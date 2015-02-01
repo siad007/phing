@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PathConvertTest" default="testPathReference" basedir=".">
+    <target name="testPathReference">
+        <path id="test.path">
+            <pathelement dir="C:\is\a\test"/>
+        </path>
+
+        <pathconvert targetos="unix" property="test.path.unix" refid="test.path">
+            <map from="c:" to="/this"/>
+        </pathconvert>
+    </target>
+
+    <target name="testComplexPathReference">
+        <property name="test.complex.path.home" value="d:\homepath"/>
+        <property name="test.complex.path.home.unix" value="/testpath"/>
+        <path id="test.complex.path">
+            <pathelement dir="${test.complex.path.home}/lib/phing.phar"/>
+            <pathelement dir="${test.complex.path.home}/classes"/>
+            <pathelement dir="${test.complex.path.home}/mssqlserver4/classes"/>
+            <pathelement dir="c:\winnt\System32"/>
+        </path>
+
+        <pathconvert targetos="unix" property="test.complex.path.result" refid="test.complex.path">
+            <map from="${test.complex.path.home}" to="${test.complex.path.home.unix}"/>
+            <map from="c:" to=""/>
+        </pathconvert>
+    </target>
+
+    <target name="testDirsepSet">
+        <pathconvert property="test.dirsep.prop" dirsep="|">
+            <map from="${project.basedir}/abc/" to=''/>
+            <path dir="abc/def/ghi"/>
+        </pathconvert>
+    </target>
+
+    <target name="testFileSet">
+        <fileset dir="." id="test.files">
+            <include name="**/*.php"/>
+        </fileset>
+
+        <pathconvert pathsep="," property="phpfiles" refid="test.files"/>
+    </target>
+
+    <target name="testDirSet">
+        <dirset dir="." id="test.dirset.files">
+            <include name="**/*.php"/>
+        </dirset>
+
+        <pathconvert pathsep="," property="dirset.files" refid="test.dirset.files"/>
+    </target>
+
+    <target name="testFileList">
+        <filelist id="test.list"
+                  dir="${project.basedir}"
+                  files="CREDITS.md,README.md"/>
+
+        <pathconvert targetos="unix" property="test.list" refid="test.list">
+            <map from="${project.basedir}" to="/usr/local"/>
+        </pathconvert>
+    </target>
+
+    <target name="testEmbeddedMapper">
+        <pathconvert property="test.embedded.mapper" targetos="unix">
+            <path path="${project.basedir}/build.xml"/>
+            <mapper type="flatten"/>
+        </pathconvert>
+    </target>
+
+    <target name="testEmbeddedFileSet">
+        <pathconvert property="test.embedded.fileset" targetos="unix">
+            <fileset dir="${project.basedir}">
+                <include name="**/*.php"/>
+            </fileset>
+        </pathconvert>
+    </target>
+
+    <target name="testEmbeddedDirSets">
+        <pathconvert property="test.embedded.dirsets" targetos="unix">
+            <dirset dir=".">
+                <include name="**/*.xml"/>
+            </dirset>
+            <dirset dir=".">
+                <include name="**/*.php"/>
+            </dirset>
+        </pathconvert>
+    </target>
+
+    <target name="testEmbeddedFileSetReferences">
+        <fileset dir="${project.basedir}" id="ref1">
+            <include name="**/*.php"/>
+        </fileset>
+        <fileset dir="${project.basedir}" id="ref2">
+            <include name="**/*.xml"/>
+        </fileset>
+        <pathconvert property="test.embedded.fileset.ref" targetos="unix">
+            <fileset refid="ref1"/>
+            <fileset refid="ref2"/>
+        </pathconvert>
+    </target>
+
+    <target name="testNotSetOnEmpty">
+        <fileset dir="${project.basedir}" id="ref">
+            <include name="**/*.notexist"/>
+        </fileset>
+        <pathconvert setonempty="false" property="test.not.set.on.empty" targetos="unix">
+            <fileset refid="ref"/>
+        </pathconvert>
+    </target>
+</project>

@@ -2304,6 +2304,180 @@
                 is a child of CopyTask and inherits all attributes.</para>
         </sect2>
     </sect1>
+    <sect1 role="taskdef" xml:id="PathConvert">
+        <title>PathConvert</title>
+        <para> Converts DirSets, FileSets, FileList, Paths or a reference to just one, into a path form for a particular
+            platform, optionally storing the result into a given property. It can also be used when you need to convert a
+            Resource Collection into a list, separated by a given character, such as a comma or space, or, conversely,
+            e.g. to convert a list of files in a FileList into a path.</para>
+
+        <para> Nested <literal>&lt;map></literal> elements can be specified to map Windows drive letters to Unix paths,
+            and vice-versa.</para>
+
+        <para> More complex transformations can be achieved using a nested <literal>&lt;mapper></literal>.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>targetos</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The target architecture. Must be one of 'unix', 'windows', 'netware', 'tandem' or 'os/2'.
+                            This is a shorthand mechanism for specifying both pathsep and dirsep according to the
+                            specified target architecture.</entry>
+                        <entry>n/a</entry>
+                        <entry>no</entry>
+                    </row>
+                    <row>
+                        <entry><literal>dirsep</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The character(s) to use as the directory separator in the generated paths.</entry>
+                        <entry>PhingFile::$separator</entry>
+                        <entry>no</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pathsep</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The character(s) to use as the path-element separator in the generated paths.</entry>
+                        <entry>PhingFile::$pathSeparator</entry>
+                        <entry>no</entry>
+                    </row>
+                    <row>
+                        <entry><literal>property</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property in which to place the converted path.</entry>
+                        <entry>n/a</entry>
+                        <entry>no - result will be logged if unset</entry>
+                    </row>
+                    <row>
+                        <entry><literal>refid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>What to convert, given as a reference to a <literal>&lt;path></literal>,
+                            <literal>&lt;fileset></literal>, <literal>&lt;dirset></literal>, or
+                            <literal>&lt;filelist></literal> defined elsewhere.</entry>
+                        <entry>n/a</entry>
+                        <entry>no - if omitted, a nested <literal>&lt;path></literal> element must be supplied.</entry>
+                    </row>
+                    <row>
+                        <entry><literal>setonempty</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Should the property be set, even if the result is the empty string?</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>no</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2 role="nestedtags">
+            <title>Parameters specified as nested elements</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>map</literal></para>
+                    <para>Specifies the mapping of path prefixes between Unix and Windows.</para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>from</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>The prefix to match. On Windows this value is insensitive to the slash style
+                                        used for directories, one can use '/' or '\'. </entry>
+                                    <entry>n/a</entry>
+                                    <entry>yes</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>to</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>The replacement text to use when <literal>from</literal> is matched.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>yes</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+                <listitem>
+                    <para><literal>mapper</literal></para>
+                    <para>A single nested &lt;mapper> element can be specified to perform
+                        any of various filename transformations</para>
+                </listitem>
+                <listitem>
+                    <para><literal>dirset</literal></para>
+                    <para>If the refid attribute is not specified, then one or more
+                        <literal>&lt;fileset></literal>, <literal>&lt;filelist></literal> or
+                        <literal>&lt;dirset></literal>elements or a combination of them must be supplied.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para><literal>fileset</literal></para>
+                    <para>If the refid attribute is not specified, then one or more
+                        <literal>&lt;fileset></literal>, <literal>&lt;filelist></literal> or
+                        <literal>&lt;dirset></literal>elements or a combination of them must be supplied.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para><literal>filelist</literal></para>
+                    <para>If the refid attribute is not specified, then one or more
+                        <literal>&lt;fileset></literal>, <literal>&lt;filelist></literal> or
+                        <literal>&lt;dirset></literal>elements or a combination of them must be supplied.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="xml">&lt;property name="test.complex.path.home" value="d:\homepath"/>
+&lt;property name="test.complex.path.home.unix" value="/testpath"/>
+&lt;path id="test.complex.path">
+    &lt;pathelement dir="${test.complex.path.home}/lib/phing.phar"/>
+    &lt;pathelement dir="${test.complex.path.home}/classes"/>
+    &lt;pathelement dir="${test.complex.path.home}/mssqlserver4/classes"/>
+    &lt;pathelement dir="c:\winnt\System32"/>
+&lt;/path>
+
+&lt;pathconvert targetos="unix" property="test.complex.path.result" refid="test.complex.path">
+    &lt;map from="${test.complex.path.home}" to="${test.complex.path.home.unix}"/>
+    &lt;map from="c:" to=""/>
+&lt;/pathconvert></programlisting>
+            <para>will generate the path shown below and store it in the property named
+                <literal>test.complex.path.result</literal>.</para>
+            <programlisting language="xml">/testpath/lib/phing.phar:/testpath/classes:/testpath/mssqlserver4/classes:/winnt/System32</programlisting>
+            <programlisting language="xml">&lt;pathconvert property="prop" dirsep="|">
+    &lt;map from="${project.basedir}/abc/" to=''/>
+    &lt;path path="abc/def/ghi"/>
+&lt;/pathconvert></programlisting>
+            <para>This example sets the property "prop" to "def|ghi" on Windows and on Unix.</para>
+        </sect2>
+    </sect1>
     <sect1 role="taskdef" xml:id="PathToFileSetTask">
         <title>PathToFileSetTask</title>
         <para>Coverts a path to a fileset. This is usefull if you have a path but need to use a fileset as input
