@@ -292,8 +292,11 @@ class PathConvert extends AbstractPropertySetterTask
 
         // Place the result into the specified property,
         // unless setonempty == false
-        if ($this->setonempty || strlen($rslt) > 0) {
+        if (($this->setonempty || strlen($rslt) > 0) && $this->getProperty() !== null) {
+            $this->log("Set property " . $this->getProperty() . " = " . $rslt, Project::MSG_VERBOSE);
             $this->setPropertyValue($rslt);
+        } else {
+            $this->log($rslt);
         }
     }
 

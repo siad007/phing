@@ -36,6 +36,11 @@ abstract class AbstractPropertySetterTask extends Task
         $this->property = $property;
     }
 
+    public function getProperty()
+    {
+        return $this->property;
+    }
+
     protected function validate()
     {
         if ($this->property == null) {
