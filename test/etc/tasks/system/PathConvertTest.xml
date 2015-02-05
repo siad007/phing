@@ -2,7 +2,7 @@
 <project name="PathConvertTest" default="testPathReference" basedir=".">
     <target name="testPathReference">
         <path id="test.path">
-            <pathelement dir="C:\is\a\test"/>
+            <pathelement dir="c:\is\a\test"/>
         </path>
 
         <pathconvert targetos="unix" property="test.path.unix" refid="test.path">

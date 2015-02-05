@@ -43,9 +43,6 @@ class PathConvertTest extends BuildFileTest
 
     public function testComplexPathReference()
     {
-        if (strtoupper(substr(php_uname(), 0, 3)) !== 'WIN') {
-            $this->markTestSkipped('This is currently just work under windows.');
-        }
         $this->executeTarget(__FUNCTION__);
         $this->assertPropertyEquals(
             'test.complex.path.result',
