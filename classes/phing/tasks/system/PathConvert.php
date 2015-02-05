@@ -346,10 +346,16 @@ class PathConvert extends AbstractPropertySetterTask
         } elseif ($resource instanceof FileSet || $resource instanceof DirSet) {
             $ds = $resource->getDirectoryScanner($this->getProject());
             $paths = $ds->getIncludedFiles();
-            $this->filenames = array_merge($this->filenames, $paths);
+            $dir = $resource->getDir($this->project);
+            foreach ($paths as $path) {
+                $d = new PhingFile($dir, $path);
+                $this->filenames[] = $d->getAbsolutePath();
+            }
         } elseif ($resource instanceof FileList) {
+            $dir = $resource->getDir($this->project);
             foreach ($resource->getFiles($this->getProject()) as $element) {
-                $this->filenames[] = rtrim($resource->getDir($this->getProject()), "\\/") . $this->dirSep . $element;
+                $d = new PhingFile($dir, $element);
+                $this->filenames[] = $d->getAbsolutePath();
             }
         }
     }
