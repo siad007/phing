@@ -17,6 +17,7 @@
     sudo apt-get install python-docutils
 
     if [[ $TRAVIS_PHP_VERSION < 5.3 ]]; then
+        sudo apt-get install libpcre3-dev
         pear upgrade pecl.php.net/Phar ||
             pear install pecl.php.net/Phar
 
