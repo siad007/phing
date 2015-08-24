@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MoveTaskTest" default="main">
+    <property name="input" value="${php.tmpdir}/testinput"/>
+    <property name="output" value="${php.tmpdir}/testoutput"/>
+	
+	<target name="setup">
+        <mkdir dir="${input}"/>
+        <mkdir dir="${output}"/>
+	</target>
+	
+	<target name="clean">
+        <phingcall target="makeFileWritable"/>
+		<delete dir="${input}"/>
+        <delete dir="${output}"/>
+	</target>
+
+    <target name="testRegexMapper">
+        <mkdir dir="${input}/AAA/foo"/>
+        <touch file="${input}/AAA/foo/bar.txt"/>
+        <mkdir dir="${input}/foo/AAA"/>
+        <touch file="${input}/foo/bar.txt"/>
+        <touch file="${input}/foo/AAA/bar.txt"/>
+        <mkdir dir="${input}/foo/bar"/>
+        <touch file="${input}/foo/bar/AAA.txt"/>
+        <touch file="${input}/foo/bar/baz.txt"/>
+
+        <move todir="${output}">
+            <fileset dir="${input}"/>
+            <mapper type="regexp" from="(.*)AAA(.*)" to="\1BBB\2"/>
+        </move>
+    </target>
+
+    <target name="testOverwriteIsTrueByDefault">
+        <echo file="${input}/x.txt">X</echo>
+        <php expression="sleep(2);"/>
+        <echo file="${output}/y.txt">Y</echo>
+        <move file="${input}/x.txt" tofile="${output}/y.txt"/>
+    </target>
+
+    <target name="testOverwriteIsHonored">
+        <echo file="${input}/x.txt">X</echo>
+        <php expression="sleep(2);"/>
+        <echo file="${output}/y.txt">Y</echo>
+        <move file="${input}/x.txt" tofile="${output}/y.txt" overwrite="false"/>
+    </target>
+
+    <property name="file" value="testfile"/>
+    <condition property="windows">
+        <os family="windows"/>
+    </condition>
+    <target name="createTestdir">
+        <mkdir dir="${output}"/>
+        <mkdir dir="${input}"/>
+        <touch file="${output}/${file}"/>
+    </target>
+    <target name="makeFileUnwritable"
+            depends="createTestdir,makeFileUnwritable-Unix,makeFileUnwritable-Windows"/>
+    <target name="makeFileUnwritable-Unix" unless="windows">
+        <chmod file="${output}/${file}" perm="444"/>
+    </target>
+    <target name="makeFileUnwritable-Windows"  id="windows">
+        <attrib file="${output}/${file}" readonly="true"/>
+    </target>
+    <target name="makeFileWritable"
+            depends="makeFileWritable-Unix,makeFileWritable-Windows"/>
+    <target name="makeFileWritable-Unix" unless="windows">
+        <chmod file="${output}/${file}" perm="777"/>
+    </target>
+    <target name="makeFileWritable-Windows"  id="windows">
+        <attrib file="${output}/${file}" readonly="false"/>
+    </target>
+
+    <target name="testMoveOverReadOnlyFile" depends="makeFileUnwritable">
+        <php expression="sleep(2);"/>
+        <touch file="${input}/${file}"/>
+        <trycatch>
+            <try>
+                <move todir="${output}">
+                    <fileset dir="${input}"/>
+                </move>
+            </try>
+            <catch>
+                <echo msg="test succeeded."/>
+            </catch>
+        </trycatch>
+
+    </target>
+
+    <target name="main"/>
+</project>
