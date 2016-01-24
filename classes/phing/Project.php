@@ -24,6 +24,8 @@ include_once 'phing/util/StringHelper.php';
 include_once 'phing/BuildEvent.php';
 include_once 'phing/input/DefaultInputHandler.php';
 include_once 'phing/types/PropertyValue.php';
+include_once 'phing/types/FilterSet.php';
+include_once 'phing/types/FilterSetCollection.php';
 
 /**
  *  The Phing project class. Represents a completely configured Phing project.
@@ -48,9 +50,9 @@ class Project
 
     /** contains the targets */
     private $targets = array();
-    /** global filterset (future use) */
+    /** global filterset */
     private $globalFilterSet = array();
-    /**  all globals filters (future use) */
+    /**  all globals filters */
     private $globalFilters = array();
 
     /** Project properties map (usually String to String). */
@@ -119,6 +121,9 @@ class Project
     {
         $this->fileUtils = new FileUtils();
         $this->inputHandler = new DefaultInputHandler();
+        $this->globalFilterSet = new FilterSet();
+        $this->globalFilterSet->setProject($this);
+        $this->global_filters = new FilterSetCollection($this->globalFilterSet);
     }
 
     /**
