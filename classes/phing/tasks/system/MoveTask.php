@@ -92,6 +92,7 @@ class MoveTask extends CopyTask
                     $this->fileUtils->copyFile(
                         $f,
                         $d,
+                        $this->filterSets,
                         $this->forceOverwrite,
                         $this->preserveLMT,
                         $this->filterChains,
@@ -127,6 +128,7 @@ class MoveTask extends CopyTask
                     $this->fileUtils->copyFile(
                         $f,
                         $d,
+                        $this->filterSets,
                         $this->forceOverwrite,
                         $this->preserveLMT,
                         $this->filterChains,
