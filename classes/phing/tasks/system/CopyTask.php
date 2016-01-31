@@ -53,6 +53,7 @@ class CopyTask extends Task
     protected $filesets = array(); // all fileset objects assigned to this task
     protected $filelists = array(); // all filelist objects assigned to this task
     protected $filterChains = array(); // all filterchains objects assigned to this task
+    protected $filterSets;
 
     protected $verbosity = Project::MSG_VERBOSE;
 
@@ -72,6 +73,7 @@ class CopyTask extends Task
     {
         $this->fileUtils = new FileUtils();
         $this->mode = 0777 - umask();
+        $this->filterSets = new FilterSetCollection();
     }
 
     /**
@@ -287,6 +289,14 @@ class CopyTask extends Task
         return $this->mapperElement;
     }
 
+    public function createFilterSet()
+    {
+        $filterSet = new FilterSet();
+        $this->filterSets->addFilterSet($filterSet);
+
+        return $filterSet;
+    }
+
     /**
      * The main entry point where everything gets in motion.
      *
@@ -406,7 +416,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    private function _scan(&$fromDir, &$toDir, &$files, &$dirs)
+    protected function _scan(&$fromDir, &$toDir, &$files, &$dirs)
     {
         /* mappers should be generic, so we get the mappers here and
         pass them on to builMap. This method is not redundan like it seems */
@@ -575,6 +585,7 @@ class CopyTask extends Task
             $this->fileUtils->copyFile(
                 $fromFile,
                 $toFile,
+                $this->filterSets,
                 $this->overwrite,
                 $this->preserveLMT,
                 $this->filterChains,
