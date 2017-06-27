@@ -44,7 +44,8 @@
         "sebastian/phpcpd": "^2.0",
         "sebastian/git": "^2.1",
         "squizlabs/php_codesniffer": "~2.2",
-        "mikey179/vfsStream": "^1.6"
+        "mikey179/vfsStream": "^1.6",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
         "classmap": ["classes/phing/"]

@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<project name="test for httpget task" default="main">
+    <property name="tmp.dir" value="./../../../../tmp/httpclient"/>
+
+    <description>
+        Tests for the guzzle http client.
+    </description>
+
+    <target name="testMethods" description="Test all supported method types.">
+
+        <httpclient uri="http://example.com/"
+                    method="get"
+                    debug="true"
+        />
+        <httpclient uri="http://example.com/"
+                    method="post"
+                    debug="true"
+        />
+        <httpclient uri="http://example.com/"
+                    method="head"
+                    debug="true"
+        />
+        <httpclient uri="http://example.com/"
+                    method="options"
+                    debug="true"
+        />
+        <httpclient uri="http://example.com/"
+                    method="post"
+                    debug="true"
+        />
+        <httpclient uri="http://example.com/"
+                    method="put"
+                    debug="true"
+                    failonerror="false" description="Prevents a 405 Method not allowed."
+        />
+        <httpclient uri="http://example.com/"
+                    method="patch"
+                    debug="true"
+                    failonerror="false" description="Prevents a 405 Method not allowed."
+        />
+        <httpclient uri="http://example.com/"
+                    method="delete"
+                    debug="true"
+                    failonerror="false" description="Prevents a 405 Method not allowed."
+        />
+
+    </target>
+
+    <target name="testPostRequest">
+        <httpclient uri="http://example.com/"
+                    method="post"
+                    body="foo=bar&amp;baz=quux"
+                    debug="true"
+        />
+    </target>
+
+    <target name="testWithHeaders">
+        <httpclient uri="http://example.com/"
+                    method="post"
+                    body="foo=bar&amp;baz=quux"
+                    debug="true">
+            <header name="User-Agent" value="testing/1.0" />
+            <header name="Accept" value="application/json" />
+        </httpclient>
+    </target>
+
+    <target name="testPut">
+        <httpclient uri="http://www.mocky.io/v2/5185415ba171ea3a00704eed"
+                    method="put"
+                    debug="true">
+        </httpclient>
+    </target>
+
+    <target name="main" depends="testMethods, testPostRequest, testWithHeaders, testPut"/>
+
+</project>
