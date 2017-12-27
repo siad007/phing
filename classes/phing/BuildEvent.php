@@ -203,7 +203,7 @@ class BuildEvent extends EventObject
      * @see BuildListener::buildFinished()
      * @return Exception
      */
-    public function getException(): \Exception
+    public function getException(): ?\Exception
     {
         return $this->exception;
     }
