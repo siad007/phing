@@ -62,17 +62,17 @@ class GitInitTask extends GitBaseTask
     /**
      * Alias @see getBare()
      *
-     * @return string
+     * @return bool
      */
-    public function isBare(): string
+    public function isBare(): bool
     {
         return $this->getBare();
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getBare(): string
+    public function getBare(): bool
     {
         return $this->isBare;
     }
