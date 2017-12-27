@@ -1,4 +1,7 @@
 <?php
+
+use SebastianBergmann\PHPLOC\Log\Csv;
+
 /**
  * $Id$
  *
@@ -32,7 +35,7 @@ class PHPLocCSVFormatter extends AbstractPHPLocFormatter
     {
         if (class_exists('\\SebastianBergmann\\PHPLOC\\Log\\CSV\\Single')) {
             $printer = new SebastianBergmann\PHPLOC\Log\CSV\Single();
-        } elseif (class_exists('\\SebastianBergmann\\PHPLOC\\Log\\Csv')) {
+        } elseif (class_exists(Csv::class)) {
             $printer = new \SebastianBergmann\PHPLOC\Log\Csv();
         } else {
         throw new BuildException('Not supported PHPLOC version used.');

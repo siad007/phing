@@ -61,7 +61,7 @@ class SvnInfoTask extends SvnBaseTask
      *
      * @return void
      */
-    public function setElement($element)
+    public function setElement($element): void
     {
         $this->element = $element;
     }
@@ -71,7 +71,7 @@ class SvnInfoTask extends SvnBaseTask
      *
      * @return string
      */
-    public function getElement()
+    public function getElement(): string
     {
         return $this->element;
     }
@@ -83,7 +83,7 @@ class SvnInfoTask extends SvnBaseTask
      *
      * @return void
      */
-    public function setSubElement($subElement)
+    public function setSubElement($subElement): void
     {
         $this->subElement = $subElement;
     }
@@ -93,7 +93,7 @@ class SvnInfoTask extends SvnBaseTask
      *
      * @return string
      */
-    public function getSubElement()
+    public function getSubElement(): string
     {
         return $this->subElement;
     }
@@ -105,7 +105,7 @@ class SvnInfoTask extends SvnBaseTask
      *
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         $this->setup('info');
 

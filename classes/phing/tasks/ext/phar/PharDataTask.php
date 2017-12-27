@@ -55,7 +55,7 @@ class PharDataTask extends MatchingTask
     /**
      * @return FileSet
      */
-    public function createFileSet()
+    public function createFileSet(): \FileSet
     {
         $this->fileset = new IterableFileSet();
         $this->filesets[] = $this->fileset;
@@ -107,6 +107,7 @@ class PharDataTask extends MatchingTask
 
     /**
      * @throws BuildException
+     * @throws IOException
      */
     public function main()
     {
@@ -158,7 +159,7 @@ class PharDataTask extends MatchingTask
     }
 
     /**
-     * @throws BuildException
+     * @throws IOException
      */
     private function checkPreconditions()
     {

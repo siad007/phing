@@ -38,17 +38,17 @@ class Table
         $this->maxLengths = $this->getHeaderLengths();
     }
 
-    private function getHeaderLengths()
+    private function getHeaderLengths(): array
     {
-        return array_map('strlen', $this->header);
+        return array_map('\strlen', $this->header);
     }
 
-    public function getMaxLengths()
+    public function getMaxLengths(): array
     {
         return $this->maxLengths;
     }
 
-    public function put($x, $y, $value)
+    public function put($x, $y, $value): void
     {
         $this->maxLengths[$y] = $this->max($y, strlen((string) $value));
         $this->output[$x][$y] = $value;
@@ -57,7 +57,7 @@ class Table
     private function max($column, $length)
     {
         $max = $length;
-        for ($i = 0; $i < count($this->output); $i++) {
+        for ($i = 0, $iMax = count($this->output); $i < $iMax; $i++) {
         $valueLength = ($this->output[$i][$column] !== null) ? strlen($this->output[$i][$column]) : 0;
             $max = max([$max, $valueLength]);
         }
@@ -69,12 +69,12 @@ class Table
         return $this->output[$x][$y];
     }
 
-    public function rows()
+    public function rows(): int
     {
         return count($this->output);
     }
 
-    public function columns()
+    public function columns(): int
     {
         return count($this->header);
     }

@@ -67,7 +67,7 @@ class ComposerTask extends Task
     /**
      * Initialize the interpreter with the Phing property php.interpreter
      */
-    public function init()
+    public function init(): void
     {
         $this->setPhp($this->project->getProperty('php.interpreter'));
     }
@@ -87,7 +87,7 @@ class ComposerTask extends Task
      *
      * @return string
      */
-    public function getPhp()
+    public function getPhp(): string
     {
         return $this->php;
     }
@@ -105,7 +105,7 @@ class ComposerTask extends Task
      * return the Composer command to execute
      * @return String
      */
-    public function getCommand()
+    public function getCommand(): string
     {
         return $this->command;
     }
@@ -123,7 +123,7 @@ class ComposerTask extends Task
      * returns the path to Composer application
      * @return string
      */
-    public function getComposer()
+    public function getComposer(): string
     {
         return $this->composer;
     }
@@ -131,10 +131,10 @@ class ComposerTask extends Task
     /**
      * creates a nested arg task
      *
-     * @return Arg Argument object
+     * @return CommandlineArgument Argument object
      */
 
-    public function createArg()
+    public function createArg(): \CommandlineArgument
     {
         return $this->commandLine->createArgument();
     }
@@ -143,7 +143,7 @@ class ComposerTask extends Task
      * Prepares the command string to be executed
      * @return string
      */
-    private function prepareCommandLine()
+    private function prepareCommandLine(): string
     {
         $this->commandLine->setExecutable($this->getPhp());
         //We are un-shifting arguments to the beginning of the command line because arguments should be at the end

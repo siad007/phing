@@ -41,7 +41,7 @@ class HgCommitTask extends HgBaseTask
      *
      * @return void
      */
-    public function setMessage($message)
+    public function setMessage($message): void
     {
         $this->message = $message;
     }
@@ -51,7 +51,7 @@ class HgCommitTask extends HgBaseTask
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -63,7 +63,7 @@ class HgCommitTask extends HgBaseTask
      * @throws BuildException If error occurs during commit
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $message = $this->getMessage();
         if ($message === '') {

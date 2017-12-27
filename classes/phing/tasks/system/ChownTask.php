@@ -110,7 +110,7 @@ class ChownTask extends Task
      * Execute the touch operation.
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         // Check Parameters
         $this->checkParams();
@@ -122,7 +122,7 @@ class ChownTask extends Task
      * @throws BuildException
      * @return void
      */
-    private function checkParams()
+    private function checkParams(): void
     {
         if ($this->file === null && empty($this->filesets) && empty($this->dirsets)) {
             throw new BuildException("Specify at least one source - a file or a fileset.");
@@ -137,7 +137,7 @@ class ChownTask extends Task
      * Does the actual work.
      * @return void
      */
-    private function chown()
+    private function chown(): void
     {
         $userElements = explode('.', $this->user);
 

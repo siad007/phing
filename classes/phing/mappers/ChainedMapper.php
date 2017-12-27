@@ -28,7 +28,7 @@ include_once 'phing/mappers/ContainerMapper.php';
 class ChainedMapper extends ContainerMapper
 {
     /** {@inheritDoc}. */
-    public function main($sourceFileName)
+    public function main($sourceFileName): array
     {
         $results[] = $sourceFileName;
         $mapper = null;
@@ -40,12 +40,12 @@ class ChainedMapper extends ContainerMapper
 
                 foreach ($inputs as $input) {
                     $mapped = $mapper->getImplementation()->main($input);
-                    if ($mapped != null) {
+                    if (count($mapped) > 0) {
                         $results = $mapped;
                     }
                 }
             }
         }
-        return !empty($results) ? $results : null;
+        return $results;
     }
 }

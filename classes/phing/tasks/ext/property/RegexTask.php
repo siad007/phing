@@ -79,7 +79,7 @@ class RegexTask extends AbstractPropertySetterTask
     /** @var int $limit */
     private $limit = -1;
     
-    public function init()
+    public function init(): void
     {
         $this->reg = new Regexp();
     }
@@ -205,7 +205,7 @@ class RegexTask extends AbstractPropertySetterTask
      *
      * @throws BuildException
      */
-    protected function doSelect()
+    protected function doSelect(): string
     {
         $this->reg->setPattern($this->pattern);
         $this->reg->setModifiers($this->modifiers);

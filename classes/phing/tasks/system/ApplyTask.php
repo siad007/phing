@@ -172,7 +172,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setExecutable($executable)
+    public function setExecutable($executable): void
     {
         $this->commandline->setExecutable((string) $executable);
     }
@@ -184,7 +184,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setDir(PhingFile $dir)
+    public function setDir(PhingFile $dir): void
     {
         $this->dir = $dir;
     }
@@ -196,7 +196,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setEscape($escape)
+    public function setEscape($escape): void
     {
         $this->escape = (bool) $escape;
     }
@@ -208,7 +208,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setOutput(PhingFile $outputfile)
+    public function setOutput(PhingFile $outputfile): void
     {
         $this->output = $outputfile;
     }
@@ -221,7 +221,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setAppend($append)
+    public function setAppend($append): void
     {
         $this->appendoutput = (bool) $append;
     }
@@ -233,7 +233,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setParallel($parallel)
+    public function setParallel($parallel): void
     {
         $this->parallel = (bool) $parallel;
     }
@@ -245,7 +245,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setAddsourcefile($addsourcefile)
+    public function setAddsourcefile($addsourcefile): void
     {
         $this->addsourcefile = (bool) $addsourcefile;
     }
@@ -257,7 +257,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setError(PhingFile $errorfile)
+    public function setError(PhingFile $errorfile): void
     {
         $this->error = $errorfile;
     }
@@ -270,7 +270,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setSpawn($spawn)
+    public function setSpawn($spawn): void
     {
         $this->spawn = (bool) $spawn;
     }
@@ -283,7 +283,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setReturnProperty($propertyname)
+    public function setReturnProperty($propertyname): void
     {
         $this->returnProperty = (string) $propertyname;
     }
@@ -296,7 +296,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setOutputProperty($propertyname)
+    public function setOutputProperty($propertyname): void
     {
         $this->outputProperty = (string) $propertyname;
     }
@@ -311,7 +311,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setRelative($relative)
+    public function setRelative($relative): void
     {
         $this->relative = (bool) $relative;
     }
@@ -324,7 +324,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setOs($os)
+    public function setOs($os): void
     {
         $this->os = (string) $os;
     }
@@ -337,7 +337,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setPassthru($passthru)
+    public function setPassthru($passthru): void
     {
         $this->passthru = (bool) $passthru;
     }
@@ -349,7 +349,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setFailonerror($failonerror)
+    public function setFailonerror($failonerror): void
     {
         $this->failonerror = (bool) $failonerror;
     }
@@ -369,7 +369,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function setForwardslash($forwardslash)
+    public function setForwardslash($forwardslash): void
     {
         $this->forwardslash = (bool) $forwardslash;
     }
@@ -401,9 +401,9 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    public function createSrcfile()
+    public function createSrcfile(): void
     {
-        return $this->commandline->addArguments([self::SOURCEFILE_ID]);
+        $this->commandline->addArguments([self::SOURCEFILE_ID]);
     }
 
     /**
@@ -411,7 +411,7 @@ class ApplyTask extends Task
      *
      * @return CommandlineArgument
      */
-    public function createArg()
+    public function createArg(): \CommandlineArgument
     {
         return $this->commandline->createArgument();
     }
@@ -424,7 +424,7 @@ class ApplyTask extends Task
      * Class Initialization
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         $this->commandline = new Commandline();
         $this->loglevel = Project::MSG_VERBOSE;
@@ -514,11 +514,10 @@ class ApplyTask extends Task
      * - Required information validation
      * - Working directory
      *
-     * @param  none
-     *
      * @return void
+     * @throws IOException
      */
-    private function initialize()
+    private function initialize(): void
     {
 
         // Log
@@ -584,7 +583,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    private function buildCommand()
+    private function buildCommand(): void
     {
 
         // Log
@@ -651,7 +650,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    private function process($files, $basedir)
+    private function process($files, $basedir): void
     {
 
         // Log
@@ -688,7 +687,7 @@ class ApplyTask extends Task
             $filecommand = str_replace([self::SOURCEFILE_ID], [$absolutefilename], $this->realCommand);
 
             // Command execution
-            list($returncode, $output) = $this->executeCommand($filecommand);
+            [$returncode, $output] = $this->executeCommand($filecommand);
 
             // Process the stuff on the first command execution only
             if (0 == $count) {
@@ -730,7 +729,7 @@ class ApplyTask extends Task
      *
      * @return array array(return code, array with output)
      */
-    private function executeCommand($command)
+    private function executeCommand($command): array
     {
 
         // Var(s)
@@ -755,7 +754,7 @@ class ApplyTask extends Task
      *
      * @return void
      */
-    private function cleanup()
+    private function cleanup(): void
     {
 
         // Restore working directory
@@ -793,12 +792,12 @@ class ApplyTask extends Task
     /**
      * Throws the exception with specified information
      *
-     * @param  $information Exception information
+     * @param string $information Exception information
      *
      * @throws BuildException
      * @return void
      */
-    private function throwBuildException($information)
+    private function throwBuildException(string $information): void
     {
         throw new BuildException('ApplyTask: ' . (string) $information);
     }

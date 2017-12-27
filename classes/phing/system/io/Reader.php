@@ -37,14 +37,14 @@ abstract class Reader
      * otherwise stream is read until EOF.
      *
      * @param int $len
+     * @return
      */
     abstract public function read($len = null);
 
     /**
      * Close stream.
-     * @throws IOException if there is an error closing stream
      */
-    abstract public function close();
+    abstract public function close(): void;
 
     /**
      * Returns the filename, url, etc. that is being read from.

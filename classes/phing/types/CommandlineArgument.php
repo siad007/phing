@@ -22,7 +22,7 @@ class CommandlineArgument
     /**
      * @param bool $escape
      */
-    public function setEscape($escape)
+    public function setEscape($escape): void
     {
         $this->escape = $escape;
     }
@@ -32,7 +32,7 @@ class CommandlineArgument
      *
      * @param string $value a single commandline argument.
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->parts = [$value];
     }
@@ -42,7 +42,7 @@ class CommandlineArgument
      *
      * @param string $line line to split into several commandline arguments
      */
-    public function setLine($line)
+    public function setLine($line): void
     {
         if ($line === null) {
             return;
@@ -57,7 +57,7 @@ class CommandlineArgument
      *
      * @param string $value a single commandline argument
      */
-    public function setPath($value)
+    public function setPath($value): void
     {
         $this->parts = [(string)$value];
     }
@@ -69,7 +69,7 @@ class CommandlineArgument
      * @param PhingFile $value
      * @internal param a $value single commandline argument.
      */
-    public function setFile(PhingFile $value)
+    public function setFile(PhingFile $value): void
     {
         $this->parts = [$value->getAbsolutePath()];
     }
@@ -78,7 +78,7 @@ class CommandlineArgument
      * Returns the parts this Argument consists of.
      * @return array string[]
      */
-    public function getParts()
+    public function getParts(): array
     {
         return $this->parts;
     }

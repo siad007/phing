@@ -60,7 +60,7 @@ class DateSelector extends BaseExtendSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{dateselector date: ";
         $buf .= $this->dateTime;
@@ -203,7 +203,7 @@ class DateSelector extends BaseExtendSelector
      * This is a consistency check to ensure the selector's required
      * values have been set.
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->dateTime === null && $this->seconds < 0) {
             $this->setError(
@@ -223,12 +223,13 @@ class DateSelector extends BaseExtendSelector
      * The heart of the matter. This is where the selector gets to decide
      * on the inclusion of a file in a particular fileset.
      *
-     * @param  PhingFile $basedir  the base directory the scan is being done from
-     * @param  string    $filename is the name of the file to check
-     * @param  PhingFile $file     is a PhingFile object the selector can use
+     * @param  PhingFile $basedir the base directory the scan is being done from
+     * @param  string $filename is the name of the file to check
+     * @param  PhingFile $file is a PhingFile object the selector can use
      * @return boolean   Whether the file should be selected or not
+     * @throws IOException
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
         if ($file->isDirectory() && ($this->includeDirs === false)) {

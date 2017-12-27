@@ -46,13 +46,13 @@ class PropertyValue
      * Sets a the value of property component.
      * @param    mixed      Value of name, all scalars allowed
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = (string) $value;
     }
 
     /** Get the value of property component. */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -60,7 +60,7 @@ class PropertyValue
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return $this->getValue();
     }

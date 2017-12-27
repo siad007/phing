@@ -22,12 +22,12 @@ trait FileListAware
     /** @var FileList[] $filelists */
     protected $filelists = [];
 
-    public function addFileList(FileList $fileList)
+    public function addFileList(FileList $fileList): void
     {
         $this->filelists[] = $fileList;
     }
 
-    public function getFileLists()
+    public function getFileLists(): array
     {
         return $this->filelists;
     }

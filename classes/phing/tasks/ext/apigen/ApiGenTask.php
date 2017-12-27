@@ -416,7 +416,7 @@ class ApiGenTask extends Task
      *
      * @return string
      */
-    protected function constructArguments()
+    protected function constructArguments(): string
     {
         $args = [];
         foreach ($this->options as $option => $value) {

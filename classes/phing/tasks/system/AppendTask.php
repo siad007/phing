@@ -105,7 +105,7 @@ class AppendTask extends Task
      *
      * @return void
      */
-    public function setDestFile(PhingFile $f)
+    public function setDestFile(PhingFile $f): void
     {
         $this->to = $f;
     }
@@ -166,7 +166,7 @@ class AppendTask extends Task
      *
      * @return void
      */
-    public function setText($txt)
+    public function setText($txt): void
     {
         $this->text = (string)$txt;
     }
@@ -178,7 +178,7 @@ class AppendTask extends Task
      *
      * @return void
      */
-    public function addText($txt)
+    public function addText($txt): void
     {
         $this->text .= (string)$txt;
     }
@@ -357,7 +357,7 @@ class AppendTask extends Task
      *
      * @return void
      */
-    private function appendFiles(Writer $writer, $files, PhingFile $dir = null)
+    private function appendFiles(Writer $writer, $files, PhingFile $dir = null): void
     {
         if (!empty($files)) {
             $this->log(
@@ -432,12 +432,12 @@ class AppendTask extends Task
      *
      * @return void
      */
-    private function appendFile(Writer $writer, PhingFile $f)
+    private function appendFile(Writer $writer, PhingFile $f): void
     {
         $in = $this->getFilteredReader(new FileReader($f));
 
         $text = '';
-        while (-1 !== ($buffer = $in->read())) { // -1 indicates EOF
+        while (-1 != ($buffer = $in->read())) { // -1 indicates EOF
             $text .= $buffer;
         }
         if ($this->fixLastLine && ($text[strlen($text) - 1] !== "\n" || $text[strlen($text) - 1] !== "\r")) {

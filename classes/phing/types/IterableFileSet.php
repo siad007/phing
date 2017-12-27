@@ -32,7 +32,7 @@ class IterableFileSet extends FileSet implements IteratorAggregate
     /**
      * @return Iterator
      */
-    public function getIterator()
+    public function getIterator(): iterable
     {
         return new ArrayIterator($this->getFiles());
     }
@@ -40,7 +40,7 @@ class IterableFileSet extends FileSet implements IteratorAggregate
     /**
      * @return array
      */
-    private function getFiles()
+    private function getFiles(): array
     {
         $directoryScanner = $this->getDirectoryScanner($this->getProject());
         $files = $directoryScanner->getIncludedFiles();

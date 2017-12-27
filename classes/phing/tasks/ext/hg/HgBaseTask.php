@@ -1,4 +1,7 @@
 <?php
+
+use Siad007\VersionControl\HG\Factory;
+
 /**
  * Utilise Mercurial from within Phing.
  *
@@ -58,7 +61,7 @@ abstract class HgBaseTask extends Task
      *
      * @return void
      */
-    public function setRepository($repository)
+    public function setRepository($repository): void
     {
         $this->repository = $repository;
     }
@@ -71,7 +74,7 @@ abstract class HgBaseTask extends Task
      *
      * @return void
      */
-    public function setQuiet($quiet)
+    public function setQuiet($quiet): void
     {
         $this->quiet = StringHelper::booleanValue($quiet);
     }
@@ -81,7 +84,7 @@ abstract class HgBaseTask extends Task
      *
      * @return bool
      */
-    public function getQuiet()
+    public function getQuiet(): bool
     {
         return $this->quiet;
     }
@@ -91,7 +94,7 @@ abstract class HgBaseTask extends Task
      *
      * @return string
      */
-    public function getRepository()
+    public function getRepository(): string
     {
         return $this->repository;
     }
@@ -103,7 +106,7 @@ abstract class HgBaseTask extends Task
      *
      * @return void
      */
-    public function setInsecure($insecure)
+    public function setInsecure($insecure): void
     {
         $this->insecure = StringHelper::booleanValue($insecure);
     }
@@ -113,7 +116,7 @@ abstract class HgBaseTask extends Task
      *
      * @return string
      */
-    public function getInsecure()
+    public function getInsecure(): string
     {
         return $this->insecure;
     }
@@ -125,7 +128,7 @@ abstract class HgBaseTask extends Task
      *
      * @return void
      */
-    public function setUser($user)
+    public function setUser($user): void
     {
         $this->user = $user;
     }
@@ -135,7 +138,7 @@ abstract class HgBaseTask extends Task
      *
      * @return string
      */
-    public function getUser()
+    public function getUser(): string
     {
         return $this->user;
     }
@@ -148,7 +151,7 @@ abstract class HgBaseTask extends Task
      * @return bool
      * @throws BuildException
      */
-    public function checkRepositoryIsDirAndExists($dir)
+    public function checkRepositoryIsDirAndExists($dir): bool
     {
         if (file_exists($dir)) {
             if (!is_dir($dir)) {
@@ -165,14 +168,14 @@ abstract class HgBaseTask extends Task
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         @include_once 'vendor/autoload.php';
     }
 
-    public function getFactoryInstance($command, $options = [])
+    public function getFactoryInstance($command, array $options = [])
     {
-        $vchq = '\\Siad007\\VersionControl\\HG\\Factory';
+        $vchq = Factory::class;
         self::$factory = $vchq::getInstance($command, $options);
         return self::$factory;
     }

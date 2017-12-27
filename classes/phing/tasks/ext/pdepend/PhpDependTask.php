@@ -1,4 +1,9 @@
 <?php
+
+use PDepend\Util\Configuration;
+use PDepend\Application;
+use PDepend\TextUI\Runner;
+
 /**
  *  $Id$
  *
@@ -144,7 +149,7 @@ class PhpDependTask extends Task
         }
 
         // check 2.x version (composer/phar)
-        if (class_exists('PDepend\\TextUI\\Runner')) {
+        if (class_exists(Runner::class)) {
             return;
         }
 
@@ -294,7 +299,7 @@ class PhpDependTask extends Task
      *
      * @return PhpDependLoggerElement
      */
-    public function createLogger()
+    public function createLogger(): \PhpDependLoggerElement
     {
         $num = array_push($this->loggers, new PhpDependLoggerElement());
 
@@ -306,7 +311,7 @@ class PhpDependTask extends Task
      *
      * @return PhpDependAnalyzerElement
      */
-    public function createAnalyzer()
+    public function createAnalyzer(): \PhpDependAnalyzerElement
     {
         $num = array_push($this->analyzers, new PhpDependAnalyzerElement());
 
@@ -325,6 +330,7 @@ class PhpDependTask extends Task
      * Executes PHP_Depend_TextUI_Runner against PhingFile or a FileSet
      *
      * @throws BuildException
+     * @throws Exception
      */
     public function main()
     {
@@ -447,8 +453,9 @@ class PhpDependTask extends Task
 
     /**
      * @return array
+     * @throws Exception
      */
-    private function getFilesToParse()
+    private function getFilesToParse(): ?array
     {
         $filesToParse = [];
 
@@ -478,7 +485,7 @@ class PhpDependTask extends Task
             return $this->createLegacyRunner();
         }
 
-        $applicationClassName = 'PDepend\\Application';
+        $applicationClassName = Application::class;
         $application = new $applicationClassName();
 
         $runner = $application->getRunner();
@@ -502,7 +509,7 @@ class PhpDependTask extends Task
     /**
      * @return PHP_Depend_TextUI_Runner
      */
-    private function createLegacyRunner()
+    private function createLegacyRunner(): \PHP_Depend_TextUI_Runner
     {
         $runner = new PHP_Depend_TextUI_Runner();
         $runner->addProcessListener(new PHP_Depend_TextUI_ResultPrinter());
@@ -531,7 +538,7 @@ class PhpDependTask extends Task
      * @return null|PHP_Depend_Util_Configuration
      * @throws BuildException
      */
-    private function getConfiguration()
+    private function getConfiguration(): ?\PHP_Depend_Util_Configuration
     {
         // Check for configuration option
         if ($this->configFile == null || ! ($this->configFile instanceof PhingFile)) {
@@ -547,7 +554,7 @@ class PhpDependTask extends Task
         if ($this->oldVersion) {
             $configurationClassName = 'PHP_Depend_Util_Configuration';
         } else {
-            $configurationClassName = 'PDepend\\Util\\Configuration';
+            $configurationClassName = Configuration::class;
         }
 
         return new $configurationClassName(

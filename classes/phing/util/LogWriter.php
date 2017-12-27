@@ -53,7 +53,7 @@ class LogWriter extends Writer
      * @param null $off
      * @param null $len
      */
-    public function write($buf, $off = null, $len = null)
+    public function write($buf, $off = null, $len = null): void
     {
         $lines = explode("\n", $buf);
 
@@ -76,7 +76,7 @@ class LogWriter extends Writer
     /**
      * @see Writer::close()
      */
-    public function close()
+    public function close(): void
     {
     }
 

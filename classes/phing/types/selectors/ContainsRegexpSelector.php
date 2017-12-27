@@ -60,7 +60,7 @@ class ContainsRegexpSelector extends BaseExtendSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{containsregexpselector expression: ";
         $buf .= $this->userProvidedExpression;
@@ -103,7 +103,7 @@ class ContainsRegexpSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setParameters($parameters)
+    public function setParameters($parameters): void
     {
         parent::setParameters($parameters);
         if ($parameters !== null) {
@@ -129,9 +129,8 @@ class ContainsRegexpSelector extends BaseExtendSelector
     /**
      * Checks to make sure all settings are kosher. In this case, it
      * means that the pattern attribute has been set.
-     *
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->userProvidedExpression === null) {
             $this->setError("The expression attribute is required");
@@ -150,7 +149,7 @@ class ContainsRegexpSelector extends BaseExtendSelector
      *
      * @return bool whether the file should be selected or not
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

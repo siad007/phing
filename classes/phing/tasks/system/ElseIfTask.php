@@ -26,7 +26,7 @@ class ElseIfTask extends ConditionBase
      * @throws BuildException
      * @return boolean
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->countConditions() > 1) {
             throw new BuildException("You must not nest more than one condition into <elseif>");

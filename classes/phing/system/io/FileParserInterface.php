@@ -31,9 +31,8 @@ interface FileParserInterface
     /**
      * Builds an array from the given (ini) file and returns it.
      *
-     * @param $file
+     * @param PhingFile $file
      * @return array
-     * @throws IOException
      */
-    public function parseFile(PhingFile $file);
+    public function parseFile(PhingFile $file): array;
 }

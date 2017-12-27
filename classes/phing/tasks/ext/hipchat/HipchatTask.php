@@ -81,7 +81,7 @@ class HipchatTask extends Task {
     /**
      * @return string
      */
-    public function getDomain()
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -97,7 +97,8 @@ class HipchatTask extends Task {
     /**
      * @return String
      */
-    public function getFormat() {
+    public function getFormat(): string
+    {
         return $this->format;
     }
 
@@ -112,7 +113,7 @@ class HipchatTask extends Task {
     /**
      * @return string
      */
-    public function getRoom()
+    public function getRoom(): string
     {
         return $this->room;
     }
@@ -128,7 +129,7 @@ class HipchatTask extends Task {
     /**
      * @return string
      */
-    public function getAuthToken()
+    public function getAuthToken(): string
     {
         return $this->authToken;
     }
@@ -144,7 +145,7 @@ class HipchatTask extends Task {
     /**
      * @return string
      */
-    public function getColor()
+    public function getColor(): string
     {
         return $this->color;
     }
@@ -160,14 +161,15 @@ class HipchatTask extends Task {
     /**
      * @return string
      */
-    public function getMessage() {
+    public function getMessage(): string
+    {
         return $this->message;
     }
 
     /**
      * @return boolean
      */
-    public function isNotify()
+    public function isNotify(): bool
     {
         return $this->notify;
     }

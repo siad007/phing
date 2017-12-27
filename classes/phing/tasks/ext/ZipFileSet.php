@@ -37,7 +37,7 @@ class ZipFileSet extends FileSet
      * @return array a list of file and directory names, relative to
      *               the baseDir for the project.
      */
-    public function getFiles(Project $p, $includeEmpty = true)
+    public function getFiles(Project $p, $includeEmpty = true): array
     {
         if ($this->files === null) {
             $ds = $this->getDirectoryScanner($p);

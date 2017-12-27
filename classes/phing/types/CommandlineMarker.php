@@ -31,7 +31,7 @@ class CommandlineMarker
      * <p>The name of the executable - if set - is counted as the
      * very first argument.</p>
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         if ($this->realPos == -1) {
             $this->realPos = ($this->outer->executable === null ? 0 : 1);

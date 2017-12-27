@@ -55,7 +55,7 @@ abstract class AbstractPHPLocFormatter
      * Sets whether to store formatting results in a file
      * @param $useFile
      */
-    public function setUseFile($useFile)
+    public function setUseFile($useFile): void
     {
         $this->useFile = $useFile;
     }
@@ -63,7 +63,7 @@ abstract class AbstractPHPLocFormatter
     /**
      * Returns whether to store formatting results in a file
      */
-    public function getUseFile()
+    public function getUseFile(): bool
     {
         return $this->useFile;
     }
@@ -71,8 +71,9 @@ abstract class AbstractPHPLocFormatter
     /**
      * Sets output directory
      * @param string $toDir
+     * @throws IOException
      */
-    public function setToDir($toDir)
+    public function setToDir($toDir): void
     {
         if (!is_dir($toDir) && null !== $toDir) {
             $toDir = new PhingFile($toDir);
@@ -86,7 +87,7 @@ abstract class AbstractPHPLocFormatter
      * Returns output directory
      * @return string
      */
-    public function getToDir()
+    public function getToDir(): string
     {
         return $this->toDir;
     }
@@ -95,7 +96,7 @@ abstract class AbstractPHPLocFormatter
      * Sets output filename
      * @param string $outfile
      */
-    public function setOutfile($outfile)
+    public function setOutfile($outfile): void
     {
         $this->outfile = $outfile;
     }
@@ -104,7 +105,7 @@ abstract class AbstractPHPLocFormatter
      * Returns output filename
      * @return string
      */
-    public function getOutfile()
+    public function getOutfile(): string
     {
         return $this->outfile;
     }

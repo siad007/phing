@@ -145,7 +145,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @throws BuildException if source is null
      */
-    public function getSource()
+    public function getSource(): string
     {
         if ($this->_content !== null) {
             $tempFile = tempnam($this->getProject()->getProperty('php.tmpdir'), 's3_put_');
@@ -180,7 +180,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @throws BuildException if content is null
      */
-    public function getContent()
+    public function getContent(): string
     {
         if ($this->_content === null) {
             throw new BuildException('Content is not set');
@@ -208,7 +208,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @throws \BuildException
      */
-    public function getObject()
+    public function getObject(): string
     {
         if ($this->_object === null) {
             throw new BuildException('Object is not set');
@@ -233,7 +233,7 @@ class S3PutTask extends Service_Amazon_S3
     /**
      * @return string
      */
-    public function getAcl()
+    public function getAcl(): string
     {
         return $this->_acl;
     }
@@ -250,7 +250,7 @@ class S3PutTask extends Service_Amazon_S3
      * @return string
      * @throws BuildException
      */
-    public function getContentType()
+    public function getContentType(): string
     {
         if ($this->_contentType === 'auto') {
             $ext = strtolower(substr(strrchr($this->getSource(), '.'), 1));
@@ -275,7 +275,7 @@ class S3PutTask extends Service_Amazon_S3
     /**
      * @return bool
      */
-    public function getCreateBuckets()
+    public function getCreateBuckets(): bool
     {
         return (bool) $this->_createBuckets;
     }
@@ -295,7 +295,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @return int Number of seconds in maxage or null.
      */
-    public function getMaxage()
+    public function getMaxage(): int
     {
         return $this->_maxage;
     }
@@ -315,7 +315,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @return boolean Indicate if content is gzipped.
      */
-    public function getGzip()
+    public function getGzip(): bool
     {
         return $this->_gzipped;
     }
@@ -325,7 +325,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @return array HttpHeader to set in S3 Object.
      */
-    protected function getHttpHeaders()
+    protected function getHttpHeaders(): array
     {
         $headers = [];
         if (null !== $this->_maxage) {
@@ -351,7 +351,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @return FileSet
      */
-    public function createFileset()
+    public function createFileset(): \FileSet
     {
         $num = array_push($this->_filesets, new FileSet());
 
@@ -363,7 +363,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @return array
      */
-    public function getFilesets()
+    public function getFilesets(): array
     {
         return $this->_filesets;
     }
@@ -378,7 +378,7 @@ class S3PutTask extends Service_Amazon_S3
      *
      * @throws BuildException
      */
-    public function getObjectData()
+    public function getObjectData(): string
     {
         $source = $this->getSource();
 
@@ -392,10 +392,10 @@ class S3PutTask extends Service_Amazon_S3
     /**
      * Store the object on S3
      *
-     * @throws BuildException
      * @return void
+     * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         if (!$this->isBucketAvailable()) {
             if (!$this->getCreateBuckets()) {

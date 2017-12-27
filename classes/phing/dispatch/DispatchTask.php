@@ -42,7 +42,7 @@ abstract class DispatchTask extends Task implements Dispatchable
      * Get the action parameter name.
      * @return string the <code>String</code> "action" by default (can be overridden).
      */
-    public function getActionParameterName()
+    public function getActionParameterName(): string
     {
         return "action";
     }
@@ -60,7 +60,7 @@ abstract class DispatchTask extends Task implements Dispatchable
      * Get the action.
      * @return string the action.
      */
-    public function getAction()
+    public function getAction(): string
     {
         return $this->action;
     }

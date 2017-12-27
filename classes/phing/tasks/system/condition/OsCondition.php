@@ -41,7 +41,7 @@ class OsCondition implements Condition
         $this->family = strtolower($f);
     }
 
-    public function evaluate()
+    public function evaluate(): bool
     {
         return self::isOS($this->family);
     }
@@ -52,7 +52,7 @@ class OsCondition implements Condition
      * @param string $family the family to check for
      * @return true if the OS matches
      */
-    public static function isFamily($family)
+    public static function isFamily($family): bool
     {
         return self::isOS($family);
     }
@@ -61,7 +61,7 @@ class OsCondition implements Condition
      * @param string $family
      * @return bool
      */
-    public static function isOS($family)
+    public static function isOS($family): bool
     {
         $osName = strtolower(Phing::getProperty("os.name"));
 

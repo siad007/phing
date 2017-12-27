@@ -45,7 +45,7 @@ class StringHelper
      *
      * @return string
      */
-    public static function unqualify($qualifiedName, $separator = '.')
+    public static function unqualify($qualifiedName, $separator = '.'): ?string
     {
         // if false, then will be 0
         $pos = strrpos($qualifiedName, $separator);
@@ -62,7 +62,7 @@ class StringHelper
      *
      * @return array  String[]
      */
-    public static function prefix($columns, $prefix)
+    public static function prefix($columns, $prefix): array
     {
         if ($prefix == null) {
             return $columns;
@@ -81,7 +81,7 @@ class StringHelper
      *
      * @return string
      */
-    public static function root($qualifiedName, $separator = '.')
+    public static function root($qualifiedName, $separator = '.'): string
     {
         $loc = strpos($qualifiedName, $separator);
 
@@ -93,7 +93,7 @@ class StringHelper
      *
      * @return int
      */
-    public static function hashCode($string)
+    public static function hashCode($string): int
     {
         return crc32($string);
     }
@@ -103,7 +103,7 @@ class StringHelper
      *
      * @return boolean
      */
-    public static function booleanValue($s)
+    public static function booleanValue($s): bool
     {
         if (is_bool($s)) {
             return $s; // it's already boolean (not a string)
@@ -121,7 +121,7 @@ class StringHelper
      *
      * @return bool
      */
-    public static function isBoolean($s)
+    public static function isBoolean($s): bool
     {
         if (is_bool($s)) {
             return true; // it already is boolean
@@ -141,7 +141,7 @@ class StringHelper
      *
      * @return string
      */
-    public static function key()
+    public static function key(): string
     {
         $args = func_get_args();
 
@@ -156,7 +156,7 @@ class StringHelper
      *
      * @return bool
      */
-    public static function startsWith($check, $string)
+    public static function startsWith($check, $string): ?bool
     {
         if ($check === "" || $check === $string) {
             return true;
@@ -173,7 +173,7 @@ class StringHelper
      *
      * @return bool
      */
-    public static function endsWith($check, $string)
+    public static function endsWith($check, $string): ?bool
     {
         if ($check === "" || $check === $string) {
             return true;
@@ -192,10 +192,10 @@ class StringHelper
      *
      * @return string
      */
-    public static function substring($string, $startpos, $endpos = -1)
+    public static function substring($string, $startpos, $endpos = -1): string
     {
         $len = strlen($string);
-        $endpos = (int) (($endpos === -1) ? $len - 1 : $endpos);
+        $endpos = (int) (($endpos == -1) ? $len - 1 : $endpos);
         if ($startpos > $len - 1 || $startpos < 0) {
             trigger_error("substring(), Startindex out of bounds must be 0<n<$len", E_USER_ERROR);
         }
@@ -235,7 +235,7 @@ class StringHelper
      *
      * @return string Extracted name part.
      */
-    public static function slotVar($var)
+    public static function slotVar($var): string
     {
         return trim($var, '%{} ');
     }

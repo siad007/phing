@@ -64,17 +64,17 @@ class AdhocTask extends Task
      * Get array of names of newly defined classes.
      * @return array
      */
-    protected function getNewClasses()
+    protected function getNewClasses(): array
     {
         return $this->newClasses;
     }
 
     /**
      * Load the adhoc class, and perform any core validation.
-     * @return string         The classname of the ProjectComponent class.
+     * @return void
      * @throws BuildException - if more than one class is defined.
      */
-    protected function execute()
+    protected function execute(): void
     {
         $classes = get_declared_classes();
         eval($this->script);

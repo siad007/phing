@@ -52,7 +52,7 @@ class PhpDependAnalyzerElement
      *
      * @throws BuildException
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
 
@@ -70,7 +70,7 @@ class PhpDependAnalyzerElement
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -80,7 +80,7 @@ class PhpDependAnalyzerElement
      *
      * @param string $value Value for the analyzer
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = [];
 
@@ -96,9 +96,9 @@ class PhpDependAnalyzerElement
     /**
      * Get the analyzer value
      *
-     * @return string
+     * @return array
      */
-    public function getValue()
+    public function getValue(): array
     {
         return $this->value;
     }

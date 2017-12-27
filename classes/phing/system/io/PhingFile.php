@@ -84,7 +84,7 @@ class PhingFile
      *
      * @return int
      */
-    public function getPrefixLength()
+    public function getPrefixLength(): int
     {
         return (int) $this->prefixLength;
     }
@@ -96,7 +96,7 @@ class PhingFile
      *
      * @throws NullPointerException
      */
-    protected function _constructPathname($pathname)
+    protected function _constructPathname($pathname): void
     {
         // obtain ref to the filesystem layer
         $fs = FileSystem::getFileSystem();
@@ -116,7 +116,7 @@ class PhingFile
      * @param string $child
      * @throws NullPointerException
      */
-    protected function _constructStringParentStringChild($parent, $child = null)
+    protected function _constructStringParentStringChild($parent, $child = null): void
     {
         // obtain ref to the filesystem layer
         $fs = FileSystem::getFileSystem();
@@ -143,7 +143,7 @@ class PhingFile
      * @param string $child
      * @throws NullPointerException
      */
-    protected function _constructFileParentStringChild($parent, $child = null)
+    protected function _constructFileParentStringChild($parent, $child = null): void
     {
         // obtain ref to the filesystem layer
         $fs = FileSystem::getFileSystem();
@@ -176,7 +176,7 @@ class PhingFile
      *                pathname, or the empty string if this pathname's name sequence
      *                is empty
      */
-    public function getName()
+    public function getName(): string
     {
         // that's a lastIndexOf
         $index = ((($res = strrpos($this->path, self::$separator)) === false) ? -1 : $res);
@@ -199,7 +199,7 @@ class PhingFile
      * @return string $pathname string of the parent directory named by this
      *                          abstract pathname, or null if this pathname does not name a parent
      */
-    public function getParent()
+    public function getParent(): ?string
     {
         // that's a lastIndexOf
         $index = ((($res = strrpos($this->path, self::$separator)) === false) ? -1 : $res);
@@ -227,7 +227,7 @@ class PhingFile
      *             abstract pathname, or null if this pathname
      *             does not name a parent
      */
-    public function getParentFile()
+    public function getParentFile(): ?\PhingFile
     {
         $p = $this->getParent();
         if ($p === null) {
@@ -244,7 +244,7 @@ class PhingFile
      *
      * @return string The string form of this abstract pathname
      */
-    public function getPath()
+    public function getPath(): string
     {
         return (string) $this->path;
     }
@@ -258,7 +258,7 @@ class PhingFile
      *
      * @uses getPath()
      */
-    public function getPathWithoutBase($basedir)
+    public function getPathWithoutBase($basedir): string
     {
         if (!StringHelper::endsWith(self::$separator, $basedir)) {
             $basedir .= self::$separator;
@@ -281,7 +281,7 @@ class PhingFile
      *
      * @return boolean true if this abstract pathname is absolute, false otherwise
      */
-    public function isAbsolute()
+    public function isAbsolute(): bool
     {
         return ($this->prefixLength !== 0);
     }
@@ -291,7 +291,7 @@ class PhingFile
      *
      * @return string The name of the extension.
      */
-    public function getFileExtension()
+    public function getFileExtension(): string
     {
         return pathinfo((string) $this->getAbsolutePath(), PATHINFO_EXTENSION);
     }
@@ -315,7 +315,7 @@ class PhingFile
      *                directory as this abstract pathname
      * @see    #isAbsolute()
      */
-    public function getAbsolutePath()
+    public function getAbsolutePath(): string
     {
         $fs = FileSystem::getFileSystem();
 
@@ -329,7 +329,7 @@ class PhingFile
      * @return PhingFile The absolute abstract pathname denoting the same file or
      *                directory as this abstract pathname
      */
-    public function getAbsoluteFile()
+    public function getAbsoluteFile(): \PhingFile
     {
         return new PhingFile((string) $this->getAbsolutePath());
     }
@@ -359,7 +359,7 @@ class PhingFile
      * @return string The canonical pathname string denoting the same file or
      *                directory as this abstract pathname
      */
-    public function getCanonicalPath()
+    public function getCanonicalPath(): string
     {
         $fs = FileSystem::getFileSystem();
 
@@ -374,7 +374,7 @@ class PhingFile
      * @return PhingFile The canonical pathname string denoting the same file or
      *                   directory as this abstract pathname
      */
-    public function getCanonicalFile()
+    public function getCanonicalFile(): \PhingFile
     {
         return new PhingFile($this->getCanonicalPath());
     }
@@ -395,7 +395,7 @@ class PhingFile
      * @todo   Not implemented yet
      *
      */
-    public function toURL()
+    public function toURL(): void
     {
         /*
         // URL class not implemented yet
@@ -408,7 +408,7 @@ class PhingFile
      * @todo   Not implemented yet
      * @return void
      */
-    public function toURI()
+    public function toURI(): void
     {
         /*
         $f = $this->getAbsoluteFile();
@@ -427,7 +427,7 @@ class PhingFile
      * @param  boolean          $isDirectory
      * @return string
      */
-    public function _slashify($path, $isDirectory)
+    public function _slashify($path, $isDirectory): string
     {
         $p = (string) $path;
 
@@ -456,7 +456,7 @@ class PhingFile
      *                 abstract pathname exists and can be read by the
      *                 application; false otherwise
      */
-    public function canRead()
+    public function canRead(): bool
     {
         $fs = FileSystem::getFileSystem();
 
@@ -476,7 +476,7 @@ class PhingFile
      *                 the application is allowed to write to the file;
      *                 false otherwise.
      */
-    public function canWrite()
+    public function canWrite(): bool
     {
         $fs = FileSystem::getFileSystem();
 
@@ -489,7 +489,7 @@ class PhingFile
      * @return boolean true if and only if the file denoted by this
      *                 abstract pathname exists; false otherwise
      */
-    public function exists()
+    public function exists(): ?bool
     {
         clearstatcache();
 
@@ -513,7 +513,7 @@ class PhingFile
      *                 abstract pathname exists and is a directory;
      *                 false otherwise
      */
-    public function isDirectory()
+    public function isDirectory(): bool
     {
         clearstatcache();
         $fs = FileSystem::getFileSystem();
@@ -534,7 +534,7 @@ class PhingFile
      *                 abstract pathname exists and is a normal file;
      *                 false otherwise
      */
-    public function isFile()
+    public function isFile(): bool
     {
         clearstatcache();
         //$fs = FileSystem::getFileSystem();
@@ -554,7 +554,7 @@ class PhingFile
      *                 abstract pathname is hidden according to the conventions of the
      *                 underlying platform
      */
-    public function isHidden()
+    public function isHidden(): bool
     {
         $fs = FileSystem::getFileSystem();
         if ($fs->checkAccess($this) !== true) {
@@ -572,7 +572,7 @@ class PhingFile
      *                 abstract pathname exists and is a symbolic link;
      *                 false otherwise
      */
-    public function isLink()
+    public function isLink(): bool
     {
         clearstatcache();
         $fs = FileSystem::getFileSystem();
@@ -591,7 +591,7 @@ class PhingFile
      *                 abstract pathname exists and is a symbolic link;
      *                 false otherwise
      */
-    public function isExecutable()
+    public function isExecutable(): bool
     {
         clearstatcache();
         $fs = FileSystem::getFileSystem();
@@ -607,7 +607,7 @@ class PhingFile
      *
      * @return string the target of the symbolic link denoted by this abstract pathname
      */
-    public function getLinkTarget()
+    public function getLinkTarget(): string
     {
         return @readlink($this->path);
     }
@@ -622,7 +622,7 @@ class PhingFile
      *             (00:00:00 GMT, January 1, 1970), or 0 if the
      *             file does not exist or if an I/O error occurs
      */
-    public function lastModified()
+    public function lastModified(): int
     {
         $fs = FileSystem::getFileSystem();
         if ($fs->checkAccess($this) !== true) {
@@ -640,7 +640,7 @@ class PhingFile
      * @return int The length, in bytes, of the file denoted by this abstract
      *             pathname, or 0 if the file does not exist
      */
-    public function length()
+    public function length(): int
     {
         $fs = FileSystem::getFileSystem();
         if ($fs->checkAccess($this) !== true) {
@@ -656,7 +656,7 @@ class PhingFile
      * @return string
      * @throws Exception - if file cannot be read
      */
-    public function contents()
+    public function contents(): string
     {
         if (!$this->canRead() || !$this->isFile()) {
             throw new IOException("Cannot read file contents!");
@@ -681,7 +681,7 @@ class PhingFile
      *                     successfully created; <code>false</code> if the named file
      *                     already exists
      */
-    public function createNewFile($parents = true, $mode = 0777)
+    public function createNewFile($parents = true, $mode = 0777): bool
     {
         /** @var PhingFile $parent */
         $parent = $this->getParentFile();
@@ -701,7 +701,7 @@ class PhingFile
      * @param bool $recursive
      * @throws IOException
      */
-    public function delete($recursive = false)
+    public function delete($recursive = false): void
     {
         $fs = FileSystem::getFileSystem();
         if ($fs->canDelete($this) !== true) {
@@ -721,7 +721,7 @@ class PhingFile
      * request.  This method should therefore be used with care.
      *
      */
-    public function deleteOnExit()
+    public function deleteOnExit(): void
     {
         $fs = FileSystem::getFileSystem();
         $fs->deleteOnExit($this);
@@ -748,7 +748,7 @@ class PhingFile
      *               this abstract pathname does not denote a directory, or if an
      *               I/O error occurs.
      */
-    public function listDir()
+    public function listDir(): array
     {
         $fs = FileSystem::getFileSystem();
 
@@ -767,7 +767,7 @@ class PhingFile
      *                     along with all necessary parent directories; false
      *                     otherwise
      */
-    public function mkdirs($mode = 0755)
+    public function mkdirs($mode = 0755): bool
     {
         if ($this->exists()) {
             return false;
@@ -791,7 +791,7 @@ class PhingFile
      * @throws IOException
      * @return boolean     true if and only if the directory was created; false otherwise
      */
-    public function mkdir($mode = 0755)
+    public function mkdir($mode = 0755): bool
     {
         $fs = FileSystem::getFileSystem();
 
@@ -808,7 +808,7 @@ class PhingFile
      * @param  PhingFile $destFile The new abstract pathname for the named file
      * @throws IOException
      */
-    public function renameTo(PhingFile $destFile)
+    public function renameTo(PhingFile $destFile): void
     {
         $fs = FileSystem::getFileSystem();
         if ($fs->checkAccess($this) !== true) {
@@ -825,7 +825,7 @@ class PhingFile
      * @param  PhingFile $destFile The new abstract pathname for the named file
      * @throws IOException
      */
-    public function copyTo(PhingFile $destFile)
+    public function copyTo(PhingFile $destFile): void
     {
         $fs = FileSystem::getFileSystem();
 
@@ -855,7 +855,7 @@ class PhingFile
      *                       the epoch (00:00:00 GMT, January 1, 1970)
      * @throws Exception
      */
-    public function setLastModified($time)
+    public function setLastModified($time): void
     {
         $time = (int) $time;
         if ($time < 0) {
@@ -876,7 +876,7 @@ class PhingFile
      *
      * @throws IOException
      */
-    public function setReadOnly()
+    public function setReadOnly(): void
     {
         $fs = FileSystem::getFileSystem();
         if ($fs->checkAccess($this, true) !== true) {
@@ -894,7 +894,7 @@ class PhingFile
      *
      * @throws IOException
      */
-    public function setUser($user)
+    public function setUser($user): void
     {
         $fs = FileSystem::getFileSystem();
 
@@ -906,7 +906,7 @@ class PhingFile
      *
      * @return int User ID of the owner of this file.
      */
-    public function getUser()
+    public function getUser(): int
     {
         return @fileowner($this->getPath());
     }
@@ -918,7 +918,7 @@ class PhingFile
      *
      * @throws IOException
      */
-    public function setGroup($group)
+    public function setGroup($group): void
     {
         $fs = FileSystem::getFileSystem();
 
@@ -930,7 +930,7 @@ class PhingFile
      *
      * @return int User ID of the owner of this file.
      */
-    public function getGroup()
+    public function getGroup(): int
     {
         return @filegroup($this->getPath());
     }
@@ -941,7 +941,7 @@ class PhingFile
      * @param int $mode Octal mode.
      * @throws IOException
      */
-    public function setMode($mode)
+    public function setMode($mode): void
     {
         $fs = FileSystem::getFileSystem();
 
@@ -953,7 +953,7 @@ class PhingFile
      *
      * @return int
      */
-    public function getMode()
+    public function getMode(): int
     {
         return @fileperms($this->getPath());
     }
@@ -993,7 +993,7 @@ class PhingFile
      *               could not be determined.  The array will be empty if there are
      *               no filesystem roots.
      */
-    public function listRoots()
+    public function listRoots(): array
     {
         $fs = FileSystem::getFileSystem();
 
@@ -1006,7 +1006,7 @@ class PhingFile
      * Returns the path to the temp directory.
      * @return string
      */
-    public static function getTempDir()
+    public static function getTempDir(): string
     {
         return Phing::getProperty('php.tmpdir');
     }
@@ -1026,7 +1026,7 @@ class PhingFile
      * @throws IOException
      * @return PhingFile
      */
-    public static function createTempFile($prefix, $suffix, PhingFile $directory)
+    public static function createTempFile($prefix, $suffix, PhingFile $directory): \PhingFile
     {
 
         // quick but efficient hack to create a unique filename ;-)
@@ -1046,7 +1046,7 @@ class PhingFile
      * If necessary, $File the lock on $File is removed and then the file is
      * deleted.
      */
-    public function removeTempFile()
+    public function removeTempFile(): void
     {
         $fs = FileSystem::getFileSystem();
         // catch IO Exception
@@ -1070,7 +1070,7 @@ class PhingFile
      *             than zero if this abstract pathname is lexicographically
      *             greater than the argument
      */
-    public function compareTo(PhingFile $file)
+    public function compareTo(PhingFile $file): ?int
     {
         $fs = FileSystem::getFileSystem();
 
@@ -1090,7 +1090,7 @@ class PhingFile
      *
      * @return boolean
      */
-    public function equals($obj)
+    public function equals($obj): bool
     {
         if (($obj !== null) && ($obj instanceof PhingFile)) {
             return ($this->compareTo($obj) === 0);
@@ -1104,7 +1104,7 @@ class PhingFile
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return $this->__toString();
     }

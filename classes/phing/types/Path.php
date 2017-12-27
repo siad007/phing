@@ -93,7 +93,7 @@ class Path extends DataType
      *
      * @throws BuildException
      */
-    public function setDir(PhingFile $location)
+    public function setDir(PhingFile $location): void
     {
         if ($this->isReference()) {
             throw $this->tooManyAttributes();
@@ -126,9 +126,8 @@ class Path extends DataType
      *
      * @return void
      *
-     * @throws BuildException
      */
-    public function setRefid(Reference $r)
+    public function setRefid(Reference $r): void
     {
         if (!empty($this->elements)) {
             throw $this->tooManyAttributes();
@@ -144,7 +143,7 @@ class Path extends DataType
      *
      * @throws BuildException
      */
-    public function createPathElement()
+    public function createPathElement(): \PathElement
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -164,7 +163,7 @@ class Path extends DataType
      *
      * @throws BuildException
      */
-    public function addFilelist(FileList $fl)
+    public function addFilelist(FileList $fl): void
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -182,7 +181,7 @@ class Path extends DataType
      *
      * @throws BuildException
      */
-    public function addFileset(FileSet $fs)
+    public function addFileset(FileSet $fs): void
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -200,7 +199,7 @@ class Path extends DataType
      *
      * @throws BuildException
      */
-    public function addDirset(DirSet $dset)
+    public function addDirset(DirSet $dset): void
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -216,7 +215,7 @@ class Path extends DataType
      *
      * @throws BuildException
      */
-    public function createPath()
+    public function createPath(): \Path
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -237,7 +236,7 @@ class Path extends DataType
      *
      * @throws BuildException
      */
-    public function append(Path $other)
+    public function append(Path $other): void
     {
         if ($other === null) {
             return;
@@ -257,8 +256,9 @@ class Path extends DataType
      * @param Path $source - Source path whose components are examined for existence.
      *
      * @return void
+     * @throws IOException
      */
-    public function addExisting(Path $source)
+    public function addExisting(Path $source): void
     {
         $list = $source->listPaths();
         foreach ($list as $el) {
@@ -283,11 +283,10 @@ class Path extends DataType
     /**
      * Returns all path elements defined by this and nested path objects.
      *
-     * @throws BuildException
-     *
      * @return array List of path elements.
+     * @throws Exception
      */
-    public function listPaths()
+    public function listPaths(): array
     {
         if (!$this->checked) {
             // make sure we don't have a circular reference here
@@ -388,7 +387,7 @@ class Path extends DataType
      *
      * @return array
      */
-    public static function translatePath(Project $project, $source)
+    public static function translatePath(Project $project, $source): array
     {
         $result = [];
         if ($source == null) {
@@ -424,7 +423,7 @@ class Path extends DataType
      *
      * @return string
      */
-    public static function translateFile($source)
+    public static function translateFile($source): string
     {
         if ($source == null) {
             return "";
@@ -448,7 +447,7 @@ class Path extends DataType
      *
      * @return bool
      */
-    protected static function translateFileSep(&$buffer, $pos)
+    protected static function translateFileSep(&$buffer, $pos): bool
     {
         if ($buffer{$pos} == '/' || $buffer{$pos} == '\\') {
             $buffer{$pos} = DIRECTORY_SEPARATOR;
@@ -466,7 +465,7 @@ class Path extends DataType
      *
      * @return int
      */
-    public function size()
+    public function size(): int
     {
         return count($this->listPaths());
     }
@@ -480,9 +479,8 @@ class Path extends DataType
      *
      * @return void
      *
-     * @throws BuildException
      */
-    public function dieOnCircularReference(&$stk, Project $p)
+    public function dieOnCircularReference(&$stk, Project $p): void
     {
         if ($this->checked) {
             return;
@@ -518,7 +516,7 @@ class Path extends DataType
      *
      * @return string
      */
-    private static function resolveFile(Project $project, $relativeName)
+    private static function resolveFile(Project $project, $relativeName): string
     {
         if ($project !== null) {
             $f = $project->resolveFile($relativeName);

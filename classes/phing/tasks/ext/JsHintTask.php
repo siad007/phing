@@ -247,7 +247,7 @@ class JsHintTask extends Task
      * @return string Path to the project basedir
      * @throws \BuildException
      */
-    private function _getProjectBasedir()
+    private function _getProjectBasedir(): string
     {
         return $this->getProject()->getBasedir()->getAbsolutePath() . DIRECTORY_SEPARATOR;
     }

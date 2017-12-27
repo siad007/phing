@@ -23,13 +23,13 @@
  */
 class StringFormatter
 {
-    public function center($value, $fixedLength)
+    public function center($value, $fixedLength): string
     {
         $spacesBeforeValue = $this->calculateSpaceBeforeValue($value, $fixedLength);
         return $this->toSpaces($spacesBeforeValue) .  $value;
     }
 
-    public function left($value, $fixedLength)
+    public function left($value, $fixedLength): string
     {
         return $value . $this->toSpaces($fixedLength - strlen($value) + 4);
     }
@@ -39,12 +39,12 @@ class StringFormatter
         return $fixedLength / 2 - strlen($value) / 2;
     }
 
-    public function toSpaces($size)
+    public function toSpaces($size): string
     {
         return $this->toChars(' ', $size);
     }
 
-    public function toChars($ch, $size)
+    public function toChars($ch, $size): string
     {
         $sb = '';
         for ($i = 0; $i < $size; $i++) {

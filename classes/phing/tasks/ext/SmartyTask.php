@@ -160,7 +160,7 @@ class SmartyTask extends Task
     // specified in the XML for the smarty task.
     // -----------------------------------------------------------------------
 
-    public function init()
+    public function init(): void
     {
         // This check returns true for smarty 3 and false otherwise.
         if (stream_resolve_include_path('SmartyBC.class.php')) {
@@ -180,7 +180,7 @@ class SmartyTask extends Task
      * @param  string $controlTemplate
      * @return void
      */
-    public function setControlTemplate($controlTemplate)
+    public function setControlTemplate($controlTemplate): void
     {
         $this->controlTemplate = $controlTemplate;
     }
@@ -190,7 +190,7 @@ class SmartyTask extends Task
      * generating process.
      * @return string
      */
-    public function getControlTemplate()
+    public function getControlTemplate(): string
     {
         return $this->controlTemplate;
     }
@@ -202,7 +202,7 @@ class SmartyTask extends Task
      * @param $templatePath
      * @return void
      */
-    public function setTemplatePath($templatePath)
+    public function setTemplatePath($templatePath): void
     {
         $resolvedPath = "";
         $tok = strtok($templatePath, ",");
@@ -230,7 +230,7 @@ class SmartyTask extends Task
      * loader.
      * @return string
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
         return $this->templatePath;
     }
@@ -242,7 +242,7 @@ class SmartyTask extends Task
      * @return void
      * @throws Exception
      */
-    public function setOutputDirectory(PhingFile $outputDirectory)
+    public function setOutputDirectory(PhingFile $outputDirectory): void
     {
         try {
             if (!$outputDirectory->exists()) {
@@ -264,7 +264,7 @@ class SmartyTask extends Task
      * Get the output directory.
      * @return string
      */
-    public function getOutputDirectory()
+    public function getOutputDirectory(): string
     {
         return $this->outputDirectory;
     }
@@ -275,7 +275,7 @@ class SmartyTask extends Task
      * @param $outputFile
      * @return void
      */
-    public function setOutputFile($outputFile)
+    public function setOutputFile($outputFile): void
     {
         $this->outputFile = $outputFile;
     }
@@ -285,7 +285,7 @@ class SmartyTask extends Task
      * generation process.
      * @return string
      */
-    public function getOutputFile()
+    public function getOutputFile(): string
     {
         return $this->outputFile;
     }
@@ -303,7 +303,7 @@ class SmartyTask extends Task
      * Get the path Smarty uses for compiling templates.
      * @return string
      */
-    public function getCompilePath()
+    public function getCompilePath(): string
     {
         return $this->compilePath;
     }
@@ -313,7 +313,7 @@ class SmartyTask extends Task
      * @param  boolean $force
      * @return void
      */
-    public function setForceCompile($force)
+    public function setForceCompile($force): void
     {
         $this->forceCompile = (boolean) $force;
     }
@@ -322,7 +322,7 @@ class SmartyTask extends Task
      * Get whether Smarty should always recompile template.
      * @return boolean
      */
-    public function getForceCompile()
+    public function getForceCompile(): bool
     {
         return $this->forceCompile;
     }
@@ -332,7 +332,7 @@ class SmartyTask extends Task
      * @param  string $configPath
      * @return void
      */
-    public function setConfigPath($configPath)
+    public function setConfigPath($configPath): void
     {
         $this->configPath = $configPath;
     }
@@ -341,7 +341,7 @@ class SmartyTask extends Task
      * Get the path that Smarty uses for looking for config files.
      * @return string
      */
-    public function getConfigPath()
+    public function getConfigPath(): string
     {
         return $this->configPath;
     }
@@ -351,7 +351,7 @@ class SmartyTask extends Task
      * @param  string $delim
      * @return void
      */
-    public function setLeftDelimiter($delim)
+    public function setLeftDelimiter($delim): void
     {
         $this->leftDelimiter = $delim;
     }
@@ -360,7 +360,7 @@ class SmartyTask extends Task
      * Get Smarty template right delimiter
      * @return string
      */
-    public function getLeftDelimiter()
+    public function getLeftDelimiter(): string
     {
         return $this->leftDelimiter;
     }
@@ -370,7 +370,7 @@ class SmartyTask extends Task
      * @param  string $delim
      * @return void
      */
-    public function setRightDelimiter($delim)
+    public function setRightDelimiter($delim): void
     {
         $this->rightDelimiter = $delim;
     }
@@ -379,7 +379,7 @@ class SmartyTask extends Task
      * Get Smarty template right delimiter
      * @return string
      */
-    public function getRightDelimiter()
+    public function getRightDelimiter(): string
     {
         return $this->rightDelimiter;
     }
@@ -392,7 +392,7 @@ class SmartyTask extends Task
      * @throws BuildException
      * @return void
      */
-    public function setContextProperties($file)
+    public function setContextProperties($file): void
     {
         $sources = explode(",", $file);
         $this->contextProperties = new Properties();
@@ -432,9 +432,9 @@ class SmartyTask extends Task
      * Get the context properties that will be
      * fed into the initial context be the
      * generating process starts.
-     * @return Properties
+     * @return array
      */
-    public function getContextProperties()
+    public function getContextProperties(): array
     {
         return $this->contextProperties;
     }
@@ -450,7 +450,7 @@ class SmartyTask extends Task
      * @throws Exception the execute method will catch
      *                   and rethrow as a <code>BuildException</code>
      */
-    public function initControlContext()
+    public function initControlContext(): \Smarty
     {
         $this->context->clear_all_assign();
 
@@ -626,7 +626,7 @@ class SmartyTask extends Task
      * {@link #initControlContext()}.
      * @return void
      */
-    protected function populateInitialContext(Smarty $context)
+    protected function populateInitialContext(Smarty $context): void
     {
     }
 
@@ -638,7 +638,7 @@ class SmartyTask extends Task
      * @return void
      * @throws Exception Problem cleaning up.
      */
-    protected function cleanup()
+    protected function cleanup(): void
     {
     }
 }

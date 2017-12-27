@@ -43,7 +43,7 @@ class LiquibaseRollbackTask extends AbstractLiquibaseTask
     /**
      * @see AbstractTask::checkParams()
      */
-    protected function checkParams()
+    protected function checkParams(): void
     {
         parent::checkParams();
 

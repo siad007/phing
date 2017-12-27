@@ -50,42 +50,42 @@ class StatisticsListener implements SubBuildListener
         }
     }
 
-    public function buildStarted(BuildEvent $buildEvent)
+    public function buildStarted(BuildEvent $buildEvent): void
     {
         if (self::$BUILDEVENT_PROJECT_NAME_HAS_NULL_VALUE) {
             $this->findInitialProjectTimer()->start();
         }
     }
 
-    public function buildFinished(BuildEvent $buildEvent)
+    public function buildFinished(BuildEvent $event): void
     {
-        $projectTimer = $this->findProjectTimer($buildEvent);
+        $projectTimer = $this->findProjectTimer($event);
         $this->updateDurationWithInitialProjectTimer($projectTimer);
         $this->buildFinishedTimer($projectTimer);
         $this->statisticsReport->write();
     }
 
-    public function targetStarted(BuildEvent $buildEvent)
+    public function targetStarted(BuildEvent $event): void
     {
-        $this->findTargetTimer($buildEvent)->start();
+        $this->findTargetTimer($event)->start();
     }
 
-    public function targetFinished(BuildEvent $buildEvent)
+    public function targetFinished(BuildEvent $buildEvent): void
     {
         $this->findTargetTimer($buildEvent)->finish();
     }
 
-    public function taskStarted(BuildEvent $buildEvent)
+    public function taskStarted(BuildEvent $buildEvent): void
     {
         $this->findTaskTimer($buildEvent)->start();
     }
 
-    public function taskFinished(BuildEvent $buildEvent)
+    public function taskFinished(BuildEvent $buildEvent): void
     {
         $this->findTaskTimer($buildEvent)->finish();
     }
 
-    public function messageLogged(BuildEvent $buildEvent)
+    public function messageLogged(BuildEvent $event): void
     {
     }
 
@@ -115,7 +115,7 @@ class StatisticsListener implements SubBuildListener
      * @param BuildEvent $buildEvent
      * @return SeriesTimer
      */
-    private function findTargetTimer(BuildEvent $buildEvent)
+    private function findTargetTimer(BuildEvent $buildEvent): \SeriesTimer
     {
         $projectTimer = $this->findProjectTimer($buildEvent);
         $target = $buildEvent->getTarget();
@@ -127,7 +127,7 @@ class StatisticsListener implements SubBuildListener
      * @param BuildEvent $buildEvent
      * @return SeriesTimer
      */
-    private function findTaskTimer(BuildEvent $buildEvent)
+    private function findTaskTimer(BuildEvent $buildEvent): \SeriesTimer
     {
         $projectTimer = $this->findProjectTimer($buildEvent);
         $task = $buildEvent->getTask();

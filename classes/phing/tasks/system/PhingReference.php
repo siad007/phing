@@ -27,7 +27,7 @@ class PhingReference extends Reference
      *
      * @return string the id of the reference in the new project.
      */
-    public function getToRefid()
+    public function getToRefid(): string
     {
         return $this->targetid;
     }

@@ -52,7 +52,7 @@ class FilterReader extends Reader
     /**
      * @param int $n
      */
-    public function skip($n)
+    public function skip($n): void
     {
         $this->in->skip($n);
     }
@@ -69,20 +69,20 @@ class FilterReader extends Reader
         return $this->in->read($len);
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->in->reset();
     }
 
-    public function close()
+    public function close(): void
     {
-        return $this->in->close();
+        $this->in->close();
     }
 
     /**
      * @return string
      */
-    public function getResource()
+    public function getResource(): string
     {
         return $this->in->getResource();
     }

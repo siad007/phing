@@ -77,7 +77,7 @@ class DifferentSelector extends MappingSelector
      *
      * @throws BuildException
      */
-    protected function selectionTest(PhingFile $srcfile, PhingFile $destfile)
+    protected function selectionTest(PhingFile $srcfile, PhingFile $destfile): bool
     {
         try {
             // if either of them is missing, they are different

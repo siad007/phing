@@ -31,7 +31,7 @@ interface SelectorContainer
      *
      * @return bool whether any selectors are in this container
      */
-    public function hasSelectors();
+    public function hasSelectors(): bool;
 
     /**
      * Gives the count of the number of selectors in this container
@@ -47,7 +47,7 @@ interface SelectorContainer
      *
      * @return BaseSelectorContainer[] an array of selectors in this container
      */
-    public function getSelectors(Project $p);
+    public function getSelectors(Project $p): array;
 
     /**
      * Returns an array for accessing the set of selectors.
@@ -60,10 +60,8 @@ interface SelectorContainer
      * Add a new selector into this container.
      *
      * @param FileSelector $selector the new selector to add
-     *
-     * @return FileSelector the selector that was added
      */
-    public function appendSelector(FileSelector $selector);
+    public function appendSelector(FileSelector $selector): void;
 
     /* Methods below all add specific selectors */
 
@@ -71,125 +69,125 @@ interface SelectorContainer
      * add a "Select" selector entry on the selector list
      * @param SelectSelector $selector
      */
-    public function addSelector(SelectSelector $selector);
+    public function addSelector(SelectSelector $selector): void;
 
     /**
      * add an "And" selector entry on the selector list
      * @param AndSelector $selector
      */
-    public function addAnd(AndSelector $selector);
+    public function addAnd(AndSelector $selector): void;
 
     /**
      * add an "Or" selector entry on the selector list
      * @param OrSelector $selector
      */
-    public function addOr(OrSelector $selector);
+    public function addOr(OrSelector $selector): void;
 
     /**
      * add a "Not" selector entry on the selector list
      * @param NotSelector $selector
      */
-    public function addNot(NotSelector $selector);
+    public function addNot(NotSelector $selector): void;
 
     /**
      * add a "None" selector entry on the selector list
      * @param NoneSelector $selector
      */
-    public function addNone(NoneSelector $selector);
+    public function addNone(NoneSelector $selector): void;
 
     /**
      * add a majority selector entry on the selector list
      * @param MajoritySelector $selector
      */
-    public function addMajority(MajoritySelector $selector);
+    public function addMajority(MajoritySelector $selector): void;
 
     /**
      * add a selector date entry on the selector list
      * @param DateSelector $selector
      */
-    public function addDate(DateSelector $selector);
+    public function addDate(DateSelector $selector): void;
 
     /**
      * add a selector size entry on the selector list
      * @param SizeSelector $selector
      */
-    public function addSize(SizeSelector $selector);
+    public function addSize(SizeSelector $selector): void;
 
     /**
      * add a selector filename entry on the selector list
      * @param FilenameSelector $selector
      */
-    public function addFilename(FilenameSelector $selector);
+    public function addFilename(FilenameSelector $selector): void;
 
     /**
      * add an extended selector entry on the selector list
      * @param ExtendSelector $selector
      */
-    public function addCustom(ExtendSelector $selector);
+    public function addCustom(ExtendSelector $selector): void;
 
     /**
      * add a contains selector entry on the selector list
      * @param ContainsSelector $selector
      */
-    public function addContains(ContainsSelector $selector);
+    public function addContains(ContainsSelector $selector): void;
 
     /**
      * add a contains selector entry on the selector list
      * @param ContainsRegexpSelector $selector
      */
-    public function addContainsRegexp(ContainsRegexpSelector $selector);
+    public function addContainsRegexp(ContainsRegexpSelector $selector): void;
 
     /**
      * add a present selector entry on the selector list
      * @param PresentSelector $selector
      */
-    public function addPresent(PresentSelector $selector);
+    public function addPresent(PresentSelector $selector): void;
 
     /**
      * add a depth selector entry on the selector list
      * @param DepthSelector $selector
      */
-    public function addDepth(DepthSelector $selector);
+    public function addDepth(DepthSelector $selector): void;
 
     /**
      * add a depends selector entry on the selector list
      * @param DependSelector $selector
      */
-    public function addDepend(DependSelector $selector);
+    public function addDepend(DependSelector $selector): void;
 
     /**
      * add a different selector entry on the selector list
      * @param DifferentSelector $selector
      */
-    public function addDifferent(DifferentSelector $selector);
+    public function addDifferent(DifferentSelector $selector): void;
 
     /**
      * add a type selector entry on the selector list
      * @param TypeSelector $selector
      */
-    public function addType(TypeSelector $selector);
+    public function addType(TypeSelector $selector): void;
 
     /**
      * add a executable selector entry on the selector list
      * @param ExecutableSelector $selector
      */
-    public function addExecutable(ExecutableSelector $selector);
+    public function addExecutable(ExecutableSelector $selector): void;
 
     /**
      * add a readable selector entry on the selector list
      * @param ReadableSelector $selector
      */
-    public function addReadable(ReadableSelector $selector);
+    public function addReadable(ReadableSelector $selector): void;
 
     /**
      * add a writable selector entry on the selector list
      * @param WritableSelector $selector
      */
-    public function addWritable(WritableSelector $selector);
+    public function addWritable(WritableSelector $selector): void;
 
     /**
      * add a symlink selector entry on the selector list
      * @param SymlinkSelector $selector
      */
-    public function addSymlink(SymlinkSelector $selector);
+    public function addSymlink(SymlinkSelector $selector): void;
 }

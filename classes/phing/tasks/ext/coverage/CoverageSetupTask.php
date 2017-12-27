@@ -69,7 +69,7 @@ class CoverageSetupTask extends Task
     /**
      * @return null|Path
      */
-    public function createClasspath()
+    public function createClasspath(): ?\Path
     {
         $this->classpath = new Path();
 
@@ -80,8 +80,9 @@ class CoverageSetupTask extends Task
      * Iterate over all filesets and return the filename of all files.
      *
      * @return array an array of (basedir, filenames) pairs
+     * @throws Exception
      */
-    private function getFilenames()
+    private function getFilenames(): array
     {
         $files = [];
 
@@ -113,7 +114,7 @@ class CoverageSetupTask extends Task
         return $files;
     }
 
-    public function init()
+    public function init(): void
     {
     }
 

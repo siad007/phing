@@ -39,6 +39,7 @@ class DataStore
      * Constructs a new data store
      *
      * @param PhingFile $file object pointing to the data store on disk
+     * @throws Exception
      */
     public function __construct(PhingFile $file)
     {
@@ -83,7 +84,7 @@ class DataStore
      *
      * @return void
      */
-    public function put($key, $value, $autocommit = false)
+    public function put($key, $value, $autocommit = false): void
     {
         $this->data[$key] = $value;
 
@@ -99,7 +100,7 @@ class DataStore
      * @param boolean $autocommit whether to auto-commit (write)
      *                            the data store to disk
      */
-    public function remove($key, $autocommit = false)
+    public function remove($key, $autocommit = false): void
     {
         unset($this->data[$key]);
 
@@ -113,7 +114,7 @@ class DataStore
      *
      * @return void
      */
-    public function commit()
+    public function commit(): void
     {
         $this->write();
     }
@@ -121,10 +122,10 @@ class DataStore
     /**
      * Internal function to read data store from file
      *
-     * @throws BuildException
      * @return void
+     * @throws Exception
      */
-    private function read()
+    private function read(): void
     {
         if (!$this->file->canRead()) {
             throw new BuildException("Can't read data store from '" .
@@ -139,10 +140,10 @@ class DataStore
     /**
      * Internal function to write data store to file
      *
-     * @throws BuildException
      * @return void
+     * @throws IOException
      */
-    private function write()
+    private function write(): void
     {
         if (!$this->file->canWrite()) {
             throw new BuildException("Can't write data store to '" .

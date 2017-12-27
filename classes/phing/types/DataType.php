@@ -58,7 +58,7 @@ class DataType extends ProjectComponent
      *
      * @return bool
      */
-    public function isReference()
+    public function isReference(): bool
     {
         return ($this->ref !== null);
     }
@@ -74,7 +74,7 @@ class DataType extends ProjectComponent
      *
      * @return void
      */
-    public function setRefid(Reference $r)
+    public function setRefid(Reference $r): void
     {
         $this->ref = $r;
         $this->checked = false;
@@ -107,9 +107,8 @@ class DataType extends ProjectComponent
      *
      * @return void
      *
-     * @throws BuildException
      */
-    public function dieOnCircularReference(&$stk, Project $p)
+    public function dieOnCircularReference(&$stk, Project $p): void
     {
         if ($this->checked || !$this->isReference()) {
             return;
@@ -182,7 +181,7 @@ class DataType extends ProjectComponent
      *
      * @return BuildException
      */
-    public function tooManyAttributes()
+    public function tooManyAttributes(): \BuildException
     {
         return new BuildException("You must not specify more than one attribute when using refid");
     }
@@ -193,7 +192,7 @@ class DataType extends ProjectComponent
      *
      * @return BuildException
      */
-    public function noChildrenAllowed()
+    public function noChildrenAllowed(): \BuildException
     {
         return new BuildException("You must not specify nested elements when using refid");
     }
@@ -204,7 +203,7 @@ class DataType extends ProjectComponent
      *
      * @return BuildException
      */
-    public function circularReference()
+    public function circularReference(): \BuildException
     {
         return new BuildException("This data type contains a circular reference.");
     }

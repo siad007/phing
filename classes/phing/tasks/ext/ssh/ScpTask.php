@@ -211,7 +211,7 @@ class ScpTask extends Task
      * @param $privkeyfilepassphrase
      * @return string
      */
-    public function getPrivkeyfilepassphrase($privkeyfilepassphrase)
+    public function getPrivkeyfilepassphrase($privkeyfilepassphrase): string
     {
         return $this->privkeyfilepassphrase;
     }
@@ -299,7 +299,7 @@ class ScpTask extends Task
      *
      * @return int
      */
-    public function getHeuristicDecision()
+    public function getHeuristicDecision(): int
     {
         return $this->heuristicDecision;
     }
@@ -308,7 +308,7 @@ class ScpTask extends Task
      * Creates an Ssh2MethodParam object. Handles the <sshconfig /> nested tag
      * @return Ssh2MethodParam
      */
-    public function createSshconfig()
+    public function createSshconfig(): \Ssh2MethodParam
     {
         $this->methods = new Ssh2MethodParam();
 
@@ -340,7 +340,7 @@ class ScpTask extends Task
         }
     }
 
-    public function init()
+    public function init(): void
     {
     }
 
@@ -443,7 +443,7 @@ class ScpTask extends Task
                 ssh2_sftp_mkdir(
                     $this->sftp,
                     dirname($remoteEndpoint),
-                    (null === $this->mode ? 0777 : $this->mode),
+                    ($this->mode ?? 0777),
                     true
                 );
             }

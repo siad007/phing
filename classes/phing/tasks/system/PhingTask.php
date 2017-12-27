@@ -93,7 +93,7 @@ class PhingTask extends Task
      * Creates a Project instance for the project to call.
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         $this->newProject = new Project();
         $tdf = $this->project->getTaskDefinitions();
@@ -148,7 +148,7 @@ class PhingTask extends Task
      *
      * @return void
      */
-    public function main()
+    public function main(): void
     {
 
         // Call Phing on the file set with the attribute "phingfile"
@@ -205,7 +205,7 @@ class PhingTask extends Task
      * @throws BuildException
      * @return void
      */
-    private function processFile()
+    private function processFile(): void
     {
         $buildFailed = false;
         $savedDir = $this->dir;
@@ -379,7 +379,7 @@ class PhingTask extends Task
      * @return void
      * @throws BuildException
      */
-    private function overrideProperties()
+    private function overrideProperties(): void
     {
         foreach (array_keys($this->properties) as $i) {
             $p = $this->properties[$i];
@@ -398,7 +398,7 @@ class PhingTask extends Task
      * @return void
      * @throws BuildException
      */
-    private function addReferences()
+    private function addReferences(): void
     {
 
         // parent project references
@@ -465,7 +465,7 @@ class PhingTask extends Task
      * @throws BuildException
      * @return void
      */
-    private function copyReference($oldKey, $newKey)
+    private function copyReference($oldKey, $newKey): void
     {
         $orig = $this->project->getReference($oldKey);
         if ($orig === null) {

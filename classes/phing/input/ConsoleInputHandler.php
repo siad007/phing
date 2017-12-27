@@ -47,7 +47,7 @@ class ConsoleInputHandler implements InputHandler
      * @param InputRequest $request
      * @return void
      */
-    public function handleInput(InputRequest $request)
+    public function handleInput(InputRequest $request): void
     {
         $questionHelper = new QuestionHelper();
         $questionHelper->setInputStream($this->inputStream);
@@ -67,7 +67,7 @@ class ConsoleInputHandler implements InputHandler
      * @param InputRequest $inputRequest
      * @return Question
      */
-    protected function getQuestion(InputRequest $inputRequest)
+    protected function getQuestion(InputRequest $inputRequest): ?Question
     {
         $prompt = $this->getPrompt($inputRequest);
 
@@ -84,7 +84,7 @@ class ConsoleInputHandler implements InputHandler
      * @param InputRequest $inputRequest
      * @return string
      */
-    protected function getPrompt(InputRequest $inputRequest)
+    protected function getPrompt(InputRequest $inputRequest): string
     {
         $prompt = $inputRequest->getPrompt();
         $defaultValue = $inputRequest->getDefaultValue();

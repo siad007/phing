@@ -50,7 +50,7 @@ class XsltTask extends CopyTask
     /**
      * Setup the filterchains w/ XSLTFilter that we will use while copying the files.
      */
-    public function init()
+    public function init(): void
     {
         $xf = new XsltFilter();
         $chain = new FilterChain();
@@ -63,7 +63,7 @@ class XsltTask extends CopyTask
      * Set any XSLT Param and invoke CopyTask::main()
      * @see CopyTask::main()
      */
-    public function main()
+    public function main(): void
     {
         $this->log("Doing XSLT transformation using stylesheet " . $this->xsltFilter->getStyle(), Project::MSG_VERBOSE);
         $this->xsltFilter->setParams($this->parameters);
@@ -107,7 +107,7 @@ class XsltTask extends CopyTask
      * Support nested <param> tags using XSLTParam class.
      * @return XsltParam
      */
-    public function createParam()
+    public function createParam(): \XsltParam
     {
         $num = array_push($this->parameters, new XsltParam());
 

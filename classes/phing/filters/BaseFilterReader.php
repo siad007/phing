@@ -67,7 +67,7 @@ class BaseFilterReader extends FilterReader
      *
      * @return boolean whether or not the filter is initialized
      */
-    public function getInitialized()
+    public function getInitialized(): bool
     {
         return $this->initialized;
     }
@@ -107,12 +107,10 @@ class BaseFilterReader extends FilterReader
     /**
      * Reads characters.
      *
-     * @param  int $len  Maximum number of characters to read.
+     * @param  int $len Maximum number of characters to read.
      *
      * @return string Characters read, or -1 if the end of the stream
      *                    has been reached
-     *
-     * @throws IOException If an I/O error occurs
      */
     public function read($len = null)
     {
@@ -129,11 +127,11 @@ class BaseFilterReader extends FilterReader
      * @throws IOException if the underlying reader throws one during
      *                     reading
      */
-    public function readLine()
+    public function readLine(): string
     {
         $line = null;
 
-        while (($ch = $this->in->read(1)) !== -1) {
+        while (($ch = $this->in->read(1)) != -1) {
             $line .= $ch;
             if ($ch === "\n") {
                 break;
@@ -148,7 +146,7 @@ class BaseFilterReader extends FilterReader
      *
      * @return boolean
      */
-    public function eof()
+    public function eof(): bool
     {
         return $this->in->eof();
     }
@@ -161,7 +159,7 @@ class BaseFilterReader extends FilterReader
      *
      * @return void
      */
-    public function log($msg, $level = Project::MSG_INFO)
+    public function log($msg, $level = Project::MSG_INFO): void
     {
         if ($this->project !== null) {
             $this->project->log("[filter:" . get_class($this) . "] " . $msg, $level);

@@ -56,11 +56,7 @@ abstract class ContainerMapper implements FileNameMapper
 
     /**
      * Add a <code>FileNameMapper</code>.
-     * @param FileNameMapper $fileNameMapper a <code>FileNameMapper</code>.
-     * @throws BadMethodCallException if attempting to add this
-     *         <code>ContainerMapper</code> to itself, or if the specified
-     *         <code>FileNameMapper</code> is itself a <code>ContainerMapper</code>
-     *         that contains this <code>ContainerMapper</code>.
+     * @param Mapper $fileNameMapper a <code>FileNameMapper</code>.
      */
     public function add(Mapper $fileNameMapper)
     {
@@ -77,13 +73,13 @@ abstract class ContainerMapper implements FileNameMapper
      * @param FileNameMapper $fileNameMapper   the <code>FileNameMapper</code> to search for.
      * @return boolean
      */
-    protected function contains(FileNameMapper $fileNameMapper)
+    protected function contains(FileNameMapper $fileNameMapper): bool
     {
         $foundit = false;
         for ($iter = new ArrayIterator($this->mappers); $iter->valid() && !$foundit;) {
             $iter->next();
             $next = $iter->current();
-            $foundit = ($next == $fileNameMapper || ($next instanceof ContainerMapper && $next->contains($fileNameMapper)));
+            $foundit = ($next == $fileNameMapper || ($next instanceof self && $next->contains($fileNameMapper)));
         }
         return $foundit;
     }
@@ -92,7 +88,7 @@ abstract class ContainerMapper implements FileNameMapper
      * Get the <code>List</code> of <code>Mapper</code>s.
      * @return Mapper[]
      */
-    public function getMappers()
+    public function getMappers(): array
     {
         return $this->mappers;
     }
@@ -101,7 +97,7 @@ abstract class ContainerMapper implements FileNameMapper
      * Empty implementation.
      * @param string $ignore ignored.
      */
-    public function setFrom($ignore)
+    public function setFrom($ignore): void
     {
         //Empty
     }
@@ -110,7 +106,7 @@ abstract class ContainerMapper implements FileNameMapper
      * Empty implementation.
      * @param string $ignore ignored.
      */
-    public function setTo($ignore)
+    public function setTo($ignore): void
     {
         //Empty
     }

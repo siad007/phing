@@ -79,7 +79,7 @@ class ConfigurationException extends Exception
      *
      * @return Exception
      */
-    public function getCause()
+    public function getCause(): \Exception
     {
         return $this->cause;
     }

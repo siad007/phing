@@ -79,7 +79,7 @@ class PatchTask extends Task
      * @return void
      * @throws BuildException if $file not exists
      */
-    public function setPatchFile($file)
+    public function setPatchFile($file): void
     {
         if (!is_file($file)) {
             throw new BuildException(sprintf('Patchfile %s doesn\'t exist', $file));
@@ -95,7 +95,7 @@ class PatchTask extends Task
      * @param  string $file File to patch
      * @return void
      */
-    public function setOriginalFile($file)
+    public function setOriginalFile($file): void
     {
         $this->originalFile = $file;
     }
@@ -109,7 +109,7 @@ class PatchTask extends Task
      * @param  string $file File to send the output to
      * @return void
      */
-    public function setDestFile($file)
+    public function setDestFile($file): void
     {
         if ($file !== null) {
             $this->cmdArgs [] = "--output=$file";
@@ -124,7 +124,7 @@ class PatchTask extends Task
      * @param  bool $backups If true create backups
      * @return void
      */
-    public function setBackups($backups)
+    public function setBackups($backups): void
     {
         if ($backups) {
             $this->cmdArgs [] = '--backup';
@@ -139,7 +139,7 @@ class PatchTask extends Task
      * @param  bool $ignore If true ignore whitespace differences
      * @return void
      */
-    public function setIgnoreWhiteSpace($ignore)
+    public function setIgnoreWhiteSpace($ignore): void
     {
         if ($ignore) {
             $this->cmdArgs [] = '--ignore-whitespace';
@@ -156,7 +156,7 @@ class PatchTask extends Task
      * @return void
      * @throws BuildException if num is < 0, or other errors
      */
-    public function setStrip($num)
+    public function setStrip($num): void
     {
         if ($num < 0) {
             throw new BuildException('strip has to be >= 0');
@@ -172,7 +172,7 @@ class PatchTask extends Task
      * @param  bool $flag If true suppress set the -s option on the patch command
      * @return void
      */
-    public function setQuiet($flag)
+    public function setQuiet($flag): void
     {
         if ($flag) {
             $this->cmdArgs [] = '--silent';
@@ -187,7 +187,7 @@ class PatchTask extends Task
      * @param  bool $flag If true set the -R option on the patch command
      * @return void
      */
-    public function setReverse($flag)
+    public function setReverse($flag): void
     {
         if ($flag) {
             $this->cmdArgs [] = '--reverse';
@@ -202,7 +202,7 @@ class PatchTask extends Task
      * @param  string $directory Directory to run the patch command in
      * @return void
      */
-    public function setDir($directory)
+    public function setDir($directory): void
     {
         $this->cmdArgs [] = "--directory=$directory";
     }
@@ -213,7 +213,7 @@ class PatchTask extends Task
      * @param  bool $flag If true set the -N (--forward) option
      * @return void
      */
-    public function setForward($flag)
+    public function setForward($flag): void
     {
         if ($flag) {
             $this->cmdArgs [] = "--forward";
@@ -228,7 +228,7 @@ class PatchTask extends Task
      * @param  string $value Value of a fuzz factor
      * @return void
      */
-    public function setFuzz($value)
+    public function setFuzz($value): void
     {
         $this->cmdArgs [] = "--fuzz=$value";
     }
@@ -242,7 +242,7 @@ class PatchTask extends Task
      * @param  bool $value "true" if it should halt, otherwise "false"
      * @return void
      */
-    public function setHaltOnFailure($value)
+    public function setHaltOnFailure($value): void
     {
         $this->haltOnFailure = $value;
     }
@@ -253,7 +253,7 @@ class PatchTask extends Task
      * @return void
      * @throws BuildException when it all goes a bit pear shaped
      */
-    public function main()
+    public function main(): void
     {
         if ($this->patchFile == null) {
             throw new BuildException('patchfile argument is required');

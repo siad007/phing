@@ -40,7 +40,7 @@ class ThrowTask extends FailTask
     /**
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         $reffed = $this->reference !== null ? $this->reference->getReferencedObject($this->getProject()) : null;
 
@@ -56,7 +56,7 @@ class ThrowTask extends FailTask
      *
      * @return void
      */
-    public function setRefid(Reference $ref)
+    public function setRefid(Reference $ref): void
     {
         $this->reference = $ref;
     }
@@ -64,7 +64,7 @@ class ThrowTask extends FailTask
     /**
      * @return Reference
      */
-    public function getRefid()
+    public function getRefid(): \Reference
     {
         return $this->reference;
     }

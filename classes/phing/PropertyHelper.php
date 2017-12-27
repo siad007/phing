@@ -39,7 +39,7 @@ class PropertyHelper
      *
      * @param Project $p the project instance.
      */
-    public function setProject(Project $p)
+    public function setProject(Project $p): void
     {
         self::$project = $p;
     }
@@ -54,7 +54,7 @@ class PropertyHelper
      *
      * @param PropertyHelper $next the next property helper in the chain.
      */
-    public function setNext(PropertyHelper $next)
+    public function setNext(PropertyHelper $next): void
     {
         $this->next = $next;
     }
@@ -64,7 +64,7 @@ class PropertyHelper
      *
      * @return PropertyHelper the next property helper.
      */
-    public function getNext()
+    public function getNext(): ?\PropertyHelper
     {
         return $this->next;
     }
@@ -79,7 +79,7 @@ class PropertyHelper
      *
      * @return PropertyHelper the project's property helper.
      */
-    public static function getPropertyHelper(Project $project)
+    public static function getPropertyHelper(Project $project): \PropertyHelper
     {
         /** @var PropertyHelper $helper */
         $helper = $project->getReference('phing.PropertyHelper');
@@ -116,7 +116,7 @@ class PropertyHelper
      *    couldn't. Each helper should delegate to the next one (unless it
      *    has a good reason not to).
      */
-    public function setPropertyHook($ns, $name, $value, $inherited, $user, $isNew)
+    public function setPropertyHook($ns, $name, $value, $inherited, $user, $isNew): bool
     {
         if ($this->getNext() !== null) {
             $subst = $this->getNext()->setPropertyHook($ns, $name, $value, $inherited, $user, $isNew);
@@ -137,7 +137,7 @@ class PropertyHelper
      * @param bool $user True if this is a user property.
      * @return string The property, if returned by a hook, or null if none.
      */
-    public function getPropertyHook($ns, $name, $user)
+    public function getPropertyHook($ns, $name, $user): ?string
     {
         if ($this->getNext() !== null) {
             $o = $this->getNext()->getPropertyHook($ns, $name, $user);
@@ -173,7 +173,7 @@ class PropertyHelper
      * @return string the original string with the properties replaced, or
      *         <code>null</code> if the original string is <code>null</code>.
      */
-    public function replaceProperties($ns, $value, $keys)
+    public function replaceProperties($ns, $value, $keys): ?string
     {
         if ($value === null) {
             return null;
@@ -247,7 +247,7 @@ class PropertyHelper
      * @param bool $verbose If this is true output extra log messages.
      * @return bool true if the property is set.
      */
-    public function setProperty($ns, $name, $value, $verbose)
+    public function setProperty($ns, $name, $value, $verbose): bool
     {
         // user (CLI) properties take precedence
         if (isset($this->userProperties[$name])) {
@@ -287,7 +287,7 @@ class PropertyHelper
      * @param string $value The new value of the property.
      *              Must not be <code>null</code>.
      */
-    public function setNewProperty($ns, $name, $value)
+    public function setNewProperty($ns, $name, $value): void
     {
         if (isset($this->properties[$name])) {
             self::$project->log('Override ignored for property ' . $name, Project::MSG_VERBOSE);
@@ -315,7 +315,7 @@ class PropertyHelper
      * @param string $value The new value of the property.
      *              Must not be <code>null</code>.
      */
-    public function setUserProperty($ns, $name, $value)
+    public function setUserProperty($ns, $name, $value): void
     {
         if ($name === null || $value === null) {
             return;
@@ -343,7 +343,7 @@ class PropertyHelper
      * @param string $value The new value of the property.
      *              Must not be <code>null</code>.
      */
-    public function setInheritedProperty($ns, $name, $value)
+    public function setInheritedProperty($ns, $name, $value): void
     {
         if ($name === null || $value === null) {
             return;
@@ -430,7 +430,7 @@ class PropertyHelper
      * @return array a hashtable containing all properties
      *         (including user properties).
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return $this->properties;
     }
@@ -439,7 +439,7 @@ class PropertyHelper
      * Returns a copy of the user property hashtable
      * @return array a hashtable containing just the user properties
      */
-    public function getUserProperties()
+    public function getUserProperties(): array
     {
         return $this->userProperties;
     }
@@ -454,7 +454,7 @@ class PropertyHelper
      *
      * @param Project $other the project to copy the properties to.  Must not be null.
      */
-    public function copyInheritedProperties(Project $other)
+    public function copyInheritedProperties(Project $other): void
     {
         foreach ($this->inheritedProperties as $arg => $value) {
             if ($other->getUserProperty($arg) !== null) {
@@ -475,7 +475,7 @@ class PropertyHelper
      *
      * @param Project $other the project to copy the properties to.  Must not be null.
      */
-    public function copyUserProperties(Project $other)
+    public function copyUserProperties(Project $other): void
     {
         foreach ($this->userProperties as $arg => $value) {
             if (isset($this->inheritedProperties[$arg])) {
@@ -504,7 +504,7 @@ class PropertyHelper
      *                           <code>${</code> without a closing
      *                           <code>}</code>
      */
-    public function parsePropertyString($value, &$fragments, &$propertyRefs)
+    public function parsePropertyString($value, &$fragments, &$propertyRefs): void
     {
         $prev = 0;
         $pos = 0;

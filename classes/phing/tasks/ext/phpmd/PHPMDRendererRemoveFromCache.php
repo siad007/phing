@@ -54,7 +54,7 @@ class PHPMDRendererRemoveFromCache extends AbstractRenderer
      * @param Report $report
      * @return void
      */
-    public function renderReport(Report $report)
+    public function renderReport(Report $report): void
     {
         foreach ($report->getRuleViolations() as $violation) {
             $fileName = $violation->getFileName();

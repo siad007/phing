@@ -110,7 +110,7 @@ class WikiPublishTask extends Task
     /**
      * @return string
      */
-    public function getApiPassword()
+    public function getApiPassword(): string
     {
         return $this->apiPassword;
     }
@@ -126,7 +126,7 @@ class WikiPublishTask extends Task
     /**
      * @return string
      */
-    public function getApiUrl()
+    public function getApiUrl(): string
     {
         return $this->apiUrl;
     }
@@ -142,7 +142,7 @@ class WikiPublishTask extends Task
     /**
      * @return string
      */
-    public function getApiUser()
+    public function getApiUser(): string
     {
         return $this->apiUser;
     }
@@ -158,7 +158,7 @@ class WikiPublishTask extends Task
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -181,7 +181,7 @@ class WikiPublishTask extends Task
     /**
      * @return string
      */
-    public function getMode()
+    public function getMode(): string
     {
         return $this->mode;
     }
@@ -197,7 +197,7 @@ class WikiPublishTask extends Task
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -213,7 +213,7 @@ class WikiPublishTask extends Task
     /**
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -221,9 +221,8 @@ class WikiPublishTask extends Task
     /**
      * Prepare CURL object
      *
-     * @throws BuildException
      */
-    public function init()
+    public function init(): void
     {
         $this->cookiesFile = tempnam(sys_get_temp_dir(), 'WikiPublish.' . uniqid('', true) . '.cookies');
 
@@ -322,7 +321,7 @@ class WikiPublishTask extends Task
      *
      * @return array
      */
-    private function getApiEditData()
+    private function getApiEditData(): array
     {
         $result = [
             'minor' => '',
@@ -362,7 +361,7 @@ class WikiPublishTask extends Task
      * @return array
      * @throws BuildException
      */
-    protected function callApi($queryString, $postData = null)
+    protected function callApi($queryString, $postData = null): array
     {
         $this->setPostData($postData);
 

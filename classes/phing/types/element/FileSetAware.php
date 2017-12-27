@@ -22,12 +22,12 @@ trait FileSetAware
     /** @var FileSet[] $filesets */
     protected $filesets = [];
 
-    public function addFileSet(FileSet $fileSet)
+    public function addFileSet(FileSet $fileSet): void
     {
         $this->filesets[] = $fileSet;
     }
 
-    public function getFileSets()
+    public function getFileSets(): array
     {
         return $this->filesets;
     }

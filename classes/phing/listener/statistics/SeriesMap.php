@@ -26,7 +26,7 @@ class SeriesMap
 
     protected $map = [];
 
-    public function getNames()
+    public function getNames(): array
     {
         return array_keys($this->map);
     }
@@ -35,12 +35,12 @@ class SeriesMap
      * @param string $name
      * @return Series
      */
-    public function get($name)
+    public function get($name): \Series
     {
         return $this->map[$name];
     }
 
-    public function put($key, Series $series)
+    public function put($key, Series $series): void
     {
         $this->map[$key] = $series;
     }

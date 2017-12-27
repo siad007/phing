@@ -35,7 +35,7 @@ class PhkPackageWebAccess
     /**
      * @return PhkPackageWebAccessPath
      */
-    public function createPath()
+    public function createPath(): \PhkPackageWebAccessPath
     {
         return ($this->paths[] = new PhkPackageWebAccessPath());
     }
@@ -43,7 +43,7 @@ class PhkPackageWebAccess
     /**
      * @return array
      */
-    public function getPaths()
+    public function getPaths(): array
     {
         /*
          * Get real paths...

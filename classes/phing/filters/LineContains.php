@@ -84,7 +84,7 @@ class LineContains extends BaseParamFilterReader implements ChainableReader
 
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -126,7 +126,7 @@ class LineContains extends BaseParamFilterReader implements ChainableReader
      * Find out whether we have been negated.
      * @return boolean negation flag.
      */
-    public function isNegated()
+    public function isNegated(): bool
     {
         return $this->negate;
     }
@@ -137,7 +137,7 @@ class LineContains extends BaseParamFilterReader implements ChainableReader
      * @return Contains The <code>contains</code> element added.
      *                  Must not be <code>null</code>.
      */
-    public function createContains()
+    public function createContains(): \Contains
     {
         $num = array_push($this->_contains, new Contains());
 
@@ -172,7 +172,7 @@ class LineContains extends BaseParamFilterReader implements ChainableReader
      *               returned object is "live" - in other words, changes made to the
      *               returned object are mirrored in the filter.
      */
-    public function getContains()
+    public function getContains(): array
     {
         return $this->_contains;
     }
@@ -186,8 +186,9 @@ class LineContains extends BaseParamFilterReader implements ChainableReader
      *
      * @return LineContains A new filter based on this configuration, but filtering
      *                      the specified reader
+     * @throws Exception
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
         $newFilter = new LineContains($reader);
         $newFilter->setContains($this->getContains());

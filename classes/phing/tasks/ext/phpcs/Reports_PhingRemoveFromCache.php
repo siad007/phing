@@ -57,7 +57,7 @@ class PHP_CodeSniffer_Reports_PhingRemoveFromCache implements PHP_CodeSniffer_Re
         PHP_CodeSniffer_File $phpcsFile,
         $showSources = false,
         $width = 80
-    ) {
+    ): bool {
         if (!self::$cache || ($report['errors'] === 0 && $report['warnings'] === 0)) {
             // Nothing to do
             return false;
@@ -92,7 +92,7 @@ class PHP_CodeSniffer_Reports_PhingRemoveFromCache implements PHP_CodeSniffer_Re
         $showSources = false,
         $width = 80,
         $toScreen = true
-    ) {
+    ): void {
         // Do nothing
     }
 }

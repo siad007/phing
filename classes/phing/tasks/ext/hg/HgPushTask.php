@@ -41,7 +41,7 @@ class HgPushTask extends HgBaseTask
      *
      * @return void
      */
-    public function setHaltonerror($halt)
+    public function setHaltonerror($halt): void
     {
         $this->haltonerror = StringHelper::booleanValue($halt);
     }
@@ -51,7 +51,7 @@ class HgPushTask extends HgBaseTask
      *
      * @return bool
      */
-    public function getHaltonerror()
+    public function getHaltonerror(): bool
     {
         return $this->haltonerror;
     }
@@ -62,7 +62,7 @@ class HgPushTask extends HgBaseTask
      * @throws BuildException
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $clone = $this->getFactoryInstance('push');
         $this->log('Pushing...', Project::MSG_INFO);

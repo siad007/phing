@@ -34,7 +34,7 @@ class DispatchUtils
      * @param object $task the task to execute.
      * @throws BuildException on error.
      */
-    public static function main($task)
+    public static function main($task): void
     {
         $methodName = "main";
         $dispatchable = null;

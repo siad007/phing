@@ -101,7 +101,7 @@ class SymlinkTask extends Task
      * @param  string $target
      * @return void
      */
-    public function setTarget($target)
+    public function setTarget($target): void
     {
         $this->_target = $target;
     }
@@ -112,7 +112,7 @@ class SymlinkTask extends Task
      * @param  string $link
      * @return void
      */
-    public function setLink($link)
+    public function setLink($link): void
     {
         $this->_link = $link;
     }
@@ -122,7 +122,7 @@ class SymlinkTask extends Task
      *
      * @return FileSet
      */
-    public function createFileset()
+    public function createFileset(): \FileSet
     {
         $num = array_push($this->_filesets, new FileSet());
 
@@ -135,7 +135,7 @@ class SymlinkTask extends Task
      * @param  boolean $overwrite
      * @return void
      */
-    public function setOverwrite($overwrite)
+    public function setOverwrite($overwrite): void
     {
         $this->_overwrite = $overwrite;
     }
@@ -154,7 +154,7 @@ class SymlinkTask extends Task
      * @throws BuildException
      * @return string
      */
-    public function getTarget()
+    public function getTarget(): string
     {
         if ($this->_target === null) {
             throw new BuildException('Target not set');
@@ -169,7 +169,7 @@ class SymlinkTask extends Task
      * @throws BuildException
      * @return string
      */
-    public function getLink()
+    public function getLink(): string
     {
         if ($this->_link === null) {
             throw new BuildException('Link not set');
@@ -183,7 +183,7 @@ class SymlinkTask extends Task
      *
      * @return array
      */
-    public function getFilesets()
+    public function getFilesets(): array
     {
         return $this->_filesets;
     }
@@ -193,7 +193,7 @@ class SymlinkTask extends Task
      *
      * @return boolean
      */
-    public function getOverwrite()
+    public function getOverwrite(): bool
     {
         return $this->_overwrite;
     }
@@ -201,7 +201,7 @@ class SymlinkTask extends Task
     /**
      * @return boolean
      */
-    public function isRelative()
+    public function isRelative(): bool
     {
         return $this->relative;
     }
@@ -272,7 +272,7 @@ class SymlinkTask extends Task
      *
      * @return bool
      */
-    public function main()
+    public function main(): bool
     {
         $map = $this->getMap();
 
@@ -296,7 +296,7 @@ class SymlinkTask extends Task
      * @param  string $link
      * @return bool
      */
-    protected function symlink($target, $link)
+    protected function symlink($target, $link): bool
     {
         $fs = FileSystem::getFileSystem();
 
@@ -324,6 +324,8 @@ class SymlinkTask extends Task
 
         $this->log('Linking: ' . $target . ' to ' . $link, Project::MSG_INFO);
 
-        return $fs->symlink($target, $link);
+        $fs->symlink($target, $link);
+
+        return true;
     }
 }

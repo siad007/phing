@@ -41,8 +41,9 @@ class CoverageMergerTask extends Task
      * Iterate over all filesets and return all the filenames.
      *
      * @return array an array of filenames
+     * @throws Exception
      */
-    private function getFilenames()
+    private function getFilenames(): array
     {
         $files = [];
 

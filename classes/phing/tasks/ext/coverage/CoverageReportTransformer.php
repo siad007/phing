@@ -67,7 +67,7 @@ class CoverageReportTransformer
     /**
      * @param $styleDir
      */
-    public function setStyleDir($styleDir)
+    public function setStyleDir($styleDir): void
     {
         $this->styleDir = $styleDir;
     }
@@ -75,7 +75,7 @@ class CoverageReportTransformer
     /**
      * @param PhingFile $toDir
      */
-    public function setToDir(PhingFile $toDir)
+    public function setToDir(PhingFile $toDir): void
     {
         $this->toDir = $toDir;
     }
@@ -83,7 +83,7 @@ class CoverageReportTransformer
     /**
      * @param $document
      */
-    public function setXmlDocument($document)
+    public function setXmlDocument($document): void
     {
         $this->document = $document;
     }
@@ -92,7 +92,7 @@ class CoverageReportTransformer
      * Setter for title parameter
      * @param $title
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -103,12 +103,12 @@ class CoverageReportTransformer
      *
      * @param boolean $useSortTable
      */
-    public function setUseSortTable($useSortTable)
+    public function setUseSortTable($useSortTable): void
     {
         $this->useSortTable = (boolean) $useSortTable;
     }
 
-    public function transform()
+    public function transform(): void
     {
         if (!$this->toDir->exists()) {
             throw new BuildException("Directory '" . $this->toDir . "' does not exist");
@@ -151,7 +151,7 @@ class CoverageReportTransformer
      * @return PhingFile
      * @throws BuildException
      */
-    private function getStyleSheet()
+    private function getStyleSheet(): \PhingFile
     {
         $xslname = "coverage-frames.xsl";
 

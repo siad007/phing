@@ -42,7 +42,7 @@ class PhpArrayMapLines extends BaseParamFilterReader implements ChainableReader
      * Parameter name for the function.
      * @var string
      */
-    const FUNCTION_KEY = "function";
+    private const FUNCTION_KEY = "function";
 
     /**
      * The function to be used.
@@ -66,7 +66,7 @@ class PhpArrayMapLines extends BaseParamFilterReader implements ChainableReader
 
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1 || !function_exists($this->function)) {
+        if ($buffer == -1 || !function_exists($this->function)) {
             return -1;
         }
 
@@ -94,7 +94,7 @@ class PhpArrayMapLines extends BaseParamFilterReader implements ChainableReader
      *
      * @return string The prefix which will be added at the start of each input line
      */
-    public function getFunction()
+    public function getFunction(): string
     {
         return $this->function;
     }
@@ -120,9 +120,9 @@ class PhpArrayMapLines extends BaseParamFilterReader implements ChainableReader
      * @return PhpArrayMapLines A new filter based on this configuration, but filtering
      *                          the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new PhpArrayMapLines($reader);
+        $newFilter = new self($reader);
         $newFilter->setFunction($this->getFunction());
         $newFilter->setInitialized(true);
         $newFilter->setProject($this->getProject());

@@ -50,7 +50,7 @@ class HgUpdateTask extends HgBaseTask
      *
      * @return void
      */
-    public function setClean($value)
+    public function setClean($value): void
     {
         $this->clean = StringHelper::booleanValue($value);
     }
@@ -60,7 +60,7 @@ class HgUpdateTask extends HgBaseTask
      *
      * @return bool
      */
-    public function getClean()
+    public function getClean(): bool
     {
         return $this->clean;
     }
@@ -72,7 +72,7 @@ class HgUpdateTask extends HgBaseTask
      *
      * @return void
      */
-    public function setBranch($value)
+    public function setBranch($value): void
     {
         $this->branch = $value;
     }
@@ -82,7 +82,7 @@ class HgUpdateTask extends HgBaseTask
      *
      * @return string
      */
-    public function getBranch()
+    public function getBranch(): string
     {
         return $this->branch;
     }
@@ -93,7 +93,7 @@ class HgUpdateTask extends HgBaseTask
      * @throws BuildException
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $pull = $this->getFactoryInstance('update');
         try {

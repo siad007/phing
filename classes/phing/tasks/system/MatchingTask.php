@@ -62,7 +62,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * @see ProjectComponent::setProject()
      * @param Project $project
      */
-    public function setProject($project)
+    public function setProject($project): void
     {
         parent::setProject($project);
         $this->fileset->setProject($project);
@@ -72,7 +72,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * add a name entry on the include list
      * @return PatternSetNameEntry
      */
-    public function createInclude()
+    public function createInclude(): \PatternSetNameEntry
     {
         return $this->fileset->createInclude();
     }
@@ -81,7 +81,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * add a name entry on the include files list
      * @return PatternSetNameEntry
      */
-    public function createIncludesFile()
+    public function createIncludesFile(): \PatternSetNameEntry
     {
         return $this->fileset->createIncludesFile();
     }
@@ -90,7 +90,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * add a name entry on the exclude list
      * @return PatternSetNameEntry
      */
-    public function createExclude()
+    public function createExclude(): \PatternSetNameEntry
     {
         return $this->fileset->createExclude();
     }
@@ -99,7 +99,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * add a name entry on the include files list
      * @return PatternSetNameEntry
      */
-    public function createExcludesFile()
+    public function createExcludesFile(): \PatternSetNameEntry
     {
         return $this->fileset->createExcludesFile();
     }
@@ -108,7 +108,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * add a set of patterns
      * @return PatternSet
      */
-    public function createPatternSet()
+    public function createPatternSet(): \PatternSet
     {
         return $this->fileset->createPatternSet();
     }
@@ -120,7 +120,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * @param  string $includes the string containing the include patterns
      * @return void
      */
-    public function setIncludes($includes)
+    public function setIncludes($includes): void
     {
         $this->fileset->setIncludes($includes);
     }
@@ -154,7 +154,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * @throws BuildException
      * @return DirectoryScanner
      */
-    protected function getDirectoryScanner(PhingFile $baseDir)
+    protected function getDirectoryScanner(PhingFile $baseDir): \DirectoryScanner
     {
         $this->fileset->setDir($baseDir);
         $this->fileset->setDefaultexcludes($this->useDefaultExcludes);
@@ -169,7 +169,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      *                                 the include patterns from.
      * @return void
      */
-    public function setIncludesfile(PhingFile $includesfile)
+    public function setIncludesfile(PhingFile $includesfile): void
     {
         $this->fileset->setIncludesfile($includesfile);
     }
@@ -181,7 +181,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      *                                 the include patterns from.
      * @return void
      */
-    public function setExcludesfile(PhingFile $excludesfile)
+    public function setExcludesfile(PhingFile $excludesfile): void
     {
         $this->fileset->setExcludesfile($excludesfile);
     }
@@ -193,7 +193,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      *                                  sensitive, "false"|"off"|"no" when not.
      * @return void
      */
-    public function setCaseSensitive($isCaseSensitive)
+    public function setCaseSensitive($isCaseSensitive): void
     {
         $this->fileset->setCaseSensitive($isCaseSensitive);
     }
@@ -204,7 +204,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * @param  boolean $followSymlinks whether or not symbolic links should be followed
      * @return void
      */
-    public function setFollowSymlinks($followSymlinks)
+    public function setFollowSymlinks($followSymlinks): void
     {
         $this->fileset->setExpandSymbolicLinks($followSymlinks);
     }
@@ -214,7 +214,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      *
      * @return boolean Whether any selectors are in this container
      */
-    public function hasSelectors()
+    public function hasSelectors(): bool
     {
         return $this->fileset->hasSelectors();
     }
@@ -224,7 +224,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      *
      * @return int The number of selectors in this container
      */
-    public function selectorCount()
+    public function selectorCount(): int
     {
         return $this->fileset->selectorCount();
     }
@@ -235,7 +235,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * @param Project $p
      * @return array FileSelector[] An array of selectors in this container
      */
-    public function getSelectors(Project $p)
+    public function getSelectors(Project $p): array
     {
         return $this->fileset->getSelectors($p);
     }
@@ -245,7 +245,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      *
      * @return array an enumerator that goes through each of the selectors
      */
-    public function selectorElements()
+    public function selectorElements(): array
     {
         return $this->fileset->selectorElements();
     }
@@ -254,9 +254,8 @@ abstract class MatchingTask extends Task implements SelectorContainer
      * Add a new selector into this container.
      *
      * @param  FileSelector $selector the new selector to add
-     * @return void
      */
-    public function appendSelector(FileSelector $selector)
+    public function appendSelector(FileSelector $selector): void
     {
         $this->fileset->appendSelector($selector);
     }
@@ -265,179 +264,197 @@ abstract class MatchingTask extends Task implements SelectorContainer
 
     /**
      * add a "Select" selector entry on the selector list
-     * @return SelectSelector
+     * @param SelectSelector $selector
+     * @return void
      */
-    public function addSelector(SelectSelector $selector)
+    public function addSelector(SelectSelector $selector): void
     {
-        return $this->fileset->addSelector($selector);
+        $this->fileset->addSelector($selector);
     }
 
     /**
      * add an "And" selector entry on the selector list
-     * @return AndSelector
+     * @param AndSelector $selector
+     * @return void
      */
-    public function addAnd(AndSelector $selector)
+    public function addAnd(AndSelector $selector): void
     {
-        return $this->fileset->addAnd($selector);
+        $this->fileset->addAnd($selector);
     }
 
     /**
      * add an "Or" selector entry on the selector list
-     * @return OrSelector
+     * @param OrSelector $selector
+     * @return void
      */
-    public function addOr(OrSelector $selector)
+    public function addOr(OrSelector $selector): void
     {
-        return $this->fileset->addOr($selector);
+        $this->fileset->addOr($selector);
     }
 
     /**
      * add a "Not" selector entry on the selector list
-     * @return NotSelector
+     * @param NotSelector $selector
+     * @return void
      */
-    public function addNot(NotSelector $selector)
+    public function addNot(NotSelector $selector): void
     {
-        return $this->fileset->addNot($selector);
+        $this->fileset->addNot($selector);
     }
 
     /**
      * add a "None" selector entry on the selector list
-     * @return NoneSelector
+     * @param NoneSelector $selector
+     * @return void
      */
-    public function addNone(NoneSelector $selector)
+    public function addNone(NoneSelector $selector): void
     {
-        return $this->fileset->addNone($selector);
+        $this->fileset->addNone($selector);
     }
 
     /**
      * add a majority selector entry on the selector list
-     * @return MajoritySelector
+     * @param MajoritySelector $selector
+     * @return void
      */
-    public function addMajority(MajoritySelector $selector)
+    public function addMajority(MajoritySelector $selector): void
     {
-        return $this->fileset->addMajority($selector);
+        $this->fileset->addMajority($selector);
     }
 
     /**
      * add a selector date entry on the selector list
-     * @return DateSelector
+     * @param DateSelector $selector
+     * @return void
      */
-    public function addDate(DateSelector $selector)
+    public function addDate(DateSelector $selector): void
     {
-        return $this->fileset->addDate($selector);
+        $this->fileset->addDate($selector);
     }
 
     /**
      * add a selector size entry on the selector list
-     * @return SizeSelector
+     * @param SizeSelector $selector
+     * @return void
      */
-    public function addSize(SizeSelector $selector)
+    public function addSize(SizeSelector $selector): void
     {
-        return $this->fileset->addSize($selector);
+        $this->fileset->addSize($selector);
     }
 
     /**
      * add a selector filename entry on the selector list
-     * @return FilenameSelector
+     * @param FilenameSelector $selector
+     * @return void
      */
-    public function addFilename(FilenameSelector $selector)
+    public function addFilename(FilenameSelector $selector): void
     {
-        return $this->fileset->addFilename($selector);
+        $this->fileset->addFilename($selector);
     }
 
     /**
      * add an extended selector entry on the selector list
-     * @return ExtendSelector
+     * @param ExtendSelector $selector
+     * @return void
      */
-    public function addCustom(ExtendSelector $selector)
+    public function addCustom(ExtendSelector $selector): void
     {
-        return $this->fileset->addCustom($selector);
+        $this->fileset->addCustom($selector);
     }
 
     /**
      * add a contains selector entry on the selector list
+     * @param ContainsSelector $selector
      */
-    public function addContains(ContainsSelector $selector)
+    public function addContains(ContainsSelector $selector): void
     {
-        return $this->fileset->addContains($selector);
+        $this->fileset->addContains($selector);
     }
 
     /**
      * add a present selector entry on the selector list
+     * @param PresentSelector $selector
      */
-    public function addPresent(PresentSelector $selector)
+    public function addPresent(PresentSelector $selector): void
     {
-        return $this->fileset->addPresent($selector);
+        $this->fileset->addPresent($selector);
     }
 
     /**
      * add a depth selector entry on the selector list
+     * @param DepthSelector $selector
      */
-    public function addDepth(DepthSelector $selector)
+    public function addDepth(DepthSelector $selector): void
     {
-        return $this->fileset->addDepth($selector);
+        $this->fileset->addDepth($selector);
     }
 
     /**
      * add a depends selector entry on the selector list
+     * @param DependSelector $selector
      */
-    public function addDepend(DependSelector $selector)
+    public function addDepend(DependSelector $selector): void
     {
-        return $this->fileset->addDepend($selector);
+        $this->fileset->addDepend($selector);
     }
 
     /**
      * add a executable selector entry on the selector list
+     * @param ExecutableSelector $selector
      */
-    public function addExecutable(ExecutableSelector $selector)
+    public function addExecutable(ExecutableSelector $selector): void
     {
-        return $this->fileset->addExecutable($selector);
+        $this->fileset->addExecutable($selector);
     }
 
     /**
      * add a readable selector entry on the selector list
+     * @param ReadableSelector $selector
      */
-    public function addReadable(ReadableSelector $selector)
+    public function addReadable(ReadableSelector $selector): void
     {
-        return $this->fileset->addReadable($selector);
+        $this->fileset->addReadable($selector);
     }
 
     /**
      * add a writable selector entry on the selector list
+     * @param WritableSelector $selector
      */
-    public function addWritable(WritableSelector $selector)
+    public function addWritable(WritableSelector $selector): void
     {
-        return $this->fileset->addWritable($selector);
+        $this->fileset->addWritable($selector);
     }
 
     /**
      * add a different selector entry on the selector list
+     * @param DifferentSelector $selector
      */
-    public function addDifferent(DifferentSelector $selector)
+    public function addDifferent(DifferentSelector $selector): void
     {
-        return $this->fileset->addDifferent($selector);
+        $this->fileset->addDifferent($selector);
     }
 
     /**
      * add a type selector entry on the selector list
      * @param TypeSelector $selector
      */
-    public function addType(TypeSelector $selector)
+    public function addType(TypeSelector $selector): void
     {
-        return $this->fileset->addType($selector);
+        $this->fileset->addType($selector);
     }
 
     /**
      * add a contains selector entry on the selector list
      * @param ContainsRegexpSelector $selector
      */
-    public function addContainsRegexp(ContainsRegexpSelector $selector)
+    public function addContainsRegexp(ContainsRegexpSelector $selector): void
     {
-        return $this->fileset->addContainsRegexp($selector);
+        $this->fileset->addContainsRegexp($selector);
     }
 
-    public function addSymlink(SymlinkSelector $selector)
+    public function addSymlink(SymlinkSelector $selector): void
     {
-        return $this->fileset->addSymlink($selector);
+        $this->fileset->addSymlink($selector);
     }
 
     /**
@@ -445,7 +462,7 @@ abstract class MatchingTask extends Task implements SelectorContainer
      *
      * @return FileSet
      */
-    final protected function getImplicitFileSet()
+    final protected function getImplicitFileSet(): \FileSet
     {
         return $this->fileset;
     }

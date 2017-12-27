@@ -34,7 +34,7 @@ class ProgressLogger extends AnsiColorLogger
      *
      * @param BuildEvent $event The BuildEvent
      */
-    public function buildStarted(BuildEvent $event)
+    public function buildStarted(BuildEvent $event): void
     {
         $this->startTime = Phing::currentTimeMillis();
         $this->bar->setMessage($event->getProject()->getProperty("phing.file"), 'buildfile');
@@ -44,9 +44,10 @@ class ProgressLogger extends AnsiColorLogger
      * Fired after the last target has finished.
      *
      * @param BuildEvent $event The BuildEvent
+     * @throws IOException
      * @see BuildEvent::getException()
      */
-    public function buildFinished(BuildEvent $event)
+    public function buildFinished(BuildEvent $event): void
     {
         $this->bar->finish();
         echo "\n";
@@ -58,9 +59,10 @@ class ProgressLogger extends AnsiColorLogger
      * Fired when a target is started.
      *
      * @param BuildEvent $event The BuildEvent
+     * @throws Exception
      * @see BuildEvent::getTarget()
      */
-    public function targetStarted(BuildEvent $event)
+    public function targetStarted(BuildEvent $event): void
     {
         $this->bar->setMessage($event->getTarget()->getName(), 'target');
         $this->determineDepth($event);
@@ -72,7 +74,7 @@ class ProgressLogger extends AnsiColorLogger
      * @param BuildEvent $event The BuildEvent
      * @see BuildEvent#getException()
      */
-    public function targetFinished(BuildEvent $event)
+    public function targetFinished(BuildEvent $event): void
     {
         $this->remTargets--;
     }
@@ -83,7 +85,7 @@ class ProgressLogger extends AnsiColorLogger
      * @param BuildEvent $event The BuildEvent
      * @see BuildEvent::getTask()
      */
-    public function taskStarted(BuildEvent $event)
+    public function taskStarted(BuildEvent $event): void
     {
         // ignore tasks in root
         if ($event->getTarget()->getName() == "") {
@@ -101,7 +103,7 @@ class ProgressLogger extends AnsiColorLogger
      * @param BuildEvent $event The BuildEvent
      * @see BuildEvent::getException()
      */
-    public function taskFinished(BuildEvent $event)
+    public function taskFinished(BuildEvent $event): void
     {
         // ignore tasks in root
         if ($event->getTarget()->getName() == "") {
@@ -118,7 +120,7 @@ class ProgressLogger extends AnsiColorLogger
      * @param BuildEvent $event The BuildEvent
      * @see BuildEvent::getMessage()
      */
-    public function messageLogged(BuildEvent $event)
+    public function messageLogged(BuildEvent $event): void
     {
         $priority = $event->getPriority();
         if ($priority <= $this->msgOutputLevel) {

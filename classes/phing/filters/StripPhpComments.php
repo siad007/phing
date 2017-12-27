@@ -53,12 +53,11 @@ class StripPhpComments extends BaseFilterReader implements ChainableReader
      * @param null $len
      * @return string the resulting stream, or -1
      *             if the end of the resulting stream has been reached
-     *
      */
     public function read($len = null)
     {
         $buffer = $this->in->read($len);
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
         $newStr = '';
@@ -66,7 +65,7 @@ class StripPhpComments extends BaseFilterReader implements ChainableReader
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                list($id, $text) = $token;
+                [$id, $text] = $token;
 
                 switch ($id) {
                     case T_COMMENT:
@@ -90,15 +89,15 @@ class StripPhpComments extends BaseFilterReader implements ChainableReader
      * Reader for instantiation.
      *
      * @param A|Reader $reader
+     * @return $this a new filter based on this configuration, but filtering
+     *           the specified reader
      * @internal param A $reader Reader object providing the underlying stream.
      *               Must not be <code>null</code>.
      *
-     * @return $this a new filter based on this configuration, but filtering
-     *           the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new StripPhpComments($reader);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
 
         return $newFilter;

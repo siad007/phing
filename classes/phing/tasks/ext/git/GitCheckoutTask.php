@@ -139,7 +139,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getBranchname()
+    public function getBranchname(): ?string
     {
         return $this->branchname;
     }
@@ -155,7 +155,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getStartPoint()
+    public function getStartPoint(): ?string
     {
         return $this->startPoint;
     }
@@ -171,7 +171,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getForce()
+    public function getForce(): bool
     {
         return $this->force;
     }
@@ -179,7 +179,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isForce()
+    public function isForce(): bool
     {
         return $this->getForce();
     }
@@ -195,7 +195,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getQuiet()
+    public function getQuiet(): bool
     {
         return $this->quiet;
     }
@@ -203,7 +203,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isQuiet()
+    public function isQuiet(): bool
     {
         return $this->getQuiet();
     }
@@ -219,7 +219,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getTrack()
+    public function getTrack(): bool
     {
         return $this->track;
     }
@@ -227,7 +227,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isTrack()
+    public function isTrack(): bool
     {
         return $this->getTrack();
     }
@@ -243,7 +243,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNoTrack()
+    public function getNoTrack(): bool
     {
         return $this->noTrack;
     }
@@ -251,7 +251,7 @@ class GitCheckoutTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isNoTrack()
+    public function isNoTrack(): bool
     {
         return $this->getNoTrack();
     }

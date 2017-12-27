@@ -47,7 +47,7 @@ class UntarTask extends ExtractBaseTask
     /**
      * Ensures that PEAR lib exists.
      */
-    public function init()
+    public function init(): void
     {
         include_once 'Archive/Tar.php';
         if (!class_exists('Archive_Tar')) {
@@ -95,7 +95,7 @@ class UntarTask extends ExtractBaseTask
      * @param  PhingFile   $tarfile
      * @return Archive_Tar the tar class instance
      */
-    private function initTar(PhingFile $tarfile)
+    private function initTar(PhingFile $tarfile): \Archive_Tar
     {
         $compression = null;
         $tarfileName = $tarfile->getName();

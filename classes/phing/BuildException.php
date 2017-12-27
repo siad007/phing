@@ -100,7 +100,7 @@ class BuildException extends RuntimeException
      *
      * @return Exception
      */
-    public function getCause()
+    public function getCause(): ?\Exception
     {
         return $this->cause;
     }
@@ -110,7 +110,7 @@ class BuildException extends RuntimeException
      *
      * @return Location
      */
-    public function getLocation()
+    public function getLocation(): \Location
     {
         return $this->location;
     }

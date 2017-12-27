@@ -140,7 +140,7 @@ class CoverageThresholdTask extends Task
      *
      * @return Path
      */
-    public function createClasspath()
+    public function createClasspath(): \Path
     {
         $this->_classpath = new Path();
 
@@ -193,7 +193,7 @@ class CoverageThresholdTask extends Task
      * @param  integer $var Coverage CODE/count
      * @return boolean
      */
-    protected function filterCovered($var)
+    protected function filterCovered($var): bool
     {
         return ($var >= 0 || $var === -2);
     }
@@ -203,7 +203,7 @@ class CoverageThresholdTask extends Task
      *
      * @return Excludes
      */
-    public function createExcludes()
+    public function createExcludes(): \Excludes
     {
         $this->_excludes = new Excludes($this->project);
 

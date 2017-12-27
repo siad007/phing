@@ -65,9 +65,9 @@ class ContainsCondition implements Condition
 
     /**
      * Check whether string contains substring.
-     * @throws BuildException
+     * @return bool
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->string === null || $this->subString === null) {
             throw new BuildException("both string and substring are required "

@@ -127,7 +127,7 @@ class HttpRequestTask extends HttpTask
      *
      * @return Parameter The created post parameter
      */
-    public function createPostParameter()
+    public function createPostParameter(): \Parameter
     {
         $num = array_push($this->postParameters, new Parameter());
 
@@ -137,9 +137,8 @@ class HttpRequestTask extends HttpTask
     /**
      * Load the necessary environment for running this task.
      *
-     * @throws BuildException
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -154,7 +153,7 @@ class HttpRequestTask extends HttpTask
      *
      * @return HTTP_Request2
      */
-    protected function createRequest()
+    protected function createRequest(): \HTTP_Request2
     {
         $request = parent::createRequest();
 
@@ -202,7 +201,7 @@ class HttpRequestTask extends HttpTask
      * @return void
      * @throws BuildException
      */
-    protected function processResponse(HTTP_Request2_Response $response)
+    protected function processResponse(HTTP_Request2_Response $response): void
     {
         if ($this->responseRegex !== '') {
             $matches = [];

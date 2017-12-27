@@ -104,7 +104,7 @@ class PathConvert extends Task
      * Create a nested MAP element
      * @return MapEntry a Map to configure
      */
-    public function createMap()
+    public function createMap(): \MapEntry
     {
         $entry = new MapEntry($this);
 
@@ -189,7 +189,7 @@ class PathConvert extends Task
      * Has the refid attribute of this element been set?
      * @return true if refid is valid
      */
-    public function isReference()
+    public function isReference(): bool
     {
         return $this->refid !== null;
     }
@@ -293,7 +293,7 @@ class PathConvert extends Task
      * @param string $elem The path element to apply the map to
      * @return String Updated element
      */
-    private function mapElement(Path $elem)
+    private function mapElement(Path $elem): string
     {
         $size = count($this->prefixMap);
 

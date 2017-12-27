@@ -72,7 +72,7 @@ class Properties
      * @return void
      * @throws IOException - if unable to read file.
      */
-    public function load(PhingFile $file)
+    public function load(PhingFile $file): void
     {
         if ($file->canRead()) {
             $this->parse($file);
@@ -88,7 +88,7 @@ class Properties
      *
      * @param  PhingFile $file
      */
-    protected function parse(PhingFile $file)
+    protected function parse(PhingFile $file): void
     {
         $this->properties = $this->fileParser->parseFile($file);
     }
@@ -99,7 +99,7 @@ class Properties
      * @param  mixed  $val The property value (may be boolean, etc.)
      * @return string
      */
-    protected function outVal($val)
+    protected function outVal($val): string
     {
         if ($val === true) {
             $val = "true";
@@ -118,7 +118,7 @@ class Properties
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "";
         foreach ($this->properties as $key => $item) {
@@ -136,7 +136,7 @@ class Properties
      * @return void
      * @throws IOException - on error writing properties file.
      */
-    public function store(PhingFile $file = null, $header = null)
+    public function store(PhingFile $file = null, $header = null): void
     {
         if ($file == null) {
             $file = $this->file;
@@ -161,12 +161,12 @@ class Properties
         }
     }
 
-    public function storeOutputStream(OutputStream $os, $comments)
+    public function storeOutputStream(OutputStream $os, $comments): void
     {
         $this->_storeOutputStream(new BufferedWriter(new OutputStreamWriter($os)), $comments);
     }
 
-    private function _storeOutputStream(BufferedWriter $bw, $comments)
+    private function _storeOutputStream(BufferedWriter $bw, $comments): void
     {
         if ($comments != null) {
             self::writeComments($bw, $comments);
@@ -180,7 +180,7 @@ class Properties
         $bw->flush();
     }
 
-    private static function writeComments(BufferedWriter $bw, $comments)
+    private static function writeComments(BufferedWriter $bw, $comments): void
     {
         $rows = explode("\n", $comments);
         $bw->write("#" . PHP_EOL);
@@ -198,7 +198,7 @@ class Properties
      *
      * @return array
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return $this->properties;
     }
@@ -279,7 +279,7 @@ class Properties
      * @param mixed  $value
      * @param string $delimiter
      */
-    public function append($key, $value, $delimiter = ',')
+    public function append($key, $value, $delimiter = ','): void
     {
         $newValue = $value;
         if (isset($this->properties[$key]) && !empty($this->properties[$key])) {
@@ -292,7 +292,7 @@ class Properties
      * Same as keys() function, returns an array of property names.
      * @return array
      */
-    public function propertyNames()
+    public function propertyNames(): array
     {
         return $this->keys();
     }
@@ -302,7 +302,7 @@ class Properties
      * @param $key
      * @return boolean
      */
-    public function containsKey($key)
+    public function containsKey($key): bool
     {
         return isset($this->properties[$key]);
     }
@@ -313,7 +313,7 @@ class Properties
      * faster than looping through property values.
      * @return array
      */
-    public function keys()
+    public function keys(): array
     {
         return array_keys($this->properties);
     }
@@ -322,7 +322,7 @@ class Properties
      * Whether properties list is empty.
      * @return boolean
      */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return empty($this->properties);
     }

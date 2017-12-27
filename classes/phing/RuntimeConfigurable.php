@@ -77,7 +77,7 @@ class RuntimeConfigurable
      *
      * @return void
      */
-    public function setProxy($proxy)
+    public function setProxy($proxy): void
     {
         $this->wrappedObject = $proxy;
         $this->proxyConfigured = false;
@@ -90,7 +90,7 @@ class RuntimeConfigurable
      *
      * @return void
      */
-    public function setAttributes($attributes)
+    public function setAttributes($attributes): void
     {
         $this->attributes = $attributes;
     }
@@ -100,7 +100,7 @@ class RuntimeConfigurable
      *
      * @return array
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
@@ -112,7 +112,7 @@ class RuntimeConfigurable
      *
      * @return void
      */
-    public function addChild(RuntimeConfigurable $child)
+    public function addChild(RuntimeConfigurable $child): void
     {
         $this->children[] = $child;
     }
@@ -124,7 +124,7 @@ class RuntimeConfigurable
      *
      * @return RuntimeConfigurable
      */
-    public function getChild($index)
+    public function getChild($index): \RuntimeConfigurable
     {
         return $this->children[(int) $index];
     }
@@ -136,7 +136,7 @@ class RuntimeConfigurable
      *
      * @return void
      */
-    public function addText($data)
+    public function addText($data): void
     {
         $this->characters .= (string) $data;
     }
@@ -156,7 +156,7 @@ class RuntimeConfigurable
      * @throws BuildException
      * @throws Exception
      */
-    public function maybeConfigure(Project $project)
+    public function maybeConfigure(Project $project): void
     {
         if ($this->proxyConfigured) {
             return;

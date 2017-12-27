@@ -74,7 +74,7 @@ class SvnSwitchTask extends SvnBaseTask
     /**
      * @return string
      */
-    public function getRevision()
+    public function getRevision(): string
     {
         return $this->revision;
     }

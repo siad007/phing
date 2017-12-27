@@ -59,7 +59,7 @@ class ConditionTask extends ConditionBase
      * @param string $p
      * @return void
      */
-    public function setProperty($p)
+    public function setProperty($p): void
     {
         $this->property = $p;
     }
@@ -69,7 +69,7 @@ class ConditionTask extends ConditionBase
      * @param string $v
      * @return void
      */
-    public function setValue($v)
+    public function setValue($v): void
     {
         $this->value = $v;
     }
@@ -90,7 +90,7 @@ class ConditionTask extends ConditionBase
      * @throws BuildException
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         if ($this->countConditions() > 1) {
             throw new BuildException(

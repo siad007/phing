@@ -82,7 +82,7 @@ class PHPCPDFormatterElement
      *
      * @throws BuildException
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
 
@@ -113,7 +113,7 @@ class PHPCPDFormatterElement
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -123,7 +123,7 @@ class PHPCPDFormatterElement
      *
      * @param boolean $useFile True or false.
      */
-    public function setUseFile($useFile)
+    public function setUseFile($useFile): void
     {
         $this->useFile = StringHelper::booleanValue($useFile);
     }
@@ -133,7 +133,7 @@ class PHPCPDFormatterElement
      *
      * @return boolean
      */
-    public function getUseFile()
+    public function getUseFile(): bool
     {
         return $this->useFile;
     }
@@ -143,7 +143,7 @@ class PHPCPDFormatterElement
      *
      * @param PhingFile $outfile The output file
      */
-    public function setOutfile(PhingFile $outfile)
+    public function setOutfile(PhingFile $outfile): void
     {
         $this->outfile = $outfile;
     }
@@ -153,7 +153,7 @@ class PHPCPDFormatterElement
      *
      * @return PhingFile
      */
-    public function getOutfile()
+    public function getOutfile(): ?\PhingFile
     {
         return $this->outfile;
     }
@@ -163,7 +163,7 @@ class PHPCPDFormatterElement
      *
      * @return PHPCPDResultFormatter
      */
-    public function getFormatter()
+    public function getFormatter(): ?\PHPCPDResultFormatter
     {
         return $this->formatter;
     }

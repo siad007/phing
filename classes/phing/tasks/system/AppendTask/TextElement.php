@@ -111,7 +111,7 @@ class TextElement extends ProjectComponent
     /**
      * @return string the text, after possible trimming
      */
-    public function getValue()
+    public function getValue(): string
     {
         if ($this->value == null) {
             $this->value = "";

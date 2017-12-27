@@ -27,7 +27,7 @@ class RegisterSlot
      * Sets the key / name for this slot.
      * @param string $k
      */
-    public function setKey($k)
+    public function setKey($k): void
     {
         $this->key = (string)$k;
     }
@@ -36,7 +36,7 @@ class RegisterSlot
      * Gets the key / name for this slot.
      * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -45,7 +45,7 @@ class RegisterSlot
      * Sets the value for this slot.
      * @param mixed
      */
-    public function setValue($v)
+    public function setValue($v): void
     {
         $this->value = $v;
     }
@@ -64,7 +64,7 @@ class RegisterSlot
      * @param  array $arr
      * @return string
      */
-    private function implodeArray(array $arr)
+    private function implodeArray(array $arr): string
     {
         $values = [];
 

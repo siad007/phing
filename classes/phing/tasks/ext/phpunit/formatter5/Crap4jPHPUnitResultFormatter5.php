@@ -49,14 +49,14 @@ class Crap4jPHPUnitResultFormatter5 extends PHPUnitResultFormatter5
     /**
      * @return string
      */
-    public function getExtension()
+    public function getExtension(): string
     {
         return ".xml";
     }
     /**
      * @return string
      */
-    public function getPreferredOutfile()
+    public function getPreferredOutfile(): string
     {
         return "crap4j-coverage";
     }

@@ -45,7 +45,7 @@ class IniFileRemove
      *
      * @return void
      */
-    public function setSection($section)
+    public function setSection($section): void
     {
         $this->section = $section;
     }
@@ -57,7 +57,7 @@ class IniFileRemove
      *
      * @return void
      */
-    public function setProperty($property)
+    public function setProperty($property): void
     {
         $this->property = $property;
     }
@@ -67,7 +67,7 @@ class IniFileRemove
      *
      * @return string
      */
-    public function getProperty()
+    public function getProperty(): ?string
     {
         return $this->property;
     }
@@ -77,7 +77,7 @@ class IniFileRemove
      *
      * @return string
      */
-    public function getSection()
+    public function getSection(): ?string
     {
         return $this->section;
     }

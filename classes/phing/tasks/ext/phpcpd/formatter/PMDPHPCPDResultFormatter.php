@@ -38,7 +38,7 @@ class PMDPHPCPDResultFormatter extends PHPCPDResultFormatter
      *
      * @throws BuildException
      */
-    public function processClones($clones, Project $project, $useFile = false, $outFile = null)
+    public function processClones($clones, Project $project, $useFile = false, $outFile = null): void
     {
         if (!$useFile || empty($outFile)) {
             throw new BuildException('Output filename required for this formatter');

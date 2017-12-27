@@ -31,7 +31,7 @@ class PatternSetNameEntry
      * @see setName()
      * @param string $pattern
      */
-    public function setPattern($pattern)
+    public function setPattern($pattern): void
     {
         $this->setName($pattern);
     }
@@ -40,7 +40,7 @@ class PatternSetNameEntry
      * Set the pattern text.
      * @param string $name The pattern
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = (string)$name;
     }
@@ -49,7 +49,7 @@ class PatternSetNameEntry
      * Sets an if-condition property for this pattern to match.
      * @param string $cond
      */
-    public function setIf($cond)
+    public function setIf($cond): void
     {
         $this->ifCond = (string)$cond;
     }
@@ -58,7 +58,7 @@ class PatternSetNameEntry
      * Sets an unless-condition property for this pattern to match.
      * @param string $cond
      */
-    public function setUnless($cond)
+    public function setUnless($cond): void
     {
         $this->unlessCond = (string)$cond;
     }
@@ -67,7 +67,7 @@ class PatternSetNameEntry
      * Get the pattern text.
      * @return string The pattern.
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -77,7 +77,7 @@ class PatternSetNameEntry
      * @param Project $project
      * @return string The pattern or null if it is ruled out by a condition.
      */
-    public function evalName(Project $project)
+    public function evalName(Project $project): string
     {
         return $this->valid($project) ? $this->name : null;
     }
@@ -88,7 +88,7 @@ class PatternSetNameEntry
      * @param  Project $project
      * @return boolean
      */
-    public function valid(Project $project)
+    public function valid(Project $project): bool
     {
         if ($this->ifCond !== null && $project->getProperty($this->ifCond) === null) {
             return false;
@@ -105,7 +105,7 @@ class PatternSetNameEntry
      * Gets a string representation of this pattern.
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = $this->name;
         if (($this->ifCond !== null) || ($this->unlessCond !== null)) {

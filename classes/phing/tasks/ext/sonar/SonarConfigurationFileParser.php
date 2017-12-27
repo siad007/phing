@@ -66,6 +66,7 @@ class SonarConfigurationFileParser
      *
      * @param string $file
      *            The properties file.
+     * @param Project $project
      */
     public function __construct($file, Project $project)
     {
@@ -82,7 +83,7 @@ class SonarConfigurationFileParser
      * @throws BuildException
      * @return array
      */
-    public function parse()
+    public function parse(): array
     {
         $this->properties = [];
 
@@ -137,7 +138,7 @@ class SonarConfigurationFileParser
      * @param string $line
      * @return boolean
      */
-    private function extractNameAndValue($line)
+    private function extractNameAndValue($line): bool
     {
         $isMultiLine = false;
 
@@ -163,7 +164,7 @@ class SonarConfigurationFileParser
      * @param string $line
      * @return boolean
      */
-    private function extractContinuedValue($line)
+    private function extractContinuedValue($line): bool
     {
         $isMultiLine = false;
 
@@ -187,7 +188,7 @@ class SonarConfigurationFileParser
      *
      * @return boolean
      */
-    private function checkMultiLine()
+    private function checkMultiLine(): bool
     {
         $isMultiLine = false;
 
@@ -206,7 +207,7 @@ class SonarConfigurationFileParser
      * @param string $line
      * @return boolean
      */
-    private function isCommentLine($line)
+    private function isCommentLine($line): bool
     {
         return preg_match('/^\\s*[!#]/', $line) === 1;
     }

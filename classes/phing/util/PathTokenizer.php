@@ -80,7 +80,7 @@ class PathTokenizer
      * @return bool <code>true</code> if and only if there is at least one token
      *                                in the string after the current position; <code>false</code> otherwise.
      */
-    public function hasMoreTokens()
+    public function hasMoreTokens(): bool
     {
         if ($this->lookahead !== null) {
             return true;
@@ -96,7 +96,7 @@ class PathTokenizer
      *
      * @throws Exception if there are no more elements in this tokenizer's path.
      */
-    public function nextToken()
+    public function nextToken(): string
     {
         if ($this->lookahead !== null) {
             $token = $this->lookahead;
@@ -148,7 +148,7 @@ class PathTokenizer
      *
      * @return boolean
      */
-    public function contains($path)
+    public function contains($path): bool
     {
         return in_array($path, $this->tokens, true);
     }

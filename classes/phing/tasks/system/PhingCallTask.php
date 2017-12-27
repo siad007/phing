@@ -147,7 +147,7 @@ class PhingCallTask extends Task
      *  init this task by creating new instance of the phing task and
      *  configuring it's by calling its own init method.
      */
-    public function init()
+    public function init(): void
     {
         $this->callee = $this->project->createTask("phing");
         $this->callee->setOwningTarget($this->getOwningTarget());

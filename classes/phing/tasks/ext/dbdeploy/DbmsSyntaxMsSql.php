@@ -31,7 +31,7 @@ class DbmsSyntaxMsSql extends DbmsSyntax
     /**
      * @return string
      */
-    public function generateTimestamp()
+    public function generateTimestamp(): string
     {
         return "DATEDIFF(s, '19700101', GETDATE())";
     }

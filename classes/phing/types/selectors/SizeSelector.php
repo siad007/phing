@@ -90,7 +90,7 @@ class SizeSelector extends BaseExtendSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{sizeselector value: ";
         $buf .= $this->sizelimit;
@@ -116,7 +116,7 @@ class SizeSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setValue($size)
+    public function setValue($size): void
     {
         $this->size = $size;
         if (($this->multiplier !== 0) && ($this->size > -1)) {
@@ -151,7 +151,7 @@ class SizeSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setUnits($units)
+    public function setUnits($units): void
     {
         $i = array_search($units, self::$byteUnits, true);
         if ($i === false) {
@@ -190,7 +190,7 @@ class SizeSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setWhen($cmp)
+    public function setWhen($cmp): void
     {
         $c = array_search($cmp, self::$sizeComparisons, true);
         if ($c !== false) {
@@ -210,7 +210,7 @@ class SizeSelector extends BaseExtendSelector
      *
      * @throws BuildException
      */
-    public function setParameters($parameters)
+    public function setParameters($parameters): void
     {
         parent::setParameters($parameters);
         if ($parameters !== null) {
@@ -254,7 +254,7 @@ class SizeSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->size < 0) {
             $this->setError("The value attribute is required, and must be positive");
@@ -277,7 +277,7 @@ class SizeSelector extends BaseExtendSelector
      *
      * @return bool whether the file should be selected or not
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

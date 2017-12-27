@@ -52,7 +52,7 @@ class StringReader extends Reader
     /**
      * @param int $n
      */
-    public function skip($n)
+    public function skip($n): void
     {
     }
 
@@ -75,17 +75,17 @@ class StringReader extends Reader
         }
     }
 
-    public function mark()
+    public function mark(): void
     {
         $this->mark = $this->currPos;
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->currPos = $this->mark;
     }
 
-    public function close()
+    public function close(): void
     {
     }
 
@@ -100,7 +100,7 @@ class StringReader extends Reader
     /**
      * @return bool
      */
-    public function markSupported()
+    public function markSupported(): bool
     {
         return true;
     }
@@ -108,7 +108,7 @@ class StringReader extends Reader
     /**
      * @return string
      */
-    public function getResource()
+    public function getResource(): string
     {
         return '(string) "' . $this->_string . '"';
     }

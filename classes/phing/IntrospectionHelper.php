@@ -108,7 +108,7 @@ class IntrospectionHelper
      * @param string $class The class to create a Helper for
      * @return IntrospectionHelper
      */
-    public static function getHelper($class)
+    public static function getHelper($class): \IntrospectionHelper
     {
         if (!isset(self::$helpers[$class])) {
             self::$helpers[$class] = new IntrospectionHelper($class);
@@ -274,7 +274,7 @@ class IntrospectionHelper
      * @param mixed $value
      * @throws BuildException
      */
-    public function setAttribute(Project $project, $element, $attributeName, &$value)
+    public function setAttribute(Project $project, $element, $attributeName, &$value): void
     {
 
         // we want to check whether the value we are setting looks like
@@ -373,7 +373,7 @@ class IntrospectionHelper
      * @param string $text
      * @throws BuildException
      */
-    public function addText(Project $project, $element, $text)
+    public function addText(Project $project, $element, $text): void
     {
         if ($this->methodAddText === null) {
             $msg = $this->getElementName($project, $element) . " doesn't support nested text data.";
@@ -508,7 +508,7 @@ class IntrospectionHelper
      * @return void
      * @throws BuildException
      */
-    public function storeElement($project, $element, $child, $elementName = null)
+    public function storeElement($project, $element, $child, $elementName = null): void
     {
         if ($elementName === null) {
             return;
@@ -535,7 +535,7 @@ class IntrospectionHelper
      * Does the introspected class support PCDATA?
      * @return boolean
      */
-    public function supportsCharacters()
+    public function supportsCharacters(): bool
     {
         return ($this->methodAddText !== null);
     }
@@ -544,7 +544,7 @@ class IntrospectionHelper
      * Return all attribues supported by the introspected class.
      * @return string[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         $attribs = [];
         foreach (array_keys($this->attributeSetters) as $setter) {
@@ -558,7 +558,7 @@ class IntrospectionHelper
      * Return all nested elements supported by the introspected class.
      * @return string[]
      */
-    public function getNestedElements()
+    public function getNestedElements(): array
     {
         return $this->nestedTypes;
     }
@@ -573,7 +573,7 @@ class IntrospectionHelper
      * @param  object  $element The Task or type element.
      * @return string  Fully qualified class name of element when possible.
      */
-    public function getElementName(Project $project, $element)
+    public function getElementName(Project $project, $element): ?string
     {
         $taskdefs = $project->getTaskDefinitions();
         $typedefs = $project->getDataTypeDefinitions();
@@ -612,7 +612,7 @@ class IntrospectionHelper
      * @param  string $prefix
      * @return string
      */
-    public function getPropertyName($methodName, $prefix)
+    public function getPropertyName($methodName, $prefix): string
     {
         $start = strlen($prefix);
 
@@ -623,7 +623,7 @@ class IntrospectionHelper
      * Prints warning message to screen if -debug was used.
      * @param string $msg
      */
-    public function warn($msg)
+    public function warn($msg): void
     {
         if (Phing::getMsgOutputLevel() === Project::MSG_DEBUG) {
             print("[IntrospectionHelper] " . $msg . "\n");

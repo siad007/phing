@@ -65,7 +65,7 @@ class MailLogger extends DefaultLogger
      * @param OutputStream $stream
      * @param int $priority
      */
-    final protected function printMessage($message, OutputStream $stream, $priority)
+    final protected function printMessage($message, OutputStream $stream, $priority): void
     {
         if ($message !== null) {
             $this->mailMessage .= $message . "\n";
@@ -77,8 +77,9 @@ class MailLogger extends DefaultLogger
      *
      * @see DefaultLogger#buildFinished
      * @param BuildEvent $event
+     * @throws IOException
      */
-    public function buildFinished(BuildEvent $event)
+    public function buildFinished(BuildEvent $event): void
     {
         parent::buildFinished($event);
 

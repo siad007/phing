@@ -71,7 +71,7 @@ abstract class FileSystem
      * @return FileSystem
      * @throws IOException
      */
-    public static function getFileSystem()
+    public static function getFileSystem(): \FileSystem
     {
         if (self::$fs === null) {
             switch (Phing::getProperty('host.fstype')) {
@@ -204,7 +204,7 @@ abstract class FileSystem
      * @param boolean $write
      * @return bool
      */
-    public function checkAccess(PhingFile $f, $write = false)
+    public function checkAccess(PhingFile $f, $write = false): ?bool
     {
         // we clear stat cache, its expensive to look up from scratch,
         // but we need to be sure
@@ -239,7 +239,7 @@ abstract class FileSystem
      * @param  PhingFile $f
      * @return boolean
      */
-    public function canDelete(PhingFile $f)
+    public function canDelete(PhingFile $f): bool
     {
         clearstatcache();
         $dir = dirname($f->getAbsolutePath());
@@ -256,7 +256,7 @@ abstract class FileSystem
      * @return int
      * @throws IOException
      */
-    public function getLastModifiedTime(PhingFile $f)
+    public function getLastModifiedTime(PhingFile $f): int
     {
         if (!$f->exists()) {
             return 0;
@@ -294,7 +294,7 @@ abstract class FileSystem
      * @throws IOException
      * @return int
      */
-    public function getLength(PhingFile $f)
+    public function getLength(PhingFile $f): ?int
     {
         $strPath = (string) $f->getAbsolutePath();
         $fs = filesize((string) $strPath);
@@ -318,7 +318,7 @@ abstract class FileSystem
      * @throws IOException
      * @return boolean
      */
-    public function createNewFile($strPathname)
+    public function createNewFile($strPathname): bool
     {
         if (@file_exists($strPathname)) {
             return false;
@@ -339,10 +339,11 @@ abstract class FileSystem
      * returning true if and only if the operation succeeds.
      *
      * @param  PhingFile $f
-     * @param  boolean   $recursive
+     * @param  boolean $recursive
+     * @throws Exception
      * @throws IOException
      */
-    public function delete(PhingFile $f, $recursive = false)
+    public function delete(PhingFile $f, $recursive = false): void
     {
         if ($f->isDirectory()) {
             $this->rmdir($f->getPath(), $recursive);
@@ -359,7 +360,7 @@ abstract class FileSystem
      * @param  PhingFile   $f
      * @throws IOException
      */
-    public function deleteOnExit($f)
+    public function deleteOnExit($f): void
     {
         throw new IOException("deleteOnExit() not implemented by local fs driver");
     }
@@ -372,7 +373,7 @@ abstract class FileSystem
      * @param PhingFile $f
      * @return array
      */
-    public function listDir(PhingFile $f)
+    public function listDir(PhingFile $f): array
     {
         $strPath = (string) $f->getAbsolutePath();
         $d = @dir($strPath);
@@ -401,7 +402,7 @@ abstract class FileSystem
      * @param  int       $mode
      * @return boolean
      */
-    public function createDirectory(&$f, $mode = 0755)
+    public function createDirectory(&$f, $mode = 0755): bool
     {
         $old_umask = umask(0);
         $return = @mkdir($f->getAbsolutePath(), $mode);
@@ -420,7 +421,7 @@ abstract class FileSystem
      * @return void
      * @throws IOException if rename cannot be performed
      */
-    public function rename(PhingFile $f1, PhingFile $f2)
+    public function rename(PhingFile $f1, PhingFile $f2): void
     {
         // get the canonical paths of the file to rename
         $src = $f1->getAbsolutePath();
@@ -441,7 +442,7 @@ abstract class FileSystem
      * @return void
      * @throws IOException
      */
-    public function setLastModifiedTime(PhingFile $f, $time)
+    public function setLastModifiedTime(PhingFile $f, $time): void
     {
         $path = $f->getPath();
         $success = @touch($path, $time);
@@ -482,10 +483,10 @@ abstract class FileSystem
      *
      * @param PhingFile $f1
      * @param PhingFile $f2
-     * @throws IOException
      * @return int
+     * @throws IOException
      */
-    public function compare(PhingFile $f1, PhingFile $f2)
+    public function compare(PhingFile $f1, PhingFile $f2): ?int
     {
         throw new IOException("compare() not implemented by local fs driver");
     }
@@ -533,7 +534,7 @@ abstract class FileSystem
      *
      * @return bool   Returns TRUE on success, FALSE on failure
      */
-    public function copyr($source, $dest)
+    public function copyr($source, $dest): bool
     {
         // Check for symlinks
         if (is_link($source)) {
@@ -578,7 +579,7 @@ abstract class FileSystem
      *
      * @throws IOException if operation failed.
      */
-    public function chown($pathname, $user)
+    public function chown($pathname, $user): void
     {
         if (false === @chown($pathname, $user)) { // FAILED.
             $msg = "FileSystem::chown() FAILED. Cannot chown $pathname. User $user." . (isset($php_errormsg) ? ' ' . $php_errormsg : "");
@@ -595,7 +596,7 @@ abstract class FileSystem
      * @return void
      * @throws IOException if operation failed.
      */
-    public function chgrp($pathname, $group)
+    public function chgrp($pathname, $group): void
     {
         if (false === @chgrp($pathname, $group)) { // FAILED.
             $msg = "FileSystem::chgrp() FAILED. Cannot chown $pathname. Group $group." . (isset($php_errormsg) ? ' ' . $php_errormsg : "");
@@ -614,7 +615,7 @@ abstract class FileSystem
      * @return void
      * @throws IOException if operation failed.
      */
-    public function chmod($pathname, $mode)
+    public function chmod($pathname, $mode): void
     {
         $str_mode = decoct($mode); // Show octal in messages.
         if (false === @chmod($pathname, $mode)) { // FAILED.
@@ -630,7 +631,7 @@ abstract class FileSystem
      * @return void
      * @throws IOException
      */
-    public function lock(PhingFile $f)
+    public function lock(PhingFile $f): void
     {
         $filename = $f->getPath();
         $fp = @fopen($filename, "w");
@@ -648,7 +649,7 @@ abstract class FileSystem
      * @throws IOException
      * @return void
      */
-    public function unlock(PhingFile $f)
+    public function unlock(PhingFile $f): void
     {
         $filename = $f->getPath();
         $fp = @fopen($filename, "w");
@@ -667,7 +668,7 @@ abstract class FileSystem
      * @return void
      * @throws IOException - if an error is encountered.
      */
-    public function unlink($file)
+    public function unlink($file): void
     {
         global $php_errormsg;
         if (false === @unlink($file)) {
@@ -686,7 +687,7 @@ abstract class FileSystem
      * @throws IOException
      * @return void
      */
-    public function symlink($target, $link)
+    public function symlink($target, $link): void
     {
 
         // If Windows OS then symlink() will report it is not supported in
@@ -707,7 +708,7 @@ abstract class FileSystem
      * @throws Exception
      * @return void
      */
-    public function touch($file, $time = null)
+    public function touch($file, $time = null): void
     {
         global $php_errormsg;
 
@@ -735,7 +736,7 @@ abstract class FileSystem
      *
      * @return void
      */
-    public function rmdir($dir, $children = false)
+    public function rmdir($dir, $children = false): void
     {
         global $php_errormsg;
 
@@ -818,7 +819,7 @@ abstract class FileSystem
      *
      * @return void
      */
-    public function umask($mode)
+    public function umask($mode): void
     {
         global $php_errormsg;
 
@@ -848,7 +849,7 @@ abstract class FileSystem
      *
      * @throws Exception - if cannot get modified time of either file.
      */
-    public function compareMTimes($file1, $file2)
+    public function compareMTimes($file1, $file2): ?int
     {
         $mtime1 = filemtime($file1);
         $mtime2 = filemtime($file2);

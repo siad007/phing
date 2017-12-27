@@ -80,7 +80,7 @@ class SleepTask extends Task
     /**
      * @return bool
      */
-    public function getFailOnError()
+    public function getFailOnError(): bool
     {
         return $this->failOnError;
     }
@@ -154,7 +154,7 @@ class SleepTask extends Task
      *
      * @return int time. if below 0 then there is an error
      */
-    private function getSleepTime()
+    private function getSleepTime(): int
     {
         return ((($this->hours * 60) + $this->minutes) * 60 + $this->seconds) * 1000 + $this->milliseconds;
     }

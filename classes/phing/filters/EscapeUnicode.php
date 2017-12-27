@@ -43,10 +43,9 @@ class EscapeUnicode extends BaseFilterReader implements ChainableReader
      * Returns the next line in the filtered stream, converting non latin
      * characters to unicode escapes.
      *
-     * @param int $len     optional
+     * @param int $len optional
      * @return string      the converted lines in the resulting stream, or -1
      *                     if the end of the resulting stream has been reached
-     * @throws IOException if the underlying stream throws
      *                     an IOException during reading
      */
     public function read($len = null)
@@ -58,7 +57,7 @@ class EscapeUnicode extends BaseFilterReader implements ChainableReader
 
         // Process whole text at once.
         $text = null;
-        while (($data = $this->in->read($len)) !== -1) {
+        while (($data = $this->in->read($len)) != -1) {
             $text .= $data;
         }
 
@@ -90,15 +89,15 @@ class EscapeUnicode extends BaseFilterReader implements ChainableReader
      * Creates a new EscapeUnicode using the passed in
      * Reader for instantiation.
      *
-     * @param Reader $rdr A Reader object providing the underlying stream.
+     * @param Reader $reader A Reader object providing the underlying stream.
      *            Must not be <code>null</code>.
      *
      * @return Reader a new filter based on this configuration, but filtering
      *         the specified reader
      */
-    public function chain(Reader $rdr)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new EscapeUnicode($rdr);
+        $newFilter = new EscapeUnicode($reader);
         $newFilter->setInitialized(true);
         $newFilter->setProject($this->getProject());
 

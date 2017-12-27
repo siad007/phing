@@ -18,6 +18,10 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
+
+use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Parser;
+
 include_once 'phing/system/io/FileParserInterface.php';
 
 /**
@@ -31,14 +35,14 @@ class YamlFileParser implements FileParserInterface
     /**
      * {@inheritDoc}
      */
-    public function parseFile(PhingFile $file)
+    public function parseFile(PhingFile $file): array
     {
         if (!$file->canRead()) {
             throw new IOException("Unable to read file: " . $file);
         }
 
         try {
-            if (!class_exists('\Symfony\Component\Yaml\Parser')) {
+            if (!class_exists(Parser::class)) {
                 throw new BuildException(
                     get_class($this)
                     . ' depends on \Symfony\Component\Yaml\Parser '
@@ -50,7 +54,7 @@ class YamlFileParser implements FileParserInterface
             // Cast properties to array in case parse() returns null.
             $properties = (array) $parser->parse(file_get_contents($file->getAbsolutePath()));
         } catch (Exception $e) {
-            if (is_a($e, '\Symfony\Component\Yaml\Exception\ParseException')) {
+            if (is_a($e, ParseException::class)) {
                 throw new IOException("Unable to parse contents of " . $file . ": " . $e->getMessage());
             }
             throw $e;
@@ -72,8 +76,9 @@ class YamlFileParser implements FileParserInterface
      * class.
      *
      * @param array $arrayToFlatten
+     * @return array
      */
-    private function flattenArray(array $arrayToFlatten, $separator = '.', $flattenedKey = '')
+    private function flattenArray(array $arrayToFlatten, $separator = '.', $flattenedKey = ''): array
     {
         $flattenedArray = [];
         foreach ($arrayToFlatten as $key => $value) {

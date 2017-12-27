@@ -1,4 +1,7 @@
 <?php
+
+use PHPMD\PHPMD;
+
 /**
  *  $Id$
  *
@@ -172,7 +175,7 @@ class PHPMDTask extends Task
      *
      * @return PHPMDFormatterElement
      */
-    public function createFormatter()
+    public function createFormatter(): \PHPMDFormatterElement
     {
         $num = array_push($this->formatters, new PHPMDFormatterElement());
 
@@ -211,13 +214,13 @@ class PHPMDTask extends Task
      * @return string
      * @throws BuildException
      */
-    protected function loadDependencies()
+    protected function loadDependencies(): string
     {
         if (!empty($this->pharLocation)) {
             include_once 'phar://' . $this->pharLocation . '/vendor/autoload.php';
         }
 
-        $className = '\PHPMD\PHPMD';
+        $className = PHPMD::class;
 
         if (!class_exists($className)) {
             @include_once 'PHP/PMD.php';
@@ -251,8 +254,9 @@ class PHPMDTask extends Task
      * Return the list of files to parse
      *
      * @return string[] list of absolute files to parse
+     * @throws Exception
      */
-    protected function getFilesToParse()
+    protected function getFilesToParse(): array
     {
         $filesToParse = [];
 
@@ -284,6 +288,7 @@ class PHPMDTask extends Task
      * Executes PHPMD against PhingFile or a FileSet
      *
      * @throws BuildException - if the phpmd classes can't be loaded.
+     * @throws Exception
      */
     public function main()
     {

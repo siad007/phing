@@ -101,7 +101,7 @@ class PharPackageTask extends MatchingTask
     /**
      * @return PharMetadata
      */
-    public function createMetadata()
+    public function createMetadata(): \PharMetadata
     {
         return ($this->metadata = new PharMetadata());
     }
@@ -109,7 +109,7 @@ class PharPackageTask extends MatchingTask
     /**
      * @return FileSet
      */
-    public function createFileSet()
+    public function createFileSet(): \FileSet
     {
         $this->fileset = new IterableFileSet();
         $this->filesets[] = $this->fileset;
@@ -335,7 +335,7 @@ class PharPackageTask extends MatchingTask
     }
 
     /**
-     * @throws BuildException
+     * @throws IOException
      */
     private function checkPreconditions()
     {
@@ -387,7 +387,7 @@ class PharPackageTask extends MatchingTask
      *
      * @return Phar
      */
-    private function buildPhar()
+    private function buildPhar(): \Phar
     {
         $phar = new Phar($this->destinationFile);
 

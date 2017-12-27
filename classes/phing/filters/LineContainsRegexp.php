@@ -73,6 +73,7 @@ class LineContainsRegexp extends BaseParamFilterReader implements ChainableReade
      * Returns all lines in a buffer that contain specified strings.
      * @param null $len
      * @return mixed buffer, -1 on EOF
+     * @throws Exception
      */
     public function read($len = null)
     {
@@ -83,7 +84,7 @@ class LineContainsRegexp extends BaseParamFilterReader implements ChainableReade
 
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -117,6 +118,7 @@ class LineContainsRegexp extends BaseParamFilterReader implements ChainableReade
 
     /**
      * Whether to match casesensitevly.
+     * @param $b
      */
     public function setCaseSensitive($b)
     {
@@ -127,7 +129,7 @@ class LineContainsRegexp extends BaseParamFilterReader implements ChainableReade
      * Find out whether we match casesensitevly.
      * @return boolean negation flag.
      */
-    public function isCaseSensitive()
+    public function isCaseSensitive(): bool
     {
         return $this->casesensitive;
     }
@@ -145,7 +147,7 @@ class LineContainsRegexp extends BaseParamFilterReader implements ChainableReade
      * Find out whether we have been negated.
      * @return boolean negation flag.
      */
-    public function isNegated()
+    public function isNegated(): bool
     {
         return $this->negate;
     }
@@ -192,13 +194,14 @@ class LineContainsRegexp extends BaseParamFilterReader implements ChainableReade
      *               filter. The returned object is "live" - in other words, changes made to
      *               the returned object are mirrored in the filter.
      */
-    public function getRegexps()
+    public function getRegexps(): array
     {
         return $this->_regexps;
     }
 
     /**
      * Set the regular expression as an attribute.
+     * @param $pattern
      */
     public function setRegexp($pattern)
     {
@@ -212,14 +215,14 @@ class LineContainsRegexp extends BaseParamFilterReader implements ChainableReade
      * Reader for instantiation.
      *
      * @param Reader $reader
+     * @return object A new filter based on this configuration, but filtering
+     *                the specified reader
      * @throws Exception
      * @internal param A $object Reader object providing the underlying stream.
      *               Must not be <code>null</code>.
      *
-     * @return object A new filter based on this configuration, but filtering
-     *                the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
         $newFilter = new LineContainsRegExp($reader);
         $newFilter->setRegexps($this->getRegexps());

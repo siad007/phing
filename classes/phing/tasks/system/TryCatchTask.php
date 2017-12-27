@@ -46,7 +46,7 @@ class TryCatchTask extends Task
      * @throws BuildException
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $exc = null;
 
@@ -100,7 +100,7 @@ class TryCatchTask extends Task
      *
      * @return void
      */
-    public function setReference($reference)
+    public function setReference($reference): void
     {
         $this->referenceName = $reference;
     }

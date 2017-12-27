@@ -52,7 +52,7 @@ class PrintStream
     /**
      * @param mixed $value
      */
-    public function println($value)
+    public function println($value): void
     {
         $this->prints($value);
         $this->newLine();
@@ -61,7 +61,7 @@ class PrintStream
     /**
      * @param mixed $value
      */
-    public function prints($value)
+    public function prints($value): void
     {
         if (is_bool($value)) {
             $value = $value === true ? 'true' : 'false';
@@ -73,7 +73,7 @@ class PrintStream
     /**
      *
      */
-    private function newLine()
+    private function newLine(): void
     {
         $this->textOut->newLine();
 
@@ -87,7 +87,7 @@ class PrintStream
      * @param int $off
      * @param int $len
      */
-    private function write($buf, $off = null, $len = null)
+    private function write($buf, $off = null, $len = null): void
     {
         $this->textOut->write($buf, $off, $len);
 

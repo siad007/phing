@@ -48,7 +48,7 @@ class HgArchiveTask extends HgBaseTask
      *
      * @return void
      */
-    public function setRevision($revision)
+    public function setRevision($revision): void
     {
         $this->revision = $revision;
     }
@@ -60,7 +60,7 @@ class HgArchiveTask extends HgBaseTask
      *
      * @return void
      */
-    public function setDestination($destination)
+    public function setDestination($destination): void
     {
         $this->destination = $destination;
     }
@@ -70,7 +70,7 @@ class HgArchiveTask extends HgBaseTask
      *
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $clone = $this->getFactoryInstance('archive');
         if ($this->revision !== '') {

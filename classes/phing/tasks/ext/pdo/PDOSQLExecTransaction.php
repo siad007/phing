@@ -26,7 +26,7 @@ class PDOSQLExecTransaction
     /**
      * @param PhingFile $src
      */
-    public function setSrc(PhingFile $src)
+    public function setSrc(PhingFile $src): void
     {
         $this->tSrcFile = $src;
     }
@@ -34,15 +34,14 @@ class PDOSQLExecTransaction
     /**
      * @param $sql
      */
-    public function addText($sql)
+    public function addText($sql): void
     {
         $this->tSqlCommand .= $sql;
     }
 
     /**
-     * @throws IOException, PDOException
      */
-    public function runTransaction()
+    public function runTransaction(): void
     {
         if (!empty($this->tSqlCommand)) {
             $this->parent->log("Executing commands", Project::MSG_INFO);

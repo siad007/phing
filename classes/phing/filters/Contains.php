@@ -17,7 +17,7 @@ class Contains
      * Set 'contains' value.
      * @param string $contains
      */
-    public function setValue($contains)
+    public function setValue($contains): void
     {
         $this->_value = (string)$contains;
     }
@@ -26,7 +26,7 @@ class Contains
      * Returns 'contains' value.
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->_value;
     }

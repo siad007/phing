@@ -106,7 +106,7 @@ class PearPackageTask extends MatchingTask
      */
     protected $roles = [];
 
-    public function init()
+    public function init(): void
     {
         include_once 'PEAR/PackageFileManager.php';
         if (!class_exists('PEAR_PackageFileManager')) {
@@ -119,7 +119,7 @@ class PearPackageTask extends MatchingTask
      * @throws BuildException
      * @return void
      */
-    protected function setOptions()
+    protected function setOptions(): void
     {
 
         // 1) first prepare/populate options
@@ -247,7 +247,7 @@ class PearPackageTask extends MatchingTask
      * Used by the PEAR_PackageFileManager_PhingFileSet lister.
      * @return array FileSet[]
      */
-    public function getFileSets()
+    public function getFileSets(): array
     {
         return $this->filesets;
     }
@@ -262,7 +262,7 @@ class PearPackageTask extends MatchingTask
      * @param  string $v
      * @return void
      */
-    public function setPackage($v)
+    public function setPackage($v): void
     {
         $this->package = $v;
     }
@@ -272,7 +272,7 @@ class PearPackageTask extends MatchingTask
      * @param  PhingFile $f
      * @return void
      */
-    public function setDir(PhingFile $f)
+    public function setDir(PhingFile $f): void
     {
         $this->dir = $f;
     }
@@ -282,7 +282,7 @@ class PearPackageTask extends MatchingTask
      * @param  string $v
      * @return void
      */
-    public function setName($v)
+    public function setName($v): void
     {
         $this->package = $v;
     }
@@ -322,7 +322,7 @@ class PearPackageTask extends MatchingTask
      * Handles nested <role> elements
      * @return PearPkgRole
      */
-    public function createRole()
+    public function createRole(): \PearPkgRole
     {
         $role = new PearPkgRole();
         $this->roles[] = $role;

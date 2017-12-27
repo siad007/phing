@@ -52,7 +52,7 @@ class PhpDependLoggerElement
      *
      * @throws BuildException
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
 
@@ -74,7 +74,7 @@ class PhpDependLoggerElement
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -84,7 +84,7 @@ class PhpDependLoggerElement
      *
      * @param PhingFile $outfile The output file
      */
-    public function setOutfile(PhingFile $outfile)
+    public function setOutfile(PhingFile $outfile): void
     {
         $this->outfile = $outfile;
     }
@@ -94,7 +94,7 @@ class PhpDependLoggerElement
      *
      * @return PhingFile
      */
-    public function getOutfile()
+    public function getOutfile(): \PhingFile
     {
         return $this->outfile;
     }

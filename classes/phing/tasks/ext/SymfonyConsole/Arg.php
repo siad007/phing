@@ -38,9 +38,9 @@ class Arg extends DataType
 
     /**
      * Gets the argument name
-     * @return String
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -56,9 +56,9 @@ class Arg extends DataType
 
     /**
      * Gets the argument value
-     * @return String
+     * @return string|null
      */
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->value;
     }
@@ -76,7 +76,7 @@ class Arg extends DataType
      * Should the argument value be enclosed in double quotes
      * @return boolean
      */
-    public function getQuotes()
+    public function getQuotes(): bool
     {
         return $this->quotes;
     }

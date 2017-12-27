@@ -22,13 +22,14 @@ class MapEntry
      * Note that this value is case-insensitive when the build is
      * running on a Windows platform and case-sensitive when running on
      * a Unix platform.
+     * @param $from
      */
-    public function setFrom($from)
+    public function setFrom($from): void
     {
         $this->outer->from = $from;
     }
 
-    public function setTo($to)
+    public function setTo($to): void
     {
         $this->outer->to = $to;
     }
@@ -41,7 +42,7 @@ class MapEntry
      *
      * @throws BuildException
      */
-    public function apply($elem)
+    public function apply($elem): string
     {
         if ($this->outer->from === null || $this->outer->to === null) {
             throw new BuildException(

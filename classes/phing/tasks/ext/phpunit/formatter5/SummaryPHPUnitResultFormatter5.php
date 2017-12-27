@@ -49,10 +49,10 @@ class SummaryPHPUnitResultFormatter5 extends PHPUnitResultFormatter5
     }
 
     /**
-     * @return null
+     * @return string
      */
-    public function getExtension()
+    public function getExtension(): string
     {
-        return null;
+        return '';
     }
 }

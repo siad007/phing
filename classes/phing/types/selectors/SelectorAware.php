@@ -27,7 +27,7 @@ trait SelectorAware
     /**
      * Indicates whether there are any selectors here.
      */
-    public function hasSelectors()
+    public function hasSelectors(): bool
     {
         return !empty($this->selectorsList);
     }
@@ -35,7 +35,7 @@ trait SelectorAware
     /**
      * Gives the count of the number of selectors in this container
      */
-    public function selectorCount()
+    public function selectorCount(): int
     {
         return count($this->selectorsList);
     }
@@ -45,7 +45,7 @@ trait SelectorAware
      * @param Project $p
      * @return array
      */
-    public function getSelectors(Project $p)
+    public function getSelectors(Project $p): array
     {
         $result = [];
         for ($i = 0, $size = count($this->selectorsList); $i < $size; $i++) {
@@ -58,7 +58,7 @@ trait SelectorAware
     /**
      * Returns an array for accessing the set of selectors (not a copy).
      */
-    public function selectorElements()
+    public function selectorElements(): array
     {
         return $this->selectorsList;
     }
@@ -68,31 +68,34 @@ trait SelectorAware
      *
      * @param FileSelector $selector new selector to add
      */
-    public function appendSelector(FileSelector $selector)
+    public function appendSelector(FileSelector $selector): void
     {
         $this->selectorsList[] = $selector;
     }
 
     /**
      * add a "Select" selector entry on the selector list
+     * @param SelectSelector $selector
      */
-    public function addSelector(SelectSelector $selector)
+    public function addSelector(SelectSelector $selector): void
     {
         $this->appendSelector($selector);
     }
 
     /**
      * add an "And" selector entry on the selector list
+     * @param AndSelector $selector
      */
-    public function addAnd(AndSelector $selector)
+    public function addAnd(AndSelector $selector): void
     {
         $this->appendSelector($selector);
     }
 
     /**
      * add an "Or" selector entry on the selector list
+     * @param OrSelector $selector
      */
-    public function addOr(OrSelector $selector)
+    public function addOr(OrSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -100,7 +103,7 @@ trait SelectorAware
     /**
      * add a "Not" selector entry on the selector list
      */
-    public function addNot(NotSelector $selector)
+    public function addNot(NotSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -108,7 +111,7 @@ trait SelectorAware
     /**
      * add a "None" selector entry on the selector list
      */
-    public function addNone(NoneSelector $selector)
+    public function addNone(NoneSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -116,7 +119,7 @@ trait SelectorAware
     /**
      * add a majority selector entry on the selector list
      */
-    public function addMajority(MajoritySelector $selector)
+    public function addMajority(MajoritySelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -124,7 +127,7 @@ trait SelectorAware
     /**
      * add a selector date entry on the selector list
      */
-    public function addDate(DateSelector $selector)
+    public function addDate(DateSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -132,7 +135,7 @@ trait SelectorAware
     /**
      * add a selector size entry on the selector list
      */
-    public function addSize(SizeSelector $selector)
+    public function addSize(SizeSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -140,7 +143,7 @@ trait SelectorAware
     /**
      * add a selector filename entry on the selector list
      */
-    public function addFilename(FilenameSelector $selector)
+    public function addFilename(FilenameSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -148,7 +151,7 @@ trait SelectorAware
     /**
      * add an extended selector entry on the selector list
      */
-    public function addCustom(ExtendSelector $selector)
+    public function addCustom(ExtendSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -156,7 +159,7 @@ trait SelectorAware
     /**
      * add a contains selector entry on the selector list
      */
-    public function addContains(ContainsSelector $selector)
+    public function addContains(ContainsSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -164,7 +167,7 @@ trait SelectorAware
     /**
      * add a contains selector entry on the selector list
      */
-    public function addContainsRegexp(ContainsRegexpSelector $selector)
+    public function addContainsRegexp(ContainsRegexpSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -172,7 +175,7 @@ trait SelectorAware
     /**
      * add a present selector entry on the selector list
      */
-    public function addPresent(PresentSelector $selector)
+    public function addPresent(PresentSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -180,7 +183,7 @@ trait SelectorAware
     /**
      * add a depth selector entry on the selector list
      */
-    public function addDepth(DepthSelector $selector)
+    public function addDepth(DepthSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -188,7 +191,7 @@ trait SelectorAware
     /**
      * add a depends selector entry on the selector list
      */
-    public function addDepend(DependSelector $selector)
+    public function addDepend(DependSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -196,7 +199,7 @@ trait SelectorAware
     /**
      * add a different selector entry on the selector list
      */
-    public function addDifferent(DifferentSelector $selector)
+    public function addDifferent(DifferentSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -204,7 +207,7 @@ trait SelectorAware
     /**
      * add a type selector entry on the selector list
      */
-    public function addType(TypeSelector $selector)
+    public function addType(TypeSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -212,7 +215,7 @@ trait SelectorAware
     /**
      * add a executable selector entry on the selector list
      */
-    public function addExecutable(ExecutableSelector $selector)
+    public function addExecutable(ExecutableSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -220,7 +223,7 @@ trait SelectorAware
     /**
      * add a readable selector entry on the selector list
      */
-    public function addReadable(ReadableSelector $selector)
+    public function addReadable(ReadableSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -228,7 +231,7 @@ trait SelectorAware
     /**
      * add a writable selector entry on the selector list
      */
-    public function addWritable(WritableSelector $selector)
+    public function addWritable(WritableSelector $selector): void
     {
         $this->appendSelector($selector);
     }
@@ -236,7 +239,7 @@ trait SelectorAware
     /**
      * add a symlink selector entry on the selector list
      */
-    public function addSymlink(SymlinkSelector $selector)
+    public function addSymlink(SymlinkSelector $selector): void
     {
         $this->appendSelector($selector);
     }

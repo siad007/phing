@@ -91,7 +91,7 @@ class PearPackageFileSet extends FileSet
      *
      * @return PearPackageScanner
      */
-    public function getDirectoryScanner(Project $p)
+    public function getDirectoryScanner(Project $p): \PearPackageScanner
     {
         if ($this->isReference()) {
             $obj = $this->getRef($p);
@@ -111,7 +111,7 @@ class PearPackageFileSet extends FileSet
      *
      * @return PhingFile Base directory
      */
-    public function getDir(Project $p)
+    public function getDir(Project $p): \PhingFile
     {
         if ($this->pps === null) {
             $this->loadPearPackageScanner($p);
@@ -127,7 +127,7 @@ class PearPackageFileSet extends FileSet
      *
      * @return void
      */
-    protected function loadPearPackageScanner(Project $p)
+    protected function loadPearPackageScanner(Project $p): void
     {
         $this->pps = new PearPackageScanner();
         $this->pps->setDescFile($this->packageFile);
@@ -147,7 +147,7 @@ class PearPackageFileSet extends FileSet
      * @param $descFile
      * @return void
      */
-    public function setDescFile($descFile)
+    public function setDescFile($descFile): void
     {
         $this->packageFile = $descFile;
     }
@@ -161,7 +161,7 @@ class PearPackageFileSet extends FileSet
      * @throws BuildException
      * @return void
      */
-    public function setPackage($package)
+    public function setPackage($package): void
     {
         $parts = explode('/', $package);
         if (count($parts) > 2) {
@@ -185,7 +185,7 @@ class PearPackageFileSet extends FileSet
      *
      * @return void
      */
-    public function setRole($role)
+    public function setRole($role): void
     {
         $this->role = $role;
     }
@@ -197,7 +197,7 @@ class PearPackageFileSet extends FileSet
      *
      * @return void
      */
-    public function setConfig($config)
+    public function setConfig($config): void
     {
         $this->config = $config;
     }

@@ -20,7 +20,7 @@ class Comment
     /**
      * @param $value
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->_value = (string)$value;
     }
@@ -30,7 +30,7 @@ class Comment
      *
      * @return string The prefix for this type of line comment.
     */
-    public function getValue()
+    public function getValue(): void
     {
         return $this->_value;
     }

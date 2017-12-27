@@ -70,7 +70,7 @@ class TidyFilter extends BaseParamFilterReader implements ChainableReader
      * Adds a <config> element (which is a Parameter).
      * @return Parameter
      */
-    public function createConfig()
+    public function createConfig(): \Parameter
     {
         $num = array_push($this->configParameters, new Parameter());
 
@@ -81,7 +81,7 @@ class TidyFilter extends BaseParamFilterReader implements ChainableReader
      * Converts the Parameter objects being used to store configuration into a simle assoc array.
      * @return array
      */
-    private function getDistilledConfig()
+    private function getDistilledConfig(): array
     {
         $config = [];
         foreach ($this->configParameters as $p) {
@@ -95,9 +95,7 @@ class TidyFilter extends BaseParamFilterReader implements ChainableReader
      * Reads input and returns Tidy-filtered output.
      *
      * @param null $len
-     * @throws BuildException
      * @return int the resulting stream, or -1 if the end of the resulting stream has been reached
-     *
      */
     public function read($len = null)
     {
@@ -111,7 +109,7 @@ class TidyFilter extends BaseParamFilterReader implements ChainableReader
         }
 
         $buffer = $this->in->read($len);
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -128,14 +126,14 @@ class TidyFilter extends BaseParamFilterReader implements ChainableReader
      * Creates a new TidyFilter using the passed in Reader for instantiation.
      *
      * @param A|Reader $reader
+     * @return TidyFilter a new filter based on this configuration, but filtering the specified reader
      * @internal param A $reader Reader object providing the underlying stream.
      *               Must not be <code>null</code>.
      *
-     * @return TidyFilter a new filter based on this configuration, but filtering the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new TidyFilter($reader);
+        $newFilter = new self($reader);
         $newFilter->setConfigParameters($this->configParameters);
         $newFilter->setEncoding($this->encoding);
         $newFilter->setProject($this->getProject());

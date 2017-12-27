@@ -337,7 +337,7 @@ class ZendGuardEncodeTask extends MatchingTask
      *
      * @return FileSet
      */
-    public function createFileSet()
+    public function createFileSet(): \FileSet
     {
         $this->fileset = new ZendGuardFileSet();
         $this->filesets[] = $this->fileset;
@@ -515,7 +515,7 @@ class ZendGuardEncodeTask extends MatchingTask
      * @throws BuildException
      * @return bool
      */
-    protected function encodeFile($filePath)
+    protected function encodeFile($filePath): bool
     {
         $command = $this->encodeCommand . $filePath . ' 2>&1';
 

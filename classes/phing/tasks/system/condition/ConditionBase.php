@@ -65,7 +65,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
      *
      * @return string the name to use in logging messages.
      */
-    public function getTaskName()
+    public function getTaskName(): string
     {
         return $this->taskName;
     }
@@ -73,7 +73,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return int
      */
-    public function countConditions()
+    public function countConditions(): int
     {
         return count($this->conditions);
     }
@@ -89,7 +89,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return Condition[]
      */
-    public function getConditions()
+    public function getConditions(): array
     {
         return $this->conditions;
     }
@@ -98,7 +98,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
      * @param AvailableTask $a
      * @return void
      */
-    public function addAvailable(AvailableTask $a)
+    public function addAvailable(AvailableTask $a): void
     {
         $this->conditions[] = $a;
     }
@@ -106,7 +106,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return NotCondition
      */
-    public function createNot()
+    public function createNot(): \NotCondition
     {
         include_once 'phing/tasks/system/condition/NotCondition.php';
         $num = array_push($this->conditions, new NotCondition());
@@ -117,7 +117,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return AndCondition
      */
-    public function createAnd()
+    public function createAnd(): \AndCondition
     {
         include_once 'phing/tasks/system/condition/AndCondition.php';
         $num = array_push($this->conditions, new AndCondition());
@@ -128,7 +128,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return OrCondition
      */
-    public function createOr()
+    public function createOr(): \OrCondition
     {
         include_once 'phing/tasks/system/condition/OrCondition.php';
         $num = array_push($this->conditions, new OrCondition());
@@ -139,7 +139,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return XorCondition
      */
-    public function createXor()
+    public function createXor(): \XorCondition
     {
         include_once 'phing/tasks/system/condition/XorCondition.php';
         $num = array_push($this->conditions, new XorCondition());
@@ -150,7 +150,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return EqualsCondition
      */
-    public function createEquals()
+    public function createEquals(): \EqualsCondition
     {
         include_once 'phing/tasks/system/condition/EqualsCondition.php';
         $num = array_push($this->conditions, new EqualsCondition());
@@ -161,7 +161,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return OsCondition
      */
-    public function createOs()
+    public function createOs(): \OsCondition
     {
         include_once 'phing/tasks/system/condition/OsCondition.php';
         $num = array_push($this->conditions, new OsCondition());
@@ -172,7 +172,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return IsFalseCondition
      */
-    public function createIsFalse()
+    public function createIsFalse(): \IsFalseCondition
     {
         include_once 'phing/tasks/system/condition/IsFalseCondition.php';
         $num = array_push($this->conditions, new IsFalseCondition());
@@ -183,7 +183,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return IsTrueCondition
      */
-    public function createIsTrue()
+    public function createIsTrue(): \IsTrueCondition
     {
         include_once 'phing/tasks/system/condition/IsTrueCondition.php';
         $num = array_push($this->conditions, new IsTrueCondition());
@@ -194,7 +194,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return IsPropertyFalseCondition
      */
-    public function createIsPropertyFalse()
+    public function createIsPropertyFalse(): \IsPropertyFalseCondition
     {
         include_once 'phing/tasks/system/condition/IsPropertyFalseCondition.php';
         $num = array_push($this->conditions, new IsPropertyFalseCondition());
@@ -205,7 +205,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return IsPropertyTrueCondition
      */
-    public function createIsPropertyTrue()
+    public function createIsPropertyTrue(): \IsPropertyTrueCondition
     {
         include_once 'phing/tasks/system/condition/IsPropertyTrueCondition.php';
         $num = array_push($this->conditions, new IsPropertyTrueCondition());
@@ -216,7 +216,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return ContainsCondition
      */
-    public function createContains()
+    public function createContains(): \ContainsCondition
     {
         include_once 'phing/tasks/system/condition/ContainsCondition.php';
         $num = array_push($this->conditions, new ContainsCondition());
@@ -227,7 +227,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return IsSetCondition
      */
-    public function createIsSet()
+    public function createIsSet(): \IsSetCondition
     {
         include_once 'phing/tasks/system/condition/IsSetCondition.php';
         $num = array_push($this->conditions, new IsSetCondition());
@@ -238,7 +238,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * @return ReferenceExistsCondition
      */
-    public function createReferenceExists()
+    public function createReferenceExists(): \ReferenceExistsCondition
     {
         include_once 'phing/tasks/system/condition/ReferenceExistsCondition.php';
         $num = array_push($this->conditions, new ReferenceExistsCondition());
@@ -324,7 +324,7 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
      * @throws BuildException
      * @return Condition
      */
-    public function customChildCreator($elementName, Project $project)
+    public function customChildCreator($elementName, Project $project): \Condition
     {
         $condition = $project->createCondition($elementName);
         $num = array_push($this->conditions, $condition);

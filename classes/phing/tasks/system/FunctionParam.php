@@ -12,7 +12,7 @@ class FunctionParam
     /**
      * @param $v
      */
-    public function setValue($v)
+    public function setValue($v): void
     {
         $this->val = $v;
     }
@@ -20,12 +20,12 @@ class FunctionParam
     /**
      * @param $v
      */
-    public function addText($v)
+    public function addText($v): void
     {
         $this->val = $v;
     }
 
-    public function getValue()
+    public function getValue(): void
     {
         return $this->val;
     }

@@ -92,7 +92,7 @@ class ExpatParser extends AbstractSAXParser
      * @internal param the $string option to set
      * @return boolean true if the option could be set, otherwise false
      */
-    public function parserSetOption($opt, $val)
+    public function parserSetOption($opt, $val): bool
     {
         return xml_parser_set_option($this->parser, $opt, $val);
     }
@@ -103,7 +103,7 @@ class ExpatParser extends AbstractSAXParser
      *
      * @return Location the location of the current parser
      */
-    public function getLocation()
+    public function getLocation(): \Location
     {
         if ($this->file !== null) {
             $path = $this->file->getAbsolutePath();
@@ -122,11 +122,10 @@ class ExpatParser extends AbstractSAXParser
      *
      * @return int                 1 if the parsing succeeded
      * @throws ExpatParseException if something gone wrong during parsing
-     * @throws IOException         if XML file can not be accessed
      */
-    public function parse()
+    public function parse(): int
     {
-        while (($data = $this->reader->read()) !== -1) {
+        while (($data = $this->reader->read()) != -1) {
             if (!xml_parse($this->parser, $data, $this->reader->eof())) {
                 $error = xml_error_string(xml_get_error_code($this->parser));
                 $e = new ExpatParseException($error, $this->getLocation());

@@ -125,8 +125,7 @@ class Mapper extends DataType
 
     /**
      * Add a nested <code>FileNameMapper</code>.
-     * @param FileNameMapper $fileNameMapper the <code>FileNameMapper</code> to add.
-     * @throws BuildException
+     * @param Mapper $fileNameMapper the <code>FileNameMapper</code> to add.
      */
     public function add(Mapper $fileNameMapper)
     {
@@ -202,9 +201,8 @@ class Mapper extends DataType
      *
      * You must not set any other attribute if you make it a reference.
      * @param Reference $r
-     * @throws BuildException
      */
-    public function setRefid(Reference $r)
+    public function setRefid(Reference $r): void
     {
         if ($this->type !== null || $this->from !== null || $this->to !== null) {
             throw DataType::tooManyAttributes();

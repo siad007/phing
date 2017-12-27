@@ -30,20 +30,20 @@ require_once 'phing/tasks/ext/git/GitBaseTask.php';
  */
 class GitArchiveTask extends GitBaseTask
 {
-    /** @var string|false $format */
-    private $format = false;
+    /** @var string $format */
+    private $format;
 
     /** @var PhingFile $output */
     private $output;
 
-    /** @var string|false $prefix */
-    private $prefix = false;
+    /** @var string $prefix */
+    private $prefix;
 
     /** @var string $treeish */
     private $treeish;
 
-    /** @var string|false $remoteRepo */
-    private $remoteRepo = false;
+    /** @var string $remoteRepo */
+    private $remoteRepo;
 
     /**
      * The main entry point for the task
@@ -58,7 +58,7 @@ class GitArchiveTask extends GitBaseTask
             throw new BuildException('"treeish" is required parameter');
         }
 
-        $cmd = $this->getGitClient(false, $this->getRepository() !== null ? $this->getRepository() : './')
+        $cmd = $this->getGitClient(false, $this->getRepository() ?? './')
             ->getCommand('archive')
             ->setOption('prefix', $this->prefix)
             ->setOption('output', $this->output !== null ? $this->output->getPath() : false)
@@ -77,7 +77,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getFormat()
+    public function getFormat(): ?string
     {
         return $this->format;
     }
@@ -93,7 +93,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return PhingFile
      */
-    public function getOutput()
+    public function getOutput(): ?\PhingFile
     {
         return $this->output;
     }
@@ -109,7 +109,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getPrefix()
+    public function getPrefix(): ?string
     {
         return $this->prefix;
     }
@@ -125,7 +125,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getTreeish()
+    public function getTreeish(): ?string
     {
         return $this->treeish;
     }
@@ -141,7 +141,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getRemoteRepo()
+    public function getRemoteRepo(): ?string
     {
         return $this->remoteRepo;
     }

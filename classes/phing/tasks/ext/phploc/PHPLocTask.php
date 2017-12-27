@@ -1,4 +1,7 @@
 <?php
+
+use SebastianBergmann\PHPLOC\Analyser;
+
 /**
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -170,7 +173,7 @@ class Application
             ob_end_clean();
         }
 
-        if (!class_exists('\SebastianBergmann\PHPLOC\Analyser')) {
+        if (!class_exists(Analyser::class)) {
             if (!@include_once 'SebastianBergmann/PHPLOC/autoload.php') {
                 throw new BuildException(
                     'PHPLocTask depends on PHPLoc being installed and on include_path.',
@@ -206,7 +209,7 @@ class Application
     }
 
     /**
-     * @throws BuildException
+     * @throws IOException
      */
     private function validateProperties()
     {
@@ -273,7 +276,7 @@ class Application
      *
      * @return boolean
      */
-    protected function isFileSuffixSet($filename)
+    protected function isFileSuffixSet($filename): bool
     {
         return in_array(pathinfo($filename, PATHINFO_EXTENSION), $this->suffixesToCheck);
     }
@@ -300,7 +303,7 @@ class Application
     /**
      * @return SplFileInfo[]
      */
-    protected function getFilesToCheck()
+    protected function getFilesToCheck(): array
     {
         $files = [];
 
@@ -320,9 +323,9 @@ class Application
      *
      * @return array
      */
-    protected function getCountForFiles(array $files)
+    protected function getCountForFiles(array $files): array
     {
-        $analyserClass = '\\SebastianBergmann\\PHPLOC\\Analyser';
+        $analyserClass = Analyser::class;
         $analyser = new $analyserClass();
 
         return $analyser->countFiles($files, $this->countTests);

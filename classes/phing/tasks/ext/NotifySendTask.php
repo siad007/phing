@@ -36,7 +36,7 @@ class NotifySendTask extends Task
      *
      * @return void
      */
-    public function setIcon($icon)
+    public function setIcon($icon): void
     {
         switch ($icon) {
             case 'info':
@@ -66,7 +66,7 @@ class NotifySendTask extends Task
      *
      * @return string
      */
-    public function getIcon()
+    public function getIcon(): string
     {
         return $this->icon;
     }
@@ -78,7 +78,7 @@ class NotifySendTask extends Task
      *
      * @return void
      */
-    public function setSilent($silent)
+    public function setSilent($silent): void
     {
         $this->silent = StringHelper::booleanValue($silent);
     }
@@ -90,7 +90,7 @@ class NotifySendTask extends Task
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -100,7 +100,7 @@ class NotifySendTask extends Task
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -112,7 +112,7 @@ class NotifySendTask extends Task
      *
      * @return void
      */
-    public function setMsg($msg)
+    public function setMsg($msg): void
     {
         $this->msg = $msg;
     }
@@ -122,7 +122,7 @@ class NotifySendTask extends Task
      *
      * @return string
      */
-    public function getMsg()
+    public function getMsg(): string
     {
         return $this->msg;
     }
@@ -133,7 +133,7 @@ class NotifySendTask extends Task
      * @throws BuildException
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $msg = '';
         $title = 'Phing';

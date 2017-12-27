@@ -13,12 +13,12 @@ class PearPkgOption
     /**
      * @param $v
      */
-    public function setName($v)
+    public function setName($v): void
     {
         $this->name = $v;
     }
 
-    public function getName()
+    public function getName(): void
     {
         return $this->name;
     }
@@ -26,12 +26,12 @@ class PearPkgOption
     /**
      * @param $v
      */
-    public function setValue($v)
+    public function setValue($v): void
     {
         $this->value = $v;
     }
 
-    public function getValue()
+    public function getValue(): void
     {
         return $this->value;
     }
@@ -39,7 +39,7 @@ class PearPkgOption
     /**
      * @param $txt
      */
-    public function addText($txt)
+    public function addText($txt): void
     {
         $this->value = trim($txt);
     }

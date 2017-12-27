@@ -68,8 +68,8 @@ class ProjectHandler extends AbstractHandler
      * this method handles the attributes of a tag.
      *
      * @param  string $tag the tag that comes in
-     * @param  array  $attrs attributes the tag carries
-     * @throws ExpatParseException if attributes are incomplete or invalid
+     * @param  array $attrs attributes the tag carries
+     * @throws IOException
      */
     public function init($tag, $attrs)
     {
@@ -171,21 +171,20 @@ class ProjectHandler extends AbstractHandler
      * calling the required handlers for the detected element.
      *
      * @param  string $name the tag that comes in
-     * @param  array  $attrs attributes the tag carries
-     * @throws ExpatParseException if a unxepected element occurs
+     * @param  array $attribs attributes the tag carries
      */
-    public function startElement($name, $attrs)
+    public function startElement($name, $attribs): void
     {
         $project = $this->configurator->project;
         $types = $project->getDataTypeDefinitions();
 
         if ($name === "target") {
             $tf = new TargetHandler($this->parser, $this, $this->configurator, $this->context);
-            $tf->init($name, $attrs);
+            $tf->init($name, $attribs);
         } else {
             $tf = new ElementHandler($this->parser, $this, $this->configurator, null, null, $this->context->getImplicitTarget(
             ));
-            $tf->init($name, $attrs);
+            $tf->init($name, $attribs);
         }
     }
 

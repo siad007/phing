@@ -36,7 +36,7 @@ class PlainPHPUnitResultFormatter5 extends PHPUnitResultFormatter5
     /**
      * @return string
      */
-    public function getExtension()
+    public function getExtension(): string
     {
         return ".txt";
     }
@@ -44,7 +44,7 @@ class PlainPHPUnitResultFormatter5 extends PHPUnitResultFormatter5
     /**
      * @return string
      */
-    public function getPreferredOutfile()
+    public function getPreferredOutfile(): string
     {
         return "testresults";
     }

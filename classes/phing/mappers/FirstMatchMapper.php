@@ -29,16 +29,16 @@ include_once 'phing/mappers/ContainerMapper.php';
 class FirstMatchMapper extends ContainerMapper
 {
     /** {@inheritDoc}. */
-    public function main($sourceFileName)
+    public function main($sourceFileName): array
     {
         foreach ($this->getMappers() as $mapper) {
             if ($mapper !== null) {
                 $mapped = $mapper->getImplementation()->main($sourceFileName);
-                if ($mapped !== null) {
+                if (count($mapped) > 0) {
                     return $mapped;
                 }
             }
         }
-        return null;
+        return [];
     }
 }

@@ -42,7 +42,7 @@ class FileUtils
      *
      * @return int  Creation Mask in octal representation
      */
-    public static function getDefaultFileCreationMask($dirmode = false)
+    public static function getDefaultFileCreationMask($dirmode = false): int
     {
 
         // Preparing the creation mask base permission
@@ -63,7 +63,7 @@ class FileUtils
      * @param  Project $project
      * @return Reader  Assembled Reader (w/ filter chains).
      */
-    public static function getChainedReader(Reader $in, &$filterChains, Project $project)
+    public static function getChainedReader(Reader $in, &$filterChains, Project $project): ?\Reader
     {
         if (!empty($filterChains)) {
             $crh = new ChainReaderHelper();
@@ -103,7 +103,7 @@ class FileUtils
         &$filterChains = null,
         $mode = 0755,
         $preservePermissions = true
-    ) {
+    ): void {
         if ($overwrite || !$destFile->exists() || $destFile->lastModified() < $sourceFile->lastModified()) {
             if ($destFile->exists() && ($destFile->isFile() || $destFile->isLink())) {
                 $destFile->delete();
@@ -127,7 +127,7 @@ class FileUtils
                 $out = new BufferedWriter(new FileWriter($destFile));
 
                 // New read() methods returns a big buffer.
-                while (-1 !== ($buffer = $in->read())) { // -1 indicates EOF
+                while (-1 != ($buffer = $in->read())) { // -1 indicates EOF
                     $out->write($buffer);
                 }
 
@@ -167,9 +167,11 @@ class FileUtils
      *
      * @param PhingFile $sourceFile
      * @param PhingFile $destFile
-     * @return boolean
+     * @param bool $overwrite
+     * @return void
+     * @throws IOException
      */
-    public function renameFile(PhingFile $sourceFile, PhingFile $destFile, $overwrite = false)
+    public function renameFile(PhingFile $sourceFile, PhingFile $destFile, $overwrite = false): void
     {
         // ensure that parent dir of dest file exists!
         $parent = $destFile->getParentFile();
@@ -208,7 +210,7 @@ class FileUtils
      * @return PhingFile A PhingFile object pointing to an absolute file that doesn't contain ./ or ../ sequences
      *                   and uses the correct separator for the current platform.
      */
-    public function resolveFile($file, $filename)
+    public function resolveFile($file, $filename): \PhingFile
     {
         // remove this and use the static class constant File::separator
         // as soon as ZE2 is ready
@@ -268,7 +270,7 @@ class FileUtils
      *
      * @return string
      */
-    public function normalize($path)
+    public function normalize($path): string
     {
         $path = (string) $path;
         $orig = $path;
@@ -387,7 +389,7 @@ class FileUtils
      * @return PhingFile            a File reference to the new temporary file.
      * @throws BuildException
      */
-    public function createTempFile($prefix, $suffix, PhingFile $parentDir, $deleteOnExit = false, $createFile = false)
+    public function createTempFile($prefix, $suffix, PhingFile $parentDir, $deleteOnExit = false, $createFile = false): \PhingFile
     {
         $result = null;
         $parent = ($parentDir === null) ? sys_get_temp_dir() : $parentDir->getPath();
@@ -417,7 +419,7 @@ class FileUtils
      *
      * @return boolean Whether contents of two files is the same.
      */
-    public function contentEquals(PhingFile $file1, PhingFile $file2)
+    public function contentEquals(PhingFile $file1, PhingFile $file2): bool
     {
         if (!($file1->exists() || $file2->exists())) {
             return false;

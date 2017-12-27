@@ -39,7 +39,7 @@ class PresentSelector extends BaseSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{presentselector targetdir: ";
         if ($this->targetdir === null) {
@@ -71,7 +71,7 @@ class PresentSelector extends BaseSelector
      *
      * @return void
      */
-    public function setTargetdir(PhingFile $targetdir)
+    public function setTargetdir(PhingFile $targetdir): void
     {
         $this->targetdir = $targetdir;
     }
@@ -83,7 +83,7 @@ class PresentSelector extends BaseSelector
      *
      * @throws BuildException
      */
-    public function createMapper()
+    public function createMapper(): \Mapper
     {
         if ($this->mapperElement !== null) {
             throw new BuildException("Cannot define more than one mapper");
@@ -107,7 +107,7 @@ class PresentSelector extends BaseSelector
      *
      * @return void
      */
-    public function setPresent($fp)
+    public function setPresent($fp): void
     {
         $idx = array_search($fp, self::$filePresence, true);
         if ($idx === 0) {
@@ -121,7 +121,7 @@ class PresentSelector extends BaseSelector
      *
      * @return void
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->targetdir === null) {
             $this->setError("The targetdir attribute is required.");
@@ -148,7 +148,7 @@ class PresentSelector extends BaseSelector
      *
      * @return bool whether the file should be selected or not
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

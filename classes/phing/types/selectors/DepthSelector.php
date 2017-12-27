@@ -42,7 +42,7 @@ class DepthSelector extends BaseExtendSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{depthselector min: ";
         $buf .= $this->min;
@@ -60,7 +60,7 @@ class DepthSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setMin($min)
+    public function setMin($min): void
     {
         $this->min = (int) $min;
     }
@@ -72,7 +72,7 @@ class DepthSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setMax($max)
+    public function setMax($max): void
     {
         $this->max = (int) $max;
     }
@@ -116,7 +116,7 @@ class DepthSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->min < 0 && $this->max < 0) {
             $this->setError(
@@ -146,7 +146,7 @@ class DepthSelector extends BaseExtendSelector
      *
      * @return bool whether the file should be selected or not
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

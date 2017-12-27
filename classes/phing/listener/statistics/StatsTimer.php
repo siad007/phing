@@ -39,19 +39,19 @@ class StatsTimer
         $this->series = new Series();
     }
 
-    public function start()
+    public function start(): void
     {
         $duration = new Duration();
         $duration->setStartTime($this->clock->getCurrentTime());
         $this->series->add($duration);
     }
 
-    public function finish()
+    public function finish(): void
     {
         $this->series->setFinishTime($this->clock->getCurrentTime());
     }
 
-    public function getName()
+    public function getName(): void
     {
         return $this->name;
     }
@@ -61,7 +61,7 @@ class StatsTimer
         return $this->series->getTotalTime();
     }
 
-    public function getSeries()
+    public function getSeries(): \Series
     {
         return $this->series;
     }

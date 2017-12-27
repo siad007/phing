@@ -1,4 +1,7 @@
 <?php
+
+use Symfony\Component\Stopwatch\Stopwatch;
+
 /**
  * $Id$
  *
@@ -63,7 +66,7 @@ class StopwatchTask extends Task
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
     }
 
@@ -74,13 +77,13 @@ class StopwatchTask extends Task
      *
      * @throws BuildException
      */
-    private function loadStopwatch()
+    private function loadStopwatch(): void
     {
         @include_once 'Symfony/Component/Stopwatch/autoload.php';
         @include_once 'Symfony/Component/Stopwatch/autoloader.php';
         @include_once 'vendor/autoload.php';
 
-        if (!class_exists('\\Symfony\\Component\\Stopwatch\\Stopwatch')) {
+        if (!class_exists(Stopwatch::class)) {
             throw new BuildException("StopwatchTask requires symfony/stopwatch to be installed.");
         }
     }
@@ -90,10 +93,10 @@ class StopwatchTask extends Task
      *
      * @return \Symfony\Component\Stopwatch\Stopwatch
      */
-    private function getStopwatchInstance()
+    private function getStopwatchInstance(): Stopwatch
     {
         if (self::$timer === null) {
-            $stopwatch = '\\Symfony\\Component\\Stopwatch\\Stopwatch';
+            $stopwatch = Stopwatch::class;
             self::$timer = new $stopwatch;
         }
 
@@ -105,7 +108,7 @@ class StopwatchTask extends Task
      *
      * @return void
      */
-    private function start()
+    private function start(): void
     {
         $timer = $this->getStopwatchInstance();
         $timer->start($this->name, $this->category);
@@ -116,7 +119,7 @@ class StopwatchTask extends Task
      *
      * @return void
      */
-    private function stop()
+    private function stop(): void
     {
         $timer = $this->getStopwatchInstance();
         $event = $timer->stop($this->name);
@@ -139,7 +142,7 @@ class StopwatchTask extends Task
      *
      * @return void
      */
-    private function lap()
+    private function lap(): void
     {
         $timer = $this->getStopwatchInstance();
         $timer->lap($this->name);
@@ -152,7 +155,7 @@ class StopwatchTask extends Task
      *
      * @return void
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -164,7 +167,7 @@ class StopwatchTask extends Task
      *
      * @return void
      */
-    public function setCategory($category)
+    public function setCategory($category): void
     {
         $this->category = $category;
     }
@@ -180,7 +183,7 @@ class StopwatchTask extends Task
      *
      * @return void
      */
-    public function setAction($action)
+    public function setAction($action): void
     {
         $this->action = $action;
     }
@@ -192,7 +195,7 @@ class StopwatchTask extends Task
      *
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         $this->loadStopwatch();
 

@@ -54,7 +54,7 @@ abstract class GitBaseTask extends Task
      * Initialize Task.
      * Check and include necessary libraries.
      */
-    public function init()
+    public function init(): void
     {
         @include_once 'VersionControl/Git.php';
         if (false == class_exists('VersionControl_Git')) {
@@ -69,7 +69,7 @@ abstract class GitBaseTask extends Task
      * @param  string      $repository Repo directory
      * @return GitBaseTask
      */
-    public function setRepository($repository)
+    public function setRepository($repository): \GitBaseTask
     {
         $this->repository = $repository;
 
@@ -81,7 +81,7 @@ abstract class GitBaseTask extends Task
      *
      * @return string
      */
-    public function getRepository()
+    public function getRepository(): ?string
     {
         return $this->repository;
     }
@@ -92,7 +92,7 @@ abstract class GitBaseTask extends Task
      * @param  string      $gitPath New path to git repository
      * @return GitBaseTask
      */
-    public function setGitPath($gitPath)
+    public function setGitPath($gitPath): \GitBaseTask
     {
         $this->gitPath = $gitPath;
 
@@ -104,7 +104,7 @@ abstract class GitBaseTask extends Task
      *
      * @return string
      */
-    public function getGitPath()
+    public function getGitPath(): ?string
     {
         return $this->gitPath;
     }
@@ -115,12 +115,10 @@ abstract class GitBaseTask extends Task
      * @return null|VersionControl_Git
      * @throws BuildException
      */
-    protected function getGitClient($reset = false, $repository = null)
+    protected function getGitClient($reset = false, $repository = null): ?\VersionControl_Git
     {
         $this->gitClient = ($reset === true) ? null : $this->gitClient;
-        $repository = (null === $repository)
-            ? $this->getRepository()
-            : $repository;
+        $repository = $repository ?? $this->getRepository();
 
         if (null === $this->gitClient) {
             try {

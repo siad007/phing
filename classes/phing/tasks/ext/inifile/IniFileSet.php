@@ -59,7 +59,7 @@ class IniFileSet
      *
      * @return void
      */
-    public function setOperation($operation)
+    public function setOperation($operation): void
     {
         $this->operation = $operation;
     }
@@ -67,9 +67,9 @@ class IniFileSet
     /**
      * Get Operation
      *
-     * @return void
+     * @return string
      */
-    public function getOperation()
+    public function getOperation(): ?string
     {
         return $this->operation;
     }
@@ -81,7 +81,7 @@ class IniFileSet
      *
      * @return void
      */
-    public function setSection($section)
+    public function setSection($section): void
     {
         $this->section = trim($section);
     }
@@ -93,7 +93,7 @@ class IniFileSet
      *
      * @return void
      */
-    public function setProperty($property)
+    public function setProperty($property): void
     {
         $this->property = $property;
     }
@@ -105,7 +105,7 @@ class IniFileSet
      *
      * @return void
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = $value;
     }
@@ -115,7 +115,7 @@ class IniFileSet
      *
      * @return string
      */
-    public function getProperty()
+    public function getProperty(): ?string
     {
         return $this->property;
     }
@@ -125,7 +125,7 @@ class IniFileSet
      *
      * @return string
      */
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->value;
     }
@@ -134,7 +134,7 @@ class IniFileSet
      *
      * @return string
      */
-    public function getSection()
+    public function getSection(): ?string
     {
         return $this->section;
     }

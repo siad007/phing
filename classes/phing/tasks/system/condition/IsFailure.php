@@ -44,7 +44,7 @@ class IsFailure implements Condition
      * Get the return code that will be checked by this IsFailure condition.
      * @return int return code as int.
      */
-    public function getCode()
+    public function getCode(): int
     {
         return $this->code;
     }
@@ -56,7 +56,7 @@ class IsFailure implements Condition
      *
      * @return bool
      */
-    protected function isFailureCode($code)
+    protected function isFailureCode($code): bool
     {
         return $code !== 0;
     }
@@ -65,7 +65,7 @@ class IsFailure implements Condition
      * Fulfill the condition interface.
      * @return boolean the result of evaluating the specified return code.
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         return $this->isFailureCode($this->code);
     }

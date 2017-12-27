@@ -35,7 +35,7 @@ class OrSelector extends BaseSelectorContainer
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "";
         if ($this->hasSelectors()) {
@@ -57,7 +57,7 @@ class OrSelector extends BaseSelectorContainer
      * can use
      * @return boolean Whether the file should be selected or not
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

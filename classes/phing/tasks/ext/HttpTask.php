@@ -85,9 +85,8 @@ abstract class HttpTask extends Task
     /**
      * Load the necessary environment for running this task.
      *
-     * @throws BuildException
      */
-    public function init()
+    public function init(): void
     {
         @include_once 'HTTP/Request2.php';
 
@@ -126,6 +125,7 @@ abstract class HttpTask extends Task
      * Creates and configures an instance of HTTP_Request2
      *
      * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException
      */
     protected function createRequest()
     {
@@ -194,7 +194,7 @@ abstract class HttpTask extends Task
      *
      * @return Parameter The created header
      */
-    public function createHeader()
+    public function createHeader(): \Parameter
     {
         $num = array_push($this->headers, new Parameter());
 
@@ -206,7 +206,7 @@ abstract class HttpTask extends Task
      *
      * @return Parameter The created config parameter
      */
-    public function createConfig()
+    public function createConfig(): \Parameter
     {
         $num = array_push($this->configData, new Parameter());
 

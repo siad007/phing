@@ -56,9 +56,8 @@ class PhingVersion extends Task implements Condition
     /**
      * Evaluate the condition.
      * @return true if the condition is true.
-     * @throws BuildException if an error occurs.
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         $this->validate();
         $actual = $this->getVersion();
@@ -94,7 +93,7 @@ class PhingVersion extends Task implements Condition
      * Get the atleast attribute.
      * @return string the atleast attribute.
      */
-    public function getAtLeast()
+    public function getAtLeast(): string
     {
         return $this->atLeast;
     }
@@ -114,7 +113,7 @@ class PhingVersion extends Task implements Condition
      * Get the exactly attribute.
      * @return string the exactly attribute.
      */
-    public function getExactly()
+    public function getExactly(): string
     {
         return $this->exactly;
     }
@@ -134,7 +133,7 @@ class PhingVersion extends Task implements Condition
      * Get the name of the property to hold the phing version.
      * @return string the name of the property.
      */
-    public function getProperty()
+    public function getProperty(): string
     {
         return $this->propertyname;
     }

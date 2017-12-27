@@ -62,7 +62,7 @@ class HgLogTask extends HgBaseTask
      *
      * @return void
      */
-    public function setMaxcount($count)
+    public function setMaxcount($count): void
     {
         $this->maxCount = $count;
     }
@@ -72,7 +72,7 @@ class HgLogTask extends HgBaseTask
      *
      * @return int
      */
-    public function getMaxcount()
+    public function getMaxcount(): int
     {
         return $this->maxCount;
     }
@@ -84,7 +84,7 @@ class HgLogTask extends HgBaseTask
      *
      * @return string
      */
-    public function setFormat($format)
+    public function setFormat($format): ?string
     {
         $this->format = $format;
     }
@@ -94,7 +94,7 @@ class HgLogTask extends HgBaseTask
      *
      * @return string
      */
-    public function getFormat()
+    public function getFormat(): string
     {
         return $this->format;
     }
@@ -106,7 +106,7 @@ class HgLogTask extends HgBaseTask
      *
      * @return void
      */
-    public function setOutputProperty($property)
+    public function setOutputProperty($property): void
     {
         $this->outputProperty = $property;
     }
@@ -118,7 +118,7 @@ class HgLogTask extends HgBaseTask
      *
      * @return void
      */
-    public function setRevision($revision)
+    public function setRevision($revision): void
     {
         $this->revision = $revision;
     }
@@ -128,7 +128,7 @@ class HgLogTask extends HgBaseTask
      *
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $clone = $this->getFactoryInstance('log');
 

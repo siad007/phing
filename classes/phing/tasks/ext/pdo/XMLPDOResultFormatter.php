@@ -88,7 +88,7 @@ class XMLPDOResultFormatter extends PDOResultFormatter
         $this->formatOutput = (boolean) $v;
     }
 
-    public function initialize()
+    public function initialize(): void
     {
         $this->doc = new DOMDocument("1.0", $this->encoding);
         $this->rootNode = $this->doc->createElement('results');
@@ -101,7 +101,7 @@ class XMLPDOResultFormatter extends PDOResultFormatter
      *
      * @param array $row Row of PDO result set.
      */
-    public function processRow($row)
+    public function processRow($row): void
     {
         $rowNode = $this->doc->createElement('row');
         $this->rootNode->appendChild($rowNode);
@@ -126,7 +126,7 @@ class XMLPDOResultFormatter extends PDOResultFormatter
      *
      * @return string
      */
-    public function getPreferredOutfile()
+    public function getPreferredOutfile(): string
     {
         return new PhingFile('results.xml');
     }
@@ -134,7 +134,7 @@ class XMLPDOResultFormatter extends PDOResultFormatter
     /**
      * Write XML to file and free the DOM objects.
      */
-    public function close()
+    public function close(): void
     {
         $this->out->write($this->doc->saveXML());
         $this->rootNode = null;

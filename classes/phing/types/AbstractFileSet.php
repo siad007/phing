@@ -129,9 +129,8 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      * You must not set another attribute or nest elements inside
      * this element if you make it a reference.
      * @param Reference $r
-     * @throws BuildException
      */
-    public function setRefid(Reference $r)
+    public function setRefid(Reference $r): void
     {
         if ((isset($this->dir) && null !== $this->dir) || $this->defaultPatterns->hasPatterns()) {
             throw $this->tooManyAttributes();
@@ -308,7 +307,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      * @throws BuildException
      * @return void
      */
-    public function setDefaultexcludes($useDefaultExcludes)
+    public function setDefaultexcludes($useDefaultExcludes): void
     {
         if ($this->isReference()) {
             throw $this->tooManyAttributes();
@@ -410,7 +409,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      *
      * @return FileSet
      */
-    public function getRef(Project $p)
+    public function getRef(Project $p): \FileSet
     {
         $dataTypeName = StringHelper::substring(__CLASS__, strrpos(__CLASS__, '\\') + 1);
         return $this->getCheckedRef(__CLASS__, $dataTypeName);
@@ -423,7 +422,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      *
      * @return boolean Whether any selectors are in this container
      */
-    public function hasSelectors()
+    public function hasSelectors(): bool
     {
         if ($this->isReference() && $this->getProject() !== null) {
             return $this->getRef($this->getProject())->hasSelectors();
@@ -437,7 +436,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      *
      * @return boolean Whether any patterns are in this container.
      */
-    public function hasPatterns()
+    public function hasPatterns(): bool
     {
         if ($this->isReference() && $this->getProject() !== null) {
             return $this->getRef($this->getProject())->hasPatterns();
@@ -463,7 +462,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      * @throws Exception
      * @return int The number of selectors in this container
      */
-    public function selectorCount()
+    public function selectorCount(): int
     {
         if ($this->isReference() && $this->getProject() !== null) {
             try {
@@ -483,7 +482,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      * @throws BuildException
      * @return array of selectors in this container
      */
-    public function getSelectors(Project $p)
+    public function getSelectors(Project $p): array
     {
         if ($this->isReference()) {
             return $this->getRef($p)->getSelectors($p);
@@ -503,7 +502,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      *
      * @return array The array of selectors
      */
-    public function selectorElements()
+    public function selectorElements(): array
     {
         if ($this->isReference() && $this->getProject() !== null) {
             return $this->getRef($this->getProject())->selectorElements();
@@ -516,12 +515,8 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
      * Add a new selector into this container.
      *
      * @param FileSelector $selector new selector to add
-     *
-     * @throws BuildException
-     *
-     * @return void
      */
-    public function appendSelector(FileSelector $selector)
+    public function appendSelector(FileSelector $selector): void
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -531,5 +526,5 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
         $this->setChecked(false);
     }
 
-    abstract public function getIterator();
+    abstract public function getIterator(): iterable;
 }

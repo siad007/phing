@@ -162,7 +162,7 @@ class ZendCodeAnalyzerTask extends Task
      * @throws BuildException
      * @return void
      */
-    protected function analyze($file)
+    protected function analyze($file): void
     {
         if (file_exists($file)) {
             if (is_readable($file)) {

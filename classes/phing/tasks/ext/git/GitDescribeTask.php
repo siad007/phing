@@ -148,7 +148,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getAll()
+    public function getAll(): bool
     {
         return $this->all;
     }
@@ -156,7 +156,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isAll()
+    public function isAll(): bool
     {
         return $this->getAll();
     }
@@ -172,7 +172,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getTags()
+    public function getTags(): bool
     {
         return $this->tags;
     }
@@ -180,7 +180,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isTags()
+    public function isTags(): bool
     {
         return $this->getTags();
     }
@@ -196,7 +196,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getContains()
+    public function getContains(): bool
     {
         return $this->contains;
     }
@@ -204,7 +204,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isContains()
+    public function isContains(): bool
     {
         return $this->getContains();
     }
@@ -220,7 +220,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return int
      */
-    public function getAbbrev()
+    public function getAbbrev(): ?int
     {
         return $this->abbrev;
     }
@@ -236,7 +236,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return int
      */
-    public function getCandidates()
+    public function getCandidates(): ?int
     {
         return $this->candidates;
     }
@@ -252,7 +252,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getLong()
+    public function getLong(): bool
     {
         return $this->long;
     }
@@ -260,7 +260,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isLong()
+    public function isLong(): bool
     {
         return $this->getLong();
     }
@@ -276,7 +276,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getMatch()
+    public function getMatch(): ?string
     {
         return $this->match;
     }
@@ -292,7 +292,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getAlways()
+    public function getAlways(): bool
     {
         return $this->always;
     }
@@ -300,7 +300,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isAlways()
+    public function isAlways(): bool
     {
         return $this->getAlways();
     }
@@ -316,7 +316,7 @@ class GitDescribeTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getCommittish()
+    public function getCommittish(): ?string
     {
         return $this->committish;
     }

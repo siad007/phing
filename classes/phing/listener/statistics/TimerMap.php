@@ -44,12 +44,12 @@ class TimerMap
         return $timer;
     }
 
-    protected function createTimer($name, Clock $clock)
+    protected function createTimer($name, Clock $clock): \SeriesTimer
     {
         return new SeriesTimer($name, $clock);
     }
 
-    public function toSeriesMap()
+    public function toSeriesMap(): \SeriesMap
     {
         $seriesMap = new SeriesMap();
         foreach ($this->map as $key => $timer) {

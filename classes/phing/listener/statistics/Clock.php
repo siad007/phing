@@ -26,5 +26,5 @@ interface Clock
     /**
      * @return int
      */
-    public function getCurrentTime();
+    public function getCurrentTime(): int;
 }

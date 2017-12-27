@@ -31,7 +31,7 @@ class TarFileSet extends FileSet
      * @return array a list of file and directory names, relative to
      *               the baseDir for the project.
      */
-    public function getFiles(Project $p, $includeEmpty = true)
+    public function getFiles(Project $p, $includeEmpty = true): array
     {
         if ($this->files === null) {
             $ds = $this->getDirectoryScanner($p);
@@ -90,7 +90,7 @@ class TarFileSet extends FileSet
     /**
      * @return int
      */
-    public function getMode()
+    public function getMode(): int
     {
         return $this->mode;
     }
@@ -109,7 +109,7 @@ class TarFileSet extends FileSet
     /**
      * @return string
      */
-    public function getUserName()
+    public function getUserName(): string
     {
         return $this->userName;
     }
@@ -128,7 +128,7 @@ class TarFileSet extends FileSet
     /**
      * @return string
      */
-    public function getGroup()
+    public function getGroup(): string
     {
         return $this->groupName;
     }
@@ -147,7 +147,7 @@ class TarFileSet extends FileSet
     /**
      * @return string
      */
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return $this->prefix;
     }
@@ -167,7 +167,7 @@ class TarFileSet extends FileSet
     /**
      * @return string
      */
-    public function getFullpath()
+    public function getFullpath(): string
     {
         return $this->fullpath;
     }
@@ -181,7 +181,7 @@ class TarFileSet extends FileSet
      *
      * @return void
      */
-    public function setPreserveLeadingSlashes($b)
+    public function setPreserveLeadingSlashes($b): void
     {
         $this->preserveLeadingSlashes = (boolean)$b;
     }
@@ -189,7 +189,7 @@ class TarFileSet extends FileSet
     /**
      * @return bool
      */
-    public function getPreserveLeadingSlashes()
+    public function getPreserveLeadingSlashes(): bool
     {
         return $this->preserveLeadingSlashes;
     }

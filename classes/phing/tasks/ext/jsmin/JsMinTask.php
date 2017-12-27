@@ -89,14 +89,6 @@ class JsMinTask extends Task
     }
 
     /**
-     * The init method: Do init steps.
-     */
-    public function init()
-    {
-        return true;
-    }
-
-    /**
      * The main entry point method.
      */
     public function main()
@@ -130,7 +122,7 @@ class JsMinTask extends Task
 
     /**
      * @param FileSet $fs
-     * @throws BuildException
+     * @throws Exception
      */
     protected function processFileSet(FileSet $fs)
     {

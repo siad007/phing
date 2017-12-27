@@ -85,7 +85,7 @@ class Commandline
      *                                            beginning of the list of args, otherwise it is appended.
      * @return CommandlineArgument
      */
-    public function createArgument($insertAtStart = false)
+    public function createArgument($insertAtStart = false): \CommandlineArgument
     {
         $argument = new CommandlineArgument($this);
         if ($insertAtStart) {
@@ -101,7 +101,7 @@ class Commandline
      * Sets the executable to run.
      * @param $executable
      */
-    public function setExecutable($executable)
+    public function setExecutable($executable): void
     {
         if (!$executable) {
             return;
@@ -114,7 +114,7 @@ class Commandline
     /**
      * @return string
      */
-    public function getExecutable()
+    public function getExecutable(): ?string
     {
         return $this->executable;
     }
@@ -122,7 +122,7 @@ class Commandline
     /**
      * @param array $arguments
      */
-    public function addArguments(array $arguments)
+    public function addArguments(array $arguments): void
     {
         foreach ($arguments as $arg) {
             $this->createArgument()->setValue($arg);
@@ -133,7 +133,7 @@ class Commandline
      * Returns the executable and all defined arguments.
      * @return array
      */
-    public function getCommandline()
+    public function getCommandline(): array
     {
         $args = $this->getArguments();
         if ($this->executable === null) {
@@ -147,7 +147,7 @@ class Commandline
      * Returns all arguments defined by <code>addLine</code>,
      * <code>addValue</code> or the argument object.
      */
-    public function getArguments()
+    public function getArguments(): array
     {
         $result = [];
         foreach ($this->arguments as $arg) {
@@ -184,7 +184,7 @@ class Commandline
      * @throws BuildException
      * @return string
      */
-    public static function quoteArgument($argument, $escape = false)
+    public static function quoteArgument($argument, $escape = false): ?string
     {
         if ($escape) {
             return escapeshellarg($argument);
@@ -210,7 +210,7 @@ class Commandline
      * @throws BuildException
      * @return string
      */
-    public static function toString($lines, $escape = false)
+    public static function toString($lines, $escape = false): string
     {
         // empty path return empty string
         if (!$lines) {
@@ -235,7 +235,7 @@ class Commandline
      * @throws BuildException
      * @return array
      */
-    public static function translateCommandline($to_process)
+    public static function translateCommandline($to_process): array
     {
         if (!$to_process) {
             return [];
@@ -278,7 +278,7 @@ class Commandline
                     } elseif ("\"" == $nextTok) {
                         $state = $inDoubleQuote;
                     } elseif (" " == $nextTok) {
-                        if ($lastTokenHasBeenQuoted || strlen($current) != 0) {
+                        if ($lastTokenHasBeenQuoted || '' !== $current) {
                             $args[] = $current;
                             $current = "";
                         }
@@ -304,7 +304,7 @@ class Commandline
     /**
      * @return int Number of components in current commandline.
      */
-    public function size()
+    public function size(): int
     {
         return count($this->getCommandline());
     }
@@ -329,7 +329,7 @@ class Commandline
      * parameters have been set.</p>
      * @return CommandlineMarker
      */
-    public function createMarker()
+    public function createMarker(): \CommandlineMarker
     {
         return new CommandlineMarker($this, count($this->arguments));
     }
@@ -344,7 +344,7 @@ class Commandline
      * @param  array  $args CommandlineArgument[] to use
      * @return string
      */
-    public function describeCommand($args = null)
+    public function describeCommand($args = null): string
     {
         if ($args === null) {
             $args = $this->getCommandline();
@@ -375,7 +375,7 @@ class Commandline
      * @param int $offset ignore entries before this index
      * @return string
      */
-    protected function describeArguments(array $args = null, $offset = 0)
+    protected function describeArguments(array $args = null, $offset = 0): string
     {
         if ($args === null) {
             $args = $this->getArguments();

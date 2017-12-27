@@ -47,7 +47,7 @@ class HttpCondition extends ProjectComponent implements Condition
      *
      * @return void
      */
-    public function setUrl($url)
+    public function setUrl($url): void
     {
         $this->url = $url;
     }
@@ -59,7 +59,7 @@ class HttpCondition extends ProjectComponent implements Condition
      *
      * @return void
      */
-    public function setErrorsBeginAt($errorsBeginAt)
+    public function setErrorsBeginAt($errorsBeginAt): void
     {
         $this->errorsBeginAt = $errorsBeginAt;
     }
@@ -102,7 +102,7 @@ class HttpCondition extends ProjectComponent implements Condition
      *
      * @throws BuildException if an error occurs
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->url === null) {
             throw new BuildException("No url specified in http condition");

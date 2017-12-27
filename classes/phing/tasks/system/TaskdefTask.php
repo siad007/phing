@@ -96,7 +96,7 @@ class TaskdefTask extends Task
      *
      * @return Path
      */
-    public function createClasspath()
+    public function createClasspath(): \Path
     {
         if ($this->classpath === null) {
             $this->classpath = new Path($this->project);

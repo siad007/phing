@@ -61,7 +61,7 @@ class TouchTask extends Task
      * @param PhingFile $file
      * @return void
      */
-    public function setFile(PhingFile $file)
+    public function setFile(PhingFile $file): void
     {
         $this->file = $file;
     }
@@ -73,7 +73,7 @@ class TouchTask extends Task
      * @param $millis
      * @return void
      */
-    public function setMillis($millis)
+    public function setMillis($millis): void
     {
         $this->millis = (int) $millis;
     }
@@ -85,7 +85,7 @@ class TouchTask extends Task
      * @param $dateTime
      * @return void
      */
-    public function setDatetime($dateTime)
+    public function setDatetime($dateTime): void
     {
         $this->dateTime = (string) $dateTime;
     }

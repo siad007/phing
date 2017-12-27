@@ -45,7 +45,7 @@ class Diagnostics
      * @return array the list of jar files existing in ant.home/lib or
      *               <tt>null</tt> if an error occurs.
      */
-    public static function listLibraries($type)
+    public static function listLibraries($type): array
     {
         $home = Phing::getProperty(Phing::PHING_HOME);
         if ($home == null) {
@@ -63,8 +63,10 @@ class Diagnostics
      * Print a report to the given stream.
      *
      * @param PrintStream $out the stream to print the report to.
+     * @throws ConfigurationException
+     * @throws IOException
      */
-    public static function doReport(PrintStream $out)
+    public static function doReport(PrintStream $out): void
     {
         $out->println(str_pad('Phing diagnostics report', 79, "-", STR_PAD_BOTH));
         self::header($out, "Version");
@@ -89,7 +91,7 @@ class Diagnostics
         self::doReportTempDir($out);
     }
 
-    private static function header(PrintStream $out, $section)
+    private static function header(PrintStream $out, $section): void
     {
         $out->println(str_repeat('-', 79));
         $out->prints(" ");
@@ -102,7 +104,7 @@ class Diagnostics
      *
      * @param PrintStream $out the stream to print the properties to.
      */
-    private static function doReportSystemProperties(PrintStream $out)
+    private static function doReportSystemProperties(PrintStream $out): void
     {
         $phing = new Phing();
 
@@ -118,7 +120,7 @@ class Diagnostics
      *
      * @param PrintStream $out the stream to print the properties to.
      */
-    private static function doReportProjectProperties(PrintStream $out)
+    private static function doReportProjectProperties(PrintStream $out): void
     {
         $project = new Project();
         $project->init();
@@ -135,7 +137,7 @@ class Diagnostics
      *
      * @param PrintStream $out the stream to print the content to
      */
-    private static function doReportPhingVendorLibraries(PrintStream $out)
+    private static function doReportPhingVendorLibraries(PrintStream $out): void
     {
         $libs = self::listLibraries('installed');
         self::printLibraries($libs, $out);
@@ -146,7 +148,7 @@ class Diagnostics
      *
      * @param PrintStream $out the stream to print the content to
      */
-    private static function doReportComposerSystemLibraries(PrintStream $out)
+    private static function doReportComposerSystemLibraries(PrintStream $out): void
     {
         $libs = self::listLibraries('platform');
         self::printLibraries($libs, $out);
@@ -158,7 +160,7 @@ class Diagnostics
      * @param array $libs array of libraries (can be null)
      * @param PrintStream $out output stream
      */
-    private static function printLibraries($libs, PrintStream $out)
+    private static function printLibraries($libs, PrintStream $out): void
     {
         if ($libs == null) {
             $out->println("No such directory.");
@@ -176,7 +178,7 @@ class Diagnostics
      * @param PrintStream $out the stream to print the tasks report to
      *                         <tt>null</tt> for a missing stream (ie mapping).
      */
-    private static function doReportTasksAvailability(PrintStream $out)
+    private static function doReportTasksAvailability(PrintStream $out): void
     {
         $project = new Project();
         $project->init();
@@ -193,8 +195,9 @@ class Diagnostics
      * We also do some clock reporting.
      *
      * @param PrintStream $out
+     * @throws IOException
      */
-    private static function doReportTempDir(PrintStream $out)
+    private static function doReportTempDir(PrintStream $out): void
     {
         $tempdir = PhingFile::getTempDir();
         if ($tempdir == null) {

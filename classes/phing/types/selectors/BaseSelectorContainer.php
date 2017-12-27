@@ -38,7 +38,7 @@ abstract class BaseSelectorContainer extends BaseSelector implements SelectorCon
      *
      * @return string comma separated list of Selectors contained in this one
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "";
         $arr = $this->selectorElements();

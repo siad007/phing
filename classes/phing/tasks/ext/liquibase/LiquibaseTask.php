@@ -48,7 +48,7 @@ class LiquibaseTask extends AbstractLiquibaseTask
         $this->command = (string) $command;
     }
 
-    protected function checkParams()
+    protected function checkParams(): void
     {
         parent::checkParams();
 

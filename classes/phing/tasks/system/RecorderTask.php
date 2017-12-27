@@ -73,7 +73,7 @@ class RecorderTask extends Task implements SubBuildListener
     /**
      * Overridden so we can add the task as build listener.
      */
-    public function init()
+    public function init(): void
     {
         $this->getProject()->addBuildListener($this);
     }
@@ -143,7 +143,7 @@ class RecorderTask extends Task implements SubBuildListener
         // get the recorder entry
         $recorder = $this->getRecorder($this->filename, $this->getProject());
         // set the values on the recorder
-        if ($this->loglevel === -1) {
+        if ($this->loglevel == -1) {
             $recorder->setMessageOutputLevel($this->loglevel);
         } elseif (isset($this->logLevelChoices[$this->loglevel])) {
             $recorder->setMessageOutputLevel($this->logLevelChoices[$this->loglevel]);
@@ -171,10 +171,10 @@ class RecorderTask extends Task implements SubBuildListener
      * @return RecorderEntry a recorder
      * @throws BuildException on error
      */
-    protected function getRecorder($name, Project $proj)
+    protected function getRecorder($name, Project $proj): \RecorderEntry
     {
         // create a recorder entry
-            $entry = isset(self::$recorderEntries[$name]) ? self::$recorderEntries[$name] : new RecorderEntry($name);
+            $entry = self::$recorderEntries[$name] ?? new RecorderEntry($name);
 
         if ($this->append == null) {
             $entry->openFile(false);
@@ -207,7 +207,7 @@ class RecorderTask extends Task implements SubBuildListener
      * Empty implementation required by SubBuildListener interface.
      * @param BuildEvent $event ignored.
      */
-    public function targetStarted(BuildEvent $event)
+    public function targetStarted(BuildEvent $event): void
     {
     }
 
@@ -239,7 +239,7 @@ class RecorderTask extends Task implements SubBuildListener
      * Empty implementation required by SubBuildListener interface.
      * @param BuildEvent $event ignored.
      */
-    public function messageLogged(BuildEvent $event)
+    public function messageLogged(BuildEvent $event): void
     {
     }
 
@@ -247,7 +247,7 @@ class RecorderTask extends Task implements SubBuildListener
      * Cleans recorder registry.
      * @param BuildEvent $event ignored.
      */
-    public function buildFinished(BuildEvent $event)
+    public function buildFinished(BuildEvent $event): void
     {
         $this->cleanup();
     }

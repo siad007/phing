@@ -64,7 +64,7 @@ class GitInitTask extends GitBaseTask
      *
      * @return string
      */
-    public function isBare()
+    public function isBare(): string
     {
         return $this->getBare();
     }
@@ -72,7 +72,7 @@ class GitInitTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getBare()
+    public function getBare(): string
     {
         return $this->isBare;
     }

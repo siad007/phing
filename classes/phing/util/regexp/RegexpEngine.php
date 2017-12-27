@@ -35,31 +35,31 @@ interface RegexpEngine
      * @param  boolean $bit
      * @return void
      */
-    public function setIgnoreCase($bit);
+    public function setIgnoreCase($bit): void;
 
     /**
      * Returns status of ignore case flag.
      * @return boolean
      */
-    public function getIgnoreCase();
+    public function getIgnoreCase(): ?bool;
 
     /**
      * Sets whether regexp should be applied in multiline mode.
      * @param boolean $bit
      */
-    public function setMultiline($bit);
+    public function setMultiline(bool $bit): void;
 
     /**
      * Gets whether regexp is to be applied in multiline mode.
      * @return boolean
      */
-    public function getMultiline();
+    public function getMultiline(): ?bool;
 
     /**
      * Sets the maximum possible replacements for each pattern.
      * @param int $limit
      */
-    public function setLimit($limit);
+    public function setLimit(int $limit);
 
     /**
      * Returns the maximum possible replacements for each pattern.
@@ -74,7 +74,7 @@ interface RegexpEngine
      * @param  array   $matches The array in which to store matches.
      * @return boolean Success of matching operation.
      */
-    public function match($pattern, $source, &$matches);
+    public function match($pattern, $source, &$matches): bool;
 
     /**
      * Matches all patterns in source string and sets the matches array.
@@ -83,7 +83,7 @@ interface RegexpEngine
      * @param  array   $matches The array in which to store matches.
      * @return boolean Success of matching operation.
      */
-    public function matchAll($pattern, $source, &$matches);
+    public function matchAll($pattern, $source, &$matches): bool;
 
     /**
      * Replaces $pattern with $replace in $source string.
@@ -92,5 +92,5 @@ interface RegexpEngine
      * @param  string $source  The source string.
      * @return string The replaced source string.
      */
-    public function replace($pattern, $replace, $source);
+    public function replace($pattern, $replace, $source): string;
 }

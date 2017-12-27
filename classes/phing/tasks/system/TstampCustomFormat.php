@@ -15,7 +15,7 @@ class TstampCustomFormat
      *
      * @param string $propertyName the name of the property.
      */
-    public function setProperty($propertyName)
+    public function setProperty($propertyName): void
     {
         $this->propertyName = $propertyName;
     }
@@ -26,7 +26,7 @@ class TstampCustomFormat
      *
      * @param pattern
      */
-    public function setPattern($pattern)
+    public function setPattern($pattern): void
     {
         $this->pattern = $pattern;
     }
@@ -36,7 +36,7 @@ class TstampCustomFormat
      *
      * @param string $locale
      */
-    public function setLocale($locale)
+    public function setLocale($locale): void
     {
         $this->locale = $locale;
     }
@@ -44,7 +44,7 @@ class TstampCustomFormat
     /**
      * @param string $timezone
      */
-    public function setTimezone($timezone)
+    public function setTimezone($timezone): void
     {
         $this->timezone = $timezone;
     }
@@ -55,7 +55,7 @@ class TstampCustomFormat
      * @param TstampTask $tstamp reference to task
      * @throws BuildException
      */
-    public function execute(TstampTask $tstamp)
+    public function execute(TstampTask $tstamp): void
     {
         if (empty($this->propertyName)) {
             throw new BuildException("property attribute must be provided");

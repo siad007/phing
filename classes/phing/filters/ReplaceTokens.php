@@ -99,7 +99,7 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader
      * @param  array  $matches Array of 1 el containing key to search for.
      * @return string Text with which to replace key or value of key if none is found.
      */
-    private function replaceTokenCallback($matches)
+    private function replaceTokenCallback($matches): string
     {
         $key = $matches[1];
 
@@ -160,7 +160,7 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader
         // read from next filter up the chain
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -189,7 +189,7 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader
      *
      * @return string The character used to denote the beginning of a token.
      */
-    public function getBeginToken()
+    public function getBeginToken(): string
     {
         return $this->_beginToken;
     }
@@ -209,7 +209,7 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader
      *
      * @return string the character used to denote the beginning of a token
      */
-    public function getEndToken()
+    public function getEndToken(): string
     {
         return $this->_endToken;
     }
@@ -264,7 +264,7 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader
      *
      * @return array A map (String->String) of token keys to replacement values.
      */
-    public function getTokens()
+    public function getTokens(): array
     {
         return $this->_tokens;
     }
@@ -290,7 +290,7 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader
      *
      * @return array
      */
-    public function getTokensources()
+    public function getTokensources(): array
     {
         return $this->_tokensources;
     }
@@ -300,16 +300,16 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader
      * Reader for instantiation.
      *
      * @param Reader $reader
+     * @return object A new filter based on this configuration, but filtering
+     *                the specified reader
      * @throws Exception
      * @internal param A $object Reader object providing the underlying stream.
      *               Must not be <code>null</code>.
      *
-     * @return object A new filter based on this configuration, but filtering
-     *                the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new ReplaceTokens($reader);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
         $newFilter->setBeginToken($this->getBeginToken());
         $newFilter->setEndToken($this->getEndToken());

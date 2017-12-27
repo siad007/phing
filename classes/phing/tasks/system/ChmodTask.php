@@ -99,7 +99,7 @@ class ChmodTask extends Task
      * Execute the touch operation.
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         // Check Parameters
         $this->checkParams();
@@ -111,7 +111,7 @@ class ChmodTask extends Task
      * @throws BuildException
      * @return void
      */
-    private function checkParams()
+    private function checkParams(): void
     {
         if ($this->file === null && empty($this->filesets) && empty($this->dirsets)) {
             throw new BuildException(
@@ -133,7 +133,7 @@ class ChmodTask extends Task
      * Does the actual work.
      * @return void
      */
-    private function chmod()
+    private function chmod(): void
     {
         if (strlen($this->mode) === 4) {
             $mode = octdec($this->mode);

@@ -53,7 +53,7 @@ abstract class zsdtBaseTask extends Task
      *
      * @return void
      */
-    public function setDescriptor($descriptor)
+    public function setDescriptor($descriptor): void
     {
         $this->descriptor = escapeshellarg($descriptor);
     }
@@ -65,7 +65,7 @@ abstract class zsdtBaseTask extends Task
      *
      * @return void
      */
-    public function setSchema($schema)
+    public function setSchema($schema): void
     {
         $this->schema = escapeshellarg($schema);
     }
@@ -75,7 +75,7 @@ abstract class zsdtBaseTask extends Task
      *
      * @return void
      */
-    public function setPath($path)
+    public function setPath($path): void
     {
         $this->path['USR'] = $path;
     }

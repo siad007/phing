@@ -52,7 +52,7 @@ class XMLPHPUnitResultFormatter5 extends PHPUnitResultFormatter5
     /**
      * @return string
      */
-    public function getExtension()
+    public function getExtension(): string
     {
         return ".xml";
     }
@@ -60,7 +60,7 @@ class XMLPHPUnitResultFormatter5 extends PHPUnitResultFormatter5
     /**
      * @return string
      */
-    public function getPreferredOutfile()
+    public function getPreferredOutfile(): string
     {
         return "testsuites";
     }

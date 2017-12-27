@@ -33,7 +33,6 @@ interface Condition
 {
     /**
      * @return boolean
-     * @throws BuildException
      */
-    public function evaluate();
+    public function evaluate(): bool;
 }

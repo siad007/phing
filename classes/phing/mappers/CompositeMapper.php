@@ -29,16 +29,16 @@ include_once 'phing/mappers/ContainerMapper.php';
 class CompositeMapper extends ContainerMapper
 {
     /** {@inheritDoc}. */
-    public function main($sourceFileName)
+    public function main($sourceFileName): array
     {
         $results = [];
         foreach ($this->getMappers() as $mapper) {
             $result = $mapper->getImplementation()->main($sourceFileName);
-            if ($result === null) {
+            if (count($result) === 0) {
                 continue;
             }
             $results[] = $result[0];
         }
-        return !empty($results) ? $results : null;
+        return $results;
     }
 }

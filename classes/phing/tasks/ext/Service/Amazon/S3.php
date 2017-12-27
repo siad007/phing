@@ -44,7 +44,7 @@ abstract class Service_Amazon_S3 extends Service_Amazon
      *
      * @throws \BuildException
      */
-    public function getClient()
+    public function getClient(): \Aws\S3\S3Client
     {
         if ($this->_client === null) {
             try {
@@ -82,7 +82,7 @@ abstract class Service_Amazon_S3 extends Service_Amazon
      *
      * @throws BuildException if bucket is not set
      */
-    public function getBucket()
+    public function getBucket(): string
     {
         if (!($bucket = $this->bucket)) {
             throw new BuildException('Bucket is not set');
@@ -100,7 +100,7 @@ abstract class Service_Amazon_S3 extends Service_Amazon
      *
      * @throws \BuildException
      */
-    public function getObjectInstance($object)
+    public function getObjectInstance($object): \Aws\Result
     {
         return $this->getClientInstance()->getObject($object);
     }
@@ -111,7 +111,7 @@ abstract class Service_Amazon_S3 extends Service_Amazon
      * @param  mixed $object
      * @return bool
      */
-    public function isObjectAvailable($object)
+    public function isObjectAvailable($object): bool
     {
         return (bool) $this->getObjectInstance($object)->load(Services_Amazon_S3_Resource_Object::LOAD_METADATA_ONLY);
     }
@@ -121,7 +121,7 @@ abstract class Service_Amazon_S3 extends Service_Amazon
      *
      * @return \Aws\S3\S3Client
      */
-    public function getClientInstance()
+    public function getClientInstance(): \Aws\S3\S3Client
     {
         return $this->getClient();
     }
@@ -133,7 +133,7 @@ abstract class Service_Amazon_S3 extends Service_Amazon
      *
      * @throws \BuildException
      */
-    public function isBucketAvailable()
+    public function isBucketAvailable(): bool
     {
         return $this->getClientInstance()->doesBucketExist($this->getBucket());
     }
@@ -145,7 +145,7 @@ abstract class Service_Amazon_S3 extends Service_Amazon
      *
      * @throws \BuildException
      */
-    public function createBucket()
+    public function createBucket(): bool
     {
         $client = $this->getClientInstance();
         $client->createBucket(['Bucket' => $this->getBucket()]);
@@ -158,7 +158,7 @@ abstract class Service_Amazon_S3 extends Service_Amazon
      *
      * @return void
      */
-    final public function main()
+    final public function main(): void
     {
         $this->execute();
     }

@@ -40,7 +40,7 @@ class HasFreeSpaceCondition implements Condition
      *
      * @return boolean
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         $this->validate();
 
@@ -53,7 +53,7 @@ class HasFreeSpaceCondition implements Condition
      *
      * @throws BuildException
      */
-    private function validate()
+    private function validate(): void
     {
         if (null == $this->partition) {
             throw new BuildException("Please set the partition attribute.");
@@ -70,7 +70,7 @@ class HasFreeSpaceCondition implements Condition
      *
      * @return void
      */
-    public function setPartition($partition)
+    public function setPartition($partition): void
     {
         $this->partition = $partition;
     }
@@ -78,9 +78,10 @@ class HasFreeSpaceCondition implements Condition
     /**
      * Set the amount of free space required.
      *
+     * @param $needed
      * @return void
      */
-    public function setNeeded($needed)
+    public function setNeeded($needed): void
     {
         $this->needed = $needed;
     }
@@ -90,7 +91,7 @@ class HasFreeSpaceCondition implements Condition
      *
      * @return float
      */
-    private function parseHumanSizes($humanSize)
+    private function parseHumanSizes($humanSize): ?float
     {
         if (ctype_alpha($char = $humanSize[strlen($humanSize - 1)])) {
             $value = (float) substr($humanSize, 0, strlen($humanSize - 1));

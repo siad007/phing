@@ -19,6 +19,9 @@
  * <http://phing.info>.
  */
 
+use Composer\Autoload\ClassLoader;
+use phpDocumentor\Bootstrap;
+
 require_once 'phing/Task.php';
 
 /**
@@ -138,13 +141,13 @@ class PhpDocumentor2Task extends Task
         if (!empty($this->pharLocation)) {
             include_once 'phar://' . $this->pharLocation . '/vendor/autoload.php';
 
-            if (!class_exists('phpDocumentor\\Bootstrap')) {
+            if (!class_exists(Bootstrap::class)) {
                 throw new BuildException(
                     $this->pharLocation . ' does not look like a phpDocumentor 2 .phar'
                 );
             }
-        } elseif (class_exists('Composer\\Autoload\\ClassLoader', false)) {
-            if (!class_exists('phpDocumentor\\Bootstrap')) {
+        } elseif (class_exists(ClassLoader::class, false)) {
+            if (!class_exists(Bootstrap::class)) {
                 throw new BuildException('You need to install phpDocumentor 2 or add your include path to your composer installation.');
             }
         } else {
@@ -169,8 +172,10 @@ class PhpDocumentor2Task extends Task
      * and call the phpDocumentor parser
      *
      * @return string
+     * @throws Exception
+     * @throws IOException
      */
-    private function parseFiles()
+    private function parseFiles(): string
     {
         $parser = $this->app['parser'];
         $builder = $this->app['descriptor.builder'];
@@ -241,7 +246,7 @@ class PhpDocumentor2Task extends Task
      *
      * @return null|string
      */
-    private function findPhpDocumentorPath()
+    private function findPhpDocumentorPath(): ?string
     {
         $phpDocumentorPath = null;
         $directories = ['phpDocumentor', 'phpdocumentor'];

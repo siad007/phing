@@ -36,7 +36,7 @@ class WritableSelector implements FileSelector
      *
      * @return bool
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         return $file !== null && $file->canWrite();
     }

@@ -127,7 +127,7 @@ class HtmlColorLogger extends DefaultLogger
      * @param OutputStream $stream
      * @param int          $priority
      */
-    final protected function printMessage($message, OutputStream $stream, $priority)
+    final protected function printMessage($message, OutputStream $stream, $priority): void
     {
         if ($message !== null) {
             if (!$this->colorsSet) {

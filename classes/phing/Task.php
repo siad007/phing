@@ -76,7 +76,7 @@ abstract class Task extends ProjectComponent
      *
      * @return Target The target object that owns this task
      */
-    public function getOwningTarget()
+    public function getOwningTarget(): ?\Target
     {
         return $this->target;
     }
@@ -86,7 +86,7 @@ abstract class Task extends ProjectComponent
      *
      * @return string Name of this task
      */
-    public function getTaskName()
+    public function getTaskName(): string
     {
         if ($this->taskName === null) {
             // if no task name is set, then it's possible
@@ -116,7 +116,7 @@ abstract class Task extends ProjectComponent
      *
      * @return string The type of this task (XML Tag)
      */
-    public function getTaskType()
+    public function getTaskType(): string
     {
         return $this->taskType;
     }
@@ -126,9 +126,9 @@ abstract class Task extends ProjectComponent
      *
      * @param string $name The type of this task (XML Tag)
      */
-    public function setTaskType($name)
+    public function setTaskType(string $name)
     {
-        $this->taskType = (string) $name;
+        $this->taskType = $name;
     }
 
     /**
@@ -136,7 +136,7 @@ abstract class Task extends ProjectComponent
      * @param string $slotName
      * @return \RegisterSlot
      */
-    protected function getRegisterSlot($slotName)
+    protected function getRegisterSlot($slotName): \RegisterSlot
     {
         return Register::getSlot('task.' . $this->getTaskName() . '.' . $slotName);
     }
@@ -150,7 +150,7 @@ abstract class Task extends ProjectComponent
      * @see BuildEvent
      * @see BuildListener
      */
-    public function log($msg, $level = Project::MSG_INFO, Exception $t = null)
+    public function log($msg, $level = Project::MSG_INFO, Exception $t = null): void
     {
         if ($this->getProject() !== null) {
             $this->getProject()->logObject($this, $msg, $level, $t);
@@ -165,9 +165,8 @@ abstract class Task extends ProjectComponent
      *
      * This is abstract here, but may not be overloaded by subclasses.
      *
-     * @throws BuildException
      */
-    public function init()
+    public function init(): void
     {
     }
 
@@ -188,7 +187,7 @@ abstract class Task extends ProjectComponent
      *
      * @return RuntimeConfigurable The wrapper object used by this task
      */
-    public function getRuntimeConfigurableWrapper()
+    public function getRuntimeConfigurableWrapper(): \RuntimeConfigurable
     {
         if ($this->wrapper === null) {
             $this->wrapper = new RuntimeConfigurable($this, $this->getTaskName());

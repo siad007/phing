@@ -88,7 +88,7 @@ class IniFileTask extends Task
      *
      * @return bool
      */
-    public function checkReadFile($readFile)
+    public function checkReadFile($readFile): bool
     {
         if (null === $readFile) {
             return false;
@@ -121,7 +121,7 @@ class IniFileTask extends Task
      *
      * @return bool
      */
-    public function checkWriteFile($writeFile)
+    public function checkWriteFile($writeFile): bool
     {
         if (file_exists($writeFile) && !is_writable($writeFile)) {
             $msg = "$writeFile is not writable";
@@ -139,7 +139,7 @@ class IniFileTask extends Task
      *
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $this->ini = new IniFileConfig();
         $readFile = null;
@@ -197,7 +197,7 @@ class IniFileTask extends Task
      *
      * @return void
      */
-    public function enumerateSets()
+    public function enumerateSets(): void
     {
         foreach ($this->sets as $set) {
             $value = $set->getValue();
@@ -268,7 +268,7 @@ class IniFileTask extends Task
      *
      * @return void
      */
-    public function enumerateRemoves()
+    public function enumerateRemoves(): void
     {
         foreach ($this->removals as $remove) {
             $key = $remove->getProperty();
@@ -298,7 +298,7 @@ class IniFileTask extends Task
      *
      * @return void
      */
-    public function setSource($source)
+    public function setSource($source): void
     {
         $this->source = $source;
     }
@@ -310,7 +310,7 @@ class IniFileTask extends Task
      *
      * @return void
      */
-    public function setDest($dest)
+    public function setDest($dest): void
     {
         $this->dest = $dest;
     }
@@ -322,7 +322,7 @@ class IniFileTask extends Task
      *
      * @return void
      */
-    public function setHaltonerror($halt)
+    public function setHaltonerror($halt): void
     {
         $this->haltonerror = StringHelper::booleanValue($halt);
     }
@@ -334,7 +334,7 @@ class IniFileTask extends Task
      *
      * @return void
      */
-    public function setVerbose($verbose)
+    public function setVerbose($verbose): void
     {
         $this->verbose = StringHelper::booleanValue($verbose);
     }
@@ -344,7 +344,7 @@ class IniFileTask extends Task
      *
      * @return IniFileSet
      */
-    public function createSet()
+    public function createSet(): \IniFileSet
     {
         $set = new IniFileSet();
         $this->sets[] = $set;
@@ -356,7 +356,7 @@ class IniFileTask extends Task
      *
      * @return IniFileRemove
      */
-    public function createRemove()
+    public function createRemove(): \IniFileRemove
     {
         $remove = new IniFileRemove();
         $this->removals[] = $remove;
@@ -370,7 +370,7 @@ class IniFileTask extends Task
      *
      * @return bool False if message is only logged at debug level.
      */
-    public function logDebugOrMore($message)
+    public function logDebugOrMore($message): bool
     {
         $this->log($message, Project::MSG_DEBUG);
         if ($this->verbose) {

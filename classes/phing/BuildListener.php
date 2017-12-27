@@ -48,7 +48,7 @@ interface BuildListener
      * @param BuildEvent $event The BuildEvent
      * @see BuildEvent::getException()
      */
-    public function buildFinished(BuildEvent $event);
+    public function buildFinished(BuildEvent $event): void;
 
     /**
      * Fired when a target is started.
@@ -56,7 +56,7 @@ interface BuildListener
      * @param BuildEvent $event The BuildEvent
      * @see BuildEvent::getTarget()
      */
-    public function targetStarted(BuildEvent $event);
+    public function targetStarted(BuildEvent $event): void;
 
     /**
      * Fired when a target has finished.
@@ -88,5 +88,5 @@ interface BuildListener
      * @param BuildEvent $event The BuildEvent
      * @see BuildEvent::getMessage()
      */
-    public function messageLogged(BuildEvent $event);
+    public function messageLogged(BuildEvent $event): void;
 }

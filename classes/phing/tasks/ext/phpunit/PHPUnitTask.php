@@ -75,7 +75,7 @@ class PHPUnitTask extends Task
      * appropriate error if they cannot be found.  This is not done in header
      * because we may want this class to be loaded w/o triggering an error.
      */
-    public function init()
+    public function init(): void
     {
     }
 
@@ -171,7 +171,7 @@ class PHPUnitTask extends Task
     /**
      * @return bool
      */
-    public function getHaltonfailure()
+    public function getHaltonfailure(): bool
     {
         return $this->haltonfailure;
     }
@@ -187,7 +187,7 @@ class PHPUnitTask extends Task
     /**
      * @return bool
      */
-    public function getHaltonincomplete()
+    public function getHaltonincomplete(): bool
     {
         return $this->haltonincomplete;
     }
@@ -203,7 +203,7 @@ class PHPUnitTask extends Task
     /**
      * @return bool
      */
-    public function getHaltonskipped()
+    public function getHaltonskipped(): bool
     {
         return $this->haltonskipped;
     }
@@ -311,7 +311,7 @@ class PHPUnitTask extends Task
      * @throws BuildException
      * @return array
      */
-    protected function handlePHPUnitConfiguration(PhingFile $configuration)
+    protected function handlePHPUnitConfiguration(PhingFile $configuration): array
     {
         if (!$configuration->exists()) {
             throw new BuildException("Unable to find PHPUnit configuration file '" . (string) $configuration . "'");
@@ -324,13 +324,13 @@ class PHPUnitTask extends Task
         }
 
         if (empty($config)) {
-            return;
+            return [];
         }
 
         $phpunit = $config->getPHPUnitConfiguration();
 
         if (empty($phpunit)) {
-            return;
+            return [];
         }
 
         $config->handlePHPConfiguration();
@@ -603,7 +603,7 @@ class PHPUnitTask extends Task
     /**
      * @return LogWriter
      */
-    protected function getDefaultOutput()
+    protected function getDefaultOutput(): \LogWriter
     {
         return new LogWriter($this);
     }
@@ -613,7 +613,7 @@ class PHPUnitTask extends Task
      *
      * @return BatchTest a new instance of a batch test.
      */
-    public function createBatchTest()
+    public function createBatchTest(): \BatchTest
     {
         $batchtest = new BatchTest($this->getProject());
 

@@ -237,7 +237,7 @@ class PropertyTask extends Task
     /**
      * @return bool
      */
-    public function getUserProperty()
+    public function getUserProperty(): bool
     {
         return $this->userProperty;
     }
@@ -253,7 +253,7 @@ class PropertyTask extends Task
     /**
      * @return bool
      */
-    public function getOverride()
+    public function getOverride(): bool
     {
         return $this->override;
     }
@@ -261,7 +261,7 @@ class PropertyTask extends Task
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return (string) $this->value;
     }
@@ -290,7 +290,7 @@ class PropertyTask extends Task
     /**
      * @return bool
      */
-    public function getLogoutput()
+    public function getLogoutput(): bool
     {
         return $this->logOutput;
     }

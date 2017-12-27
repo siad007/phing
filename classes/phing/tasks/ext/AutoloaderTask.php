@@ -35,7 +35,7 @@ class AutoloaderTask extends Task
     /**
      * @return string
      */
-    public function getAutoloaderPath()
+    public function getAutoloaderPath(): string
     {
         return $this->autoloaderPath;
     }

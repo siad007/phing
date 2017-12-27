@@ -42,7 +42,7 @@ class SonarProperty
      *
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -52,7 +52,7 @@ class SonarProperty
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = (string) $name;
     }
@@ -61,7 +61,7 @@ class SonarProperty
      *
      * @return string
      */
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->value;
     }
@@ -71,7 +71,7 @@ class SonarProperty
      * @param string $value
      * @return void
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = (string) $value;
     }

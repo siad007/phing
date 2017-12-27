@@ -54,7 +54,7 @@ abstract class ExtractBaseTask extends MatchingTask
      * @param PhingFile $file zip file to extract
      * @return void
      */
-    public function setFile(PhingFile $file)
+    public function setFile(PhingFile $file): void
     {
         $this->file = $file;
     }
@@ -64,7 +64,7 @@ abstract class ExtractBaseTask extends MatchingTask
      * @param PhingFile $todir
      * @return void
      */
-    public function setToDir(PhingFile $todir)
+    public function setToDir(PhingFile $todir): void
     {
         $this->todir = $todir;
     }
@@ -73,7 +73,7 @@ abstract class ExtractBaseTask extends MatchingTask
      * @param $removepath
      * @return void
      */
-    public function setRemovePath($removepath)
+    public function setRemovePath($removepath): void
     {
         $this->removepath = $removepath;
     }
@@ -83,7 +83,7 @@ abstract class ExtractBaseTask extends MatchingTask
      * @param boolean $forceExtract
      * @return void
      */
-    public function setForceExtract($forceExtract)
+    public function setForceExtract($forceExtract): void
     {
         $this->forceExtract = (bool) $forceExtract;
     }
@@ -151,7 +151,7 @@ abstract class ExtractBaseTask extends MatchingTask
      * @internal param PhingFile $dir
      * @return boolean
      */
-    protected function isDestinationUpToDate(PhingFile $compressedArchiveFile)
+    protected function isDestinationUpToDate(PhingFile $compressedArchiveFile): bool
     {
         if (!$compressedArchiveFile->exists()) {
             throw new BuildException("Could not find file " . $compressedArchiveFile->__toString() . " to extract.");
@@ -197,7 +197,7 @@ abstract class ExtractBaseTask extends MatchingTask
      * @return void
      * @throws BuildException
      */
-    protected function validateAttributes()
+    protected function validateAttributes(): void
     {
         if ($this->file === null && count($this->filesets) === 0) {
             throw new BuildException("Specify at least one source compressed archive - a file or a fileset.");

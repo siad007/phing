@@ -24,7 +24,7 @@ trait DirSetAware
     /** @var DirSet[] $dirsets */
     protected $dirsets = [];
 
-    public function addDirSet(DirSet $dirSet)
+    public function addDirSet(DirSet $dirSet): void
     {
         $this->dirsets[] = $dirSet;
     }
@@ -32,7 +32,7 @@ trait DirSetAware
     /**
      * @return DirSet[]
      */
-    public function getDirSets()
+    public function getDirSets(): array
     {
         return $this->dirsets;
     }

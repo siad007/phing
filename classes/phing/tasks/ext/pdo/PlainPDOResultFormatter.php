@@ -89,7 +89,7 @@ class PlainPDOResultFormatter extends PDOResultFormatter
      *
      * @param array $row Row of PDO result set.
      */
-    public function processRow($row)
+    public function processRow($row): void
     {
         if (!$this->colsprinted && $this->showheaders) {
             $first = true;
@@ -130,7 +130,7 @@ class PlainPDOResultFormatter extends PDOResultFormatter
     /**
      * @return PhingFile
      */
-    public function getPreferredOutfile()
+    public function getPreferredOutfile(): \PhingFile
     {
         return new PhingFile('results.txt');
     }

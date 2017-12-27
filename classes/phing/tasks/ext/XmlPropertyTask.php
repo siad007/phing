@@ -62,7 +62,7 @@ class XmlPropertyTask extends PropertyTask
      * @return void
      * @since 2.0
      */
-    public function setPrefix($prefix)
+    public function setPrefix($prefix): void
     {
         $this->prefix = $prefix;
         if (!StringHelper::endsWith(".", $prefix)) {
@@ -74,7 +74,7 @@ class XmlPropertyTask extends PropertyTask
      * @return string
      * @since 2.0
      */
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return $this->prefix;
     }
@@ -92,7 +92,7 @@ class XmlPropertyTask extends PropertyTask
     /**
      * @return bool
      */
-    public function getKeepRoot()
+    public function getKeepRoot(): bool
     {
         return $this->_keepRoot;
     }
@@ -110,7 +110,7 @@ class XmlPropertyTask extends PropertyTask
     /**
      * @return bool
      */
-    public function getCollapseAttributes()
+    public function getCollapseAttributes(): bool
     {
         return $this->_collapseAttr;
     }
@@ -128,7 +128,7 @@ class XmlPropertyTask extends PropertyTask
     /**
      * @return string
      */
-    public function getDelimiter()
+    public function getDelimiter(): string
     {
         return $this->_delimiter;
     }
@@ -146,7 +146,7 @@ class XmlPropertyTask extends PropertyTask
     /**
      * @return string
      */
-    public function getRequired()
+    public function getRequired(): string
     {
         return $this->_required;
     }
@@ -172,7 +172,7 @@ class XmlPropertyTask extends PropertyTask
      * @throws BuildException
      * @return Properties
      */
-    protected function loadFile(PhingFile $file)
+    protected function loadFile(PhingFile $file): ?\Properties
     {
         $props = new Properties();
         $this->log("Loading " . $file->getAbsolutePath(), Project::MSG_INFO);
@@ -202,7 +202,7 @@ class XmlPropertyTask extends PropertyTask
      * @throws IOException
      * @return Properties
      */
-    protected function _getProperties($filePath)
+    protected function _getProperties($filePath): \Properties
     {
 
         // load() already made sure that file is readable
@@ -256,7 +256,7 @@ class XmlPropertyTask extends PropertyTask
      *
      * @return void
      */
-    protected function _addNode($node, $path, $prop)
+    protected function _addNode($node, $path, $prop): void
     {
         foreach ($node as $tag => $value) {
             $prefix = implode('.', $path);

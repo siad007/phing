@@ -68,8 +68,9 @@ class ImportTask extends Task
     /**
      * Initialize task.
      * @return void
+     * @throws IOException
      */
-    public function init()
+    public function init(): void
     {
         $this->fs = FileSystem::getFileSystem();
     } //end init
@@ -79,7 +80,7 @@ class ImportTask extends Task
      * @param  string $f Path to file
      * @return void
      */
-    public function setFile($f)
+    public function setFile($f): void
     {
         $this->file = $f;
     }
@@ -89,7 +90,7 @@ class ImportTask extends Task
      * This is for when you don't care what order files get appended.
      * @return FileSet
      */
-    public function createFileSet()
+    public function createFileSet(): \FileSet
     {
         $num = array_push($this->filesets, new FileSet());
         return $this->filesets[$num-1];
@@ -101,7 +102,7 @@ class ImportTask extends Task
      *                   exist
      * @return void
      */
-    public function setOptional($opt)
+    public function setOptional($opt): void
     {
         $this->optional = $opt;
     }
@@ -113,7 +114,7 @@ class ImportTask extends Task
      * @throws BuildException
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         if ($this->file === null && count($this->filesets) === 0) {
             throw new BuildException(
@@ -173,10 +174,10 @@ class ImportTask extends Task
      * Parse a Phing build file and copy the properties, tasks, data types and
      * targets it defines into the current project.
      *
-     * @throws BuildException
+     * @param PhingFile $file
      * @return void
      */
-    protected function importFile(PhingFile $file)
+    protected function importFile(PhingFile $file): void
     {
         $ctx = $this->project->getReference(ProjectConfigurator::PARSING_CONTEXT_REFERENCE);
         $cfg = $ctx->getConfigurator();

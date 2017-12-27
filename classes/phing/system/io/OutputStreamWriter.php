@@ -51,8 +51,9 @@ class OutputStreamWriter extends Writer
     /**
      * Close the stream.
      * @return void
+     * @throws IOException
      */
-    public function close()
+    public function close(): void
     {
         $this->outStream->close();
     }
@@ -65,16 +66,18 @@ class OutputStreamWriter extends Writer
      * @param  int $len
      *
      * @return void
+     * @throws IOException
      */
-    public function write($buf, $off = null, $len = null)
+    public function write($buf, $off = null, $len = null): void
     {
-        return $this->outStream->write($buf, $off, $len);
+        $this->outStream->write($buf, $off, $len);
     }
 
     /**
      * Flush output to the stream.
+     * @throws IOException
      */
-    public function flush()
+    public function flush(): void
     {
         $this->outStream->flush();
     }
@@ -84,7 +87,7 @@ class OutputStreamWriter extends Writer
      *
      * @return string String representation of output stream
      */
-    public function getResource()
+    public function getResource(): string
     {
         return $this->outStream->__toString();
     }

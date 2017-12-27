@@ -102,7 +102,7 @@ class VersionTask extends Task
      * @param $property
      * @return void
      */
-    public function setProperty($property)
+    public function setProperty($property): void
     {
         $this->property = $property;
     }
@@ -121,7 +121,7 @@ class VersionTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         // check supplied attributes
         $this->checkStartingVersion();
@@ -175,7 +175,7 @@ class VersionTask extends Task
      * @return Properties the loaded properties
      * @throws BuildException
      */
-    private function loadProperties()
+    private function loadProperties(): \Properties
     {
         try {
             $properties = new Properties();
@@ -192,7 +192,7 @@ class VersionTask extends Task
      * @param  string $filecontent
      * @return string
      */
-    private function getVersion($filecontent)
+    private function getVersion($filecontent): string
     {
         // init
         $newVersion = '';
@@ -202,7 +202,7 @@ class VersionTask extends Task
         }
 
         // Extract version
-        list($major, $minor, $bugfix) = explode(".", $filecontent);
+        [$major, $minor, $bugfix] = explode(".", $filecontent);
 
         // Return new version number
         switch ($this->releasetype) {
@@ -242,7 +242,7 @@ class VersionTask extends Task
      * @return void
      * @throws BuildException
      */
-    private function checkReleasetype()
+    private function checkReleasetype(): void
     {
         // check Releasetype
         if (null === $this->releasetype) {
@@ -268,7 +268,7 @@ class VersionTask extends Task
      * @return void
      * @throws BuildException
      */
-    private function checkFile()
+    private function checkFile(): void
     {
         $fileUtils = new FileUtils();
         // check File

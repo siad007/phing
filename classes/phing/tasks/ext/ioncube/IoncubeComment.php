@@ -34,7 +34,7 @@ class IoncubeComment
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -42,7 +42,7 @@ class IoncubeComment
     /**
      * @param $txt
      */
-    public function addText($txt)
+    public function addText($txt): void
     {
         $this->value = trim($txt);
     }

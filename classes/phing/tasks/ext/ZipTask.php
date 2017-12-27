@@ -70,7 +70,7 @@ class ZipTask extends MatchingTask
      *
      * @return ZipFileSet
      */
-    public function createFileSet()
+    public function createFileSet(): \ZipFileSet
     {
         $this->fileset = new ZipFileSet();
         $this->filesets[] = $this->fileset;
@@ -112,7 +112,7 @@ class ZipTask extends MatchingTask
      *
      * @return void
      */
-    public function setPrefix($prefix)
+    public function setPrefix($prefix): void
     {
         $this->prefix = $prefix;
     }
@@ -122,7 +122,7 @@ class ZipTask extends MatchingTask
      * @param  boolean  Flag if empty dirs should be tarred too
      * @return void
      */
-    public function setIncludeEmptyDirs($bool)
+    public function setIncludeEmptyDirs($bool): void
     {
         $this->includeEmpty = (boolean) $bool;
     }
@@ -132,7 +132,7 @@ class ZipTask extends MatchingTask
      * @param  boolean $bool Flag if symlinks should be ignored
      * @return void
      */
-    public function setIgnoreLinks($bool)
+    public function setIgnoreLinks($bool): void
     {
         $this->ignoreLinks = (boolean) $bool;
     }
@@ -144,7 +144,7 @@ class ZipTask extends MatchingTask
      *
      * @return void
      */
-    public function setComment($text)
+    public function setComment($text): void
     {
         $this->comment = $text;
     }
@@ -229,7 +229,7 @@ class ZipTask extends MatchingTask
      * @param  PhingFile $dir
      * @return boolean
      */
-    private function archiveIsUpToDate($files, $dir)
+    private function archiveIsUpToDate($files, $dir): bool
     {
         $sfs = new SourceFileScanner($this);
         $mm = new MergeMapper();
@@ -239,10 +239,9 @@ class ZipTask extends MatchingTask
     }
 
     /**
-     * @return array
-     * @throws BuildException
+     * @return bool
      */
-    public function areFilesetsUpToDate()
+    public function areFilesetsUpToDate(): bool
     {
         /** @var FileSet $fs */
         foreach ($this->filesets as $fs) {

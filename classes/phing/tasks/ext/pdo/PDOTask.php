@@ -63,8 +63,9 @@ abstract class PDOTask extends Task
      * This method checks if the PDO classes are available and triggers
      * appropriate error if they cannot be found.  This is not done in header
      * because we may want this class to be loaded w/o triggering an error.
+     * @throws Exception
      */
-    public function init()
+    public function init(): void
     {
         if (!class_exists('PDO')) {
             throw new Exception("PDOTask depends on PDO feature being included in PHP.");
@@ -134,7 +135,7 @@ abstract class PDOTask extends Task
      * @return PDO     the newly created connection.
      * @throws BuildException if the UserId/Password/Url is not set or there is no suitable driver or the driver fails to load.
      */
-    protected function getConnection()
+    protected function getConnection(): ?\PDO
     {
         if ($this->url === null) {
             throw new BuildException("Url attribute must be set!", $this->getLocation());
@@ -184,7 +185,7 @@ abstract class PDOTask extends Task
      * Gets the autocommit.
      * @return bool
      */
-    public function isAutocommit()
+    public function isAutocommit(): bool
     {
         return $this->autocommit;
     }
@@ -193,7 +194,7 @@ abstract class PDOTask extends Task
      * Gets the url.
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -202,7 +203,7 @@ abstract class PDOTask extends Task
      * Gets the userId.
      * @return string
      */
-    public function getUserId()
+    public function getUserId(): ?string
     {
         return $this->userId;
     }
@@ -220,7 +221,7 @@ abstract class PDOTask extends Task
      * Gets the password.
      * @return string
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }

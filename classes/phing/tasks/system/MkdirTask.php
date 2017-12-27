@@ -87,7 +87,7 @@ class MkdirTask extends Task
      * @param PhingFile $dir
      * @return void
      */
-    public function setDir(PhingFile $dir)
+    public function setDir(PhingFile $dir): void
     {
         $this->dir = $dir;
     }
@@ -97,7 +97,7 @@ class MkdirTask extends Task
      * @param mixed $mode
      * @return void
      */
-    public function setMode($mode)
+    public function setMode($mode): void
     {
         $this->mode = base_convert((int) $mode, 8, 10);
     }

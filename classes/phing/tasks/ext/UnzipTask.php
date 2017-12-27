@@ -36,7 +36,7 @@ class UnzipTask extends ExtractBaseTask
      * @param PhingFile Zip file to extract
      * @return boolean
      */
-    protected function extractArchive(PhingFile $zipfile)
+    protected function extractArchive(PhingFile $zipfile): bool
     {
         $this->log(
             "Extracting zip: " . $zipfile->__toString() . ' to ' . $this->todir->__toString(),
@@ -67,7 +67,7 @@ class UnzipTask extends ExtractBaseTask
      * @param PhingFile Zip file to list content
      * @return array List of files inside $zipfile
      */
-    protected function listArchiveContent(PhingFile $zipfile)
+    protected function listArchiveContent(PhingFile $zipfile): array
     {
         $zip = new ZipArchive();
         $zip->open($zipfile->getAbsolutePath());

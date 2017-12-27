@@ -106,7 +106,7 @@ abstract class Service_Amazon extends Task
      *
      * @throws BuildException if key is not set
      */
-    public function getKey()
+    public function getKey(): string
     {
         if (!($key = $this->key)) {
             throw new BuildException('Key is not set');
@@ -133,7 +133,7 @@ abstract class Service_Amazon extends Task
      *
      * @throws BuildException if secret is not set
      */
-    public function getSecret()
+    public function getSecret(): string
     {
         if (!($secret = $this->secret)) {
             throw new BuildException('Secret is not set');

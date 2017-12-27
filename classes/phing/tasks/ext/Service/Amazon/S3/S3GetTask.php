@@ -108,7 +108,7 @@ class S3GetTask extends Service_Amazon_S3
         return $this->_target;
     }
 
-    public function execute()
+    public function execute(): void
     {
         $target = $this->getTarget();
 

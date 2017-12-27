@@ -48,7 +48,7 @@ class FormatterElement
      * Sets parent task
      * @param Task $parent Calling Task
      */
-    public function setParent($parent)
+    public function setParent($parent): void
     {
         $this->parent = $parent;
     }
@@ -57,7 +57,7 @@ class FormatterElement
      * Loads a specific formatter type
      * @param string $type
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
     }
@@ -66,7 +66,7 @@ class FormatterElement
      * Loads a specific formatter class
      * @param $className
      */
-    public function setClassName($className)
+    public function setClassName($className): void
     {
         $classNameNoDot = Phing::import($className);
 
@@ -77,7 +77,7 @@ class FormatterElement
      * Sets whether to store formatting results in a file
      * @param $useFile
      */
-    public function setUseFile($useFile)
+    public function setUseFile($useFile): void
     {
         $this->useFile = $useFile;
     }
@@ -85,7 +85,7 @@ class FormatterElement
     /**
      * Returns whether to store formatting results in a file
      */
-    public function getUseFile()
+    public function getUseFile(): bool
     {
         return $this->useFile;
     }
@@ -93,8 +93,9 @@ class FormatterElement
     /**
      * Sets output directory
      * @param string $toDir
+     * @throws IOException
      */
-    public function setToDir($toDir)
+    public function setToDir($toDir): void
     {
         if (!is_dir($toDir)) {
             $toDir = new PhingFile($toDir);
@@ -108,7 +109,7 @@ class FormatterElement
      * Returns output directory
      * @return string
      */
-    public function getToDir()
+    public function getToDir(): string
     {
         return $this->toDir;
     }
@@ -117,7 +118,7 @@ class FormatterElement
      * Sets output filename
      * @param string $outfile
      */
-    public function setOutfile($outfile)
+    public function setOutfile($outfile): void
     {
         $this->outfile = $outfile;
     }
@@ -126,7 +127,7 @@ class FormatterElement
      * Returns output filename
      * @return string
      */
-    public function getOutfile()
+    public function getOutfile(): ?string
     {
         if ($this->outfile) {
             return $this->outfile;
@@ -139,7 +140,7 @@ class FormatterElement
      * Returns extension
      * @return string
      */
-    public function getExtension()
+    public function getExtension(): string
     {
         return $this->formatter->getExtension();
     }
@@ -147,7 +148,7 @@ class FormatterElement
     /**
      * Returns formatter object
      * @throws BuildException
-     * @return PHPUnitResultFormatter
+     * @return mixed
      */
     public function getFormatter()
     {

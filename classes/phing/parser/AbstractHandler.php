@@ -47,7 +47,7 @@ abstract class AbstractHandler
      *
      * The constructor must be called by all derived classes.
      *
-     * @param ExpatParser $parser the parser object
+     * @param AbstractSAXParser $parser the parser object
      * @param AbstractHandler $parentHandler the parent handler of this handler
      */
     protected function __construct(AbstractSAXParser $parser, AbstractHandler $parentHandler)
@@ -65,9 +65,8 @@ abstract class AbstractHandler
      *
      * @param string $name name of the XML element
      * @param array $attribs attributes of the XML element
-     * @throws ExpatParseException
      */
-    public function startElement($name, $attribs)
+    public function startElement($name, $attribs): void
     {
         throw new ExpatParseException("Unexpected element $name");
     }
@@ -75,7 +74,7 @@ abstract class AbstractHandler
     /**
      * Gets invoked when element closes method.
      */
-    protected function finished()
+    protected function finished(): void
     {
     }
 
@@ -87,7 +86,7 @@ abstract class AbstractHandler
      *
      * @param string $name the name of the XML element
      */
-    public function endElement($name)
+    public function endElement($name): void
     {
         $this->finished();
         $this->parser->setHandler($this->parentHandler);

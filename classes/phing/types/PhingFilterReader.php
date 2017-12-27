@@ -74,7 +74,7 @@ class PhingFilterReader extends DataType
      * @return Path
      * @throws BuildException
      */
-    public function createClasspath()
+    public function createClasspath(): \Path
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -122,7 +122,7 @@ class PhingFilterReader extends DataType
     /**
      * @return array
      */
-    public function getParams()
+    public function getParams(): array
     {
         // We return a COPY
         $ret = [];
@@ -145,9 +145,8 @@ class PhingFilterReader extends DataType
     */
     /**
      * @param Reference $r
-     * @throws BuildException
      */
-    public function setRefid(Reference $r)
+    public function setRefid(Reference $r): void
     {
         if ((count($this->parameters) !== 0) || ($this->className !== null)) {
             throw $this->tooManyAttributes();

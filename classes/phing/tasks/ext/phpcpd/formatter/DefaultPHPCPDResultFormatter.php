@@ -1,4 +1,7 @@
 <?php
+
+use SebastianBergmann\PHPCPD\Log\Text;
+
 /**
  * $Id$
  *
@@ -38,10 +41,10 @@ class DefaultPHPCPDResultFormatter extends PHPCPDResultFormatter
      * @param boolean        $useFile
      * @param PhingFile|null $outFile
      */
-    public function processClones($clones, Project $project, $useFile = false, $outFile = null)
+    public function processClones($clones, Project $project, $useFile = false, $outFile = null): void
     {
         if (get_class($clones) == 'SebastianBergmann\PHPCPD\CodeCloneMap') {
-            if (class_exists('SebastianBergmann\PHPCPD\Log\Text')) {
+            if (class_exists(Text::class)) {
                 $this->processClonesNew($clones, $useFile, $outFile);
 
                 return;

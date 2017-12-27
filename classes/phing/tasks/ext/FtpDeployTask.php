@@ -224,12 +224,12 @@ class FtpDeployTask extends Task
     /**
      * The init method: check if Net_FTP is available
      */
-    public function init()
+    public function init(): void
     {
         $paths = Phing::explodeIncludePath();
         foreach ($paths as $path) {
             if (file_exists($path . DIRECTORY_SEPARATOR . 'Net' . DIRECTORY_SEPARATOR . 'FTP.php')) {
-                return true;
+                return;
             }
         }
         throw new BuildException('The FTP Deploy task requires the Net_FTP PEAR package.');
@@ -388,7 +388,7 @@ class FtpDeployTask extends Task
      * @param $directory
      * @return bool
      */
-    private function _directoryInformations(Net_FTP $ftp, &$remoteFileInformations, $directory)
+    private function _directoryInformations(Net_FTP $ftp, &$remoteFileInformations, $directory): ?bool
     {
         $content = $ftp->ls($directory);
         if (@PEAR::isError($content)) {
@@ -422,7 +422,7 @@ class FtpDeployTask extends Task
      * @param null $directory
      * @return array
      */
-    private function parseRawFtpContent($content, $directory = null)
+    private function parseRawFtpContent($content, $directory = null): array
     {
         if (!is_array($content)) {
             return [];

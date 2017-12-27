@@ -97,9 +97,8 @@ class VersionCompareCondition implements Condition
 
     /**
      * @return mixed
-     * @throws BuildException
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->version === null || $this->desiredVersion === null) {
             require_once 'phing/BuildException.php';

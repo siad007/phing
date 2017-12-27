@@ -32,7 +32,7 @@ class LiquibaseParameter extends DataType
      * @return string
      * @throws BuildException
      */
-    public function getCommandline(Project $p)
+    public function getCommandline(Project $p): string
     {
         if ($this->isReference()) {
             return $this->getRef($p)->getCommandline($p);

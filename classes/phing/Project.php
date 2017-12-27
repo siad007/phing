@@ -116,7 +116,7 @@ class Project
      * Sets the input handler
      * @param InputHandler $handler
      */
-    public function setInputHandler($handler)
+    public function setInputHandler($handler): void
     {
         $this->inputHandler = $handler;
     }
@@ -125,13 +125,13 @@ class Project
      * Retrieves the current input handler.
      * @return InputHandler
      */
-    public function getInputHandler()
+    public function getInputHandler(): ?\InputHandler
     {
         return $this->inputHandler;
     }
 
     /** inits the project, called from main app */
-    public function init()
+    public function init(): void
     {
         // set builtin properties
         $this->setSystemProperties();
@@ -142,7 +142,7 @@ class Project
     }
 
     /** returns the global filterset (future use) */
-    public function getGlobalFilterSet()
+    public function getGlobalFilterSet(): array
     {
         return $this->globalFilterSet;
     }
@@ -159,7 +159,7 @@ class Project
      * @param  string $value The new value of the property.
      *                       Must not be <code>null</code>.
      */
-    public function setProperty($name, $value)
+    public function setProperty($name, $value): void
     {
         PropertyHelper::getPropertyHelper($this)->setProperty(null, $name, $value, true);
     }
@@ -175,7 +175,7 @@ class Project
      *                      Must not be <code>null</code>.
      * @since 2.0
      */
-    public function setNewProperty($name, $value)
+    public function setNewProperty($name, $value): void
     {
         PropertyHelper::getPropertyHelper($this)->setNewProperty(null, $name, $value);
     }
@@ -189,7 +189,7 @@ class Project
      *                      Must not be <code>null</code>.
      * @see setProperty()
      */
-    public function setUserProperty($name, $value)
+    public function setUserProperty($name, $value): void
     {
         PropertyHelper::getPropertyHelper($this)->setUserProperty(null, $name, $value);
     }
@@ -206,7 +206,7 @@ class Project
      *                      Must not be <code>null</code>.
      * @see setProperty()
      */
-    public function setInheritedProperty($name, $value)
+    public function setInheritedProperty($name, $value): void
     {
         PropertyHelper::getPropertyHelper($this)->setInheritedProperty(null, $name, $value);
     }
@@ -219,7 +219,7 @@ class Project
      *             Must not be <code>null</code>.
      * @param string $value The property value. Must not be <code>null</code>.
      */
-    private function setPropertyInternal($name, $value)
+    private function setPropertyInternal($name, $value): void
     {
         PropertyHelper::getPropertyHelper($this)->setProperty(null, $name, $value, false);
     }
@@ -252,7 +252,7 @@ class Project
      * @exception BuildException if the given value has an unclosed
      *                           property name, e.g. <code>${xxx</code>
      */
-    public function replaceProperties($value)
+    public function replaceProperties($value): ?string
     {
         return PropertyHelper::getPropertyHelper($this)->replaceProperties(null, $value, $this->getProperties());
     }
@@ -266,7 +266,7 @@ class Project
      * @return string The property value, or <code>null</code> for no match
      *                     or if a <code>null</code> name is provided.
      */
-    public function getUserProperty($name)
+    public function getUserProperty($name): ?string
     {
         return PropertyHelper::getPropertyHelper($this)->getUserProperty(null, $name);
     }
@@ -276,7 +276,7 @@ class Project
      * @return array A hashtable containing all properties
      *               (including user properties).
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return PropertyHelper::getPropertyHelper($this)->getProperties();
     }
@@ -285,7 +285,7 @@ class Project
      * Returns a copy of the user property hashtable
      * @return array a hashtable containing just the user properties
      */
-    public function getUserProperties()
+    public function getUserProperties(): array
     {
         return PropertyHelper::getPropertyHelper($this)->getUserProperties();
     }
@@ -302,7 +302,7 @@ class Project
      * @return void
      * @since phing 2.0
      */
-    public function copyUserProperties(Project $other)
+    public function copyUserProperties(Project $other): void
     {
         PropertyHelper::getPropertyHelper($this)->copyUserProperties($other);
     }
@@ -319,7 +319,7 @@ class Project
      *
      * @since phing 2.0
      */
-    public function copyInheritedProperties(Project $other)
+    public function copyInheritedProperties(Project $other): void
     {
         PropertyHelper::getPropertyHelper($this)->copyUserProperties($other);
     }
@@ -332,7 +332,7 @@ class Project
      * Sets default target
      * @param string $targetName
      */
-    public function setDefaultTarget($targetName)
+    public function setDefaultTarget($targetName): void
     {
         $this->defaultTarget = (string) trim($targetName);
     }
@@ -341,7 +341,7 @@ class Project
      * Returns default target
      * @return string
      */
-    public function getDefaultTarget()
+    public function getDefaultTarget(): string
     {
         return (string) $this->defaultTarget;
     }
@@ -353,7 +353,7 @@ class Project
      * @return void
      * @author Andreas Aderhold, andi@binarycloud.com
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = (string) trim($name);
         $this->setUserProperty("phing.project.name", $this->name);
@@ -365,7 +365,7 @@ class Project
      * @return string projectname
      * @author Andreas Aderhold, andi@binarycloud.com
      */
-    public function getName()
+    public function getName(): string
     {
         return (string) $this->name;
     }
@@ -374,7 +374,7 @@ class Project
      * Set the projects description
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = (string) trim($description);
     }
@@ -383,7 +383,7 @@ class Project
      * return the description, null otherwise
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -392,7 +392,7 @@ class Project
      * Set the minimum required phing version
      * @param string $version
      */
-    public function setPhingVersion($version)
+    public function setPhingVersion($version): void
     {
         $version = str_replace('phing', '', strtolower($version));
         $this->phingVersion = (string) trim($version);
@@ -402,7 +402,7 @@ class Project
      * Get the minimum required phing version
      * @return string
      */
-    public function getPhingVersion()
+    public function getPhingVersion(): string
     {
         if ($this->phingVersion === null) {
             $this->setPhingVersion(Phing::getPhingVersion());
@@ -416,12 +416,12 @@ class Project
      * (If strict mode is On, all the warnings would be converted to an error
      * (and the build will be stopped/aborted)
      *
-     * @param    string $mode Strict-mode information
+     * @param $strictmode
      * @return   void
      * @access   public
      * @author   Utsav Handa, handautsav@hotmail.com
      */
-    public function setStrictMode($strictmode)
+    public function setStrictMode($strictmode): void
     {
         $this->strictMode = (bool) $strictmode;
         $this->setProperty("phing.project.strictmode", $this->strictMode);
@@ -431,7 +431,7 @@ class Project
      * Get the strict-mode status for the project
      * @return boolean
      */
-    public function getStrictmode()
+    public function getStrictmode(): bool
     {
         return $this->strictMode;
     }
@@ -441,7 +441,7 @@ class Project
      * @param PhingFile|string $dir
      * @throws BuildException
      */
-    public function setBasedir($dir)
+    public function setBasedir($dir): void
     {
         if ($dir instanceof PhingFile) {
             $dir = $dir->getAbsolutePath();
@@ -474,7 +474,7 @@ class Project
      *
      * @author  Andreas Aderhold, andi@binarycloud.com
      */
-    public function getBasedir()
+    public function getBasedir(): \PhingFile
     {
         if ($this->basedir === null) {
             try { // try to set it
@@ -495,7 +495,7 @@ class Project
      * property, they will have no effect.
      * @param bool $keepGoingMode &quot;keep-going&quot; mode
      */
-    public function setKeepGoingMode($keepGoingMode)
+    public function setKeepGoingMode($keepGoingMode): void
     {
         $this->keepGoingMode = $keepGoingMode;
     }
@@ -506,7 +506,7 @@ class Project
      * property, they will have no effect.
      * @return bool &quot;keep-going&quot; mode
      */
-    public function isKeepGoingMode()
+    public function isKeepGoingMode(): bool
     {
         return $this->keepGoingMode;
     }
@@ -516,7 +516,7 @@ class Project
      *
      * @return void
      */
-    public function setSystemProperties()
+    public function setSystemProperties(): void
     {
 
         // first get system properties
@@ -541,7 +541,7 @@ class Project
      * @param string $class     The class path to use.
      * @param string $classpath The classpat to use.
      */
-    public function addTaskDefinition($name, $class, $classpath = null)
+    public function addTaskDefinition($name, $class, $classpath = null): void
     {
         ComponentHelper::getComponentHelper($this)->addTaskDefinition($name, $class, $classpath);
     }
@@ -550,7 +550,7 @@ class Project
      * Returns the task definitions
      * @return array
      */
-    public function getTaskDefinitions()
+    public function getTaskDefinitions(): array
     {
         return ComponentHelper::getComponentHelper($this)->getTaskDefinitions();
     }
@@ -561,7 +561,7 @@ class Project
      * @param string $typeClass The class to use.
      * @param string $classpath The classpath to use.
      */
-    public function addDataTypeDefinition($typeName, $typeClass, $classpath = null)
+    public function addDataTypeDefinition($typeName, $typeClass, $classpath = null): void
     {
         ComponentHelper::getComponentHelper($this)->addDataTypeDefinition($typeName, $typeClass, $classpath);
     }
@@ -570,7 +570,7 @@ class Project
      * Returns the data type definitions
      * @return array
      */
-    public function getDataTypeDefinitions()
+    public function getDataTypeDefinitions(): array
     {
         return ComponentHelper::getComponentHelper($this)->getDataTypeDefinitions();
     }
@@ -581,7 +581,7 @@ class Project
      * @param Target $target
      * @throws BuildException
      */
-    public function addTarget($targetName, $target)
+    public function addTarget($targetName, $target): void
     {
         if (isset($this->targets[$targetName])) {
             throw new BuildException("Duplicate target: $targetName");
@@ -594,7 +594,7 @@ class Project
      * @param string $targetName
      * @param Target $target
      */
-    public function addOrReplaceTarget($targetName, &$target)
+    public function addOrReplaceTarget($targetName, &$target): void
     {
         $this->log("  +Target: $targetName", Project::MSG_DEBUG);
         $target->setProject($this);
@@ -609,7 +609,7 @@ class Project
      * Returns the available targets
      * @return Target[]
      */
-    public function getTargets()
+    public function getTargets(): array
     {
         return $this->targets;
     }
@@ -617,7 +617,7 @@ class Project
     /**
      * @return string[]
      */
-    public function getExecutedTargetNames()
+    public function getExecutedTargetNames(): array
     {
         return $this->executedTargetNames;
     }
@@ -629,7 +629,7 @@ class Project
      * @return Task           A task object
      * @throws BuildException
      */
-    public function createTask($taskType)
+    public function createTask($taskType): ?\Task
     {
         return ComponentHelper::getComponentHelper($this)->createTask($taskType);
     }
@@ -641,7 +641,7 @@ class Project
      * @return Condition
      * @throws BuildException
      */
-    public function createCondition($conditionType)
+    public function createCondition($conditionType): \Condition
     {
         return ComponentHelper::getComponentHelper($this)->createCondition($conditionType);
     }
@@ -667,7 +667,7 @@ class Project
      * @return void
      * @throws BuildException
      */
-    public function executeTargets($targetNames)
+    public function executeTargets($targetNames): void
     {
         $this->executedTargetNames = $targetNames;
 
@@ -683,7 +683,7 @@ class Project
      * @return void
      * @throws BuildException
      */
-    public function executeTarget($targetName)
+    public function executeTarget($targetName): void
     {
 
         // complain about executing void
@@ -745,7 +745,7 @@ class Project
      * @throws IOException
      * @return \PhingFile
      */
-    public function resolveFile($fileName, $rootDir = null)
+    public function resolveFile($fileName, $rootDir = null): ?\PhingFile
     {
         if ($rootDir === null) {
             return $this->fileUtils->resolveFile($this->basedir, $fileName);
@@ -761,11 +761,11 @@ class Project
      *
      * @param string $s The string to convert to a boolean value.
      *
-     * @return <code>true</code> if the given string is <code>"on"</code>,
+     * @return bool <code>true</code> if the given string is <code>"on"</code>,
      *         <code>"true"</code> or <code>"yes"</code>, or
      *         <code>false</code> otherwise.
      */
-    public static function toBoolean($s)
+    public static function toBoolean($s): bool
     {
         return (
             strcasecmp($s, 'on') === 0
@@ -785,7 +785,7 @@ class Project
      * @throws Exception
      * @return Target[] targets in sorted order
      */
-    public function topoSort($rootTarget)
+    public function topoSort($rootTarget): array
     {
         $rootTarget = (string) $rootTarget;
         $ret = [];
@@ -858,7 +858,7 @@ class Project
      * @throws BuildException
      * @throws Exception
      */
-    public function _tsort($root, &$state, &$visiting, &$ret)
+    public function _tsort($root, &$state, &$visiting, &$ret): void
     {
         $state[$root] = "VISITING";
         $visiting[] = $root;
@@ -912,7 +912,7 @@ class Project
      * @param array $stk
      * @return BuildException
      */
-    public function _makeCircularException($end, $stk)
+    public function _makeCircularException($end, $stk): \BuildException
     {
         $sb = "Circular dependency: $end";
         do {
@@ -930,7 +930,7 @@ class Project
      * @param string $name
      * @param object $object
      */
-    public function addReference($name, $object)
+    public function addReference($name, $object): void
     {
         if (isset($this->references[$name])) {
             $this->log("Overriding previous definition of reference to $name", Project::MSG_VERBOSE);
@@ -943,7 +943,7 @@ class Project
      * Returns the references array.
      * @return array
      */
-    public function getReferences()
+    public function getReferences(): array
     {
         return $this->references;
     }
@@ -967,7 +967,7 @@ class Project
      * @param string $msg
      * @param int    $level
      */
-    public function log($msg, $level = Project::MSG_INFO)
+    public function log($msg, $level = Project::MSG_INFO): void
     {
         $this->logObject($this, $msg, $level);
     }
@@ -978,7 +978,7 @@ class Project
      * @param int $level
      * @param Exception|null $t
      */
-    public function logObject($obj, $msg, $level, Exception $t = null)
+    public function logObject($obj, $msg, $level, Exception $t = null): void
     {
         $this->fireMessageLogged($obj, $msg, $level, $t);
 
@@ -992,7 +992,7 @@ class Project
     /**
      * @param BuildListener $listener
      */
-    public function addBuildListener(BuildListener $listener)
+    public function addBuildListener(BuildListener $listener): void
     {
         $this->listeners[] = $listener;
     }
@@ -1000,7 +1000,7 @@ class Project
     /**
      * @param BuildListener $listener
      */
-    public function removeBuildListener(BuildListener $listener)
+    public function removeBuildListener(BuildListener $listener): void
     {
         $newarray = [];
         for ($i = 0, $size = count($this->listeners); $i < $size; $i++) {
@@ -1014,12 +1014,12 @@ class Project
     /**
      * @return array
      */
-    public function getBuildListeners()
+    public function getBuildListeners(): array
     {
         return $this->listeners;
     }
 
-    public function fireBuildStarted()
+    public function fireBuildStarted(): void
     {
         $event = new BuildEvent($this);
         foreach ($this->listeners as $listener) {
@@ -1030,7 +1030,7 @@ class Project
     /**
      * @param Exception $exception
      */
-    public function fireBuildFinished($exception)
+    public function fireBuildFinished($exception): void
     {
         $event = new BuildEvent($this);
         $event->setException($exception);
@@ -1042,7 +1042,7 @@ class Project
     /**
      * @param $target
      */
-    public function fireTargetStarted($target)
+    public function fireTargetStarted($target): void
     {
         $event = new BuildEvent($target);
         foreach ($this->listeners as $listener) {
@@ -1054,7 +1054,7 @@ class Project
      * @param $target
      * @param $exception
      */
-    public function fireTargetFinished($target, $exception)
+    public function fireTargetFinished($target, $exception): void
     {
         $event = new BuildEvent($target);
         $event->setException($exception);
@@ -1066,7 +1066,7 @@ class Project
     /**
      * @param $task
      */
-    public function fireTaskStarted($task)
+    public function fireTaskStarted($task): void
     {
         $event = new BuildEvent($task);
         foreach ($this->listeners as $listener) {
@@ -1078,7 +1078,7 @@ class Project
      * @param $task
      * @param $exception
      */
-    public function fireTaskFinished($task, $exception)
+    public function fireTaskFinished($task, $exception): void
     {
         $event = new BuildEvent($task);
         $event->setException($exception);
@@ -1092,7 +1092,7 @@ class Project
      * @param $message
      * @param $priority
      */
-    public function fireMessageLoggedEvent($event, $message, $priority)
+    public function fireMessageLoggedEvent($event, $message, $priority): void
     {
         $event->setMessage($message, $priority);
         foreach ($this->listeners as $listener) {
@@ -1107,7 +1107,7 @@ class Project
      * @param Exception $t
      * @throws \Exception
      */
-    public function fireMessageLogged($object, $message, $priority, Exception $t = null)
+    public function fireMessageLogged($object, $message, $priority, Exception $t = null): void
     {
         $event = new BuildEvent($object);
         if ($t !== null) {

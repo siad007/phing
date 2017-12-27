@@ -42,9 +42,9 @@ class MoveTask extends CopyTask
      *
      * @return void
      *
-     * @throws BuildException
+     * @throws IOException
      */
-    protected function validateAttributes()
+    protected function validateAttributes(): void
     {
         if ($this->file !== null && $this->file->isDirectory()) {
             if (($this->destFile !== null && $this->destDir !== null)
@@ -69,7 +69,7 @@ class MoveTask extends CopyTask
         }
     }
 
-    protected function doWork()
+    protected function doWork(): void
     {
         if (count($this->completeDirMap) > 0) {
             foreach ($this->completeDirMap as $from => $to) {
@@ -184,7 +184,7 @@ class MoveTask extends CopyTask
      *
      * @return bool
      */
-    private function okToDelete(PhingFile $d)
+    private function okToDelete(PhingFile $d): bool
     {
         $list = $d->listDir();
         if ($list === null) {

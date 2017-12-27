@@ -38,7 +38,7 @@ class IsPropertyFalseCondition extends ConditionBase implements Condition
      *
      * @return void
      */
-    public function setProperty($property)
+    public function setProperty($property): void
     {
         $this->property = $property;
     }
@@ -46,9 +46,8 @@ class IsPropertyFalseCondition extends ConditionBase implements Condition
     /**
      * @return bool
      *
-     * @throws BuildException
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->property === null) {
             throw new BuildException('Property name must be set.');

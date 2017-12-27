@@ -158,7 +158,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getForce()
+    public function getForce(): bool
     {
         return $this->force;
     }
@@ -166,7 +166,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isForce()
+    public function isForce(): bool
     {
         return $this->getForce();
     }
@@ -182,7 +182,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getQuiet()
+    public function getQuiet(): bool
     {
         return $this->quiet;
     }
@@ -190,7 +190,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isQuiet()
+    public function isQuiet(): bool
     {
         return $this->getQuiet();
     }
@@ -206,7 +206,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getAll()
+    public function getAll(): bool
     {
         return $this->allRemotes;
     }
@@ -214,7 +214,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isAllRemotes()
+    public function isAllRemotes(): bool
     {
         return $this->getAll();
     }
@@ -230,7 +230,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getKeep()
+    public function getKeep(): bool
     {
         return $this->keepFiles;
     }
@@ -238,7 +238,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isKeepFiles()
+    public function isKeepFiles(): bool
     {
         return $this->getKeep();
     }
@@ -254,7 +254,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getPrune()
+    public function getPrune(): bool
     {
         return $this->prune;
     }
@@ -262,7 +262,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isPrune()
+    public function isPrune(): bool
     {
         return $this->getPrune();
     }
@@ -278,7 +278,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNoTags()
+    public function getNoTags(): bool
     {
         return $this->noTags;
     }
@@ -286,7 +286,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isNoTags()
+    public function isNoTags(): bool
     {
         return $this->getNoTags();
     }
@@ -302,7 +302,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getTags()
+    public function getTags(): bool
     {
         return $this->tags;
     }
@@ -310,7 +310,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isTags()
+    public function isTags(): bool
     {
         return $this->getTags();
     }
@@ -326,7 +326,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getSource()
+    public function getSource(): string
     {
         return $this->source;
     }
@@ -342,7 +342,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getRefspec()
+    public function getRefspec(): ?string
     {
         return $this->refspec;
     }
@@ -358,7 +358,7 @@ class GitFetchTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getGroup()
+    public function getGroup(): ?string
     {
         return $this->group;
     }

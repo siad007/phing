@@ -63,7 +63,7 @@ class IconvFilter extends BaseParamFilterReader implements ChainableReader
 
         // Process whole text at once.
         $text = null;
-        while (($data = $this->in->read($len)) !== -1) {
+        while (($data = $this->in->read($len)) != -1) {
             $text .= $data;
         }
 
@@ -94,7 +94,7 @@ class IconvFilter extends BaseParamFilterReader implements ChainableReader
      *
      * @return string
      */
-    public function getInputEncoding()
+    public function getInputEncoding(): string
     {
         return $this->_inputEncoding;
     }
@@ -112,7 +112,7 @@ class IconvFilter extends BaseParamFilterReader implements ChainableReader
      *
      * @return string
      */
-    public function getOutputEncoding()
+    public function getOutputEncoding(): string
     {
         return $this->_outputEncoding;
     }
@@ -121,11 +121,11 @@ class IconvFilter extends BaseParamFilterReader implements ChainableReader
      * Creates a new IconvFilter using the passed in Reader for instantiation.
      *
      * @param Reader $reader
+     * @return self A new filter based on this configuration, but filtering the specified reader.
      * @internal param A $object Reader object providing the underlying stream. Must not be <code>null</code>.
      *
-     * @return self A new filter based on this configuration, but filtering the specified reader.
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
         $filter = new self($reader);
 

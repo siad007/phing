@@ -34,7 +34,7 @@ class YesNoInputRequest extends MultipleChoiceInputRequest
     /**
      * @return true if the input is one of the allowed values.
      */
-    public function isInputValid()
+    public function isInputValid(): bool
     {
         return StringHelper::isBoolean($this->input);
     }

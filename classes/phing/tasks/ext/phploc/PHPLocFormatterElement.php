@@ -50,7 +50,7 @@ class PHPLocFormatterElement
      * Loads a specific formatter type
      * @param string $type
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
     }
@@ -58,7 +58,7 @@ class PHPLocFormatterElement
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -67,7 +67,7 @@ class PHPLocFormatterElement
      * Sets whether to store formatting results in a file
      * @param $useFile
      */
-    public function setUseFile($useFile)
+    public function setUseFile($useFile): void
     {
         $this->useFile = $useFile;
     }
@@ -75,7 +75,7 @@ class PHPLocFormatterElement
     /**
      * Returns whether to store formatting results in a file
      */
-    public function getUseFile()
+    public function getUseFile(): bool
     {
         return $this->useFile;
     }
@@ -84,7 +84,7 @@ class PHPLocFormatterElement
      * Sets output directory
      * @param string $toDir
      */
-    public function setToDir($toDir)
+    public function setToDir($toDir): void
     {
         $this->toDir = $toDir;
     }
@@ -93,7 +93,7 @@ class PHPLocFormatterElement
      * Returns output directory
      * @return string
      */
-    public function getToDir()
+    public function getToDir(): string
     {
         return $this->toDir;
     }
@@ -102,7 +102,7 @@ class PHPLocFormatterElement
      * Sets output filename
      * @param string $outfile
      */
-    public function setOutfile($outfile)
+    public function setOutfile($outfile): void
     {
         $this->outfile = $outfile;
     }
@@ -111,7 +111,7 @@ class PHPLocFormatterElement
      * Returns output filename
      * @return string
      */
-    public function getOutfile()
+    public function getOutfile(): string
     {
         return $this->outfile;
     }

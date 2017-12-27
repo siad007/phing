@@ -59,7 +59,7 @@ abstract class BaseSelector extends DataType implements FileSelector
      *
      * @return string the error condition
      */
-    public function getError()
+    public function getError(): ?string
     {
         return $this->errmsg;
     }
@@ -71,9 +71,8 @@ abstract class BaseSelector extends DataType implements FileSelector
      * <p>Implementations should check for incorrect settings and call
      * setError() as necessary.</p>
      *
-     * @throws \BuildException
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->isReference()) {
             $this->getCheckedRef(__CLASS__, StringHelper::unqualify(__CLASS__))->verifySettings();

@@ -47,7 +47,7 @@ class OutputStream
      * @throws IOException if cannot close stream (note that attempting to close an already closed stream will not raise an IOException)
      * @return void
      */
-    public function close()
+    public function close(): void
     {
         if ($this->stream === null) {
             return;
@@ -67,7 +67,7 @@ class OutputStream
      *
      * @throws IOException if unable to flush data (e.g. stream is not open).
      */
-    public function flush()
+    public function flush(): void
     {
         if (false === @fflush($this->stream)) {
             throw new IOException("Could not flush stream: " . $php_errormsg);
@@ -83,7 +83,7 @@ class OutputStream
      * @return void
      * @throws IOException - if there is an error writing to stream
      */
-    public function write($buf, $off = null, $len = null)
+    public function write($buf, $off = null, $len = null): void
     {
         if ($off === null && $len === null) {
             $to_write = $buf;

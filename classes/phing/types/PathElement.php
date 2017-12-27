@@ -26,7 +26,7 @@ class PathElement
      *
      * @return void
      */
-    public function setDir(PhingFile $loc)
+    public function setDir(PhingFile $loc): void
     {
         $this->parts = [Path::translateFile($loc->getAbsolutePath())];
     }
@@ -36,7 +36,7 @@ class PathElement
      *
      * @return void
      */
-    public function setPath($path)
+    public function setPath($path): void
     {
         $this->parts = Path::translatePath($this->outer->getProject(), $path);
     }
@@ -44,7 +44,7 @@ class PathElement
     /**
      * @return array
      */
-    public function getParts()
+    public function getParts(): array
     {
         return $this->parts;
     }

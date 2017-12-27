@@ -29,7 +29,7 @@ class EventObject
     protected $source;
 
     /** Constructs a prototypical Event.
-     * @param $source
+     * @param object $source
      * @throws Exception
      */
     public function __construct($source)
@@ -41,13 +41,13 @@ class EventObject
     }
 
     /** The object on which the Event initially occurred. */
-    public function getSource()
+    public function getSource(): object
     {
         return $this->source;
     }
 
     /** Returns a String representation of this EventObject.*/
-    public function toString()
+    public function toString(): ?string
     {
         if (method_exists($this->source, "toString")) {
             return get_class($this) . "[source=" . $this->source->toString() . "]";

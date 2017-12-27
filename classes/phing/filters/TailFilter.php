@@ -78,7 +78,7 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader
             $this->setInitialized(true);
         }
 
-        while (($buffer = $this->in->read($len)) !== -1) {
+        while (($buffer = $this->in->read($len)) != -1) {
             // Remove the last "\n" from buffer for
             // prevent explode to add an empty cell at
             // the end of array
@@ -129,7 +129,7 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader
      *
      * @return integer The number of lines to be returned in the filtered stream.
      */
-    public function getLines()
+    public function getLines(): int
     {
         return $this->lines;
     }
@@ -149,7 +149,7 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader
      *
      * @return int the number of lines to be skipped in the filtered stream
      */
-    private function getSkip()
+    private function getSkip(): int
     {
         return $this->skip;
     }
@@ -164,9 +164,9 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader
      * @return TailFilter A new filter based on this configuration, but filtering
      *                    the specified reader.
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new TailFilter($reader);
+        $newFilter = new self($reader);
         $newFilter->setLines($this->getLines());
         $newFilter->setSkip($this->getSkip());
         $newFilter->setInitialized(true);

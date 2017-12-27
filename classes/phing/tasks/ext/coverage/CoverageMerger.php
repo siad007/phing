@@ -36,7 +36,7 @@ class CoverageMerger
      * @param $right
      * @return array
      */
-    private static function mergeCodeCoverage($left, $right)
+    private static function mergeCodeCoverage($left, $right): array
     {
         $coverageMerged = [];
 
@@ -79,11 +79,11 @@ class CoverageMerger
     }
 
     /**
-     * @param  Project        $project
+     * @param  Project $project
      * @return Properties
-     * @throws BuildException
+     * @throws IOException
      */
-    protected static function _getDatabase($project)
+    protected static function _getDatabase($project): \Properties
     {
         $coverageDatabase = $project->getProperty('coverage.database');
 
@@ -104,7 +104,7 @@ class CoverageMerger
      * @return array
      * @throws BuildException
      */
-    public static function getWhiteList($project)
+    public static function getWhiteList($project): array
     {
         $whitelist = [];
         $props = self::_getDatabase($project);
@@ -123,7 +123,7 @@ class CoverageMerger
      * @throws BuildException
      * @throws IOException
      */
-    public static function merge($project, $codeCoverageInformation)
+    public static function merge($project, $codeCoverageInformation): void
     {
         $props = self::_getDatabase($project);
 

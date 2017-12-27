@@ -82,7 +82,7 @@ class RecorderEntry implements BuildLogger, SubBuildListener
     /**
      * @return string the name of the file the output is sent to.
      */
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
@@ -101,13 +101,13 @@ class RecorderEntry implements BuildLogger, SubBuildListener
     }
 
     /** {@inheritDoc}. */
-    public function buildStarted(BuildEvent $event)
+    public function buildStarted(BuildEvent $event): void
     {
         $this->log("> BUILD STARTED", Project::MSG_DEBUG);
     }
 
     /** {@inheritDoc}. */
-    public function buildFinished(BuildEvent $event)
+    public function buildFinished(BuildEvent $event): void
     {
         $this->log("< BUILD FINISHED", Project::MSG_DEBUG);
 
@@ -149,7 +149,7 @@ class RecorderEntry implements BuildLogger, SubBuildListener
     }
 
     /** {@inheritDoc}. */
-    public function targetStarted(BuildEvent $event)
+    public function targetStarted(BuildEvent $event): void
     {
         $this->log(">> TARGET STARTED -- " . $event->getTarget()->getName(), Project::MSG_DEBUG);
         $this->log(Phing::getProperty('line.separator') . $event->getTarget()->getName() . ":",
@@ -158,7 +158,7 @@ class RecorderEntry implements BuildLogger, SubBuildListener
     }
 
     /** {@inheritDoc}. */
-    public function targetFinished(BuildEvent $event)
+    public function targetFinished(BuildEvent $event): void
     {
         $this->log("<< TARGET FINISHED -- " . $event->getTarget()->getName(), Project::MSG_DEBUG);
 
@@ -169,20 +169,20 @@ class RecorderEntry implements BuildLogger, SubBuildListener
     }
 
     /** {@inheritDoc}. */
-    public function taskStarted(BuildEvent $event)
+    public function taskStarted(BuildEvent $event): void
     {
         $this->log(">>> TASK STARTED -- " . $event->getTask()->getTaskName(), Project::MSG_DEBUG);
     }
 
     /** {@inheritDoc}. */
-    public function taskFinished(BuildEvent $event)
+    public function taskFinished(BuildEvent $event): void
     {
         $this->log("<<< TASK FINISHED -- " . $event->getTask()->getTaskName(), Project::MSG_DEBUG);
         $this->flush();
     }
 
     /** {@inheritDoc}. */
-    public function messageLogged(BuildEvent $event)
+    public function messageLogged(BuildEvent $event): void
     {
         $this->log("--- MESSAGE LOGGED", Project::MSG_DEBUG);
 

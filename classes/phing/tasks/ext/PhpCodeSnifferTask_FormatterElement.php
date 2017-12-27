@@ -27,7 +27,7 @@ class PhpCodeSnifferTask_FormatterElement extends DataType
     /**
      * Validate config.
      */
-    public function parsingComplete()
+    public function parsingComplete(): void
     {
         if (empty($this->type)) {
             throw new BuildException("Format missing required 'type' attribute.");
@@ -48,7 +48,7 @@ class PhpCodeSnifferTask_FormatterElement extends DataType
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -64,7 +64,7 @@ class PhpCodeSnifferTask_FormatterElement extends DataType
     /**
      * @return bool
      */
-    public function getUseFile()
+    public function getUseFile(): bool
     {
         return $this->useFile;
     }
@@ -80,7 +80,7 @@ class PhpCodeSnifferTask_FormatterElement extends DataType
     /**
      * @return string
      */
-    public function getOutfile()
+    public function getOutfile(): string
     {
         return $this->outfile;
     }

@@ -37,7 +37,7 @@ class PHPUnitUtil
      * @param string the name of the class
      * @return string the name of the package
      */
-    public static function getPackageName($classname)
+    public static function getPackageName($classname): string
     {
         $reflect = new ReflectionClass($classname);
 
@@ -65,7 +65,7 @@ class PHPUnitUtil
      * @author Benjamin Schultz <bschultz@proqrent.de>
      * @return string|null the name of the subpackage
      */
-    public static function getSubpackageName($classname)
+    public static function getSubpackageName($classname): ?string
     {
         $reflect = new ReflectionClass($classname);
 
@@ -84,7 +84,7 @@ class PHPUnitUtil
      * @param string the filename
      * @return string the name fo the class
      */
-    public static function getClassFromFileName($filename)
+    public static function getClassFromFileName($filename): string
     {
         $filename = basename($filename);
 
@@ -105,7 +105,7 @@ class PHPUnitUtil
      * @internal param optional $Path classpath
      * @return array list of classes defined in the file
      */
-    public static function getDefinedClasses($filename, $classpath = null)
+    public static function getDefinedClasses($filename, $classpath = null): ?array
     {
         $filename = realpath($filename);
 

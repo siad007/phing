@@ -43,7 +43,7 @@ class Description extends DataType
      * @param $text
      * @return void
      */
-    public function addText($text)
+    public function addText($text): void
     {
         $currentDescription = $this->project->getDescription();
         if ($currentDescription === null) {

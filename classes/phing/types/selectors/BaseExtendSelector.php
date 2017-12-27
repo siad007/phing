@@ -58,7 +58,7 @@ abstract class BaseExtendSelector extends BaseSelector implements ExtendFileSele
      *
      * @return array the set of parameters defined for this selector
      */
-    protected function getParameters()
+    protected function getParameters(): array
     {
         return $this->parameters;
     }

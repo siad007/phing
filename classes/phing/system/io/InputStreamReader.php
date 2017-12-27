@@ -49,8 +49,9 @@ class InputStreamReader extends Reader
 
     /**
      * Close the stream.
+     * @throws IOException
      */
-    public function close()
+    public function close(): void
     {
         $this->inStream->close();
     }
@@ -60,14 +61,14 @@ class InputStreamReader extends Reader
      * @param int $n
      * @return int
      */
-    public function skip($n)
+    public function skip($n): int
     {
         return $this->inStream->skip($n);
     }
 
     /**
      * Read data from file.
-     * @param  int    $len Num chars to read.
+     * @param  int $len Num chars to read.
      * @return string chars read or -1 if eof.
      */
     public function read($len = null)
@@ -79,7 +80,7 @@ class InputStreamReader extends Reader
      * Marks the current position in this input stream.
      * @throws IOException - if the underlying stream doesn't support this method.
      */
-    public function mark()
+    public function mark(): void
     {
         $this->inStream->mark();
     }
@@ -88,7 +89,7 @@ class InputStreamReader extends Reader
      * Whether the attached stream supports mark/reset.
      * @return boolean
      */
-    public function markSupported()
+    public function markSupported(): bool
     {
         return $this->inStream->markSupported();
     }
@@ -97,7 +98,7 @@ class InputStreamReader extends Reader
      * Repositions this stream to the position at the time the mark method was last called on this input stream.
      * @throws IOException - if the underlying stream doesn't support this method.
      */
-    public function reset()
+    public function reset(): void
     {
         $this->inStream->reset();
     }
@@ -106,7 +107,7 @@ class InputStreamReader extends Reader
      * Whether eof has been reached with stream.
      * @return boolean
      */
-    public function eof()
+    public function eof(): bool
     {
         return $this->inStream->eof();
     }
@@ -115,7 +116,7 @@ class InputStreamReader extends Reader
      * Returns string representation of attached stream.
      * @return string
      */
-    public function getResource()
+    public function getResource(): string
     {
         return $this->inStream->__toString();
     }

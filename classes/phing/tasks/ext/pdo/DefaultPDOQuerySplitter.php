@@ -69,7 +69,7 @@ class DefaultPDOQuerySplitter extends PDOQuerySplitter
      *
      * @return string|null
      */
-    public function nextQuery()
+    public function nextQuery(): ?string
     {
         $sql = "";
         $hasQuery = false;

@@ -62,7 +62,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
      */
     public function __construct(
         Project $project,
-        $groups = [],
+        array $groups = [],
         $excludeGroups = [],
         $processIsolation = false
     ) {
@@ -102,6 +102,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
      * @param $message
      * @param $file
      * @param $line
+     * @return
      */
     public function handleError($level, $message, $file, $line)
     {
@@ -191,7 +192,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
     /**
      * @return boolean
      */
-    public function hasErrors()
+    public function hasErrors(): bool
     {
         return $this->hasErrors;
     }
@@ -199,7 +200,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
     /**
      * @return boolean
      */
-    public function hasFailures()
+    public function hasFailures(): bool
     {
         return $this->hasFailures;
     }
@@ -207,7 +208,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
     /**
      * @return boolean
      */
-    public function hasIncomplete()
+    public function hasIncomplete(): bool
     {
         return $this->hasIncomplete;
     }
@@ -215,7 +216,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
     /**
      * @return boolean
      */
-    public function hasSkipped()
+    public function hasSkipped(): bool
     {
         return $this->hasSkipped;
     }
@@ -223,7 +224,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
     /**
      * @return string
      */
-    public function getLastErrorMessage()
+    public function getLastErrorMessage(): string
     {
         return $this->lastErrorMessage;
     }
@@ -231,7 +232,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
     /**
      * @return string
      */
-    public function getLastFailureMessage()
+    public function getLastFailureMessage(): string
     {
         return $this->lastFailureMessage;
     }
@@ -239,7 +240,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
     /**
      * @return string
      */
-    public function getLastIncompleteMessage()
+    public function getLastIncompleteMessage(): string
     {
         return $this->lastIncompleteMessage;
     }
@@ -247,7 +248,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
     /**
      * @return string
      */
-    public function getLastSkippedMessage()
+    public function getLastSkippedMessage(): string
     {
         return $this->lastSkippedMessage;
     }
@@ -258,7 +259,7 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements \PHPUni
      * @param Exception $e
      * @return string
      */
-    protected function composeMessage($message, PHPUnit_Framework_Test $test, Exception $e)
+    protected function composeMessage($message, PHPUnit_Framework_Test $test, Exception $e): string
     {
         $message = "Test $message (" . $test->getName() . " in class " . get_class($test) . "): " . $e->getMessage();
 

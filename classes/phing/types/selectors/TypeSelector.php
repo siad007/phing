@@ -43,7 +43,7 @@ class TypeSelector extends BaseExtendSelector
     /**
      * @return string A string describing this object
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{typeselector type: " . $this->type . "}";
 
@@ -84,9 +84,8 @@ class TypeSelector extends BaseExtendSelector
     /**
      * Checks to make sure all settings are kosher. In this case, it
      * means that the pattern attribute has been set.
-     *
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->type === null) {
             $this->setError("The type attribute is required");
@@ -99,12 +98,13 @@ class TypeSelector extends BaseExtendSelector
      * The heart of the matter. This is where the selector gets to decide
      * on the inclusion of a file in a particular fileset.
      *
-     * @param  PhingFile $basedir  the base directory the scan is being done from
-     * @param  string    $filename is the name of the file to check
-     * @param  PhingFile $file     is a PhingFile object the selector can use
+     * @param  PhingFile $basedir the base directory the scan is being done from
+     * @param  string $filename is the name of the file to check
+     * @param  PhingFile $file is a PhingFile object the selector can use
      * @return boolean   Whether the file should be selected or not
+     * @throws IOException
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         // throw BuildException on error
         $this->validate();

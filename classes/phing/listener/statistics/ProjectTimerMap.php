@@ -37,7 +37,7 @@ class ProjectTimerMap extends TimerMap
         return parent::find($name, $clock);
     }
 
-    protected function createTimer($name, Clock $clock)
+    protected function createTimer($name, Clock $clock): \SeriesTimer
     {
         return new ProjectTimer($name, $clock);
     }

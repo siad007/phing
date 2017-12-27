@@ -93,7 +93,7 @@ class PgsqlPDOQuerySplitter extends PDOQuerySplitter
      */
     public function getc()
     {
-        if (!strlen($this->line) || $this->inputIndex >= strlen($this->line)) {
+        if ('' === $this->line || $this->inputIndex >= strlen($this->line)) {
             if (null === ($line = $this->sqlReader->readLine())) {
                 return false;
             }
@@ -153,7 +153,7 @@ class PgsqlPDOQuerySplitter extends PDOQuerySplitter
     /**
      * @return null|string
      */
-    public function nextQuery()
+    public function nextQuery(): ?string
     {
         $sql = '';
         $delimiter = $this->parent->getDelimiter();

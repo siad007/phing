@@ -55,7 +55,7 @@ class HgRevertTask extends HgBaseTask
      *
      * @return void
      */
-    public function setAll($value)
+    public function setAll($value): void
     {
         $this->all = StringHelper::booleanValue($value);
     }
@@ -67,7 +67,7 @@ class HgRevertTask extends HgBaseTask
      *
      * @return void
      */
-    public function setFile($file)
+    public function setFile($file): void
     {
         $this->file = $file;
     }
@@ -77,7 +77,7 @@ class HgRevertTask extends HgBaseTask
      *
      * @return string
      */
-    public function getFile()
+    public function getFile(): string
     {
         return $this->file;
     }
@@ -89,7 +89,7 @@ class HgRevertTask extends HgBaseTask
      *
      * @return void
      */
-    public function setRevision($revision)
+    public function setRevision($revision): void
     {
         $this->revision = $revision;
     }
@@ -100,7 +100,7 @@ class HgRevertTask extends HgBaseTask
      * @throws BuildException
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $clone = $this->getFactoryInstance('revert');
         $clone->setQuiet($this->getQuiet());

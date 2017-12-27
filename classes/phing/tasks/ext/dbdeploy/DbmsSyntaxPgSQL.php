@@ -31,7 +31,7 @@ class DbmsSyntaxPgSQL extends DbmsSyntax
     /**
      * @return string
      */
-    public function generateTimestamp()
+    public function generateTimestamp(): string
     {
         return "NOW()";
     }

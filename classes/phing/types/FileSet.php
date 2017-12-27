@@ -39,7 +39,7 @@ class FileSet extends AbstractFileSet
     /**
      * @return array
      */
-    public function getIterator()
+    public function getIterator(): iterable
     {
         $ds = $this->getDirectoryScanner($this->getProject());
         return $ds->getIncludedFiles() + $ds->getIncludedDirectories();

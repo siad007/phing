@@ -64,7 +64,7 @@ class FailTask extends Task
      *
      * @return void
      */
-    public function setMsg($value)
+    public function setMsg($value): void
     {
         $this->setMessage($value);
     }
@@ -76,7 +76,7 @@ class FailTask extends Task
      *
      * @return void
      */
-    public function setMessage($value)
+    public function setMessage($value): void
     {
         $this->message = $value;
     }
@@ -88,7 +88,7 @@ class FailTask extends Task
      *
      * @return void
      */
-    public function setIf($c)
+    public function setIf($c): void
     {
         $this->ifCondition = $c;
     }
@@ -101,7 +101,7 @@ class FailTask extends Task
      *
      * @return void
      */
-    public function setUnless($c)
+    public function setUnless(string $c): void
     {
         $this->unlessCondition = $c;
     }
@@ -110,9 +110,9 @@ class FailTask extends Task
      * Set the status code to associate with the thrown Exception.
      * @param int $int the <code>int</code> status
      */
-    public function setStatus($int)
+    public function setStatus(int $int)
     {
-        $this->status = (int) $int;
+        $this->status = $int;
     }
 
     /**
@@ -122,7 +122,7 @@ class FailTask extends Task
      *
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         $fail =  $this->nestedConditionPresent() ? $this->testNestedCondition() :
             $this->testIfCondition() && $this->testUnlessCondition();
@@ -166,7 +166,7 @@ class FailTask extends Task
      * @return NestedCondition
      * @throws BuildException
      */
-    public function createCondition()
+    public function createCondition(): \NestedCondition
     {
         if ($this->nestedCondition !== null) {
             throw new BuildException("Only one nested condition is allowed.");
@@ -182,7 +182,7 @@ class FailTask extends Task
      *
      * @return void
      */
-    public function addText($msg)
+    public function addText($msg): void
     {
         if ($this->message === null) {
             $this->message = "";
@@ -193,7 +193,7 @@ class FailTask extends Task
     /**
      * @return boolean
      */
-    protected function testIfCondition()
+    protected function testIfCondition(): bool
     {
         if ($this->ifCondition === null || $this->ifCondition === "") {
             return true;
@@ -205,7 +205,7 @@ class FailTask extends Task
     /**
      * @return boolean
      */
-    protected function testUnlessCondition()
+    protected function testUnlessCondition(): bool
     {
         if ($this->unlessCondition === null || $this->unlessCondition === "") {
             return true;
@@ -219,7 +219,7 @@ class FailTask extends Task
      * @return bool true if there is none, or it evaluates to true
      * @throws BuildException
      */
-    private function testNestedCondition()
+    private function testNestedCondition(): bool
     {
         $result = $this->nestedConditionPresent();
 
@@ -234,7 +234,7 @@ class FailTask extends Task
      * test whether there is a nested condition.
      * @return boolean
      */
-    private function nestedConditionPresent()
+    private function nestedConditionPresent(): bool
     {
         return (bool) $this->nestedCondition;
     }

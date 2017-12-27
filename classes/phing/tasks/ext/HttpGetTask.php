@@ -74,7 +74,7 @@ class HttpGetTask extends HttpTask
      * @throws BuildException
      * @throws HTTP_Request2_LogicException
      */
-    protected function createRequest()
+    protected function createRequest(): \HTTP_Request2
     {
         if (!isset($this->dir)) {
             throw new BuildException("Required attribute 'dir' is missing", $this->getLocation());
@@ -105,7 +105,7 @@ class HttpGetTask extends HttpTask
      * @return void
      * @throws BuildException
      */
-    protected function processResponse(HTTP_Request2_Response $response)
+    protected function processResponse(HTTP_Request2_Response $response): void
     {
         if ($response->getStatus() != 200) {
             throw new BuildException(
@@ -198,7 +198,7 @@ class HttpGetTask extends HttpTask
         $this->quiet = $v;
     }
 
-    public function log($msg, $msgLevel = Project::MSG_INFO, Exception $t = null)
+    public function log($msg, $msgLevel = Project::MSG_INFO, Exception $t = null): void
     {
         if (!$this->quiet || $msgLevel <= Project::MSG_ERR) {
             parent::log($msg, $msgLevel, $t);

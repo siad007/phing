@@ -93,7 +93,7 @@ class RegexpMapper implements FileNameMapper
      *
      * @return void
      */
-    public function setFrom($from)
+    public function setFrom($from): void
     {
         if ($from === null) {
             throw new BuildException("this mapper requires a 'from' attribute");
@@ -114,7 +114,7 @@ class RegexpMapper implements FileNameMapper
      * @intern [HL] I'm changing the way this works for now to just use string
      *              <code>$this->to = StringHelper::toCharArray($to);</code>
      */
-    public function setTo($to)
+    public function setTo($to): void
     {
         if ($to === null) {
             throw new BuildException("this mapper requires a 'to' attribute");
@@ -130,7 +130,7 @@ class RegexpMapper implements FileNameMapper
      *
      * @return array|null
      */
-    public function main($sourceFileName)
+    public function main($sourceFileName): array
     {
         if ($this->handleDirSep) {
             if (strpos('\\', $sourceFileName) !== false) {
@@ -138,7 +138,7 @@ class RegexpMapper implements FileNameMapper
             }
         }
         if ($this->reg === null || $this->to === null || !$this->reg->matches((string) $sourceFileName)) {
-            return null;
+            return [];
         }
 
         return [$this->replaceReferences($sourceFileName)];
@@ -170,7 +170,7 @@ class RegexpMapper implements FileNameMapper
      *
      * @return string
      */
-    private function replaceReferencesCallback($matches)
+    private function replaceReferencesCallback($matches): string
     {
         return (string) $this->reg->getGroup($matches[1]);
     }

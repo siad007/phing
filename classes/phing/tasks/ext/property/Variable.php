@@ -78,6 +78,7 @@ class Variable extends PropertyTask
     /**
      * Remove a property from the project's property table and the userProperty table.
      * Note that Ant 1.6 uses a helper for this.
+     * @param $name
      */
     private function removeProperty($name)
     {
@@ -126,7 +127,7 @@ class Variable extends PropertyTask
      * @return ReflectionProperty               The field value
      * @throws Exception
      */
-    private function getField($thisClass, $fieldName)
+    private function getField($thisClass, $fieldName): \ReflectionProperty
     {
         $refClazz = new ReflectionObject($thisClass);
         if (!$refClazz->hasProperty($fieldName)) {
@@ -204,7 +205,7 @@ class Variable extends PropertyTask
      * @param Properties $props               properties object to resolve
      * @throws BuildException  Description of the Exception
      */
-    protected function resolveAllProperties(Properties $props)
+    protected function resolveAllProperties(Properties $props): void
     {
         foreach ($props->keys() as $name) {
             // There may be a nice regex/callback way to handle this

@@ -82,7 +82,7 @@ class TabToSpaces extends BaseParamFilterReader implements ChainableReader
 
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -106,7 +106,7 @@ class TabToSpaces extends BaseParamFilterReader implements ChainableReader
      *
      * @return int The number of spaces used when converting a tab
      */
-    public function getTablength()
+    public function getTablength(): int
     {
         return $this->tabLength;
     }
@@ -121,9 +121,9 @@ class TabToSpaces extends BaseParamFilterReader implements ChainableReader
      * @return TabToSpaces A new filter based on this configuration, but filtering
      *                the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new TabToSpaces($reader);
+        $newFilter = new self($reader);
         $newFilter->setTablength($this->getTablength());
         $newFilter->setInitialized(true);
         $newFilter->setProject($this->getProject());

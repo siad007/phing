@@ -174,7 +174,7 @@ abstract class AbstractLiquibaseTask extends Task
      *
      * @return void
      */
-    public function setOutputProperty($prop)
+    public function setOutputProperty($prop): void
     {
         $this->outputProperty = $prop;
     }
@@ -184,7 +184,7 @@ abstract class AbstractLiquibaseTask extends Task
      *
      * @return LiquibaseProperty Argument object
      */
-    public function createProperty()
+    public function createProperty(): \LiquibaseProperty
     {
         $prop = new LiquibaseProperty();
         $this->properties[] = $prop;
@@ -197,7 +197,7 @@ abstract class AbstractLiquibaseTask extends Task
      *
      * @return LiquibaseParameter Argument object
      */
-    public function createParameter()
+    public function createParameter(): \LiquibaseParameter
     {
         $param = new LiquibaseParameter();
         $this->parameters[] = $param;
@@ -247,9 +247,8 @@ abstract class AbstractLiquibaseTask extends Task
      * @param $lbcommand
      * @param string $lbparams the command to execute
      * @throws BuildException
-     * @return string the output of the executed command
      */
-    protected function execute($lbcommand, $lbparams = '')
+    protected function execute($lbcommand, $lbparams = ''): void
     {
         $nestedparams = "";
         foreach ($this->parameters as $p) {

@@ -35,7 +35,7 @@ class ConsoleReader extends Reader
     /**
      * @return string
      */
-    public function readLine()
+    public function readLine(): string
     {
         $out = fgets(STDIN); // note: default maxlen is 1kb
         $out = rtrim($out);
@@ -45,7 +45,7 @@ class ConsoleReader extends Reader
 
     /**
      *
-     * @param  int    $len Num chars to read.
+     * @param  int $len Num chars to read.
      * @return string chars read or -1 if eof.
      */
     public function read($len = null)
@@ -59,7 +59,7 @@ class ConsoleReader extends Reader
         // ability to read chars w/o <enter> ?
     }
 
-    public function close()
+    public function close(): void
     {
         // STDIN is always open
     }
@@ -73,7 +73,7 @@ class ConsoleReader extends Reader
      * Whether eof has been reached with stream.
      * @return boolean
      */
-    public function eof()
+    public function eof(): bool
     {
         return feof(STDIN);
     }
@@ -82,7 +82,7 @@ class ConsoleReader extends Reader
      * Returns path to file we are reading.
      * @return string
      */
-    public function getResource()
+    public function getResource(): string
     {
         return "console";
     }

@@ -38,7 +38,7 @@ class DummyPDOQuerySplitter extends PDOQuerySplitter
      *
      * @return string|null
      */
-    public function nextQuery()
+    public function nextQuery(): ?string
     {
         $sql = null;
 

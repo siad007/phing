@@ -140,7 +140,7 @@ class BuildEvent extends EventObject
      *
      * @return Project The project instance that fired this event
      */
-    public function getProject()
+    public function getProject(): \Project
     {
         return $this->project;
     }
@@ -153,7 +153,7 @@ class BuildEvent extends EventObject
      *
      * @return Target The target that fired this event
      */
-    public function getTarget()
+    public function getTarget(): \Target
     {
         return $this->target;
     }
@@ -166,7 +166,7 @@ class BuildEvent extends EventObject
      *
      * @return Task The task that fired this event
      */
-    public function getTask()
+    public function getTask(): ?\Task
     {
         return $this->task;
     }
@@ -177,7 +177,7 @@ class BuildEvent extends EventObject
      *
      * @return string The log message
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -188,7 +188,7 @@ class BuildEvent extends EventObject
      *
      * @return integer The message priority
      */
-    public function getPriority()
+    public function getPriority(): int
     {
         return $this->priority;
     }
@@ -203,7 +203,7 @@ class BuildEvent extends EventObject
      * @see BuildListener::buildFinished()
      * @return Exception
      */
-    public function getException()
+    public function getException(): \Exception
     {
         return $this->exception;
     }

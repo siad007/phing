@@ -55,7 +55,7 @@ class HgTagTask extends HgBaseTask
      *
      * @return void
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -65,7 +65,7 @@ class HgTagTask extends HgBaseTask
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -77,7 +77,7 @@ class HgTagTask extends HgBaseTask
      *
      * @return void
      */
-    public function setMessage($message)
+    public function setMessage($message): void
     {
         $this->message = $message;
     }
@@ -87,7 +87,7 @@ class HgTagTask extends HgBaseTask
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -99,7 +99,7 @@ class HgTagTask extends HgBaseTask
      *
      * @return void
      */
-    public function setRevision($revision)
+    public function setRevision($revision): void
     {
         $this->revision = $revision;
     }
@@ -109,7 +109,7 @@ class HgTagTask extends HgBaseTask
      *
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $clone = $this->getFactoryInstance('tag');
         $cwd = getcwd();

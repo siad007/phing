@@ -48,9 +48,9 @@ class IsTrueCondition extends ProjectComponent implements Condition
 
     /**
      * return the inverted value;
-     * @throws BuildException if someone forgot to spec a value
+     * @return bool
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->value === null) {
             throw new BuildException("Nothing to test for falsehood");

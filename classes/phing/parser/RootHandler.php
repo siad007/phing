@@ -76,18 +76,17 @@ class RootHandler extends AbstractHandler
      * to handle any nested tags & attributes of the &lt;project&gt; tag,
      * and calls init.
      *
-     * @param  string              $tag   The xml tagname
-     * @param  array               $attrs The attributes of the tag
-     * @throws ExpatParseException if the first element within our build file
-     *                                   is not the &gt;project&lt; element
+     * @param  string $name The xml tagname
+     * @param  array $attribs The attributes of the tag
+     * @throws IOException
      */
-    public function startElement($tag, $attrs)
+    public function startElement($name, $attribs): void
     {
-        if ($tag === "project") {
+        if ($name === "project") {
             $ph = new ProjectHandler($this->parser, $this, $this->configurator, $this->context);
-            $ph->init($tag, $attrs);
+            $ph->init($name, $attribs);
         } else {
-            throw new ExpatParseException("Unexpected tag <$tag> in top-level of build file.", $this->parser->getLocation(
+            throw new ExpatParseException("Unexpected tag <$name> in top-level of build file.", $this->parser->getLocation(
             ));
         }
     }

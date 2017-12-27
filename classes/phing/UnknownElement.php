@@ -57,7 +57,7 @@ class UnknownElement extends Task
      *
      * @return string The XML element name that is unknown
      */
-    public function getTag()
+    public function getTag(): string
     {
         return (string) $this->elementName;
     }
@@ -134,7 +134,7 @@ class UnknownElement extends Task
                 continue;
             }
 
-            $project = $this->project === null ? $parent->project : $this->project;
+            $project = $this->project ?? $parent->project;
             $realChild = $ih->createElement($project, $parent, $child->getTag());
 
             $childWrapper->setProxy($realChild);
@@ -180,7 +180,7 @@ class UnknownElement extends Task
      * @throws BuildException
      * @return Task                The freshly created task
      */
-    protected function makeTask(UnknownElement $ue, RuntimeConfigurable $w, $onTopLevel = false)
+    protected function makeTask(UnknownElement $ue, RuntimeConfigurable $w, $onTopLevel = false): ?\Task
     {
         $task = $this->project->createTask($ue->getTag());
 
@@ -215,7 +215,7 @@ class UnknownElement extends Task
      *
      * @return string The task's name
      */
-    public function getTaskName()
+    public function getTaskName(): string
     {
         return $this->realThing === null || !$this->realThing instanceof Task
             ? parent::getTaskName()

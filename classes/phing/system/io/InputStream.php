@@ -60,12 +60,12 @@ class InputStream
      * @param int $n
      * @return int
      */
-    public function skip($n)
+    public function skip($n): int
     {
         $start = $this->currentPosition;
 
         $ret = @fseek($this->stream, $n, SEEK_CUR);
-        if ($ret === -1) {
+        if ($ret == -1) {
             return -1;
         }
 
@@ -85,7 +85,7 @@ class InputStream
      * @param  int    $len Num chars to read.  If not specified this stream will read until EOF.
      * @return string chars read or -1 if eof.
      */
-    public function read($len = null)
+    public function read($len = null): string
     {
         if ($this->eof()) {
             return -1;
@@ -109,7 +109,7 @@ class InputStream
      * Marks the current position in this input stream.
      * @throws IOException - if the underlying stream doesn't support this method.
      */
-    public function mark()
+    public function mark(): void
     {
         if (!$this->markSupported()) {
             throw new IOException(get_class($this) . " does not support mark() and reset() methods.");
@@ -130,7 +130,7 @@ class InputStream
      * Repositions this stream to the position at the time the mark method was last called on this input stream.
      * @throws IOException - if the underlying stream doesn't support this method.
      */
-    public function reset()
+    public function reset(): void
     {
         if (!$this->markSupported()) {
             throw new IOException(get_class($this) . " does not support mark() and reset() methods.");
@@ -144,7 +144,7 @@ class InputStream
      * Closes stream.
      * @throws IOException if stream cannot be closed (note that calling close() on an already-closed stream will not raise an exception)
      */
-    public function close()
+    public function close(): void
     {
         if ($this->stream === null) {
             return;
@@ -161,7 +161,7 @@ class InputStream
      * Whether eof has been reached with stream.
      * @return boolean
      */
-    public function eof()
+    public function eof(): bool
     {
         return feof($this->stream);
     }

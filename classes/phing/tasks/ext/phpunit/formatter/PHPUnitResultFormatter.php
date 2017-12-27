@@ -219,7 +219,7 @@ abstract class PHPUnitResultFormatter implements PHPUnit\Framework\TestListener
      * @param Exception $e
      * @param float $time
      */
-    public function addRiskyTest(PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addRiskyTest(PHPUnit\Framework\Test $test, Exception $e, $time): void
     {
     }
 
@@ -286,9 +286,9 @@ abstract class PHPUnitResultFormatter implements PHPUnit\Framework\TestListener
     /**
      * @return float
      */
-    private function getMicrotime()
+    private function getMicrotime(): float
     {
-        list($usec, $sec) = explode(' ', microtime());
+        [$usec, $sec] = explode(' ', microtime());
 
         return (float) $usec + (float) $sec;
     }

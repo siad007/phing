@@ -23,7 +23,7 @@
  */
 class TimeFormatter
 {
-    public function format($time)
+    public function format($time): string
     {
         $format = "%0.5f";
         return sprintf($format, $time) . ' sec';

@@ -66,7 +66,7 @@ class PregEngine implements RegexpEngine
      * @param  string $mods Modifiers to be applied to a given regex
      * @return void
      */
-    public function setModifiers($mods)
+    public function setModifiers($mods): void
     {
         $this->modifiers = (string) $mods;
     }
@@ -75,7 +75,7 @@ class PregEngine implements RegexpEngine
      * Gets pattern modifiers.
      * @return string
      */
-    public function getModifiers()
+    public function getModifiers(): string
     {
         $mods = $this->modifiers;
         if ($this->getIgnoreCase()) {
@@ -100,7 +100,7 @@ class PregEngine implements RegexpEngine
      * @param  boolean $bit
      * @return void
      */
-    public function setIgnoreCase($bit)
+    public function setIgnoreCase($bit): void
     {
         $this->ignoreCase = (boolean) $bit;
     }
@@ -109,7 +109,7 @@ class PregEngine implements RegexpEngine
      * Gets whether or not regex operation is case sensitive.
      * @return boolean
      */
-    public function getIgnoreCase()
+    public function getIgnoreCase(): ?bool
     {
         return $this->ignoreCase;
     }
@@ -118,7 +118,7 @@ class PregEngine implements RegexpEngine
      * Sets whether regexp should be applied in multiline mode.
      * @param boolean $bit
      */
-    public function setMultiline($bit)
+    public function setMultiline(bool $bit): void
     {
         $this->multiline = $bit;
     }
@@ -127,7 +127,7 @@ class PregEngine implements RegexpEngine
      * Gets whether regexp is to be applied in multiline mode.
      * @return boolean
      */
-    public function getMultiline()
+    public function getMultiline(): ?bool
     {
         return $this->multiline;
     }
@@ -136,7 +136,7 @@ class PregEngine implements RegexpEngine
      * Sets the maximum possible replacements for each pattern.
      * @param int $limit
      */
-    public function setLimit($limit)
+    public function setLimit(int $limit): void
     {
         $this->limit = $limit;
     }
@@ -145,7 +145,7 @@ class PregEngine implements RegexpEngine
      * Returns the maximum possible replacements for each pattern.
      * @return int
      */
-    public function getLimit()
+    public function getLimit(): int
     {
         return $this->limit;
     }
@@ -155,7 +155,7 @@ class PregEngine implements RegexpEngine
      * @param  string $pattern
      * @return string prepared pattern.
      */
-    private function preparePattern($pattern)
+    private function preparePattern($pattern): string
     {
         $delimiterPattern = '/\\\\*' . self::DELIMITER . '/';
 
@@ -185,7 +185,7 @@ class PregEngine implements RegexpEngine
      * @param  array   $matches The array in which to store matches.
      * @return boolean Success of matching operation.
      */
-    public function match($pattern, $source, &$matches)
+    public function match($pattern, $source, &$matches): bool
     {
         return preg_match($this->preparePattern($pattern), $source, $matches) > 0;
     }
@@ -197,7 +197,7 @@ class PregEngine implements RegexpEngine
      * @param  array   $matches The array in which to store matches.
      * @return boolean Success of matching operation.
      */
-    public function matchAll($pattern, $source, &$matches)
+    public function matchAll($pattern, $source, &$matches): bool
     {
         return preg_match_all($this->preparePattern($pattern), $source, $matches) > 0;
     }
@@ -211,7 +211,7 @@ class PregEngine implements RegexpEngine
      * @param  string $source  The source string.
      * @return string The replaced source string.
      */
-    public function replace($pattern, $replace, $source)
+    public function replace($pattern, $replace, $source): string
     {
         // convert \1 -> $1, because we want to use the more generic \1 in the XML
         // but PREG prefers $1 syntax.

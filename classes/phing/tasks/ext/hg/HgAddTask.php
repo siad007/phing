@@ -39,10 +39,10 @@ class HgAddTask extends HgBaseTask
     /**
      * The main entry point method.
      *
-     * @throws BuildException
      * @return void
+     * @throws Exception
      */
-    public function main()
+    public function main(): void
     {
         $filesAdded = false;
         $clone = $this->getFactoryInstance('add');
@@ -122,7 +122,7 @@ class HgAddTask extends HgBaseTask
      *
      * @return void
      */
-    public function loadIgnoreFile()
+    public function loadIgnoreFile(): void
     {
         $ignores = [];
         $lines = file('.hgignore');
@@ -141,7 +141,7 @@ class HgAddTask extends HgBaseTask
      *
      * @return bool
      */
-    public function fileIsIgnored($file)
+    public function fileIsIgnored($file): bool
     {
         $line = $this->ignoreFile[0];
         $mode = 'regexp';
@@ -166,7 +166,7 @@ class HgAddTask extends HgBaseTask
      *
      * @return bool
      */
-    public function ignoredByGlob($file)
+    public function ignoredByGlob($file): bool
     {
         $lfile = $file;
         if (strpos($lfile, './') === 0) {
@@ -187,7 +187,7 @@ class HgAddTask extends HgBaseTask
      *
      * @return bool
      */
-    public function ignoredByRegex($file)
+    public function ignoredByRegex($file): bool
     {
         return true;
     }

@@ -70,7 +70,7 @@ class InputRequest
     /**
      * Retrieves the prompt text.
      */
-    public function getPrompt()
+    public function getPrompt(): string
     {
         return $this->prompt;
     }
@@ -79,7 +79,7 @@ class InputRequest
      * Sets the user provided input.
      * @param $input
      */
-    public function setInput($input)
+    public function setInput($input): void
     {
         $this->input = $input;
     }
@@ -87,7 +87,7 @@ class InputRequest
     /**
      * Is the user input valid?
      */
-    public function isInputValid()
+    public function isInputValid(): bool
     {
         return true;
     }
@@ -104,16 +104,16 @@ class InputRequest
      * Set the default value to use.
      * @param mixed $v
      */
-    public function setDefaultValue($v)
+    public function setDefaultValue($v): void
     {
         $this->defaultValue = $v;
     }
 
     /**
      * Return the default value to use.
-     * @return mixed
+     * @return string
      */
-    public function getDefaultValue()
+    public function getDefaultValue(): ?string
     {
         return $this->defaultValue;
     }
@@ -122,7 +122,7 @@ class InputRequest
      * Set the default value to use.
      * @param string $c
      */
-    public function setPromptChar($c)
+    public function setPromptChar(string $c): void
     {
         $this->promptChar = $c;
     }
@@ -131,7 +131,7 @@ class InputRequest
      * Return the default value to use.
      * @return string
      */
-    public function getPromptChar()
+    public function getPromptChar(): ?string
     {
         return $this->promptChar;
     }
@@ -139,7 +139,7 @@ class InputRequest
     /**
      * @return bool
      */
-    public function isHidden()
+    public function isHidden(): bool
     {
         return $this->hidden;
     }
@@ -147,7 +147,7 @@ class InputRequest
     /**
      * @param bool $hidden
      */
-    public function setHidden($hidden)
+    public function setHidden(bool $hidden): void
     {
         $this->hidden = $hidden;
     }

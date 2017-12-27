@@ -72,7 +72,7 @@ class Regexp
      * @param  string $pat The pattern to match on.
      * @return void
      */
-    public function setPattern($pat)
+    public function setPattern($pat): void
     {
         $this->pattern = (string) $pat;
     }
@@ -81,7 +81,7 @@ class Regexp
      * Gets pattern to use for matching.
      * @return string The pattern to match on.
      */
-    public function getPattern()
+    public function getPattern(): string
     {
         return $this->pattern;
     }
@@ -91,7 +91,7 @@ class Regexp
      * @param  string $rep The pattern to replace matches with.
      * @return void
      */
-    public function setReplace($rep)
+    public function setReplace($rep): void
     {
         $this->replace = (string) $rep;
     }
@@ -100,7 +100,7 @@ class Regexp
      * Gets replacement string.
      * @return string The pattern to replace matches with.
      */
-    public function getReplace()
+    public function getReplace(): string
     {
         return $this->replace;
     }
@@ -111,7 +111,7 @@ class Regexp
      * @throws Exception
      * @return boolean Whether or not pattern matches subject string passed.
      */
-    public function matches($subject)
+    public function matches($subject): bool
     {
         if ($this->pattern === null) {
             throw new Exception("No pattern specified for regexp match().");
@@ -126,7 +126,7 @@ class Regexp
      * @throws Exception
      * @return string subject after replacement has been performed.
      */
-    public function replace($subject)
+    public function replace($subject): string
     {
         if ($this->pattern === null || $this->replace === null) {
             throw new Exception("Missing pattern or replacement string regexp replace().");
@@ -139,7 +139,7 @@ class Regexp
      * Get array of matched groups.
      * @return array Matched groups
      */
-    public function getGroups()
+    public function getGroups(): array
     {
         return $this->groups;
     }
@@ -149,7 +149,7 @@ class Regexp
      * @param  integer $idx
      * @return string  specified group or NULL if group is not set.
      */
-    public function getGroup($idx)
+    public function getGroup($idx): string
     {
         if (!isset($this->groups[$idx])) {
             return null;
@@ -164,7 +164,7 @@ class Regexp
      * @param  string $mods Modifiers to be applied to a given regex
      * @return void
      */
-    public function setModifiers($mods)
+    public function setModifiers($mods): void
     {
         $this->engine->setModifiers($mods);
     }
@@ -176,7 +176,7 @@ class Regexp
      * modifier would be included only once
      * @return string
      */
-    public function getModifiers()
+    public function getModifiers(): string
     {
         return $this->engine->getModifiers();
     }
@@ -186,7 +186,7 @@ class Regexp
      * (default is false -- i.e. case sensisitive)
      * @param boolean $bit
      */
-    public function setIgnoreCase($bit)
+    public function setIgnoreCase($bit): void
     {
         $this->engine->setIgnoreCase($bit);
     }
@@ -195,7 +195,7 @@ class Regexp
      * Gets whether the regexp matching is case insensitive.
      * @return boolean
      */
-    public function getIgnoreCase()
+    public function getIgnoreCase(): bool
     {
         return $this->engine->getIgnoreCase();
     }
@@ -204,7 +204,7 @@ class Regexp
      * Sets whether regexp should be applied in multiline mode.
      * @param boolean $bit
      */
-    public function setMultiline($bit)
+    public function setMultiline($bit): void
     {
         $this->engine->setMultiline($bit);
     }
@@ -213,7 +213,7 @@ class Regexp
      * Gets whether regexp is to be applied in multiline mode.
      * @return boolean
      */
-    public function getMultiline()
+    public function getMultiline(): bool
     {
         return $this->engine->getMultiline();
     }
@@ -222,7 +222,7 @@ class Regexp
      * Sets the maximum possible replacements for each pattern.
      * @param int $limit
      */
-    public function setLimit($limit)
+    public function setLimit($limit): void
     {
         $this->engine->setLimit($limit);
     }

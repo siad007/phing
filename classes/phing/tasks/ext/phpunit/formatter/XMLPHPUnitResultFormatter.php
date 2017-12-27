@@ -52,7 +52,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
     /**
      * @return string
      */
-    public function getExtension()
+    public function getExtension(): string
     {
         return ".xml";
     }
@@ -60,7 +60,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
     /**
      * @return string
      */
-    public function getPreferredOutfile()
+    public function getPreferredOutfile(): string
     {
         return "testsuites";
     }
@@ -68,7 +68,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
     /**
      * @param PHPUnit\Framework\TestSuite $suite
      */
-    public function startTestSuite(PHPUnit\Framework\TestSuite $suite)
+    public function startTestSuite(PHPUnit\Framework\TestSuite $suite): void
     {
         parent::startTestSuite($suite);
 
@@ -78,7 +78,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
     /**
      * @param PHPUnit\Framework\TestSuite $suite
      */
-    public function endTestSuite(PHPUnit\Framework\TestSuite $suite)
+    public function endTestSuite(PHPUnit\Framework\TestSuite $suite): void
     {
         parent::endTestSuite($suite);
 
@@ -88,7 +88,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
     /**
      * @param PHPUnit\Framework\Test $test
      */
-    public function startTest(PHPUnit\Framework\Test $test)
+    public function startTest(PHPUnit\Framework\Test $test): void
     {
         parent::startTest($test);
 
@@ -99,7 +99,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
      * @param PHPUnit\Framework\Test $test
      * @param float $time
      */
-    public function endTest(PHPUnit\Framework\Test $test, $time)
+    public function endTest(PHPUnit\Framework\Test $test, $time): void
     {
         parent::endTest($test, $time);
 
@@ -111,7 +111,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
      * @param Exception $e
      * @param float $time
      */
-    public function addError(PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addError(PHPUnit\Framework\Test $test, Exception $e, $time): void
     {
         parent::addError($test, $e, $time);
 
@@ -123,7 +123,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
      * @param PHPUnit\Framework\AssertionFailedError $e
      * @param float $time
      */
-    public function addFailure(PHPUnit\Framework\Test $test, PHPUnit\Framework\AssertionFailedError $e, $time)
+    public function addFailure(PHPUnit\Framework\Test $test, PHPUnit\Framework\AssertionFailedError $e, $time): void
     {
         parent::addFailure($test, $e, $time);
 
@@ -132,10 +132,10 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
 
     /**
      * @param PHPUnit\Framework\Test $test
-     * @param PHPUnit\Framework\AssertionFailedError $e
+     * @param \PHPUnit\Framework\Warning $e
      * @param float $time
      */
-    public function addWarning(PHPUnit\Framework\Test $test, \PHPUnit\Framework\Warning $e, $time)
+    public function addWarning(PHPUnit\Framework\Test $test, \PHPUnit\Framework\Warning $e, $time): void
     {
         parent::addWarning($test, $e, $time);
 
@@ -147,7 +147,7 @@ class XMLPHPUnitResultFormatter extends PHPUnitResultFormatter
      * @param Exception $e
      * @param float $time
      */
-    public function addIncompleteTest(PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addIncompleteTest(PHPUnit\Framework\Test $test, Exception $e, $time): void
     {
         parent::addIncompleteTest($test, $e, $time);
 

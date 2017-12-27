@@ -160,7 +160,7 @@ class EchoProperties extends Task
      */
     public function setPrefix($prefix)
     {
-        if ($prefix != null && strlen($prefix) != 0) {
+        if ($prefix != null && '' !== $prefix) {
             $this->prefix = $prefix;
         }
     }
@@ -272,7 +272,7 @@ class EchoProperties extends Task
     {
         if ($this->failonerror) {
             throw new BuildException(
-                $exception !== null ? $exception : $message,
+                $exception ?? $message,
                 $this->getLocation()
             );
         } else {
@@ -293,8 +293,6 @@ class EchoProperties extends Task
      *
      * @param  array $allProps propfile to save
      * @param  OutputStream $os output stream
-     * @throws IOException      on output errors
-     * @throws BuildException   on other errors
      */
     protected function saveProperties($allProps, $os)
     {

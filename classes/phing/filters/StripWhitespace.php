@@ -42,7 +42,6 @@ class StripWhitespace extends BaseFilterReader implements ChainableReader
      * @param null $len
      * @return int the resulting stream, or -1
      *             if the end of the resulting stream has been reached
-     *
      */
     public function read($len = null)
     {
@@ -52,7 +51,7 @@ class StripWhitespace extends BaseFilterReader implements ChainableReader
 
         // Read XML
         $php = null;
-        while (($buffer = $this->in->read($len)) !== -1) {
+        while (($buffer = $this->in->read($len)) != -1) {
             $php .= $buffer;
         }
 
@@ -83,15 +82,15 @@ class StripWhitespace extends BaseFilterReader implements ChainableReader
      * Reader for instantiation.
      *
      * @param A|Reader $reader
+     * @return StripWhitespace a new filter based on this configuration, but filtering
+     *           the specified reader
      * @internal param A $reader Reader object providing the underlying stream.
      *               Must not be <code>null</code>.
      *
-     * @return StripWhitespace a new filter based on this configuration, but filtering
-     *           the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new StripWhitespace($reader);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
 
         return $newFilter;

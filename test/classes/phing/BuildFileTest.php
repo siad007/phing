@@ -500,8 +500,9 @@ class PhingTestListener implements BuildListener
      *  will still be thrown if an error occurred during the build.
      *
      * @see BuildEvent#getException()
+     * @param BuildEvent $event
      */
-    public function buildFinished(BuildEvent $event)
+    public function buildFinished(BuildEvent $event): void
     {
     }
 
@@ -509,8 +510,9 @@ class PhingTestListener implements BuildListener
      *  Fired when a target is started.
      *
      * @see BuildEvent#getTarget()
+     * @param BuildEvent $event
      */
-    public function targetStarted(BuildEvent $event)
+    public function targetStarted(BuildEvent $event): void
     {
         //System.out.println("targetStarted " + event.getTarget().getName());
     }
@@ -552,8 +554,9 @@ class PhingTestListener implements BuildListener
      *
      * @see BuildEvent#getMessage()
      * @see BuildEvent#getPriority()
+     * @param BuildEvent $event
      */
-    public function messageLogged(BuildEvent $event)
+    public function messageLogged(BuildEvent $event): void
     {
         $this->parent->logBuffer[] = [
             'message' => $event->getMessage(),

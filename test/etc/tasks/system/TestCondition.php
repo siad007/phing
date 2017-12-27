@@ -9,7 +9,7 @@ class TestCondition implements Condition
         $this->foo = $value;
     }
     
-    public function evaluate()
+    public function evaluate(): bool
     {
         return ($this->foo == "bar");
     }

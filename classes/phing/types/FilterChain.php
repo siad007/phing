@@ -69,7 +69,7 @@ class FilterChain extends DataType
     /**
      * @return array
      */
-    public function getFilterReaders()
+    public function getFilterReaders(): array
     {
         return $this->filterReaders;
     }
@@ -165,7 +165,7 @@ class FilterChain extends DataType
     }
 
     /**
-     * @param PrefixLines $o
+     * @param EscapeUnicode $o
      */
     public function addEscapeUnicode(EscapeUnicode $o)
     {
@@ -311,9 +311,8 @@ class FilterChain extends DataType
     */
     /**
      * @param Reference $r
-     * @throws BuildException
      */
-    public function setRefid(Reference $r)
+    public function setRefid(Reference $r): void
     {
         if (count($this->filterReaders) !== 0) {
             throw $this->tooManyAttributes();

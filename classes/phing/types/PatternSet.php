@@ -43,9 +43,8 @@ class PatternSet extends DataType
      * You must not set another attribute or nest elements inside
      * this element if you make it a reference.
      * @param Reference $r
-     * @throws BuildException
      */
-    public function setRefid(Reference $r)
+    public function setRefid(Reference $r): void
     {
         if (!empty($this->includeList) || !empty($this->excludeList)) {
             throw $this->tooManyAttributes();
@@ -59,7 +58,7 @@ class PatternSet extends DataType
      * @return PatternSetNameEntry Reference to object
      * @throws BuildException
      */
-    public function createInclude()
+    public function createInclude(): \PatternSetNameEntry
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -74,7 +73,7 @@ class PatternSet extends DataType
      * @return PatternSetNameEntry Reference to object
      * @throws BuildException
      */
-    public function createIncludesFile()
+    public function createIncludesFile(): \PatternSetNameEntry
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -89,7 +88,7 @@ class PatternSet extends DataType
      * @return PatternSetNameEntry Reference to object
      * @throws BuildException
      */
-    public function createExclude()
+    public function createExclude(): \PatternSetNameEntry
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -104,7 +103,7 @@ class PatternSet extends DataType
      * @return PatternSetNameEntry Reference to object
      * @throws BuildException
      */
-    public function createExcludesFile()
+    public function createExcludesFile(): \PatternSetNameEntry
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -121,7 +120,7 @@ class PatternSet extends DataType
      * @return void
      * @throws BuildException
      */
-    public function setIncludes($includes)
+    public function setIncludes($includes): void
     {
         if ($this->isReference()) {
             throw $this->tooManyAttributes();
@@ -144,7 +143,7 @@ class PatternSet extends DataType
      * @return void
      * @throws BuildException
      */
-    public function setExcludes($excludes)
+    public function setExcludes($excludes): void
     {
         if ($this->isReference()) {
             throw $this->tooManyAttributes();
@@ -165,7 +164,7 @@ class PatternSet extends DataType
      * @param  array List onto which the nameentry should be added
      * @return PatternSetNameEntry Reference to the created PsetNameEntry instance
      */
-    private function addPatternToList(&$list)
+    private function addPatternToList(&$list): \PatternSetNameEntry
     {
         $num = array_push($list, new PatternSetNameEntry());
 
@@ -250,12 +249,12 @@ class PatternSet extends DataType
     /**
      * Adds the patterns of the other instance to this set.
      *
-     * @param $other
+     * @param PatternSet $other
      * @param Project $p
      *
      * @throws BuildException
      */
-    public function append($other, $p)
+    public function append(PatternSet $other, Project $p)
     {
         if ($this->isReference()) {
             throw new BuildException("Cannot append to a reference");
@@ -287,7 +286,7 @@ class PatternSet extends DataType
      *
      * @return array
      */
-    public function getIncludePatterns(Project $p)
+    public function getIncludePatterns(Project $p): ?array
     {
         if ($this->isReference()) {
             $o = $this->getRef($p);
@@ -309,7 +308,7 @@ class PatternSet extends DataType
      *
      * @return array
      */
-    public function getExcludePatterns(Project $p)
+    public function getExcludePatterns(Project $p): ?array
     {
         if ($this->isReference()) {
             $o = $this->getRef($p);
@@ -327,7 +326,7 @@ class PatternSet extends DataType
      *
      * @return bool
      */
-    public function hasPatterns()
+    public function hasPatterns(): bool
     {
         return (boolean) count($this->includesFileList) > 0 || count($this->excludesFileList) > 0
         || count($this->includeList) > 0 || count($this->excludeList) > 0;
@@ -343,7 +342,7 @@ class PatternSet extends DataType
      *
      * @return Reference
      */
-    public function getRef(Project $p)
+    public function getRef(Project $p): \Reference
     {
         $dataTypeName = StringHelper::substring(__CLASS__, strrpos(__CLASS__, '\\') + 1);
         return $this->getCheckedRef(__CLASS__, $dataTypeName);
@@ -357,7 +356,7 @@ class PatternSet extends DataType
      *
      * @return array
      */
-    private function makeArray(&$list, Project $p)
+    private function makeArray(&$list, Project $p): ?array
     {
         if (count($list) === 0) {
             return null;
@@ -415,7 +414,7 @@ class PatternSet extends DataType
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
 
         // We can't compile includeList into array because, toString() does

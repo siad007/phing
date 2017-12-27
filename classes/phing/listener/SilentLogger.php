@@ -27,34 +27,34 @@ include_once 'phing/listener/DefaultLogger.php';
  */
 class SilentLogger extends DefaultLogger
 {
-    public function buildStarted(BuildEvent $event)
+    public function buildStarted(BuildEvent $event): void
     {
         // log nothing
     }
 
-    public function buildFinished(BuildEvent $event)
+    public function buildFinished(BuildEvent $event): void
     {
         if ($event->getException() != null) {
             parent::buildFinished($event);
         }
     }
 
-    public function targetStarted(BuildEvent $event)
+    public function targetStarted(BuildEvent $event): void
     {
         // log nothing
     }
 
-    public function targetFinished(BuildEvent $event)
+    public function targetFinished(BuildEvent $event): void
     {
         // log nothing
     }
 
-    public function taskStarted(BuildEvent $event)
+    public function taskStarted(BuildEvent $event): void
     {
         // log nothing
     }
 
-    public function taskFinished(BuildEvent $event)
+    public function taskFinished(BuildEvent $event): void
     {
         // log nothing
     }

@@ -49,7 +49,7 @@ class AttribTask extends ApplyTask
 
     private $attr = false;
 
-    public function init()
+    public function init(): void
     {
         parent::init();
         parent::setExecutable('attrib');
@@ -140,7 +140,7 @@ class AttribTask extends ApplyTask
      * @param mixed $e
      * @throws BuildException
      */
-    public function setExecutable($e)
+    public function setExecutable($e): void
     {
         throw new BuildException(
             $this->getTaskType() . ' doesn\'t support the executable attribute',
@@ -154,7 +154,7 @@ class AttribTask extends ApplyTask
      * @param boolean $b ignored
      * @throws BuildException
      */
-    public function setAddsourcefile($b)
+    public function setAddsourcefile($b): void
     {
         throw new BuildException(
             $this->getTaskType()
@@ -169,7 +169,7 @@ class AttribTask extends ApplyTask
      * @param int $max ignored
      * @throws BuildException
      */
-    public function setMaxParallel($max)
+    public function setMaxParallel($max): void
     {
         throw new BuildException(
             $this->getTaskType()
@@ -184,7 +184,7 @@ class AttribTask extends ApplyTask
      * @param boolean $parallel ignored
      * @throws BuildException
      */
-    public function setParallel($parallel)
+    public function setParallel($parallel): void
     {
         throw new BuildException(
             $this->getTaskType()
@@ -193,7 +193,7 @@ class AttribTask extends ApplyTask
         );
     }
 
-    protected function validateOS()
+    protected function validateOS(): bool
     {
         return $this->os === null && $this->osvariant === null ?: parent::validateOS();
     }
@@ -212,7 +212,7 @@ class AttribTask extends ApplyTask
     /**
      * @return bool
      */
-    private function hasAttr()
+    private function hasAttr(): bool
     {
         return $this->attr;
     }

@@ -216,7 +216,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getStrategy()
+    public function getStrategy(): ?string
     {
         return $this->strategy;
     }
@@ -232,7 +232,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getStrategyOption()
+    public function getStrategyOption(): ?string
     {
         return $this->strategyOption;
     }
@@ -248,7 +248,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getSource()
+    public function getSource(): string
     {
         return $this->source;
     }
@@ -264,7 +264,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getRefspec()
+    public function getRefspec(): ?string
     {
         return $this->refspec;
     }
@@ -280,7 +280,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getAll()
+    public function getAll(): bool
     {
         return $this->allRemotes;
     }
@@ -288,7 +288,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isAllRemotes()
+    public function isAllRemotes(): bool
     {
         return $this->getAll();
     }
@@ -304,7 +304,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getAppend()
+    public function getAppend(): bool
     {
         return $this->append;
     }
@@ -312,7 +312,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isAppend()
+    public function isAppend(): bool
     {
         return $this->getAppend();
     }
@@ -328,7 +328,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getKeep()
+    public function getKeep(): bool
     {
         return $this->keepFiles;
     }
@@ -336,7 +336,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isKeepFiles()
+    public function isKeepFiles(): bool
     {
         return $this->getKeep();
     }
@@ -352,7 +352,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNoTags()
+    public function getNoTags(): bool
     {
         return $this->noTags;
     }
@@ -360,7 +360,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isNoTags()
+    public function isNoTags(): bool
     {
         return $this->getNoTags();
     }
@@ -376,7 +376,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getTags()
+    public function getTags(): bool
     {
         return $this->tags;
     }
@@ -384,7 +384,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isTags()
+    public function isTags(): bool
     {
         return $this->getTags();
     }
@@ -400,7 +400,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getQuiet()
+    public function getQuiet(): bool
     {
         return $this->quiet;
     }
@@ -408,7 +408,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isQuiet()
+    public function isQuiet(): bool
     {
         return $this->getQuiet();
     }
@@ -424,7 +424,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getRebase()
+    public function getRebase(): bool
     {
         return $this->rebase;
     }
@@ -432,7 +432,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isRebase()
+    public function isRebase(): bool
     {
         return $this->getRebase();
     }
@@ -448,7 +448,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNoRebase()
+    public function getNoRebase(): bool
     {
         return $this->noRebase;
     }
@@ -456,7 +456,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isNoRebase()
+    public function isNoRebase(): bool
     {
         return $this->getNoRebase();
     }
@@ -472,7 +472,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getForce()
+    public function getForce(): bool
     {
         return $this->force;
     }
@@ -480,7 +480,7 @@ class GitPullTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isForce()
+    public function isForce(): bool
     {
         return $this->getForce();
     }

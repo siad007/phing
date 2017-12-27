@@ -114,7 +114,7 @@ class SshTask extends Task
     /**
      * @return string
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->host;
     }
@@ -130,7 +130,7 @@ class SshTask extends Task
     /**
      * @return int
      */
-    public function getPort()
+    public function getPort(): int
     {
         return $this->port;
     }
@@ -146,7 +146,7 @@ class SshTask extends Task
     /**
      * @return string
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -162,7 +162,7 @@ class SshTask extends Task
     /**
      * @return string
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -215,7 +215,7 @@ class SshTask extends Task
      * @param $privkeyfilepassphrase
      * @return string
      */
-    public function getPrivkeyfilepassphrase($privkeyfilepassphrase)
+    public function getPrivkeyfilepassphrase($privkeyfilepassphrase): string
     {
         return $this->privkeyfilepassphrase;
     }
@@ -231,7 +231,7 @@ class SshTask extends Task
     /**
      * @return string
      */
-    public function getCommand()
+    public function getCommand(): string
     {
         return $this->command;
     }
@@ -247,7 +247,7 @@ class SshTask extends Task
     /**
      * @return string
      */
-    public function getPty()
+    public function getPty(): string
     {
         return $this->pty;
     }
@@ -284,14 +284,14 @@ class SshTask extends Task
      * Creates an Ssh2MethodParam object. Handles the <sshconfig /> nested tag
      * @return Ssh2MethodParam
      */
-    public function createSshconfig()
+    public function createSshconfig(): \Ssh2MethodParam
     {
         $this->methods = new Ssh2MethodParam();
 
         return $this->methods;
     }
 
-    public function init()
+    public function init(): void
     {
     }
 

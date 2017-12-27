@@ -81,7 +81,7 @@ class ExtendSelector extends BaseSelector
      * @param Parameter $p The new Parameter object
      * @return void
      */
-    public function addParam(Parameter $p)
+    public function addParam(Parameter $p): void
     {
         $this->parameters[] = $p;
     }
@@ -91,7 +91,7 @@ class ExtendSelector extends BaseSelector
      * errors in the custom selector, it should throw a BuildException
      * when isSelected() is called.
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         // Creation is done here rather than in isSelected() because some
         // containers may do a validation pass before running isSelected(),
@@ -122,7 +122,7 @@ class ExtendSelector extends BaseSelector
      * @return bool
      * @throws BuildException
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

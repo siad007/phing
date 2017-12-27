@@ -79,7 +79,7 @@ class UpToDateTask extends Task implements Condition
      * Get property name
      * @return string property the name of the property to set if Target is up-to-date.
      */
-    public function getProperty()
+    public function getProperty(): string
     {
         return $this->_property;
     }
@@ -100,7 +100,7 @@ class UpToDateTask extends Task implements Condition
      */
     private function getValue()
     {
-        return ($this->_value !== null) ? $this->_value : "true";
+        return $this->_value ?? "true";
     }
 
     /**
@@ -148,10 +148,11 @@ class UpToDateTask extends Task implements Condition
     /**
      * Evaluate (all) target and source file(s) to
      * see if the target(s) is/are up-to-date.
-     * @throws BuildException
      * @return boolean
+     * @throws Exception
+     * @throws IOException
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if (count($this->filesets) == 0 && count($this->filelists) == 0 && $this->_sourceFile === null) {
             throw new BuildException("At least one srcfile or a nested "
@@ -260,7 +261,7 @@ class UpToDateTask extends Task implements Condition
      * @param $files
      * @return bool
      */
-    protected function scanDir(PhingFile $srcDir, $files)
+    protected function scanDir(PhingFile $srcDir, $files): bool
     {
         $sfs = new SourceFileScanner($this);
         $mapper = null;

@@ -44,9 +44,9 @@ class IsSetCondition extends ProjectComponent implements Condition
 
     /**
      * Check whether property is set.
-     * @throws BuildException
+     * @return bool
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->property === null) {
             throw new BuildException("No property specified for isset "

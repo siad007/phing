@@ -103,7 +103,7 @@ class Parameter extends DataType
     /**
      * @return Parameter
      */
-    public function createParam()
+    public function createParam(): \Parameter
     {
         $num = array_push($this->parameters, new Parameter());
 
@@ -113,7 +113,7 @@ class Parameter extends DataType
     /**
      * @return array Nested parameters.
      */
-    public function getParams()
+    public function getParams(): array
     {
         return $this->parameters;
     }

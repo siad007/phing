@@ -101,7 +101,7 @@ class WaitForTask extends ConditionBase
      * @param string $checkEveryUnit
      * @return void
      */
-    public function setCheckEveryUnit($checkEveryUnit)
+    public function setCheckEveryUnit($checkEveryUnit): void
     {
         $this->checkEveryMultiplier = $this->_convertUnit($checkEveryUnit);
     }
@@ -111,7 +111,7 @@ class WaitForTask extends ConditionBase
      * @param string $timeoutProperty
      * @return void
      */
-    public function setTimeoutProperty($timeoutProperty)
+    public function setTimeoutProperty($timeoutProperty): void
     {
         $this->timeoutProperty = $timeoutProperty;
     }
@@ -122,7 +122,7 @@ class WaitForTask extends ConditionBase
      * @throws BuildException
      * @return int
      */
-    protected function _convertUnit($unit)
+    protected function _convertUnit($unit): ?int
     {
         switch ($unit) {
             case "week":

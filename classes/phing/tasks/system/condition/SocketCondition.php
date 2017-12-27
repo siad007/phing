@@ -58,9 +58,8 @@ class SocketCondition implements Condition
 
     /**
      * @return boolean
-     * @throws BuildException
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if (empty($this->server)) {
             throw new BuildException("No server specified");

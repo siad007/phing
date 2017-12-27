@@ -81,7 +81,7 @@ class DeleteTask extends Task
      * @param bool $bool
      * @return void
      */
-    public function setQuiet($bool)
+    public function setQuiet($bool): void
     {
         $this->quiet = $bool;
         if ($this->quiet) {
@@ -103,7 +103,7 @@ class DeleteTask extends Task
      * @param bool $includeEmpty
      * @return void
      */
-    public function setIncludeEmptyDirs($includeEmpty)
+    public function setIncludeEmptyDirs($includeEmpty): void
     {
         $this->includeEmpty = (boolean) $includeEmpty;
     }

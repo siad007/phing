@@ -58,7 +58,7 @@ class StatisticsReport
         $this->stack = new SplStack();
     }
 
-    public function create($title, SeriesMap $seriesMap)
+    public function create($title, SeriesMap $seriesMap): string
     {
         $keys = $seriesMap->getNames();
         sort($keys);
@@ -81,7 +81,7 @@ class StatisticsReport
         return $this->toString($title, $table);
     }
 
-    private function updateTableWithPercentagesOfTotalTime(Table $table, array $totalTimes, $runningTotalTime)
+    private function updateTableWithPercentagesOfTotalTime(Table $table, array $totalTimes, $runningTotalTime): void
     {
         for ($i = 0; $i < count($totalTimes); $i++) {
             $totalTime = $totalTimes[$i];
@@ -90,7 +90,7 @@ class StatisticsReport
         }
     }
 
-    private function toString($title, Table $table)
+    private function toString($title, Table $table): string
     {
         $sb = '';
         $maxLengths = $table->getMaxLengths();
@@ -110,7 +110,7 @@ class StatisticsReport
         return $sb;
     }
 
-    private function createTitleBarIfFirstRow($titleBarLength, $i)
+    private function createTitleBarIfFirstRow($titleBarLength, $i): string
     {
         if ($i !== 0) {
             return '';
@@ -127,12 +127,12 @@ class StatisticsReport
         return $fixedLength;
     }
 
-    public function push(ProjectTimer $projectTimer)
+    public function push(ProjectTimer $projectTimer): void
     {
         $this->stack->push($projectTimer);
     }
 
-    public function write(ProjectTimer $projectTimer = null)
+    public function write(ProjectTimer $projectTimer = null): void
     {
         if ($projectTimer !== null) {
             $this->create("Target Statistics", $projectTimer->toTargetSeriesMap());
@@ -154,12 +154,12 @@ class StatisticsReport
         }
     }
 
-    private function createTaskStatistics(ProjectTimer $projectTimer)
+    private function createTaskStatistics(ProjectTimer $projectTimer): string
     {
         return $this->create("Task Statistics - " . $projectTimer->getName(), $projectTimer->toTaskSeriesMap());
     }
 
-    private function createTargetStatistics(ProjectTimer $projectTimer)
+    private function createTargetStatistics(ProjectTimer $projectTimer): string
     {
         return $this->create("Target Statistics - " . $projectTimer->getName(), $projectTimer->toTargetSeriesMap());
     }

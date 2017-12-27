@@ -1,4 +1,9 @@
 <?php
+
+use SebastianBergmann\PHPLOC\Log\Text;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\StreamOutput;
+
 /**
  * $Id$
  *
@@ -31,15 +36,15 @@ class PHPLocTextFormatter extends AbstractPHPLocFormatter
     public function printResult(array $count, $countTests = false)
     {
         if ($this->getUseFile()) {
-            $outputClass = '\\Symfony\\Component\\Console\\Output\\StreamOutput';
+            $outputClass = StreamOutput::class;
             $stream = fopen($this->getToDir() . DIRECTORY_SEPARATOR . $this->getOutfile(), 'a+');
             $output = new $outputClass($stream);
         } else {
-            $outputClass = '\\Symfony\\Component\\Console\\Output\\ConsoleOutput';
+            $outputClass = ConsoleOutput::class;
             $output = new $outputClass();
         }
 
-        $printerClass = '\\SebastianBergmann\\PHPLOC\\Log\\Text';
+        $printerClass = Text::class;
         $printer = new $printerClass();
         $printer->printResult($output, $count, $countTests);
     }

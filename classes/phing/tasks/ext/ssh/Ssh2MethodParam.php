@@ -67,7 +67,7 @@ class Ssh2MethodParam extends DataType
      * @throws BuildException
      * @return string
      */
-    public function getHostkey(Project $p)
+    public function getHostkey(Project $p): string
     {
         if ($this->isReference()) {
             return $this->getRef($p)->getHostkey($p);
@@ -89,7 +89,7 @@ class Ssh2MethodParam extends DataType
      * @throws BuildException
      * @return string
      */
-    public function getKex(Project $p)
+    public function getKex(Project $p): string
     {
         if ($this->isReference()) {
             return $this->getRef($p)->getKex($p);
@@ -103,7 +103,7 @@ class Ssh2MethodParam extends DataType
      * @throws BuildException
      * @return \Ssh2MethodConnectionParam
      */
-    public function getClientToServer(Project $p)
+    public function getClientToServer(Project $p): \Ssh2MethodConnectionParam
     {
         if ($this->isReference()) {
             return $this->getRef($p)->getClientToServer($p);
@@ -117,7 +117,7 @@ class Ssh2MethodParam extends DataType
      * @throws BuildException
      * @return \Ssh2MethodConnectionParam
      */
-    public function getServerToClient(Project $p)
+    public function getServerToClient(Project $p): \Ssh2MethodConnectionParam
     {
         if ($this->isReference()) {
             return $this->getRef($p)->getServerToClient($p);
@@ -130,7 +130,7 @@ class Ssh2MethodParam extends DataType
      * Handles the <client /> nested element
      * @return Ssh2MethodConnectionParam
      */
-    public function createClient()
+    public function createClient(): \Ssh2MethodConnectionParam
     {
         $this->client_to_server = new Ssh2MethodConnectionParam();
 
@@ -141,7 +141,7 @@ class Ssh2MethodParam extends DataType
      * Handles the <server /> nested element
      * @return Ssh2MethodConnectionParam
      */
-    public function createServer()
+    public function createServer(): \Ssh2MethodConnectionParam
     {
         $this->server_to_client = new Ssh2MethodConnectionParam();
 
@@ -153,7 +153,7 @@ class Ssh2MethodParam extends DataType
      * @param Project $p
      * @return array
      */
-    public function toArray(Project $p)
+    public function toArray(Project $p): array
     {
         $client_to_server = $this->getClientToServer($p);
         $server_to_client = $this->getServerToClient($p);
@@ -172,7 +172,7 @@ class Ssh2MethodParam extends DataType
      * @param $var
      * @return boolean
      */
-    protected function _filterParam($var)
+    protected function _filterParam($var): bool
     {
         if (is_array($var)) {
             return !empty($var);
@@ -187,7 +187,7 @@ class Ssh2MethodParam extends DataType
      * @throws BuildException
      * @return Ssh2MethodParam
      */
-    public function getRef(Project $p)
+    public function getRef(Project $p): \Ssh2MethodParam
     {
         $dataTypeName = StringHelper::substring(__CLASS__, strrpos(__CLASS__, '\\') + 1);
         return $this->getCheckedRef(__CLASS__, $dataTypeName);

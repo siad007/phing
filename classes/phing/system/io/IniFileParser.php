@@ -34,7 +34,7 @@ class IniFileParser implements FileParserInterface
     /**
      * {@inheritDoc}
      */
-    public function parseFile(PhingFile $file)
+    public function parseFile(PhingFile $file): array
     {
         if (($lines = @file($file, FILE_IGNORE_NEW_LINES)) === false) {
             throw new IOException("Unable to parse contents of $file");

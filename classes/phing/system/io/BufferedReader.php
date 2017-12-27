@@ -56,7 +56,7 @@ class BufferedReader extends Reader
 
     /**
      * Reads and returns a chunk of data.
-     * @param  int   $len Number of bytes to read.  Default is to read configured buffer size number of bytes.
+     * @param  int $len Number of bytes to read.  Default is to read configured buffer size number of bytes.
      * @return mixed buffer or -1 if EOF.
      */
     public function read($len = null)
@@ -67,7 +67,7 @@ class BufferedReader extends Reader
             $len = $this->bufferSize;
         }
 
-        if (($data = $this->in->read($len)) !== -1) {
+        if (($data = $this->in->read($len)) != -1) {
 
             // not all files end with a newline character, so we also need to check EOF
             if (!$this->in->eof()) {
@@ -95,17 +95,17 @@ class BufferedReader extends Reader
      * @param int $n
      * @return int
      */
-    public function skip($n)
+    public function skip($n): int
     {
         return $this->in->skip($n);
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->in->reset();
     }
 
-    public function close()
+    public function close(): void
     {
         $this->in->close();
     }
@@ -116,7 +116,7 @@ class BufferedReader extends Reader
     public function readLine()
     {
         $line = null;
-        while (($ch = $this->readChar()) !== -1) {
+        while (($ch = $this->readChar()) != -1) {
             if ($ch === "\n") {
                 break;
             }
@@ -124,7 +124,7 @@ class BufferedReader extends Reader
         }
 
         // Warning : Not considering an empty line as an EOF
-        if ($line === null && $ch !== -1) {
+        if ($line === null && $ch != -1) {
             return "";
         }
 
@@ -135,12 +135,12 @@ class BufferedReader extends Reader
      * Reads a single char from the reader.
      * @return string single char or -1 if EOF.
      */
-    public function readChar()
+    public function readChar(): string
     {
         if ($this->buffer === null) {
             // Buffer is empty, fill it ...
             $read = $this->in->read($this->bufferSize);
-            if ($read === -1) {
+            if ($read == -1) {
                 $ch = -1;
             } else {
                 $this->buffer = $read;
@@ -168,7 +168,7 @@ class BufferedReader extends Reader
      * has been reached.
      * @return boolean
      */
-    public function eof()
+    public function eof(): bool
     {
         return $this->in->eof();
     }
@@ -176,7 +176,7 @@ class BufferedReader extends Reader
     /**
      * @return string
      */
-    public function getResource()
+    public function getResource(): string
     {
         return $this->in->getResource();
     }

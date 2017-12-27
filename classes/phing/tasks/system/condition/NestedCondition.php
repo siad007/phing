@@ -28,7 +28,7 @@ require_once 'phing/tasks/system/condition/ConditionBase.php';
  */
 class NestedCondition extends ConditionBase implements Condition
 {
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->countConditions() != 1) {
             throw new BuildException(

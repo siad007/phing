@@ -133,7 +133,7 @@ class TempFile extends Task
      * Learn whether deleteOnExit is set for this tempfile task.
      * @return boolean deleteOnExit flag.
      */
-    public function isDeleteOnExit()
+    public function isDeleteOnExit(): bool
     {
         return $this->deleteOnExit;
     }
@@ -151,7 +151,7 @@ class TempFile extends Task
      * Learn whether createFile flag is set for this tempFile task.
      * @return boolean the createFile flag.
      */
-    public function isCreateFile()
+    public function isCreateFile(): bool
     {
         return $this->createFile;
     }
@@ -160,6 +160,7 @@ class TempFile extends Task
      * Creates the temporary file.
      *
      * @throws BuildException if something goes wrong with the build
+     * @throws IOException
      */
     public function main()
     {

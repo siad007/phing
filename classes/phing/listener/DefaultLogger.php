@@ -138,8 +138,9 @@ class DefaultLogger implements StreamRequiredBuildLogger
      *  the build-time.
      *
      * @param BuildEvent $event
+     * @throws IOException
      */
-    public function buildStarted(BuildEvent $event)
+    public function buildStarted(BuildEvent $event): void
     {
         $this->startTime = Phing::currentTimeMillis();
         if ($this->msgOutputLevel >= Project::MSG_INFO) {
@@ -156,9 +157,10 @@ class DefaultLogger implements StreamRequiredBuildLogger
      *  occurred during the build. Also outputs the total build-time.
      *
      * @param BuildEvent $event
+     * @throws IOException
      * @see    BuildEvent::getException()
      */
-    public function buildFinished(BuildEvent $event)
+    public function buildFinished(BuildEvent $event): void
     {
         $error = $event->getException();
         if ($error === null) {
@@ -203,7 +205,7 @@ class DefaultLogger implements StreamRequiredBuildLogger
      * Get the message to return when a build failed.
      * @return string The classic "BUILD FAILED"
      */
-    protected function getBuildFailedMessage()
+    protected function getBuildFailedMessage(): string
     {
         return "BUILD FAILED";
     }
@@ -212,7 +214,7 @@ class DefaultLogger implements StreamRequiredBuildLogger
      * Get the message to return when a build succeeded.
      * @return string The classic "BUILD FINISHED"
      */
-    protected function getBuildSuccessfulMessage()
+    protected function getBuildSuccessfulMessage(): string
     {
         return "BUILD FINISHED";
     }
@@ -221,9 +223,10 @@ class DefaultLogger implements StreamRequiredBuildLogger
      *  Prints the current target name
      *
      * @param BuildEvent $event
+     * @throws IOException
      * @see    BuildEvent::getTarget()
      */
-    public function targetStarted(BuildEvent $event)
+    public function targetStarted(BuildEvent $event): void
     {
         if (Project::MSG_INFO <= $this->msgOutputLevel
             && $event->getTarget()->getName() != ''
@@ -242,7 +245,7 @@ class DefaultLogger implements StreamRequiredBuildLogger
      * @param BuildEvent $event
      * @see    BuildEvent::getException()
      */
-    public function targetFinished(BuildEvent $event)
+    public function targetFinished(BuildEvent $event): void
     {
     }
 
@@ -253,7 +256,7 @@ class DefaultLogger implements StreamRequiredBuildLogger
      * @param BuildEvent $event
      * @see    BuildEvent::getTask()
      */
-    public function taskStarted(BuildEvent $event)
+    public function taskStarted(BuildEvent $event): void
     {
     }
 
@@ -264,7 +267,7 @@ class DefaultLogger implements StreamRequiredBuildLogger
      * @param  BuildEvent $event  The BuildEvent
      * @see    BuildEvent::getException()
      */
-    public function taskFinished(BuildEvent $event)
+    public function taskFinished(BuildEvent $event): void
     {
     }
 
@@ -272,9 +275,10 @@ class DefaultLogger implements StreamRequiredBuildLogger
      *  Print a message to the stdout.
      *
      * @param BuildEvent $event
+     * @throws IOException
      * @see    BuildEvent::getMessage()
      */
-    public function messageLogged(BuildEvent $event)
+    public function messageLogged(BuildEvent $event): void
     {
         $priority = $event->getPriority();
         if ($priority <= $this->msgOutputLevel) {
@@ -301,7 +305,7 @@ class DefaultLogger implements StreamRequiredBuildLogger
      * @param  integer The time stamp
      * @return string
      */
-    public static function formatTime($micros)
+    public static function formatTime($micros): ?string
     {
         $seconds = $micros;
         $minutes = (int)floor($seconds / 60);
@@ -329,7 +333,7 @@ class DefaultLogger implements StreamRequiredBuildLogger
      * @throws IOException
      * @return void
      */
-    protected function printMessage($message, OutputStream $stream, $priority)
+    protected function printMessage($message, OutputStream $stream, $priority): void
     {
         $stream->write($message . PHP_EOL);
     }

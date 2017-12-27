@@ -54,7 +54,7 @@ abstract class ProjectComponent
      *
      * @return void
      */
-    public function setProject($project)
+    public function setProject($project): void
     {
         $this->project = $project;
     }
@@ -64,7 +64,7 @@ abstract class ProjectComponent
      *
      * @return Project Reference to current porject object
      */
-    public function getProject()
+    public function getProject(): \Project
     {
         return $this->project;
     }
@@ -75,7 +75,7 @@ abstract class ProjectComponent
      * @return Location the file/location where this task was defined.
      *         Should not return <code>null</code>.
      */
-    public function getLocation()
+    public function getLocation(): \Location
     {
         return $this->location;
     }
@@ -86,7 +86,7 @@ abstract class ProjectComponent
      * @param Location $location The file/location where this task was defined.
      *                 Should not be <code>null</code>
      */
-    public function setLocation(Location $location)
+    public function setLocation(Location $location): void
     {
         $this->location = $location;
     }
@@ -100,7 +100,7 @@ abstract class ProjectComponent
      *             available.
      *
      */
-    public function setDescription($desc)
+    public function setDescription($desc): void
     {
         $this->description = $desc;
     }
@@ -111,7 +111,7 @@ abstract class ProjectComponent
      * @return string the description of the current action, or <code>null</code> if
      *         no description is available.
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -124,7 +124,7 @@ abstract class ProjectComponent
      *
      * @return void
      */
-    public function log($msg, $level = Project::MSG_INFO)
+    public function log($msg, $level = Project::MSG_INFO): void
     {
         if ($this->project !== null) {
             $this->project->log($msg, $level);

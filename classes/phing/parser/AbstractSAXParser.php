@@ -54,7 +54,7 @@ abstract class AbstractSAXParser
      *
      * @param AbstractHandler $obj The handler object.
      */
-    public function setHandler(AbstractHandler $obj)
+    public function setHandler(AbstractHandler $obj): void
     {
         $this->handler = $obj;
     }
@@ -72,7 +72,7 @@ abstract class AbstractSAXParser
      * @param  array  $attribs the tag's attributes if any
      * @throws Exception - Exceptions may be thrown by the Handler
      */
-    public function startElement($parser, $name, $attribs)
+    public function startElement($parser, $name, $attribs): void
     {
         $this->handler->startElement($name, $attribs);
     }
@@ -90,7 +90,7 @@ abstract class AbstractSAXParser
      * @param   string $name the closing tag name
      * @throws Exception - Exceptions may be thrown by the Handler
      */
-    public function endElement($parser, $name)
+    public function endElement($parser, $name): void
     {
         $this->handler->endElement($name);
     }
@@ -108,7 +108,7 @@ abstract class AbstractSAXParser
      * @param  string    $data   the CDATA
      * @throws Exception - Exceptions may be thrown by the Handler
      */
-    public function characters($parser, $data)
+    public function characters($parser, $data): void
     {
         $this->handler->characters($data);
     }

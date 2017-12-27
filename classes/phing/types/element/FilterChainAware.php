@@ -25,7 +25,7 @@ trait FilterChainAware
     /**
      * @param FilterChain $filterChain
      */
-    public function addFilterChain(FilterChain $filterChain)
+    public function addFilterChain(FilterChain $filterChain): void
     {
         $this->filterChains[] = $filterChain;
     }
@@ -33,7 +33,7 @@ trait FilterChainAware
     /**
      * @return FilterChain[]
      */
-    public function getFilterChains()
+    public function getFilterChains(): array
     {
         return $this->filterChains;
     }

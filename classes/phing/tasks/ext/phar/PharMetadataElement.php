@@ -56,7 +56,7 @@ class PharMetadataElement extends PharMetadata
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

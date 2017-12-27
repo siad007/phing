@@ -149,7 +149,7 @@ class JslLintTask extends Task
     /**
      * @return string
      */
-    public function getExecutable()
+    public function getExecutable(): string
     {
         return $this->executable;
     }

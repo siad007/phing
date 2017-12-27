@@ -57,7 +57,7 @@ class IniFileTokenReader extends TokenReader
      * @throws BuildException
      * @return Token
      */
-    public function readToken()
+    public function readToken(): ?\Token
     {
         if ($this->file === null) {
             throw new BuildException("No File set for IniFileTokenReader");

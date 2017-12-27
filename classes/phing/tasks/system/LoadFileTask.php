@@ -93,7 +93,7 @@ class LoadFileTask extends Task
      * @param $property
      * @return void
      */
-    public function setProperty($property)
+    public function setProperty($property): void
     {
         $this->property = $property;
     }
@@ -104,7 +104,7 @@ class LoadFileTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         if (empty($this->file)) {
             throw new BuildException("Attribute 'file' required", $this->getLocation());
@@ -137,7 +137,7 @@ class LoadFileTask extends Task
 
             if ($this->file->length() > 0) {
                 $reader = FileUtils::getChainedReader(new FileReader($this->file), $this->filterChains, $this->project);
-                while (-1 !== ($buffer = $reader->read())) {
+                while (-1 != ($buffer = $reader->read())) {
                     $contents .= $buffer;
                 }
                 $reader->close();

@@ -49,7 +49,7 @@ class SvnLastRevisionTask extends SvnBaseTask
      * Returns the name of the property to use
      * @return string
      */
-    public function getPropertyName()
+    public function getPropertyName(): string
     {
         return $this->propertyName;
     }

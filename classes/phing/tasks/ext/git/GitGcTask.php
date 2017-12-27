@@ -103,7 +103,7 @@ class GitGcTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getAggressive()
+    public function getAggressive(): bool
     {
         return $this->isAggressive;
     }
@@ -127,7 +127,7 @@ class GitGcTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getAuto()
+    public function getAuto(): bool
     {
         return $this->isAuto;
     }
@@ -151,7 +151,7 @@ class GitGcTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNoPrune()
+    public function getNoPrune(): bool
     {
         return $this->noPrune;
     }
@@ -167,7 +167,7 @@ class GitGcTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getPrune()
+    public function getPrune(): string
     {
         return $this->prune;
     }

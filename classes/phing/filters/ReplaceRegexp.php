@@ -51,7 +51,7 @@ class ReplaceRegexp extends BaseFilterReader implements ChainableReader
      * Creator method handles nested <regexp> tags.
      * @return RegularExpression
      */
-    public function createRegexp()
+    public function createRegexp(): \RegularExpression
     {
         $num = array_push($this->regexps, new RegularExpression());
 
@@ -73,7 +73,7 @@ class ReplaceRegexp extends BaseFilterReader implements ChainableReader
      * (Used when, e.g., cloning/chaining the method.)
      * @return array RegularExpression[]
      */
-    public function getRegexps()
+    public function getRegexps(): array
     {
         return $this->regexps;
     }
@@ -93,7 +93,7 @@ class ReplaceRegexp extends BaseFilterReader implements ChainableReader
     {
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -126,9 +126,9 @@ class ReplaceRegexp extends BaseFilterReader implements ChainableReader
      * @return ReplaceRegExp A new filter based on this configuration, but filtering
      *                       the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new ReplaceRegExp($reader);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
         $newFilter->setRegexps($this->getRegexps());
 

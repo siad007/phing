@@ -33,7 +33,7 @@ class IsFileSelected extends AbstractSelectorContainer implements Condition
 
     /**
      * The file to check.
-     * @param file the file to check if if passes the embedded selector.
+     * @param PhingFile $file
      */
     public function setFile(PhingFile $file)
     {
@@ -42,8 +42,7 @@ class IsFileSelected extends AbstractSelectorContainer implements Condition
 
     /**
      * The base directory to use.
-     * @param baseDir the base directory to use, if null use the project's
-     *                basedir.
+     * @param PhingFile $baseDir
      */
     public function setBaseDir(PhingFile $baseDir)
     {
@@ -65,7 +64,7 @@ class IsFileSelected extends AbstractSelectorContainer implements Condition
      * Evaluate the selector with the file.
      * @return true if the file is selected by the embedded selector.
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->file === null) {
             throw new BuildException('file attribute not set');

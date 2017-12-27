@@ -75,7 +75,7 @@ class XmlLintTask extends Task
      *
      * @return void
      */
-    public function setHaltonfailure($haltonfailure)
+    public function setHaltonfailure($haltonfailure): void
     {
         $this->haltonfailure = (bool) $haltonfailure;
     }
@@ -89,7 +89,7 @@ class XmlLintTask extends Task
      *
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         if (isset($this->schema) && !file_exists($this->schema->getPath())) {
             throw new BuildException("Schema file not found: " . $this->schema->getPath());
@@ -122,7 +122,7 @@ class XmlLintTask extends Task
      *
      * @throws BuildException
      */
-    protected function logError($message)
+    protected function logError($message): void
     {
         if ($this->haltonfailure) {
             throw new BuildException($message);
@@ -138,7 +138,7 @@ class XmlLintTask extends Task
      *
      * @return void
      */
-    protected function lint($file)
+    protected function lint($file): void
     {
         if (file_exists($file)) {
             if (is_readable($file)) {
@@ -187,7 +187,7 @@ class XmlLintTask extends Task
      *
      * @return void
      */
-    public function errorHandler($level, $message, $file, $line, $context)
+    public function errorHandler($level, $message, $file, $line, $context): void
     {
         $matches = [];
         preg_match('/^.*\(\): (.*)$/', $message, $matches);

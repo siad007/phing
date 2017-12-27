@@ -35,19 +35,19 @@ class Series
         $this->stack = new SplStack();
     }
 
-    public function add(Duration $duration)
+    public function add(Duration $duration): void
     {
         $this->list[] = $duration;
         $this->stack->push($duration);
     }
 
-    public function setFinishTime($time)
+    public function setFinishTime($time): void
     {
         $duration = $this->stack->pop();
         $duration->setFinishTime($time);
     }
 
-    public function getTimes()
+    public function getTimes(): array
     {
         return array_map(
             function (Duration $elem) {
@@ -70,7 +70,7 @@ class Series
         return $this->getTotalTime() / count($this->list);
     }
 
-    public function size()
+    public function size(): int
     {
         return count($this->list);
     }

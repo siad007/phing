@@ -58,7 +58,7 @@ class PhkPackageTask extends Task
     /**
      * @return PhkPackageWebAccess
      */
-    public function createWebAccess()
+    public function createWebAccess(): \PhkPackageWebAccess
     {
         return ($this->webAccess = new PhkPackageWebAccess());
     }
@@ -182,9 +182,8 @@ class PhkPackageTask extends Task
     }
 
     /**
-     *
      */
-    public function init()
+    public function init(): void
     {
     }
 

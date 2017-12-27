@@ -166,7 +166,7 @@ class TargetHandler extends AbstractHandler
         if (isset($projectTargets[$name])) {
             if ($this->configurator->isIgnoringProjectTag() &&
                 $this->configurator->getCurrentProjectName() != null &&
-                strlen($this->configurator->getCurrentProjectName()) != 0
+                '' !== $this->configurator->getCurrentProjectName()
             ) {
                 // In an impored file (and not completely
                 // ignoring the project tag)
@@ -201,19 +201,19 @@ class TargetHandler extends AbstractHandler
      * handlers respectively.
      *
      * @param  string $name the tag that comes in
-     * @param  array  $attrs  attributes the tag carries
+     * @param  array $attribs attributes the tag carries
      */
-    public function startElement($name, $attrs)
+    public function startElement($name, $attribs): void
     {
         $tmp = new ElementHandler($this->parser, $this, $this->configurator, null, null, $this->target);
-        $tmp->init($name, $attrs);
+        $tmp->init($name, $attribs);
     }
 
     /**
      * Checks if this target has dependencies and/or nested tasks.
      * If the target has neither, show a warning.
      */
-    protected function finished()
+    protected function finished(): void
     {
         if (!count($this->target->getDependencies()) && !count($this->target->getTasks())) {
             $this->configurator->project->log(

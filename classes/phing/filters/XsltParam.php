@@ -22,7 +22,7 @@ class XsltParam
      * Sets param name.
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -31,7 +31,7 @@ class XsltParam
      * Get param name.
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -42,7 +42,7 @@ class XsltParam
      * @param string $v
      * @see setExpression()
      */
-    public function setValue($v)
+    public function setValue($v): void
     {
         $this->setExpression($v);
     }
@@ -53,7 +53,7 @@ class XsltParam
      * @return string
      * @see getExpression()
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->getExpression();
     }
@@ -62,7 +62,7 @@ class XsltParam
      * Sets expression value.
      * @param string $expr
      */
-    public function setExpression($expr)
+    public function setExpression($expr): void
     {
         $this->expr = $expr;
     }
@@ -71,7 +71,7 @@ class XsltParam
      * Sets expression to dynamic register slot.
      * @param RegisterSlot $expr
      */
-    public function setListeningExpression(RegisterSlot $expr)
+    public function setListeningExpression(RegisterSlot $expr): void
     {
         $this->expr = $expr;
     }
@@ -81,7 +81,7 @@ class XsltParam
      *
      * @return string
      */
-    public function getExpression()
+    public function getExpression(): ?string
     {
         if ($this->expr instanceof RegisterSlot) {
             return $this->expr->getValue();

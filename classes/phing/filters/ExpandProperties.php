@@ -80,7 +80,7 @@ class ExpandProperties extends BaseFilterReader implements ChainableReader
     {
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -101,9 +101,9 @@ class ExpandProperties extends BaseFilterReader implements ChainableReader
      * @return ExpandProperties A new filter based on this configuration, but filtering
      *                the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new ExpandProperties($reader);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
 
         return $newFilter;

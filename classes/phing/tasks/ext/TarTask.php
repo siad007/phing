@@ -73,7 +73,7 @@ class TarTask extends MatchingTask
     /**
      * Ensures that PEAR lib exists.
      */
-    public function init()
+    public function init(): void
     {
         include_once 'Archive/Tar.php';
         if (!class_exists('Archive_Tar')) {
@@ -85,7 +85,7 @@ class TarTask extends MatchingTask
      * Add a new fileset
      * @return FileSet
      */
-    public function createTarFileSet()
+    public function createTarFileSet(): \FileSet
     {
         $this->fileset = new TarFileSet();
         $this->filesets[] = $this->fileset;
@@ -98,7 +98,7 @@ class TarTask extends MatchingTask
      * @return FileSet
      * @see createTarFileSet()
      */
-    public function createFileSet()
+    public function createFileSet(): \FileSet
     {
         $this->fileset = new TarFileSet();
         $this->filesets[] = $this->fileset;
@@ -131,7 +131,7 @@ class TarTask extends MatchingTask
      *
      * @return void
      */
-    public function setIncludeEmptyDirs($bool)
+    public function setIncludeEmptyDirs($bool): void
     {
         $this->includeEmpty = (boolean) $bool;
     }
@@ -193,14 +193,14 @@ class TarTask extends MatchingTask
      *
      * @return void
      */
-    public function setPrefix($prefix)
+    public function setPrefix($prefix): void
     {
         $this->prefix = $prefix;
     }
 
     /**
      * do the work
-     * @throws BuildException
+     * @throws IOException
      */
     public function main()
     {
@@ -291,7 +291,7 @@ class TarTask extends MatchingTask
      *
      * @return boolean
      */
-    protected function areFilesUpToDate($files, $dir)
+    protected function areFilesUpToDate($files, $dir): bool
     {
         $sfs = new SourceFileScanner($this);
         $mm = new MergeMapper();
@@ -304,7 +304,7 @@ class TarTask extends MatchingTask
      * @return bool
      * @throws BuildException
      */
-    private function isArchiveUpToDate()
+    private function isArchiveUpToDate(): bool
     {
         foreach ($this->filesets as $fs) {
             $files = $fs->getFiles($this->project, $this->includeEmpty);

@@ -27,17 +27,17 @@ class Duration
 
     private $finishTime;
 
-    public function setFinishTime($finishTime)
+    public function setFinishTime($finishTime): void
     {
         $this->finishTime = $finishTime;
     }
 
-    public function setStartTime($startTime)
+    public function setStartTime($startTime): void
     {
         $this->startTime = $startTime;
     }
 
-    public function getTime()
+    public function getTime(): void
     {
         return $this->finishTime - $this->startTime;
     }

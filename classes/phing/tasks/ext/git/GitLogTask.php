@@ -183,7 +183,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNameStatus()
+    public function getNameStatus(): bool
     {
         return $this->nameStatus;
     }
@@ -191,7 +191,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isNameStatus()
+    public function isNameStatus(): bool
     {
         return $this->getNameStatus();
     }
@@ -207,7 +207,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return int
      */
-    public function getMaxCount()
+    public function getMaxCount(): ?int
     {
         return $this->maxCount;
     }
@@ -223,7 +223,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNoMerges()
+    public function getNoMerges(): bool
     {
         return $this->noMerges;
     }
@@ -231,7 +231,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isNoMerges()
+    public function isNoMerges(): bool
     {
         return $this->getNoMerges();
     }
@@ -247,7 +247,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getFormat()
+    public function getFormat(): string
     {
         return $this->format;
     }
@@ -263,7 +263,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getDate()
+    public function getDate(): ?string
     {
         return $this->date;
     }
@@ -279,7 +279,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getSince()
+    public function getSince(): ?string
     {
         return $this->since;
     }
@@ -303,7 +303,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getUntil()
+    public function getUntil(): ?string
     {
         return $this->until;
     }
@@ -327,7 +327,7 @@ class GitLogTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getPaths()
+    public function getPaths(): ?string
     {
         return $this->paths;
     }

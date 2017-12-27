@@ -60,7 +60,7 @@ class JsonValidateTask extends Task
     /**
      * @return string
      */
-    public function getFile()
+    public function getFile(): string
     {
         return $this->file;
     }

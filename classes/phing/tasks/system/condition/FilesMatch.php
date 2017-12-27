@@ -58,9 +58,8 @@ class FilesMatch implements Condition
      * comparison method of the interface
      *
      * @return bool if the files are equal
-     * @throws BuildException if it all went pear-shaped
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->file1 == null || $this->file2 == null) {
             throw new BuildException("both file1 and file2 are required in filesmatch");

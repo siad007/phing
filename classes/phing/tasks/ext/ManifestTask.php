@@ -110,7 +110,7 @@ class ManifestTask extends Task
      *
      * @return void
      */
-    public function setFile(PhingFile $file)
+    public function setFile(PhingFile $file): void
     {
         $this->file = $file;
     }
@@ -122,7 +122,7 @@ class ManifestTask extends Task
      *
      * @return void
      */
-    public function setChecksum($mixed)
+    public function setChecksum($mixed): void
     {
         if (is_string($mixed)) {
             $data = [strtolower($mixed)];
@@ -144,7 +144,7 @@ class ManifestTask extends Task
      *
      * @return void
      */
-    public function setSalt($string)
+    public function setSalt($string): void
     {
         $this->salt = $string;
     }
@@ -156,7 +156,7 @@ class ManifestTask extends Task
      *
      * @internal nothing to do here
      */
-    public function init()
+    public function init(): void
     {
     }
 
@@ -306,7 +306,7 @@ class ManifestTask extends Task
      *
      * @throws BuildException
      */
-    protected function validateAttributes()
+    protected function validateAttributes(): void
     {
         if ($this->action != 'r' && $this->action != 'w') {
             throw new BuildException("'action' attribute has non valid value. Use 'r' or 'w'");

@@ -60,7 +60,7 @@ class SourceFileScanner
      *                forced to be copied.
      * @return array
      */
-    public function restrict(&$files, $srcDir, $destDir, $mapper, $force = false)
+    public function restrict(&$files, $srcDir, $destDir, $mapper, $force = false): array
     {
         $now = time();
         $targetList = "";
@@ -82,7 +82,7 @@ class SourceFileScanner
 
         for ($i = 0, $size = count($files); $i < $size; $i++) {
             $targets = $mapper->main($files[$i]);
-            if (empty($targets)) {
+            if (count($targets) === 0) {
                 $this->task->log($files[$i] . " skipped - don't know how to handle it", Project::MSG_VERBOSE);
                 continue;
             }
@@ -170,7 +170,7 @@ class SourceFileScanner
      * @param $mapper
      * @return array
      */
-    public function restrictAsFiles(&$files, &$srcDir, &$destDir, &$mapper)
+    public function restrictAsFiles(&$files, &$srcDir, &$destDir, &$mapper): array
     {
         $res = $this->restrict($files, $srcDir, $destDir, $mapper);
         $result = [];

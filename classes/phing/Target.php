@@ -103,7 +103,7 @@ class Target implements TaskContainer
      *
      * @return Project Reference to current porject object
      */
-    public function getProject()
+    public function getProject(): \Project
     {
         return $this->project;
     }
@@ -144,7 +144,7 @@ class Target implements TaskContainer
      *
      * @return array Reference to target dependencoes
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return $this->dependencies;
     }
@@ -164,7 +164,7 @@ class Target implements TaskContainer
      *
      * @return string The name of the target
      */
-    public function getName()
+    public function getName(): string
     {
         return (string) $this->name;
     }
@@ -175,7 +175,7 @@ class Target implements TaskContainer
      * @param  boolean $flag
      * @return Target
      */
-    public function setHidden($flag)
+    public function setHidden($flag): \Target
     {
         $this->hidden = (boolean) $flag;
 
@@ -187,7 +187,7 @@ class Target implements TaskContainer
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getHidden(): bool
     {
         return $this->hidden;
     }
@@ -197,7 +197,7 @@ class Target implements TaskContainer
      *
      * @return boolean
      */
-    public function isHidden()
+    public function isHidden(): bool
     {
         return $this->getHidden();
     }
@@ -207,7 +207,7 @@ class Target implements TaskContainer
      *
      * @param Task $task The task object to add
      */
-    public function addTask(Task $task)
+    public function addTask(Task $task): void
     {
         $this->children[] = $task;
     }
@@ -231,7 +231,7 @@ class Target implements TaskContainer
      *
      * @return array Task[]
      */
-    public function getTasks()
+    public function getTasks(): array
     {
         $tasks = [];
         for ($i = 0, $size = count($this->children); $i < $size; $i++) {
@@ -253,7 +253,7 @@ class Target implements TaskContainer
      */
     public function setIf($property)
     {
-        $this->ifCondition = ($property === null) ? "" : $property;
+        $this->ifCondition = $property ?? "";
     }
 
     /**
@@ -265,7 +265,7 @@ class Target implements TaskContainer
      */
     public function setUnless($property)
     {
-        $this->unlessCondition = ($property === null) ? "" : $property;
+        $this->unlessCondition = $property ?? "";
     }
 
     /**
@@ -287,7 +287,7 @@ class Target implements TaskContainer
      *
      * @return string The description text of this target
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -303,7 +303,7 @@ class Target implements TaskContainer
     /**
      * @return bool|null
      */
-    public function getLogSkipped()
+    public function getLogSkipped(): ?bool
     {
         if ($this->logSkipped === null) {
             $this->setLogSkipped(false);
@@ -318,7 +318,7 @@ class Target implements TaskContainer
      *
      * @return string The string representation of this target
      */
-    public function toString()
+    public function toString(): string
     {
         return (string) $this;
     }
@@ -390,7 +390,7 @@ class Target implements TaskContainer
      *                 in <code>$this->ifCondition</code> exists;
      *                 <code>false</code> otherwise
      */
-    private function testIfCondition()
+    private function testIfCondition(): bool
     {
         if ($this->ifCondition === "") {
             return true;
@@ -414,7 +414,7 @@ class Target implements TaskContainer
      *                 in <code>$this->unlessCondition</code> exists;
      *                 <code>false</code> otherwise
      */
-    private function testUnlessCondition()
+    private function testUnlessCondition(): bool
     {
         if ($this->unlessCondition === "") {
             return true;

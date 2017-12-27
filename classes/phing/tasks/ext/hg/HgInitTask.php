@@ -41,7 +41,7 @@ class HgInitTask extends HgBaseTask
      *
      * @return void
      */
-    public function setTargetPath($targetPath)
+    public function setTargetPath($targetPath): void
     {
         $this->targetPath = $targetPath;
     }
@@ -51,7 +51,7 @@ class HgInitTask extends HgBaseTask
      *
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $clone = $this->getFactoryInstance('init');
         $this->log('Initializing', Project::MSG_INFO);

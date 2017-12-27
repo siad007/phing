@@ -69,7 +69,7 @@ class ProjectConfigurator
      * @param  Project $project  the Project instance this configurator should use
      * @param  PhingFile $buildFile  the buildfile object the parser should use
      */
-    public static function configureProject(Project $project, PhingFile $buildFile)
+    public static function configureProject(Project $project, PhingFile $buildFile): void
     {
         $pc = new ProjectConfigurator($project, $buildFile);
         $pc->parse();
@@ -95,7 +95,7 @@ class ProjectConfigurator
      * find out the build file
      * @return PhingFile the build file to which the xml context belongs
      */
-    public function getBuildFile()
+    public function getBuildFile(): \PhingFile
     {
         return $this->buildFile;
     }
@@ -104,7 +104,7 @@ class ProjectConfigurator
      * find out the parent build file of this build file
      * @return PhingFile the parent build file of this build file
      */
-    public function getBuildFileParent()
+    public function getBuildFileParent(): \PhingFile
     {
         return $this->buildFileParent;
     }
@@ -113,7 +113,7 @@ class ProjectConfigurator
      * find out the current project name
      * @return string current project name
      */
-    public function getCurrentProjectName()
+    public function getCurrentProjectName(): string
     {
         return $this->currentProjectName;
     }
@@ -122,7 +122,7 @@ class ProjectConfigurator
      * set the name of the current project
      * @param string $name name of the current project
      */
-    public function setCurrentProjectName($name)
+    public function setCurrentProjectName($name): void
     {
         $this->currentProjectName = $name;
     }
@@ -131,7 +131,7 @@ class ProjectConfigurator
      * tells whether the project tag is being ignored
      * @return bool whether the project tag is being ignored
      */
-    public function isIgnoringProjectTag()
+    public function isIgnoringProjectTag(): bool
     {
         return $this->ignoreProjectTag;
     }
@@ -140,7 +140,7 @@ class ProjectConfigurator
      * sets the flag to ignore the project tag
      * @param bool $flag flag to ignore the project tag
      */
-    public function setIgnoreProjectTag($flag)
+    public function setIgnoreProjectTag($flag): void
     {
         $this->ignoreProjectTag = $flag;
     }
@@ -148,7 +148,7 @@ class ProjectConfigurator
     /**
      * @return bool
      */
-    public function isParsing()
+    public function isParsing(): bool
     {
         return $this->isParsing;
     }
@@ -157,10 +157,9 @@ class ProjectConfigurator
      * Creates the ExpatParser, sets root handler and kick off parsing
      * process.
      *
-     * @throws BuildException if there is any kind of exception during
-     *                        the parsing process
+     * @throws Exception
      */
-    protected function parse()
+    protected function parse(): void
     {
         try {
             // get parse context
@@ -207,7 +206,7 @@ class ProjectConfigurator
      * @param PhingXMLContext $ctx
      * @throws ExpatParseException
      */
-    protected function _parse(PhingXMLContext $ctx)
+    protected function _parse(PhingXMLContext $ctx): void
     {
         // push action onto global stack
         $ctx->startConfigure($this);
@@ -234,7 +233,7 @@ class ProjectConfigurator
      *
      * @param Task $task Task to execute after parse
      */
-    public function delayTaskUntilParseEnd($task)
+    public function delayTaskUntilParseEnd($task): void
     {
         $this->parseEndTarget->addTask($task);
     }
@@ -248,7 +247,7 @@ class ProjectConfigurator
      * @throws BuildException
      * @throws Exception
      */
-    public static function configure($target, $attrs, Project $project)
+    public static function configure($target, $attrs, Project $project): void
     {
         if ($target instanceof TaskAdapter) {
             $target = $target->getProxy();
@@ -292,7 +291,7 @@ class ProjectConfigurator
      * @param  object  the element to configure
      * @param  string $text the element's #CDATA
      */
-    public static function addText($project, $target, $text = null)
+    public static function addText($project, $target, $text = null): void
     {
         if ($text === null || strlen(trim($text)) === 0) {
             return;
@@ -310,7 +309,7 @@ class ProjectConfigurator
      * @param  object  the child element
      * @param  string  the XML tagname
      */
-    public static function storeChild($project, $parent, $child, $tag)
+    public static function storeChild($project, $parent, $child, $tag): void
     {
         $ih = IntrospectionHelper::getHelper(get_class($parent));
         $ih->storeElement($project, $parent, $child, $tag);
@@ -323,7 +322,7 @@ class ProjectConfigurator
      * @param object $target the element's object
      * @param array  $attr the element's attributes
      */
-    public function configureId($target, $attr)
+    public function configureId($target, $attr): void
     {
         if (isset($attr['id']) && $attr['id'] !== null) {
             $this->project->addReference($attr['id'], $target);

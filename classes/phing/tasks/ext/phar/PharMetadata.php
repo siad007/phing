@@ -36,7 +36,7 @@ class PharMetadata
     /**
      * @return PharMetadataElement
      */
-    public function createElement()
+    public function createElement(): \PharMetadataElement
     {
         return ($this->elements[] = new PharMetadataElement());
     }

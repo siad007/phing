@@ -15,7 +15,7 @@ class CaseTask extends SequentialTask
      *
      * @return void
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = $value;
     }

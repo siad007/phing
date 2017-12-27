@@ -73,9 +73,8 @@ class EqualsCondition implements Condition
 
     /**
      * @return bool
-     * @throws BuildException
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->arg1 === null || $this->arg2 === null) {
             throw new BuildException("Both arg1 and arg2 are required in equals.");

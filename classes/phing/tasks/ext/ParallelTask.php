@@ -1,5 +1,7 @@
 <?php
 
+use MehrAlsNix\Parallel\Worker;
+
 /**
  * $Id$
  *
@@ -50,13 +52,13 @@ class ParallelTask extends SequentialTask
         $this->threadCount = $threadCount;
     }
 
-    public function init()
+    public function init(): void
     {
     }
 
     public function main()
     {
-        if (!class_exists('MehrAlsNix\Parallel\Worker')) {
+        if (!class_exists(Worker::class)) {
             throw new BuildException(
                 'ParallelTask depends on DocBlox being installed and on include_path.',
                 $this->getLocation()

@@ -21,7 +21,7 @@ class PearPkgRole
      * Sets the file extension
      * @param string $extension
      */
-    public function setExtension($extension)
+    public function setExtension($extension): void
     {
         $this->extension = $extension;
     }
@@ -30,7 +30,7 @@ class PearPkgRole
      * Retrieves the file extension
      * @return string
      */
-    public function getExtension()
+    public function getExtension(): string
     {
         return $this->extension;
     }
@@ -39,7 +39,7 @@ class PearPkgRole
      * Sets the role
      * @param string $role
      */
-    public function setRole($role)
+    public function setRole($role): void
     {
         $this->role = $role;
     }
@@ -48,7 +48,7 @@ class PearPkgRole
      * Retrieves the role
      * @return string
      */
-    public function getRole()
+    public function getRole(): string
     {
         return $this->role;
     }

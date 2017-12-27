@@ -13,12 +13,12 @@ class PearPkgMapping
     /**
      * @param $v
      */
-    public function setName($v)
+    public function setName($v): void
     {
         $this->name = $v;
     }
 
-    public function getName()
+    public function getName(): void
     {
         return $this->name;
     }
@@ -26,7 +26,7 @@ class PearPkgMapping
     /**
      * @return PearPkgMappingElement
      */
-    public function createElement()
+    public function createElement(): \PearPkgMappingElement
     {
         $e = new PearPkgMappingElement();
         $this->elements[] = $e;
@@ -37,7 +37,7 @@ class PearPkgMapping
     /**
      * @return array
      */
-    public function getElements()
+    public function getElements(): array
     {
         return $this->elements;
     }
@@ -46,7 +46,7 @@ class PearPkgMapping
      * Returns the PHP hash or array of hashes (etc.) that this mapping represents.
      * @return array
      */
-    public function getValue()
+    public function getValue(): array
     {
         $value = [];
         foreach ($this->getElements() as $el) {

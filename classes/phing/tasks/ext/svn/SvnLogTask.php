@@ -68,6 +68,7 @@ class SvnLogTask extends SvnBaseTask
      * The main entry point
      *
      * @throws BuildException
+     * @throws VersionControl_SVN_Exception
      */
     public function main()
     {

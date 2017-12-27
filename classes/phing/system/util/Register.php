@@ -52,7 +52,7 @@ class Register
      * @param  string       $key
      * @return RegisterSlot
      */
-    public static function getSlot($key)
+    public static function getSlot($key): \RegisterSlot
     {
         if (!isset(self::$slots[$key])) {
             self::$slots[$key] = new RegisterSlot($key);

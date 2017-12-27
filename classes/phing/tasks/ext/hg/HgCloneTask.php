@@ -41,7 +41,7 @@ class HgCloneTask extends HgBaseTask
      *
      * @return void
      */
-    public function setTargetPath($targetPath)
+    public function setTargetPath($targetPath): void
     {
         $this->targetPath = $targetPath;
     }
@@ -51,7 +51,7 @@ class HgCloneTask extends HgBaseTask
      *
      * @return string
      */
-    public function getTargetPath()
+    public function getTargetPath(): string
     {
         return $this->targetPath;
     }
@@ -62,7 +62,7 @@ class HgCloneTask extends HgBaseTask
      * @return void
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         $clone = $this->getFactoryInstance('clone');
         $repository = $this->getRepository();

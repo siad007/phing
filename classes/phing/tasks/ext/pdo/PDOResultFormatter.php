@@ -42,7 +42,7 @@ abstract class PDOResultFormatter
      *
      * @param Writer $out
      */
-    public function setOutput(Writer $out)
+    public function setOutput(Writer $out): void
     {
         $this->out = $out;
     }
@@ -52,7 +52,7 @@ abstract class PDOResultFormatter
      *
      * @return Writer
      */
-    public function getOutput()
+    public function getOutput(): \Writer
     {
         return $this->out;
     }

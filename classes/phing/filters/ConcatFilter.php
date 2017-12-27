@@ -88,12 +88,8 @@ class ConcatFilter extends BaseParamFilterReader implements ChainableReader
      * @param int $len
      * @return int|string the next character in the resulting stream, or -1
      * if the end of the resulting stream has been reached
-     *
-     * @throws IOException if the underlying stream throws an IOException
-     *                     during reading
-     * @throws BuildException
      */
-    public function read($len = 0)
+    public function read($len = null)
     {
         // do the "singleton" initialization
         if (!$this->getInitialized()) {
@@ -107,18 +103,18 @@ class ConcatFilter extends BaseParamFilterReader implements ChainableReader
         // after that the "content" and at the end the "append" file.
         if ($this->prependReader !== null) {
             $ch = $this->prependReader->read();
-            if ($ch === -1) {
+            if ($ch == -1) {
                 // I am the only one so I have to close the reader
                 $this->prependReader->close();
                 $this->prependReader = null;
             }
         }
-        if ($ch === -1) {
+        if ($ch == -1) {
             $ch = parent::read();
         }
-        if ($ch === -1 && $this->appendReader !== null) {
+        if ($ch == -1 && $this->appendReader !== null) {
             $ch = $this->appendReader->read();
-            if ($ch === -1) {
+            if ($ch == -1) {
                 // I am the only one so I have to close the reader
                 $this->appendReader->close();
                 $this->appendReader = null;
@@ -170,15 +166,15 @@ class ConcatFilter extends BaseParamFilterReader implements ChainableReader
      * Creates a new ConcatReader using the passed in
      * Reader for instantiation.
      *
-     * @param Reader $rdr A Reader object providing the underlying stream.
+     * @param Reader $reader A Reader object providing the underlying stream.
      *                    Must not be <code>null</code>.
      *
      * @return ConcatFilter a new filter based on this configuration, but filtering
      *                      the specified reader
      */
-    public function chain(Reader $rdr)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new ConcatFilter($rdr);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
         $newFilter->setPrepend($this->getPrepend());
         $newFilter->setAppend($this->getAppend());
@@ -190,7 +186,7 @@ class ConcatFilter extends BaseParamFilterReader implements ChainableReader
      * Returns `prepend` attribute.
      * @return PhingFile prepend attribute
      */
-    public function getPrepend()
+    public function getPrepend(): ?\PhingFile
     {
         return $this->prepend;
     }
@@ -212,7 +208,7 @@ class ConcatFilter extends BaseParamFilterReader implements ChainableReader
      * Returns `append` attribute.
      * @return PhingFile append attribute
      */
-    public function getAppend()
+    public function getAppend(): ?\PhingFile
     {
         return $this->append;
     }

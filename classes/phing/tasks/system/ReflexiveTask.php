@@ -108,7 +108,7 @@ class ReflexiveTask extends Task
             try {
                 $contents = "";
                 $in = FileUtils::getChainedReader(new FileReader($file), $this->filterChains, $this->project);
-                while (-1 !== ($buffer = $in->read())) {
+                while (-1 != ($buffer = $in->read())) {
                     $contents .= $buffer;
                 }
                 $in->close();

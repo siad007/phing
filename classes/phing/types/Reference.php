@@ -31,6 +31,7 @@ class Reference
     private $project;
 
     /**
+     * @param Project $project
      * @param string $id
      */
     public function __construct(Project $project, $id = null)
@@ -42,7 +43,7 @@ class Reference
     /**
      * @param $id
      */
-    public function setRefId($id)
+    public function setRefId($id): void
     {
         $this->refid = (string) $id;
     }
@@ -50,7 +51,7 @@ class Reference
     /**
      * @return string
      */
-    public function getRefId()
+    public function getRefId(): string
     {
         return $this->refid;
     }
@@ -62,7 +63,7 @@ class Reference
      *
      * @throws BuildException
      *
-     * @return Reference
+     * @return mixed
      */
     public function getReferencedObject(Project $project = null)
     {
@@ -86,7 +87,7 @@ class Reference
         return $this->refid;
     }
 
-    private function setProject($project)
+    private function setProject($project): void
     {
         $this->project = $project;
     }

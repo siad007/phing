@@ -55,7 +55,7 @@ abstract class TokenReader
      *
      * @return void
      */
-    public function log($level, $msg)
+    public function log($level, $msg): void
     {
         $this->project->log($level, $msg);
     }

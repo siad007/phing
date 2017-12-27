@@ -44,7 +44,7 @@ class FilenameSelector extends BaseExtendSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{filenameselector name: ";
         if ($this->pattern !== null) {
@@ -79,7 +79,7 @@ class FilenameSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setName($pattern)
+    public function setName($pattern): void
     {
         $pattern = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $pattern);
 
@@ -108,7 +108,7 @@ class FilenameSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setCasesensitive($casesensitive)
+    public function setCasesensitive($casesensitive): void
     {
         $this->casesensitive = $casesensitive;
     }
@@ -123,7 +123,7 @@ class FilenameSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setNegate($negated)
+    public function setNegate($negated): void
     {
         $this->negated = $negated;
     }
@@ -136,7 +136,7 @@ class FilenameSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function setParameters($parameters)
+    public function setParameters($parameters): void
     {
         parent::setParameters($parameters);
         if ($parameters !== null) {
@@ -170,7 +170,7 @@ class FilenameSelector extends BaseExtendSelector
      *
      * @return void
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->pattern === null && $this->regex === null) {
             $this->setError("The name or regex attribute is required");
@@ -194,7 +194,7 @@ class FilenameSelector extends BaseExtendSelector
      *
      * @return bool whether the file should be selected or not
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

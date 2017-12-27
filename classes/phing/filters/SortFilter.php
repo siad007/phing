@@ -105,7 +105,6 @@ class SortFilter extends BaseParamFilterReader implements ChainableReader
      * @param int $len
      * @return string the next character in the resulting stream, or -1 if the end of
      *         the resulting stream has been reached
-     * @throws BuildException
      * @exception IOException
      *                if the underlying stream throws an IOException during
      *                reading
@@ -119,7 +118,7 @@ class SortFilter extends BaseParamFilterReader implements ChainableReader
 
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -135,16 +134,16 @@ class SortFilter extends BaseParamFilterReader implements ChainableReader
     /**
      * Creates a new SortReader using the passed in Reader for instantiation.
      *
-     * @param Reader $rdr
+     * @param Reader $reader
      *            A Reader object providing the underlying stream. Must not be
      *            <code>null</code>.
      *
      * @return SortFilter a new filter based on this configuration, but filtering the
      *         specified reader
      */
-    public function chain(Reader $rdr)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new SortFilter($rdr);
+        $newFilter = new self($reader);
         $newFilter->setReverse($this->isReverse());
         $newFilter->setInitialized(true);
         return $newFilter;
@@ -157,7 +156,7 @@ class SortFilter extends BaseParamFilterReader implements ChainableReader
      * @return boolean <code>true</code> if the sorting process will be in reverse
      *                 order, otherwise the sorting process will be in ascendant order.
      */
-    public function isReverse()
+    public function isReverse(): bool
     {
         return $this->reverse;
     }

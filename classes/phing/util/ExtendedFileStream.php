@@ -33,14 +33,14 @@ class ExtendedFileStream
 {
     private $fp = null;
 
-    public static function registerStream()
+    public static function registerStream(): void
     {
         if (!in_array("efile", stream_get_wrappers())) {
             stream_wrapper_register("efile", "ExtendedFileStream");
         }
     }
 
-    public static function unregisterStream()
+    public static function unregisterStream(): void
     {
         stream_wrapper_unregister("efile");
     }
@@ -48,7 +48,7 @@ class ExtendedFileStream
     /**
      * @param $path
      */
-    private function createDirectories($path)
+    private function createDirectories($path): void
     {
         $f = new PhingFile($path);
         if (!$f->exists()) {
@@ -64,7 +64,7 @@ class ExtendedFileStream
      * @return bool
      * @throws IOException
      */
-    public function stream_open($path, $mode, $options, &$opened_path)
+    public function stream_open($path, $mode, $options, &$opened_path): bool
     {
         // if we're on Windows, urldecode() the path again
         if (FileSystem::getFileSystem()->getSeparator() == '\\') {
@@ -84,7 +84,7 @@ class ExtendedFileStream
         return true;
     }
 
-    public function stream_close()
+    public function stream_close(): void
     {
         fclose($this->fp);
         $this->fp = null;
@@ -94,7 +94,7 @@ class ExtendedFileStream
      * @param $count
      * @return string
      */
-    public function stream_read($count)
+    public function stream_read($count): string
     {
         return fread($this->fp, $count);
     }
@@ -103,7 +103,7 @@ class ExtendedFileStream
      * @param $data
      * @return int
      */
-    public function stream_write($data)
+    public function stream_write($data): int
     {
         return fwrite($this->fp, $data);
     }
@@ -111,7 +111,7 @@ class ExtendedFileStream
     /**
      * @return bool
      */
-    public function stream_eof()
+    public function stream_eof(): bool
     {
         return feof($this->fp);
     }
@@ -119,7 +119,7 @@ class ExtendedFileStream
     /**
      * @return int
      */
-    public function stream_tell()
+    public function stream_tell(): int
     {
         return ftell($this->fp);
     }
@@ -129,7 +129,7 @@ class ExtendedFileStream
      * @param $whence
      * @return int
      */
-    public function stream_seek($offset, $whence)
+    public function stream_seek($offset, $whence): int
     {
         return fseek($this->fp, $offset, $whence);
     }
@@ -137,7 +137,7 @@ class ExtendedFileStream
     /**
      * @return bool
      */
-    public function stream_flush()
+    public function stream_flush(): bool
     {
         return fflush($this->fp);
     }
@@ -145,7 +145,7 @@ class ExtendedFileStream
     /**
      * @return array
      */
-    public function stream_stat()
+    public function stream_stat(): array
     {
         return fstat($this->fp);
     }
@@ -154,7 +154,7 @@ class ExtendedFileStream
      * @param $path
      * @return bool
      */
-    public function unlink($path)
+    public function unlink($path): bool
     {
         return false;
     }
@@ -164,7 +164,7 @@ class ExtendedFileStream
      * @param $path_to
      * @return bool
      */
-    public function rename($path_from, $path_to)
+    public function rename($path_from, $path_to): bool
     {
         return false;
     }
@@ -175,7 +175,7 @@ class ExtendedFileStream
      * @param $options
      * @return bool
      */
-    public function mkdir($path, $mode, $options)
+    public function mkdir($path, $mode, $options): bool
     {
         return false;
     }
@@ -185,7 +185,7 @@ class ExtendedFileStream
      * @param $options
      * @return bool
      */
-    public function rmdir($path, $options)
+    public function rmdir($path, $options): bool
     {
         return false;
     }

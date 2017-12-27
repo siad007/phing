@@ -34,7 +34,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
     /**
      * @return string
      */
-    public function getExtension()
+    public function getExtension(): string
     {
         return ".txt";
     }
@@ -42,7 +42,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
     /**
      * @return string
      */
-    public function getPreferredOutfile()
+    public function getPreferredOutfile(): string
     {
         return "testresults";
     }
@@ -50,7 +50,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
     /**
      * @param PHPUnit\Framework\TestSuite $suite
      */
-    public function startTestSuite(PHPUnit\Framework\TestSuite $suite)
+    public function startTestSuite(PHPUnit\Framework\TestSuite $suite): void
     {
         parent::startTestSuite($suite);
 
@@ -63,7 +63,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
     public function endTestSuite(PHPUnit\Framework\TestSuite $suite)
     {
         if ($suite->getName() === 'AllTests') {
-            return false;
+            return;
         }
 
         $sb = "Testsuite: " . $suite->getName() . "\n";
@@ -88,7 +88,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
      * @param Exception $e
      * @param float $time
      */
-    public function addError(PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addError(PHPUnit\Framework\Test $test, Exception $e, $time): void
     {
         parent::addError($test, $e, $time);
 
@@ -100,7 +100,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
      * @param PHPUnit\Framework\AssertionFailedError $e
      * @param float $time
      */
-    public function addFailure(PHPUnit\Framework\Test $test, PHPUnit\Framework\AssertionFailedError $e, $time)
+    public function addFailure(PHPUnit\Framework\Test $test, PHPUnit\Framework\AssertionFailedError $e, $time): void
     {
         parent::addFailure($test, $e, $time);
         $this->formatError("FAILED", $test, $e);
@@ -108,10 +108,10 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
 
     /**
      * @param PHPUnit\Framework\Test $test
-     * @param PHPUnit\Framework\AssertionFailedError $e
+     * @param \PHPUnit\Framework\Warning $e
      * @param float $time
      */
-    public function addWarning(PHPUnit\Framework\Test $test, PHPUnit\Framework\Warning $e, $time)
+    public function addWarning(PHPUnit\Framework\Test $test, PHPUnit\Framework\Warning $e, $time): void
     {
         parent::addWarning($test, $e, $time);
         $this->formatError("WARNING", $test, $e);
@@ -122,7 +122,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
      * @param Exception $e
      * @param float $time
      */
-    public function addIncompleteTest(PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addIncompleteTest(PHPUnit\Framework\Test $test, Exception $e, $time): void
     {
         parent::addIncompleteTest($test, $e, $time);
 
@@ -134,7 +134,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
      * @param Exception $e
      * @param float $time
      */
-    public function addSkippedTest(PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addSkippedTest(PHPUnit\Framework\Test $test, Exception $e, $time): void
     {
         parent::addSkippedTest($test, $e, $time);
         $this->formatError("SKIPPED", $test);

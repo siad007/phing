@@ -39,7 +39,7 @@ class ProfileLogger extends DefaultLogger
      *            An event with any relevant extra information. Must not be
      *            <code>null</code>.
      */
-    public function targetStarted(BuildEvent $event)
+    public function targetStarted(BuildEvent $event): void
     {
         if (@date_default_timezone_get() === 'UTC') {
             date_default_timezone_set('Europe/Berlin');
@@ -57,7 +57,7 @@ class ProfileLogger extends DefaultLogger
      *            An event with any relevant extra information. Must not be
      *            <code>null</code>.
      */
-    public function targetFinished(BuildEvent $event)
+    public function targetFinished(BuildEvent $event): void
     {
         $start = array_pop($this->profileData);
 
@@ -72,7 +72,7 @@ class ProfileLogger extends DefaultLogger
      *            An event with any relevant extra information. Must not be
      *            <code>null</code>.
      */
-    public function taskStarted(BuildEvent $event)
+    public function taskStarted(BuildEvent $event): void
     {
         $name = $event->getTask()->getTaskName();
         $now = Phing::currentTimeMillis();
@@ -87,7 +87,7 @@ class ProfileLogger extends DefaultLogger
      *            An event with any relevant extra information. Must not be
      *            <code>null</code>.
      */
-    public function taskFinished(BuildEvent $event)
+    public function taskFinished(BuildEvent $event): void
     {
         $start = array_pop($this->profileData);
 

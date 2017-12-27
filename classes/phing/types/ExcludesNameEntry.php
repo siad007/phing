@@ -44,7 +44,7 @@ class ExcludesNameEntry
      *
      * @param string $pattern The file pattern
      */
-    public function addText($pattern)
+    public function addText($pattern): void
     {
         $this->setName($pattern);
     }
@@ -54,7 +54,7 @@ class ExcludesNameEntry
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = (string) $name;
     }
@@ -64,7 +64,7 @@ class ExcludesNameEntry
      *
      * @return string The name of a file, class or method or the file pattern
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -74,7 +74,7 @@ class ExcludesNameEntry
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return $this->name;
     }

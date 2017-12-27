@@ -161,7 +161,7 @@ class ElementHandler extends AbstractHandler
      * @param string $data  the CDATA that comes in
      * @throws ExpatParseException if the CDATA could not be set-up properly
      */
-    public function characters($data)
+    public function characters($data): void
     {
         $this->childWrapper->addText($data);
     }
@@ -170,12 +170,12 @@ class ElementHandler extends AbstractHandler
      * Checks for nested tags within the current one. Creates and calls
      * handlers respectively.
      *
-     * @param string $name  the tag that comes in
-     * @param array  $attrs attributes the tag carries
+     * @param string $name the tag that comes in
+     * @param array $attribs attributes the tag carries
      */
-    public function startElement($name, $attrs)
+    public function startElement($name, $attribs): void
     {
         $eh = new ElementHandler($this->parser, $this, $this->configurator, $this->child, $this->childWrapper, $this->target);
-        $eh->init($name, $attrs);
+        $eh->init($name, $attribs);
     }
 }

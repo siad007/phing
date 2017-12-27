@@ -36,8 +36,9 @@ class PHPLocFormatterFactory
      * @param PHPLocFormatterElement $formatterElement
      * @throws BuildException
      * @return AbstractPHPLocFormatter
+     * @throws IOException
      */
-    public static function createFormatter($formatterElement)
+    public static function createFormatter($formatterElement): \AbstractPHPLocFormatter
     {
         $formatter = null;
         $type = $formatterElement->getType();

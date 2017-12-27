@@ -188,7 +188,7 @@ class PDOSQLExecTask extends PDOTask
      * Creates a new PDOSQLExecFormatterElement for <formatter> element.
      * @return PDOSQLExecFormatterElement
      */
-    public function createFormatter()
+    public function createFormatter(): \PDOSQLExecFormatterElement
     {
         $fe = new PDOSQLExecFormatterElement($this);
         $this->formatters[] = $fe;
@@ -235,7 +235,7 @@ class PDOSQLExecTask extends PDOTask
      *
      * @return string
      */
-    public function getDelimiter()
+    public function getDelimiter(): string
     {
         return $this->delimiter;
     }
@@ -286,7 +286,7 @@ class PDOSQLExecTask extends PDOTask
      *
      * @return Writer
      */
-    private function getDefaultOutput()
+    private function getDefaultOutput(): \Writer
     {
         return new LogWriter($this);
     }
@@ -433,7 +433,7 @@ class PDOSQLExecTask extends PDOTask
     /**
      * read in lines and execute them
      * @param Reader $reader
-     * @throws BuildException
+     * @throws Exception
      */
     public function runStatements(Reader $reader)
     {
@@ -467,7 +467,7 @@ class PDOSQLExecTask extends PDOTask
      *
      * @return boolean Whether specified SQL looks like a SELECT query.
      */
-    protected function isSelectSql($sql)
+    protected function isSelectSql($sql): bool
     {
         $sql = trim($sql);
 
@@ -519,7 +519,7 @@ class PDOSQLExecTask extends PDOTask
      *
      * @return array PDOResultFormatter[]
      */
-    protected function getConfiguredFormatters()
+    protected function getConfiguredFormatters(): array
     {
         $formatters = [];
         foreach ($this->formatters as $fe) {
@@ -555,6 +555,7 @@ class PDOSQLExecTask extends PDOTask
      * Passes results from query to any formatters.
      *
      * @throws PDOException
+     * @throws Exception
      */
     protected function processResults()
     {

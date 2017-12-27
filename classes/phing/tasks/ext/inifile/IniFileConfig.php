@@ -42,7 +42,7 @@ class IniFileConfig
      *
      * @return void
      */
-    public function read($file)
+    public function read($file): void
     {
         $this->lines = [];
 
@@ -83,9 +83,9 @@ class IniFileConfig
      * @param string $section Section
      * @param string $key     Key
      *
-     * @return void
+     * @return string
      */
-    public function get($section, $key)
+    public function get($section, $key): string
     {
         foreach ($this->lines as $line) {
             if ($line['type'] != 'entry') {
@@ -112,7 +112,7 @@ class IniFileConfig
      *
      * @return void
      */
-    public function set($section, $key, $value)
+    public function set($section, $key, $value): void
     {
         foreach ($this->lines as &$line) {
             if ($line['type'] != 'entry') {
@@ -142,7 +142,7 @@ class IniFileConfig
      *
      * @return void
      */
-    public function remove($section, $key)
+    public function remove($section, $key): void
     {
         if ($section == '') {
             throw new RuntimeException("Section not set.");
@@ -173,7 +173,7 @@ class IniFileConfig
      *
      * @return void
      */
-    public function write($file)
+    public function write($file): void
     {
         if (file_exists($file) && !is_writable($file)) {
             throw new RuntimeException("$file is not writable");

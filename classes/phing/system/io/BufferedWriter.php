@@ -70,12 +70,12 @@ class BufferedWriter extends Writer
     /**
      * @return string
      */
-    public function getResource()
+    public function getResource(): string
     {
         return $this->out->getResource();
     }
 
-    public function flush()
+    public function flush(): void
     {
         $this->out->flush();
     }
@@ -83,8 +83,8 @@ class BufferedWriter extends Writer
     /**
      * Close attached stream.
      */
-    public function close()
+    public function close(): void
     {
-        return $this->out->close();
+        $this->out->close();
     }
 }

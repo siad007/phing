@@ -56,7 +56,7 @@ class Location
     /**
      * @return null|string
      */
-    public function getFileName()
+    public function getFileName(): ?string
     {
         return $this->fileName;
     }
@@ -64,7 +64,7 @@ class Location
     /**
      * @return null|int
      */
-    public function getLineNumber()
+    public function getLineNumber(): ?int
     {
         return $this->lineNumber;
     }
@@ -72,7 +72,7 @@ class Location
     /**
      * @return null|int
      */
-    public function getColumnNumber()
+    public function getColumnNumber(): ?int
     {
         return $this->columnNumber;
     }
@@ -85,7 +85,7 @@ class Location
      *
      * @return string the string representation of this Location object
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "";
         if ($this->fileName !== null) {

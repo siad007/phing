@@ -80,7 +80,7 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
      * Get the current domain.
      * @return string
      */
-    public function getDomain()
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -98,7 +98,7 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
      * Gets the root locale directory.
      * @return PhingFile
      */
-    public function getDir()
+    public function getDir(): \PhingFile
     {
         return $this->dir;
     }
@@ -119,7 +119,7 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
      * Gets the locale to use for translation.
      * @return string
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
@@ -144,7 +144,7 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
      * @throws BuildException - if locale cannot be set.
      * @see restoreEnvironment()
      */
-    protected function initEnvironment()
+    protected function initEnvironment(): void
     {
         $this->storedLocale = getenv("LANG");
 
@@ -170,7 +170,7 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
      *
      * @return void
      */
-    protected function restoreEnvironment()
+    protected function restoreEnvironment(): void
     {
         putenv("LANG=" . $this->storedLocale);
         setlocale(LC_ALL, $this->storedLocale);
@@ -186,7 +186,7 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
      * @param  array  $matches Array of matches; we're interested in $matches[2].
      * @return string Translated text
      */
-    private function xlateStringCallback($matches)
+    private function xlateStringCallback($matches): string
     {
         $charbefore = $matches[1];
         $msgid = $matches[2];
@@ -201,9 +201,9 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
      * The original stream is first read in fully, and then translation is performed.
      *
      * @param null $len
-     * @throws BuildException
      * @return mixed the filtered stream, or -1 if the end of the resulting stream has been reached.
      *
+     * @throws BuldException
      */
     public function read($len = null)
     {
@@ -216,7 +216,7 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
         $this->checkAttributes();
 
         $buffer = $this->in->read($len);
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -268,9 +268,9 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader
      * @return TranslateGettext A new filter based on this configuration, but filtering
      *                          the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new TranslateGettext($reader);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
         $newFilter->setDomain($this->getDomain());
         $newFilter->setLocale($this->getLocale());

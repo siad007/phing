@@ -50,7 +50,7 @@ class BaseParamFilterReader extends BaseFilterReader implements Parameterizable
      *
      * @throws Exception
      */
-    public function setParameters($parameters)
+    public function setParameters($parameters): void
     {
         // type check, error must never occur, bad code of it does
         if (!is_array($parameters)) {
@@ -66,7 +66,7 @@ class BaseParamFilterReader extends BaseFilterReader implements Parameterizable
      *
      * @return array the parameters to be used by this filter
      */
-    public function &getParameters()
+    public function &getParameters(): array
     {
         return $this->_parameters;
     }

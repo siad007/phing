@@ -54,7 +54,7 @@ class zsdtPackTask extends zsdtBaseTask
      *
      * @return void
      */
-    public function setPackage($package)
+    public function setPackage($package): void
     {
         $this->package = escapeshellarg($package);
     }
@@ -66,7 +66,7 @@ class zsdtPackTask extends zsdtBaseTask
      *
      * @return void
      */
-    public function setLint($lint)
+    public function setLint($lint): void
     {
         $this->lint = $lint;
     }
@@ -79,7 +79,7 @@ class zsdtPackTask extends zsdtBaseTask
      *
      * @return void
      */
-    public function setOutput($output)
+    public function setOutput($output): void
     {
         $this->output = escapeshellarg($output);
     }
@@ -91,7 +91,7 @@ class zsdtPackTask extends zsdtBaseTask
      *
      * @return void
      */
-    public function setPhpbin($phpbin)
+    public function setPhpbin($phpbin): void
     {
         $this->phpbin = escapeshellarg($phpbin);
     }
@@ -104,7 +104,7 @@ class zsdtPackTask extends zsdtBaseTask
      *
      * @return void
      */
-    public function setScripts($scripts)
+    public function setScripts($scripts): void
     {
         $this->scripts = escapeshellarg($scripts);
     }
@@ -116,7 +116,7 @@ class zsdtPackTask extends zsdtBaseTask
      *
      * @return void
      */
-    public function setSource($source)
+    public function setSource($source): void
     {
         $this->source = escapeshellarg($source);
     }
@@ -126,7 +126,7 @@ class zsdtPackTask extends zsdtBaseTask
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         $this->action = 'pack';
     }
@@ -138,7 +138,7 @@ class zsdtPackTask extends zsdtBaseTask
      *
      * @throws BuildException
      */
-    protected function validate()
+    protected function validate(): void
     {
         if ($this->descriptor === null || $this->scripts === null || $this->package === null) {
             throw new BuildException(

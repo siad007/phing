@@ -58,7 +58,7 @@ class FileSizeTask extends Task
      * @param $property
      * @return void
      */
-    public function setPropertyName($property)
+    public function setPropertyName($property): void
     {
         $this->propertyName = $property;
     }
@@ -69,7 +69,7 @@ class FileSizeTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         $this->checkFile();
         $this->checkPropertyName();
@@ -89,7 +89,7 @@ class FileSizeTask extends Task
      * @return void
      * @throws BuildException
      */
-    private function checkFile()
+    private function checkFile(): void
     {
         // check File
         if ($this->file === null ||
@@ -111,7 +111,7 @@ class FileSizeTask extends Task
      * @return void
      * @throws BuildException
      */
-    private function checkPropertyName()
+    private function checkPropertyName(): void
     {
         if (null === $this->propertyName ||
             strlen($this->propertyName) === 0

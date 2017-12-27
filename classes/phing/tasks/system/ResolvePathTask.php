@@ -66,7 +66,7 @@ class ResolvePathTask extends Task
      * @param  string $v Property name
      * @return void
      */
-    public function setPropertyName($v)
+    public function setPropertyName($v): void
     {
         $this->propertyName = $v;
     }
@@ -109,7 +109,7 @@ class ResolvePathTask extends Task
      * @throws BuildException
      * @return void
      */
-    public function setLevel($level)
+    public function setLevel($level): void
     {
         switch ($level) {
             case 'error':

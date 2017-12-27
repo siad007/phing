@@ -84,9 +84,8 @@ class GrowlNotifyTask extends Task
      * (exists and can be loaded)
      *
      * @return void
-     * @throws BuildException
      */
-    public function init()
+    public function init(): void
     {
         $autoloader = 'Net/Growl/Autoload.php';
 
@@ -123,7 +122,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setName($name = '')
+    public function setName($name = ''): void
     {
         if ('' == $name) {
             $name = 'Growl for Phing';
@@ -146,7 +145,7 @@ class GrowlNotifyTask extends Task
      *
      * @return void
      */
-    public function setSticky($sticky = true)
+    public function setSticky($sticky = true): void
     {
         $this->sticky = (bool) $sticky;
     }
@@ -160,7 +159,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setMessage($message = '')
+    public function setMessage($message = ''): void
     {
         if (!is_string($message)) {
             throw new BuildException(
@@ -182,7 +181,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setTitle($title = '')
+    public function setTitle($title = ''): void
     {
         if ('' == $title) {
             $title = 'GrowlNotify';
@@ -207,7 +206,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setNotification($notification = '')
+    public function setNotification($notification = ''): void
     {
         if ('' == $notification) {
             $notification = 'General Notification';
@@ -238,7 +237,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setAppicon($icon = '')
+    public function setAppicon($icon = ''): void
     {
         if (!is_string($icon)) {
             throw new BuildException(
@@ -270,7 +269,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setHost($host = '127.0.0.1')
+    public function setHost($host = '127.0.0.1'): void
     {
         if (!is_string($host)) {
             throw new BuildException(
@@ -295,7 +294,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setPassword($password = '')
+    public function setPassword($password = ''): void
     {
         if (!is_string($password)) {
             throw new BuildException(
@@ -319,7 +318,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setPriority($priority = '')
+    public function setPriority($priority = ''): void
     {
         if ('' == $priority) {
             $priority = 'normal';
@@ -363,7 +362,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setProtocol($protocol = '')
+    public function setProtocol($protocol = ''): void
     {
         if ('' == $protocol) {
             $protocol = 'gntp';
@@ -398,7 +397,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function setIcon($icon = '')
+    public function setIcon($icon = ''): void
     {
         if (!is_string($icon)) {
             throw new BuildException(
@@ -423,7 +422,7 @@ class GrowlNotifyTask extends Task
      * @return void
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         if (empty($this->message)) {
             throw new BuildException(

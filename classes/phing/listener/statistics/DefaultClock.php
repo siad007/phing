@@ -28,7 +28,7 @@ class DefaultClock implements Clock
     /**
      * @return int
      */
-    public function getCurrentTime()
+    public function getCurrentTime(): int
     {
         return microtime(true);
     }

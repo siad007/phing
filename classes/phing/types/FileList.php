@@ -75,9 +75,8 @@ class FileList extends DataType
      * Makes this instance in effect a reference to another FileList
      * instance.
      * @param Reference $r
-     * @throws BuildException
      */
-    public function setRefid(Reference $r)
+    public function setRefid(Reference $r): void
     {
         if ($this->dir !== null || count($this->filenames) !== 0) {
             throw $this->tooManyAttributes();
@@ -107,7 +106,7 @@ class FileList extends DataType
      * @throws BuildException
      * @return PhingFile
      */
-    public function getDir(Project $p)
+    public function getDir(Project $p): \PhingFile
     {
         if ($this->isReference()) {
             $ref = $this->getRef($p);
@@ -161,7 +160,7 @@ class FileList extends DataType
      * @param  Project   $p
      * @return PhingFile
      */
-    public function getListFile(Project $p)
+    public function getListFile(Project $p): \PhingFile
     {
         if ($this->isReference()) {
             $ref = $this->getRef($p);
@@ -177,7 +176,7 @@ class FileList extends DataType
      * @param  Project $p
      * @return array
      */
-    public function getFiles(Project $p)
+    public function getFiles(Project $p): array
     {
         if ($this->isReference()) {
             $ret = $this->getRef($p);
@@ -202,7 +201,7 @@ class FileList extends DataType
      *
      * @return FileList
      */
-    public function getRef(Project $p)
+    public function getRef(Project $p): \FileList
     {
         $dataTypeName = StringHelper::substring(__CLASS__, strrpos(__CLASS__, '\\') + 1);
         return $this->getCheckedRef(__CLASS__, $dataTypeName);

@@ -82,7 +82,7 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
      * Create new XSLT Param object, to handle the <param/> nested element.
      * @return XsltParam
      */
-    public function createParam()
+    public function createParam(): \XsltParam
     {
         $num = array_push($this->xsltParams, new XsltParam());
 
@@ -104,7 +104,7 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
      * This is used to "clone" this class, in the chain() method.
      * @return array
      */
-    public function getParams()
+    public function getParams(): array
     {
         return $this->xsltParams;
     }
@@ -123,7 +123,7 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
      * This is supported in libxml2 -- Yay!
      * @return boolean
      */
-    public function getHtml()
+    public function getHtml(): bool
     {
         return $this->html;
     }
@@ -163,7 +163,7 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
      *
      * @since 2.4
      */
-    public function getResolveDocumentExternals()
+    public function getResolveDocumentExternals(): bool
     {
         return $this->resolveDocumentExternals;
     }
@@ -185,7 +185,7 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
      *
      * @since 2.4
      */
-    public function getResolveStylesheetExternals()
+    public function getResolveStylesheetExternals(): bool
     {
         return $this->resolveStylesheetExternals;
     }
@@ -193,7 +193,6 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
     /**
      * Reads stream, applies XSLT and returns resulting stream.
      * @param null $len
-     * @throws BuildException
      * @return string         transformed buffer.
      */
     public function read($len = null)
@@ -213,7 +212,7 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
 
         // Read XML
         $_xml = null;
-        while (($data = $this->in->read($len)) !== -1) {
+        while (($data = $this->in->read($len)) != -1) {
             $_xml .= $data;
         }
 
@@ -260,7 +259,7 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
      *
      * @throws BuildException On XSLT errors
      */
-    protected function process($xml, $xsl)
+    protected function process($xml, $xsl): ?string
     {
         $processor = new XSLTProcessor();
 
@@ -316,7 +315,7 @@ class XsltFilter extends BaseParamFilterReader implements ChainableReader
      * @return XsltFilter A new filter based on this configuration, but filtering
      *                    the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
         $newFilter = new XsltFilter($reader);
         $newFilter->setProject($this->getProject());

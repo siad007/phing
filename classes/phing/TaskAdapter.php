@@ -43,7 +43,7 @@ class TaskAdapter extends Task
      * @throws Exception
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         if (method_exists($this->proxy, "setLocation")) {
             try { // try to set location
@@ -82,7 +82,7 @@ class TaskAdapter extends Task
      * @param  object $o
      * @return void
      */
-    public function setProxy($o)
+    public function setProxy($o): void
     {
         $this->proxy = $o;
     }

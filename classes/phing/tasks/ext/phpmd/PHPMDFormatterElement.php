@@ -1,4 +1,7 @@
 <?php
+
+use PHPMD\Writer\StreamWriter;
+
 /**
  * $Id$
  *
@@ -69,7 +72,7 @@ class PHPMDFormatterElement
      *
      * @throws BuildException
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
         switch ($this->type) {
@@ -95,7 +98,7 @@ class PHPMDFormatterElement
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -105,7 +108,7 @@ class PHPMDFormatterElement
      *
      * @param boolean $useFile True or false.
      */
-    public function setUseFile($useFile)
+    public function setUseFile($useFile): void
     {
         $this->useFile = StringHelper::booleanValue($useFile);
     }
@@ -115,7 +118,7 @@ class PHPMDFormatterElement
      *
      * @return boolean
      */
-    public function getUseFile()
+    public function getUseFile(): bool
     {
         return $this->useFile;
     }
@@ -125,7 +128,7 @@ class PHPMDFormatterElement
      *
      * @param PhingFile $outfile The output file
      */
-    public function setOutfile(PhingFile $outfile)
+    public function setOutfile(PhingFile $outfile): void
     {
         $this->outfile = $outfile;
     }
@@ -135,7 +138,7 @@ class PHPMDFormatterElement
      *
      * @return PhingFile
      */
-    public function getOutfile()
+    public function getOutfile(): ?\PhingFile
     {
         return $this->outfile;
     }
@@ -143,19 +146,19 @@ class PHPMDFormatterElement
     /**
      * Creates a report renderer instance based on the formatter type.
      *
-     * @return PHP_PMD_AbstractRenderer
+     * @return PHP_PMD_AbstractRenderer|PHPMD\Renderer\XMLRenderer
      * @throws BuildException           When the specified renderer does not exist.
      */
     public function getRenderer()
     {
-        if (!class_exists('\\PHPMD\\Writer\\StreamWriter')) {
+        if (!class_exists(StreamWriter::class)) {
             $renderClass = 'PHP_PMD_RENDERER_' . $this->className;
             $writerClass = 'PHP_PMD_Writer_Stream';
             include_once 'PHP/PMD/Renderer/' . $this->className . '.php';
             include_once 'PHP/PMD/Writer/Stream.php';
         } else {
             $renderClass = 'PHPMD\Renderer\\' . $this->className;
-            $writerClass = '\PHPMD\Writer\StreamWriter';
+            $writerClass = StreamWriter::class;
         }
 
         $renderer = new $renderClass();

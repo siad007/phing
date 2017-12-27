@@ -58,7 +58,7 @@ class ReplaceRegexpTask extends Task
      *
      * @return void
      */
-    public function setFile(PhingFile $path)
+    public function setFile(PhingFile $path): void
     {
         $this->file = $path;
     }
@@ -70,7 +70,7 @@ class ReplaceRegexpTask extends Task
      *
      * @return void
      */
-    public function setMatch($regexp)
+    public function setMatch($regexp): void
     {
         $this->_regexp->setPattern($regexp);
     }
@@ -82,7 +82,7 @@ class ReplaceRegexpTask extends Task
      *
      * @return void
      */
-    public function setPattern($regexp)
+    public function setPattern($regexp): void
     {
         $this->setMatch($regexp);
     }
@@ -94,7 +94,7 @@ class ReplaceRegexpTask extends Task
      *
      * @return void
      */
-    public function setReplace($string)
+    public function setReplace($string): void
     {
         $this->_regexp->setReplace($string);
     }
@@ -108,7 +108,7 @@ class ReplaceRegexpTask extends Task
      *
      * todo ... `$this->_regexp->setFlags( $flags );`
      */
-    public function setFlags($flags)
+    public function setFlags($flags): void
     {
     }
 
@@ -119,7 +119,7 @@ class ReplaceRegexpTask extends Task
      *
      * @return void
      */
-    public function setByline($yesNo)
+    public function setByline($yesNo): void
     {
         // TODO... $this->_regexp->
     }
@@ -129,7 +129,7 @@ class ReplaceRegexpTask extends Task
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         $this->_regexp = new RegularExpression();
     }
@@ -141,7 +141,7 @@ class ReplaceRegexpTask extends Task
      *
      * @throws BuildException
      */
-    public function main()
+    public function main(): void
     {
         if ($this->file === null && empty($this->filesets)) {
             throw new BuildException("You must specify a file or fileset(s) for the <ReplaceRegexp> task.");
@@ -196,7 +196,7 @@ class ReplaceRegexpTask extends Task
             try {
                 $contents = "";
                 $in = FileUtils::getChainedReader(new FileReader($file), $filters, $this->project);
-                while (-1 !== ($buffer = $in->read())) {
+                while (-1 != ($buffer = $in->read())) {
                     $contents .= $buffer;
                 }
                 $in->close();

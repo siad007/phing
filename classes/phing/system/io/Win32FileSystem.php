@@ -46,7 +46,7 @@ class Win32FileSystem extends FileSystem
      * @param $c
      * @return bool
      */
-    public function isSlash($c)
+    public function isSlash($c): bool
     {
         return ($c == '\\') || ($c == '/');
     }
@@ -55,7 +55,7 @@ class Win32FileSystem extends FileSystem
      * @param $c
      * @return bool
      */
-    public function isLetter($c)
+    public function isLetter($c): bool
     {
         return ((ord($c) >= ord('a')) && (ord($c) <= ord('z')))
         || ((ord($c) >= ord('A')) && (ord($c) <= ord('Z')));
@@ -65,7 +65,7 @@ class Win32FileSystem extends FileSystem
      * @param $p
      * @return string
      */
-    public function slashify($p)
+    public function slashify($p): ?string
     {
         if ((strlen($p) > 0) && ($p{0} != $this->slash)) {
             return $this->slash . $p;
@@ -79,7 +79,7 @@ class Win32FileSystem extends FileSystem
     /**
      * @return string
      */
-    public function getSeparator()
+    public function getSeparator(): string
     {
         // the ascii value of is the \
         return chr(92);
@@ -88,7 +88,7 @@ class Win32FileSystem extends FileSystem
     /**
      * @return string
      */
-    public function getPathSeparator()
+    public function getPathSeparator(): string
     {
         return ';';
     }
@@ -109,7 +109,7 @@ class Win32FileSystem extends FileSystem
      * @param $sb
      * @return int
      */
-    public function normalizePrefix($strPath, $len, &$sb)
+    public function normalizePrefix($strPath, $len, &$sb): int
     {
         $src = 0;
         while (($src < $len) && $this->isSlash($strPath{$src})) {
@@ -153,7 +153,7 @@ class Win32FileSystem extends FileSystem
      * @param $offset
      * @return string
      */
-    protected function normalizer($strPath, $len, $offset)
+    protected function normalizer($strPath, $len, $offset): string
     {
         if ($len == 0) {
             return $strPath;
@@ -228,7 +228,7 @@ class Win32FileSystem extends FileSystem
      * @param  string $strPath
      * @return string
      */
-    public function normalize($strPath)
+    public function normalize($strPath): string
     {
         $strPath = $this->fixEncoding($strPath);
 
@@ -264,7 +264,7 @@ class Win32FileSystem extends FileSystem
      * @param string $strPath
      * @return int
      */
-    public function prefixLength($strPath)
+    public function prefixLength($strPath): int
     {
         if ($this->_isPharArchive($strPath)) {
             return 0;
@@ -303,7 +303,7 @@ class Win32FileSystem extends FileSystem
      * @param string $child
      * @return string
      */
-    public function resolve($parent, $child)
+    public function resolve($parent, $child): string
     {
         $parent = (string) $parent;
         $child = (string) $child;
@@ -340,7 +340,7 @@ class Win32FileSystem extends FileSystem
     /**
      * @return string
      */
-    public function getDefaultParent()
+    public function getDefaultParent(): string
     {
         return (string) ("" . $this->slash);
     }
@@ -349,7 +349,7 @@ class Win32FileSystem extends FileSystem
      * @param string $strPath
      * @return string
      */
-    public function fromURIPath($strPath)
+    public function fromURIPath($strPath): string
     {
         $p = (string) $strPath;
         if ((strlen($p) > 2) && ($p{2} === ':')) {
@@ -375,7 +375,7 @@ class Win32FileSystem extends FileSystem
      * @param PhingFile $f
      * @return bool
      */
-    public function isAbsolute(PhingFile $f)
+    public function isAbsolute(PhingFile $f): bool
     {
         $pl = (int) $f->getPrefixLength();
         $p = (string) $f->getPath();
@@ -387,7 +387,7 @@ class Win32FileSystem extends FileSystem
      * @param $d
      * @return int
      */
-    public function _driveIndex($d)
+    public function _driveIndex($d): int
     {
         $d = (string) $d{0};
         if ((ord($d) >= ord('a')) && (ord($d) <= ord('z'))) {
@@ -404,16 +404,16 @@ class Win32FileSystem extends FileSystem
      * @param $strPath
      * @return bool
      */
-    public function _isPharArchive($strPath)
+    public function _isPharArchive($strPath): bool
     {
         return (strpos($strPath, 'phar://') === 0);
     }
 
     /**
      * @param $drive
-     * @return null
+     * @return string|null
      */
-    public function _getDriveDirectory($drive)
+    public function _getDriveDirectory($drive): ?string
     {
         $drive = (string) $drive{0};
         $i = (int) $this->_driveIndex($drive);
@@ -421,7 +421,7 @@ class Win32FileSystem extends FileSystem
             return null;
         }
 
-        $s = (isset(self::$driveDirCache[$i]) ? self::$driveDirCache[$i] : null);
+        $s = (self::$driveDirCache[$i] ?? null);
 
         if ($s !== null) {
             return $s;
@@ -436,7 +436,7 @@ class Win32FileSystem extends FileSystem
     /**
      * @return string
      */
-    public function _getUserPath()
+    public function _getUserPath(): string
     {
         //For both compatibility and security, we must look this up every time
         return (string) $this->normalize(Phing::getProperty("user.dir"));
@@ -446,7 +446,7 @@ class Win32FileSystem extends FileSystem
      * @param $path
      * @return null|string
      */
-    public function _getDrive($path)
+    public function _getDrive($path): ?string
     {
         $path = (string) $path;
         $pl = $this->prefixLength($path);
@@ -456,8 +456,9 @@ class Win32FileSystem extends FileSystem
 
     /**
      * @param PhingFile $f
+     * @return string
      */
-    public function resolveFile(PhingFile $f)
+    public function resolveFile(PhingFile $f): string
     {
         $path = $f->getPath();
         $pl = (int) $f->getPrefixLength();
@@ -524,7 +525,7 @@ class Win32FileSystem extends FileSystem
      * @param PhingFile $f
      * @throws Exception
      */
-    public function setReadOnly($f)
+    public function setReadOnly($f): void
     {
         // dunno how to do this on win
         throw new Exception("WIN32FileSystem doesn't support read-only yet.");
@@ -537,7 +538,7 @@ class Win32FileSystem extends FileSystem
      * @return bool
      * @throws Exception
      */
-    protected function _access($path)
+    protected function _access($path): bool
     {
         if (!$this->checkAccess($path, false)) {
             throw new Exception("Can't resolve path $p");
@@ -554,7 +555,7 @@ class Win32FileSystem extends FileSystem
     /**
      * @return array
      */
-    public function listRoots()
+    public function listRoots(): array
     {
         $ds = $this->_nativeListRoots();
         $n = 0;
@@ -586,7 +587,7 @@ class Win32FileSystem extends FileSystem
      * @param PhingFile $f2
      * @return int
      */
-    public function compare(PhingFile $f1, PhingFile $f2)
+    public function compare(PhingFile $f1, PhingFile $f2): int
     {
         $f1Path = $f1->getPath();
         $f2Path = $f2->getPath();
@@ -600,7 +601,7 @@ class Win32FileSystem extends FileSystem
      * @throws Exception
      * @return array
      */
-    public function lister($f)
+    public function lister($f): array
     {
         $dir = @opendir($f->getAbsolutePath());
         if (!$dir) {
@@ -640,7 +641,7 @@ class Win32FileSystem extends FileSystem
      * @return array
      * @throws Exception
      */
-    public function listContents(PhingFile $f)
+    public function listContents(PhingFile $f): array
     {
         $iterator = new FilesystemIterator($f->getAbsolutePath());
         $filelist = array();

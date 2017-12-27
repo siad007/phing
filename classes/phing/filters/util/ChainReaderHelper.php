@@ -85,7 +85,7 @@ class ChainReaderHelper
     /**
      * @param Reader $reader
      */
-    public function setPrimaryReader(Reader $reader)
+    public function setPrimaryReader(Reader $reader): void
     {
         $this->primaryReader = $reader;
     }
@@ -96,7 +96,7 @@ class ChainReaderHelper
     /**
      * @param Project $project
      */
-    public function setProject(Project $project)
+    public function setProject(Project $project): void
     {
         $this->project = $project;
     }
@@ -104,7 +104,7 @@ class ChainReaderHelper
     /*
      * Get the project
     */
-    public function getProject()
+    public function getProject(): \Project
     {
         return $this->project;
     }
@@ -116,7 +116,7 @@ class ChainReaderHelper
     /**
      * @param $size
      */
-    public function setBufferSize($size)
+    public function setBufferSize($size): void
     {
         $this->bufferSize = $size;
     }
@@ -127,7 +127,7 @@ class ChainReaderHelper
     /**
      * @param $fchain
      */
-    public function setFilterChains(&$fchain)
+    public function setFilterChains(&$fchain): void
     {
         $this->filterChains = & $fchain;
     }

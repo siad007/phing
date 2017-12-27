@@ -43,9 +43,9 @@ class ReferenceExistsCondition extends ProjectComponent implements Condition
 
     /**
      * Check whether the reference exists.
-     * @throws BuildException
+     * @return bool
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->refid === null) {
             throw new BuildException("No ref attribute specified for reference-exists "

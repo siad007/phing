@@ -68,7 +68,7 @@ class XincludeFilter extends BaseParamFilterReader implements ChainableReader
      *
      * @since 2.4
      */
-    public function getResolveExternals()
+    public function getResolveExternals(): bool
     {
         return $this->resolveExternals;
     }
@@ -82,9 +82,9 @@ class XincludeFilter extends BaseParamFilterReader implements ChainableReader
     }
 
     /**
-     * @return null
+     * @return string
      */
-    public function getBasedir()
+    public function getBasedir(): string
     {
         return $this->basedir;
     }
@@ -92,7 +92,6 @@ class XincludeFilter extends BaseParamFilterReader implements ChainableReader
     /**
      * Reads stream, applies XSLT and returns resulting stream.
      * @param null $len
-     * @throws BuildException
      * @return string         transformed buffer.
      */
     public function read($len = null)
@@ -107,7 +106,7 @@ class XincludeFilter extends BaseParamFilterReader implements ChainableReader
 
         // Read XML
         $_xml = null;
-        while (($data = $this->in->read($len)) !== -1) {
+        while (($data = $this->in->read($len)) != -1) {
             $_xml .= $data;
         }
 
@@ -124,7 +123,6 @@ class XincludeFilter extends BaseParamFilterReader implements ChainableReader
 
         $this->log("Transforming XML " . $this->in->getResource() . " using Xinclude ", Project::MSG_VERBOSE);
 
-        $out = '';
         try {
             $out = $this->process($_xml);
             $this->processed = true;
@@ -143,7 +141,7 @@ class XincludeFilter extends BaseParamFilterReader implements ChainableReader
      * @return string
      * @throws BuildException On errors
      */
-    protected function process($xml)
+    protected function process($xml): string
     {
         if ($this->basedir) {
             $cwd = getcwd();
@@ -175,9 +173,9 @@ class XincludeFilter extends BaseParamFilterReader implements ChainableReader
      * @return Reader A new filter based on this configuration, but filtering
      *                the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new XincludeFilter($reader);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
         $newFilter->setBasedir($this->getBasedir());
 

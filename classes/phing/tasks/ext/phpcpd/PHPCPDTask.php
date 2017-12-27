@@ -1,4 +1,9 @@
 <?php
+
+use SebastianBergmann\PHPCPD\Detector\Detector;
+use Composer\Autoload\ClassLoader;
+use SebastianBergmann\PHPCPD\Detector\Strategy\DefaultStrategy;
+
 /**
  *  $Id$
  *
@@ -192,7 +197,7 @@ class PHPCPDTask extends Task
      *
      * @return PHPCPDFormatterElement
      */
-    public function createFormatter()
+    public function createFormatter(): \PHPCPDFormatterElement
     {
         $num = array_push($this->formatters, new PHPCPDFormatterElement($this));
 
@@ -224,13 +229,13 @@ class Application
             include $this->pharLocation;
             ob_end_clean();
 
-            if (class_exists('\\SebastianBergmann\\PHPCPD\\Detector\\Strategy\\DefaultStrategy')) {
+            if (class_exists(DefaultStrategy::class)) {
                 return;
             }
         }
 
-        if (class_exists('Composer\\Autoload\\ClassLoader', false) && class_exists(
-                '\\SebastianBergmann\\PHPCPD\\Detector\\Strategy\\DefaultStrategy'
+        if (class_exists(ClassLoader::class, false) && class_exists(
+                DefaultStrategy::class
             )
         ) {
             return;
@@ -261,7 +266,7 @@ class Application
     /**
      * Executes PHPCPD against PhingFile or a FileSet
      *
-     * @throws BuildException
+     * @throws Exception
      */
     public function main()
     {
@@ -304,8 +309,8 @@ class Application
             $detectorClass = 'PHPCPD_Detector';
             $strategyClass = 'PHPCPD_Detector_Strategy_Default';
         } else {
-            $detectorClass = '\\SebastianBergmann\\PHPCPD\\Detector\\Detector';
-            $strategyClass = '\\SebastianBergmann\\PHPCPD\\Detector\\Strategy\\DefaultStrategy';
+            $detectorClass = Detector::class;
+            $strategyClass = DefaultStrategy::class;
         }
 
         $detector = new $detectorClass(new $strategyClass());

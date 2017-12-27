@@ -25,7 +25,7 @@ class Token
      *
      * @param string $key The key for this token. Must not be <code>null</code>.
      */
-    public function setKey($key)
+    public function setKey($key): void
     {
         $this->_key = (string)$key;
     }
@@ -35,7 +35,7 @@ class Token
      *
      * @param string $value The value for this token. Must not be <code>null</code>.
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         // special case for boolean values
         if (is_bool($value)) {
@@ -54,7 +54,7 @@ class Token
      *
      * @return string The key for this token.
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->_key;
     }
@@ -64,7 +64,7 @@ class Token
      *
      * @return string The value for this token.
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->_value;
     }
@@ -74,7 +74,7 @@ class Token
      *
      * @param string $value The value for this token. Must not be <code>null</code>.
      */
-    public function addText($value)
+    public function addText($value): void
     {
         $this->setValue($value);
     }

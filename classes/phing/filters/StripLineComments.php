@@ -69,7 +69,6 @@ class StripLineComments extends BaseParamFilterReader implements ChainableReader
      * @param null $len
      * @return mixed the resulting stream, or -1
      *               if the end of the resulting stream has been reached.
-     *
      */
     public function read($len = null)
     {
@@ -80,7 +79,7 @@ class StripLineComments extends BaseParamFilterReader implements ChainableReader
 
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -146,7 +145,7 @@ class StripLineComments extends BaseParamFilterReader implements ChainableReader
     /**
      * @return array
      */
-    public function getComments()
+    public function getComments(): array
     {
         return $this->_comments;
     }
@@ -166,9 +165,9 @@ class StripLineComments extends BaseParamFilterReader implements ChainableReader
      * @return StripLineComments
      * @throws Exception
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new StripLineComments($reader);
+        $newFilter = new self($reader);
         $newFilter->setComments($this->getComments());
         $newFilter->setInitialized(true);
         $newFilter->setProject($this->getProject());

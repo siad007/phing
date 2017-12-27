@@ -59,7 +59,7 @@ class Timer
      *
      * @return void
      */
-    public function start()
+    public function start(): void
     {
         $this->stime = microtime(true);
     }
@@ -70,7 +70,7 @@ class Timer
      *
      * @return void
      */
-    public function stop()
+    public function stop(): void
     {
         $this->etime = microtime(true);
     }
@@ -86,7 +86,7 @@ class Timer
      *
      * @return string Properly formatted time.
      */
-    public function getElapsedTime($places = 5)
+    public function getElapsedTime($places = 5): string
     {
         $etime = $this->etime - $this->stime;
         $format = "%0." . $places . "f";

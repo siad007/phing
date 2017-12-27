@@ -54,7 +54,7 @@ class PhpLintTask extends Task
     /**
      * Initialize the interpreter with the Phing property php.interpreter
      */
-    public function init()
+    public function init(): void
     {
         $this->setInterpreter($this->project->getProperty('php.interpreter'));
     }
@@ -219,7 +219,7 @@ class PhpLintTask extends Task
      * @throws BuildException
      * @return void
      */
-    protected function lint($file)
+    protected function lint($file): void
     {
         $command = $this->interpreter == ''
             ? 'php'
@@ -249,7 +249,7 @@ class PhpLintTask extends Task
             if ($lastmtime >= filemtime($file)) {
                 $this->log("Not linting '" . $file . "' due to cache", Project::MSG_DEBUG);
 
-                return false;
+                return;
             }
         }
 

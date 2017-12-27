@@ -93,7 +93,7 @@ class PhpCodeSnifferTask extends Task
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
     }
 
@@ -113,7 +113,7 @@ class PhpCodeSnifferTask extends Task
      *
      * @return void
      */
-    public function setStandard($standards)
+    public function setStandard($standards): void
     {
         $this->standards = [];
         $token = ' ,;';
@@ -145,7 +145,7 @@ class PhpCodeSnifferTask extends Task
      *
      * @return void
      */
-    public function setDocGenerator($generator)
+    public function setDocGenerator($generator): void
     {
         $this->docGenerator = $generator;
     }
@@ -157,7 +157,7 @@ class PhpCodeSnifferTask extends Task
      *
      * @return void
      */
-    public function setDocFile(PhingFile $file)
+    public function setDocFile(PhingFile $file): void
     {
         $this->docFile = $file;
     }
@@ -178,7 +178,7 @@ class PhpCodeSnifferTask extends Task
      *
      * @return void
      */
-    public function setShowSources($show)
+    public function setShowSources($show): void
     {
         $this->showSources = StringHelper::booleanValue($show);
     }
@@ -190,7 +190,7 @@ class PhpCodeSnifferTask extends Task
      *
      * @return void
      */
-    public function setReportWidth($width)
+    public function setReportWidth($width): void
     {
         $this->reportWidth = (int) $width;
     }
@@ -282,7 +282,7 @@ class PhpCodeSnifferTask extends Task
      *
      * @return Parameter The created parameter
      */
-    public function createConfig()
+    public function createConfig(): \Parameter
     {
         $num = array_push($this->configData, new Parameter());
 
@@ -311,7 +311,7 @@ class PhpCodeSnifferTask extends Task
      * Create object for nested formatter element.
      * @return PhpCodeSnifferTask_FormatterElement
      */
-    public function createFormatter()
+    public function createFormatter(): \PhpCodeSnifferTask_FormatterElement
     {
         $num = array_push(
             $this->formatters,
@@ -380,7 +380,7 @@ class PhpCodeSnifferTask extends Task
      *
      * @return string[] list of absolute files to parse
      */
-    protected function getFilesToParse()
+    protected function getFilesToParse(): array
     {
         $filesToParse = [];
 

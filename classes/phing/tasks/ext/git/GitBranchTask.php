@@ -160,7 +160,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getSetUpstream()
+    public function getSetUpstream(): bool
     {
         return $this->setUpstream;
     }
@@ -168,7 +168,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isSetUpstream()
+    public function isSetUpstream(): bool
     {
         return $this->getSetUpstream();
     }
@@ -184,7 +184,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getTrack()
+    public function getTrack(): bool
     {
         return $this->track;
     }
@@ -192,7 +192,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isTrack()
+    public function isTrack(): bool
     {
         return $this->getTrack();
     }
@@ -208,7 +208,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNoTrack()
+    public function getNoTrack(): bool
     {
         return $this->noTrack;
     }
@@ -216,7 +216,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isNoTrack()
+    public function isNoTrack(): bool
     {
         return $this->getNoTrack();
     }
@@ -232,7 +232,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getForce()
+    public function getForce(): bool
     {
         return $this->force;
     }
@@ -240,7 +240,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isForce()
+    public function isForce(): bool
     {
         return $this->getForce();
     }
@@ -256,7 +256,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getBranchname()
+    public function getBranchname(): ?string
     {
         return $this->branchname;
     }
@@ -272,7 +272,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getStartPoint()
+    public function getStartPoint(): ?string
     {
         return $this->startPoint;
     }
@@ -355,7 +355,7 @@ class GitBranchTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getNewBranch()
+    public function getNewBranch(): ?string
     {
         return $this->newbranch;
     }

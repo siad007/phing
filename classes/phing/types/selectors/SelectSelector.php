@@ -41,7 +41,7 @@ class SelectSelector extends AndSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "";
         if ($this->hasSelectors()) {
@@ -66,8 +66,9 @@ class SelectSelector extends AndSelector
 
     /**
      * Indicates whether there are any selectors here.
+     * @return bool
      */
-    public function hasSelectors()
+    public function hasSelectors(): bool
     {
         if ($this->isReference()) {
             return $this->getRef()->hasSelectors();
@@ -79,7 +80,7 @@ class SelectSelector extends AndSelector
     /**
      * Gives the count of the number of selectors in this container
      */
-    public function selectorCount()
+    public function selectorCount(): int
     {
         if ($this->isReference()) {
             return $this->getRef()->selectorCount();
@@ -93,7 +94,7 @@ class SelectSelector extends AndSelector
      * @param Project $p
      * @return array
      */
-    public function getSelectors(Project $p)
+    public function getSelectors(Project $p): array
     {
         if ($this->isReference()) {
             return $this->getRef()->getSelectors($p);
@@ -105,7 +106,7 @@ class SelectSelector extends AndSelector
     /**
      * Returns an enumerator for accessing the set of selectors.
      */
-    public function selectorElements()
+    public function selectorElements(): array
     {
         if ($this->isReference()) {
             return $this->getRef()->selectorElements();
@@ -119,9 +120,8 @@ class SelectSelector extends AndSelector
      *
      * @param FileSelector $selector new selector to add
      * @return void
-     * @throws BuildException
      */
-    public function appendSelector(FileSelector $selector)
+    public function appendSelector(FileSelector $selector): void
     {
         if ($this->isReference()) {
             throw $this->noChildrenAllowed();
@@ -133,7 +133,7 @@ class SelectSelector extends AndSelector
      * Makes sure that there is only one entry, sets an error message if
      * not.
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->selectorCount() != 1) {
             $this->setError(

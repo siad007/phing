@@ -96,7 +96,7 @@ class SwitchTask extends Task
      *
      * @return void
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = $value;
     }
@@ -108,7 +108,7 @@ class SwitchTask extends Task
      *
      * @return void
      */
-    public function addCase(CaseTask $case)
+    public function addCase(CaseTask $case): void
     {
         $this->cases[] = $case;
     }
@@ -118,7 +118,7 @@ class SwitchTask extends Task
      *
      * @return void
      */
-    public function setCaseInsensitive($bool)
+    public function setCaseInsensitive($bool): void
     {
         $this->caseInsensitive = $bool;
     }

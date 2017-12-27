@@ -139,10 +139,10 @@ class rSTTask extends Task
     /**
      * The main entry point method.
      *
-     * @throws BuildException
      * @return void
+     * @throws Exception
      */
-    public function main()
+    public function main(): void
     {
         $tool = $this->getToolPath($this->format);
         if (count($this->filterChains)) {
@@ -205,7 +205,7 @@ class rSTTask extends Task
      *
      * @return void
      */
-    protected function render($tool, $source, $targetFile)
+    protected function render($tool, $source, $targetFile): void
     {
         if (count($this->filterChains) == 0) {
             $this->renderFile($tool, $source, $targetFile);
@@ -238,7 +238,7 @@ class rSTTask extends Task
      *
      * @throws BuildException When the conversion fails
      */
-    protected function renderFile($tool, $source, $targetFile)
+    protected function renderFile($tool, $source, $targetFile): void
     {
         if ($this->uptodate && file_exists($targetFile)
             && filemtime($source) <= filemtime($targetFile)
@@ -278,7 +278,7 @@ class rSTTask extends Task
      *
      * @throws BuildException When the tool cannot be found
      */
-    protected function getToolPath($format)
+    protected function getToolPath($format): string
     {
         if ($this->toolPath !== null) {
             return $this->toolPath;
@@ -309,7 +309,7 @@ class rSTTask extends Task
      * @uses $format
      * @uses $targetExt
      */
-    public function getTargetFile($file, $destination = null)
+    public function getTargetFile($file, $destination = null): string
     {
         if ($destination != ''
             && substr($destination, -1) !== '/'
@@ -332,7 +332,7 @@ class rSTTask extends Task
      *
      * @return void
      */
-    public function setFile($file)
+    public function setFile($file): void
     {
         $this->file = $file;
     }
@@ -346,7 +346,7 @@ class rSTTask extends Task
      *
      * @throws BuildException When the format is not supported
      */
-    public function setFormat($format)
+    public function setFormat($format): void
     {
         if (!in_array($format, self::$supportedFormats)) {
             throw new BuildException(
@@ -368,7 +368,7 @@ class rSTTask extends Task
      *
      * @return void
      */
-    public function setDestination($destination)
+    public function setDestination($destination): void
     {
         $this->destination = $destination;
     }
@@ -380,7 +380,7 @@ class rSTTask extends Task
      *
      * @return void
      */
-    public function setToolparam($param)
+    public function setToolparam($param): void
     {
         $this->toolParam = $param;
     }
@@ -395,7 +395,7 @@ class rSTTask extends Task
      * @return void
      *
      */
-    public function setToolpath($path)
+    public function setToolpath($path): void
     {
         if (!file_exists($path)) {
             $fs = FileSystem::getFileSystem();
@@ -422,7 +422,7 @@ class rSTTask extends Task
      *
      * @return void
      */
-    public function setUptodate($uptodate)
+    public function setUptodate($uptodate): void
     {
         $this->uptodate = (boolean) $uptodate;
     }
@@ -434,7 +434,7 @@ class rSTTask extends Task
      *
      * @throws BuildException
      */
-    public function createMapper()
+    public function createMapper(): \Mapper
     {
         if ($this->mapperElement !== null) {
             throw new BuildException(

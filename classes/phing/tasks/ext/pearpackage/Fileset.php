@@ -73,7 +73,7 @@ class PEAR_PackageFileManager_Fileset
      * containing all files in this package
      * @return array structure of all files to include
      */
-    public function getFileList()
+    public function getFileList(): array
     {
         $allfiles = [];
 
@@ -154,7 +154,7 @@ class PEAR_PackageFileManager_Fileset
      * @return array same as struc but with array('dir' =>
      *               array(file1,file2,'subdir' => array(file1,...)))
      */
-    private function setupDirs($struc, $dir, $contents)
+    private function setupDirs($struc, $dir, $contents): array
     {
         if (!count($dir)) {
             foreach ($contents as $dir => $files) {
@@ -192,7 +192,7 @@ class PEAR_PackageFileManager_Fileset
      * @param array
      * @return array processed $dir
      */
-    public function setDir($dir, $contents)
+    public function setDir($dir, $contents): array
     {
         while (list($one, $two) = each($contents)) {
             if (isset($dir[$one])) {
@@ -211,7 +211,7 @@ class PEAR_PackageFileManager_Fileset
      * @param string
      * @return int
      */
-    private function sortfiles($a, $b)
+    private function sortfiles($a, $b): int
     {
         return strnatcasecmp($a['file'], $b['file']);
     }
@@ -221,7 +221,7 @@ class PEAR_PackageFileManager_Fileset
      * @param $b
      * @return int
      */
-    private function mystrucsort($a, $b)
+    private function mystrucsort($a, $b): int
     {
         if (is_numeric($a) && is_string($b)) {
             return 1;

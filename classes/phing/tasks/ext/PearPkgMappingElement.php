@@ -14,12 +14,12 @@ class PearPkgMappingElement
     /**
      * @param $v
      */
-    public function setKey($v)
+    public function setKey($v): void
     {
         $this->key = $v;
     }
 
-    public function getKey()
+    public function getKey(): void
     {
         return $this->key;
     }
@@ -27,7 +27,7 @@ class PearPkgMappingElement
     /**
      * @param $v
      */
-    public function setValue($v)
+    public function setValue($v): void
     {
         $this->value = $v;
     }
@@ -58,7 +58,7 @@ class PearPkgMappingElement
     /**
      * Handles nested <element> tags.
      */
-    public function createElement()
+    public function createElement(): \PearPkgMappingElement
     {
         $e = new PearPkgMappingElement();
         $this->elements[] = $e;

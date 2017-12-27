@@ -38,7 +38,7 @@ class NotSelector extends NoneSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "";
         if ($this->hasSelectors()) {
@@ -54,7 +54,7 @@ class NotSelector extends NoneSelector
      * Makes sure that there is only one entry, sets an error message if
      * not.
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->selectorCount() != 1) {
             $this->setError(

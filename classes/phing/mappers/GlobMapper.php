@@ -106,7 +106,7 @@ class GlobMapper implements FileNameMapper
      * @param mixed $sourceFileName
      * @return array|null
      */
-    public function main($sourceFileName)
+    public function main($sourceFileName): array
     {
         $modName = $this->modifyName($sourceFileName);
         if ($this->fromPrefix === null
@@ -118,7 +118,7 @@ class GlobMapper implements FileNameMapper
                     || !StringHelper::endsWith($this->modifyName($this->fromPostfix), $modName))
             )
         ) {
-            return null;
+            return [];
         }
         return [
             $this->toPrefix . (
@@ -134,7 +134,7 @@ class GlobMapper implements FileNameMapper
      * @param string $from
      * @return void
      */
-    public function setFrom($from)
+    public function setFrom($from): void
     {
         if ($from === null) {
             throw new BuildException("this mapper requires a 'from' attribute");
@@ -160,7 +160,7 @@ class GlobMapper implements FileNameMapper
      * @param string $to
      * @return void
      */
-    public function setTo($to)
+    public function setTo($to): void
     {
         if ($to === null) {
             throw new BuildException("this mapper requires a 'to' attribute");
@@ -182,7 +182,7 @@ class GlobMapper implements FileNameMapper
      * @param string $name
      * @return string
      */
-    private function extractVariablePart($name)
+    private function extractVariablePart($name): string
     {
         return StringHelper::substring($name, $this->prefixLength, strlen($name) - $this->postfixLength - 1);
     }
@@ -192,7 +192,7 @@ class GlobMapper implements FileNameMapper
      * @param string $name the name to convert
      * @return string the converted name
      */
-    private function modifyName($name)
+    private function modifyName($name): string
     {
         if (!$this->caseSensitive) {
             $name = strtolower($name);

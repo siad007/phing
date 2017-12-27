@@ -44,7 +44,7 @@ abstract class Writer
     /**
      * Flush the stream, if supported by the stream.
      */
-    public function flush()
+    public function flush(): void
     {
     }
 

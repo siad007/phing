@@ -34,7 +34,7 @@ class zsdtValidateTask extends zsdtBaseTask
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         $this->action = 'validate';
     }
@@ -46,7 +46,7 @@ class zsdtValidateTask extends zsdtBaseTask
      *
      * @return void
      */
-    protected function validate()
+    protected function validate(): void
     {
         parent::validate();
 

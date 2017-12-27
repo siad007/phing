@@ -32,7 +32,7 @@ require_once 'phing/util/ExtendedFileStream.php';
  * different packages or testcases since it is a Javadoc like report.
  *
  * @author Michiel Rook <mrook@php.net>
- * @version $Id: dc442784b469acd14ae80e43def1751bf4b957a8 $
+ * @version $Id$
  * @package phing.tasks.ext.phpunit
  * @since 2.1.0
  */
@@ -62,7 +62,7 @@ class PHPUnitReportTask extends Task
      * @param PhingFile $inFile
      * @return void
      */
-    public function setInFile(PhingFile $inFile)
+    public function setInFile(PhingFile $inFile): void
     {
         $this->inFile = $inFile;
     }
@@ -72,7 +72,7 @@ class PHPUnitReportTask extends Task
      * @param $format
      * @return void
      */
-    public function setFormat($format)
+    public function setFormat($format): void
     {
         $this->format = $format;
     }
@@ -82,7 +82,7 @@ class PHPUnitReportTask extends Task
      * @param $styleDir
      * @return void
      */
-    public function setStyleDir($styleDir)
+    public function setStyleDir($styleDir): void
     {
         $this->styleDir = $styleDir;
     }
@@ -93,7 +93,7 @@ class PHPUnitReportTask extends Task
      * @param PhingFile $toDir
      * @return void
      */
-    public function setToDir(PhingFile $toDir)
+    public function setToDir(PhingFile $toDir): void
     {
         $this->toDir = $toDir;
     }
@@ -105,7 +105,7 @@ class PHPUnitReportTask extends Task
      * @param boolean $useSortTable
      * @return void
      */
-    public function setUseSortTable($useSortTable)
+    public function setUseSortTable($useSortTable): void
     {
         $this->useSortTable = (boolean) $useSortTable;
     }
@@ -267,9 +267,8 @@ class PHPUnitReportTask extends Task
 
     /**
      * Initialize the task
-     * @throws \BuildException
      */
-    public function init()
+    public function init(): void
     {
         if (!class_exists('XSLTProcessor')) {
             throw new BuildException("PHPUnitReportTask requires the XSL extension");

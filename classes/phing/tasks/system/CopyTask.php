@@ -95,7 +95,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    public function setOverwrite($bool)
+    public function setOverwrite($bool): void
     {
         $this->overwrite = (boolean) $bool;
     }
@@ -144,7 +144,7 @@ class CopyTask extends Task
      * @param  boolean $bool Preserve the timestamp on the destination file
      * @return void
      */
-    public function setPreserveLastModified($bool)
+    public function setPreserveLastModified($bool): void
     {
         $this->preserveLMT = (boolean) $bool;
     }
@@ -157,7 +157,7 @@ class CopyTask extends Task
      * @param  boolean $bool Preserve the timestamp on the destination file
      * @return void
      */
-    public function setPreservepermissions($bool)
+    public function setPreservepermissions($bool): void
     {
         $this->preservePermissions = (boolean) $bool;
     }
@@ -178,7 +178,7 @@ class CopyTask extends Task
      * @param  boolean $bool Flag if empty dirs should be cpoied too
      * @return void
      */
-    public function setIncludeEmptyDirs($bool)
+    public function setIncludeEmptyDirs($bool): void
     {
         $this->includeEmpty = (boolean) $bool;
     }
@@ -192,7 +192,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    public function setFile(PhingFile $file)
+    public function setFile(PhingFile $file): void
     {
         $this->file = $file;
     }
@@ -206,7 +206,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    public function setTofile(PhingFile $file)
+    public function setTofile(PhingFile $file): void
     {
         $this->destFile = $file;
     }
@@ -219,7 +219,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    public function setMode($mode)
+    public function setMode($mode): void
     {
         $this->mode = (int) base_convert($mode, 8, 10);
     }
@@ -233,7 +233,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    public function setTodir(PhingFile $dir)
+    public function setTodir(PhingFile $dir): void
     {
         $this->destDir = $dir;
     }
@@ -256,7 +256,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    public function setHaltonerror($haltonerror)
+    public function setHaltonerror($haltonerror): void
     {
         $this->haltonerror = (boolean) $haltonerror;
     }
@@ -267,7 +267,7 @@ class CopyTask extends Task
      * @return Mapper         The created Mapper type object
      * @throws BuildException
      */
-    public function createMapper()
+    public function createMapper(): \Mapper
     {
         if ($this->mapperElement !== null) {
             throw new BuildException("Cannot define more than one mapper", $this->getLocation());
@@ -280,10 +280,11 @@ class CopyTask extends Task
     /**
      * The main entry point where everything gets in motion.
      *
-     * @return true           on success
-     * @throws BuildException
+     * @return void on success
+     * @throws Exception
+     * @throws IOException
      */
-    public function main()
+    public function main(): void
     {
         $this->validateAttributes();
 
@@ -382,7 +383,7 @@ class CopyTask extends Task
      * @return void
      * @throws BuildException
      */
-    protected function validateAttributes()
+    protected function validateAttributes(): void
     {
         if ($this->file === null && count($this->dirsets) === 0 && count($this->filesets) === 0 && count($this->filelists) === 0) {
             throw new BuildException("CopyTask. Specify at least one source - a file, fileset or filelist.");
@@ -420,7 +421,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    private function _scan(&$fromDir, &$toDir, &$files, &$dirs)
+    private function _scan(&$fromDir, &$toDir, &$files, &$dirs): void
     {
         /* mappers should be generic, so we get the mappers here and
         pass them on to builMap. This method is not redundan like it seems */
@@ -433,7 +434,7 @@ class CopyTask extends Task
         }
     }
 
-    private function getMapper()
+    private function getMapper(): FileNameMapper
     {
         $mapper = null;
         if ($this->mapperElement !== null) {
@@ -457,7 +458,7 @@ class CopyTask extends Task
      *
      * @return void
      */
-    private function buildMap(&$fromDir, &$toDir, &$names, &$mapper, &$map)
+    private function buildMap(&$fromDir, &$toDir, &$names, &$mapper, &$map): void
     {
         $toCopy = null;
         if ($this->overwrite) {

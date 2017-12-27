@@ -42,7 +42,7 @@ class ContainsSelector extends BaseExtendSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{containsselector text: ";
         $buf .= $this->contains;
@@ -124,9 +124,8 @@ class ContainsSelector extends BaseExtendSelector
     /**
      * Checks to make sure all settings are kosher. In this case, it
      * means that the pattern attribute has been set.
-     *
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->contains === null) {
             $this->setError("The text attribute is required");
@@ -137,19 +136,15 @@ class ContainsSelector extends BaseExtendSelector
      * The heart of the matter. This is where the selector gets to decide
      * on the inclusion of a file in a particular fileset.
      *
-     * @param PhingFile $basedir
-     * @param string $filename
-     * @param PhingFile $file
-     *
-     * @throws BuildException
-     *
-     * @internal param the $basedir base directory the scan is being done from
-     * @internal param is $filename the name of the file to check
-     * @internal param a $file PhingFile object the selector can use
+     * @param PhingFile $basedir base directory the scan is being done from
+     * @param string $filename the name of the file to check
+     * @param PhingFile $file object the selector can use
      *
      * @return bool whether the file should be selected or not
+     *
+     * @throws BuildException
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

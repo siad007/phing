@@ -175,7 +175,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getRemote()
+    public function getRemote(): ?string
     {
         return $this->remote;
     }
@@ -191,7 +191,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->message;
     }
@@ -207,7 +207,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getStrategy()
+    public function getStrategy(): ?string
     {
         return $this->strategy;
     }
@@ -223,7 +223,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getStrategyOption()
+    public function getStrategyOption(): ?string
     {
         return $this->strategyOption;
     }
@@ -239,7 +239,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getQuiet()
+    public function getQuiet(): bool
     {
         return $this->quiet;
     }
@@ -247,7 +247,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isQuiet()
+    public function isQuiet(): bool
     {
         return $this->getQuiet();
     }
@@ -263,7 +263,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getCommit()
+    public function getCommit(): bool
     {
         return $this->commit;
     }
@@ -271,7 +271,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isCommit()
+    public function isCommit(): bool
     {
         return $this->getCommit();
     }
@@ -287,7 +287,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getNoCommit()
+    public function getNoCommit(): bool
     {
         return $this->noCommit;
     }
@@ -295,7 +295,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isNoCommit()
+    public function isNoCommit(): bool
     {
         return $this->getNoCommit();
     }
@@ -311,7 +311,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getFastForwardCommit()
+    public function getFastForwardCommit(): bool
     {
         return $this->fastForwardCommit;
     }
@@ -319,7 +319,7 @@ class GitMergeTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function isFastForwardCommit()
+    public function isFastForwardCommit(): bool
     {
         return $this->getFastForwardCommit();
     }

@@ -93,7 +93,7 @@ class Matches extends ProjectComponent implements Condition
         $this->modifiers = $modifiers;
     }
 
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->string === null) {
             throw new BuildException('Parameter string is required in matches.');

@@ -45,7 +45,7 @@ class MultipleChoiceInputRequest extends InputRequest
     /**
      * @return array The possible values.
      */
-    public function getChoices()
+    public function getChoices(): array
     {
         return $this->choices;
     }
@@ -53,7 +53,7 @@ class MultipleChoiceInputRequest extends InputRequest
     /**
      * @return bool true if the input is one of the allowed values.
      */
-    public function isInputValid()
+    public function isInputValid(): bool
     {
         return in_array($this->getInput(), $this->choices); // not strict (?)
     }

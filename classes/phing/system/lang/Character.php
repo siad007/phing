@@ -34,7 +34,7 @@ class Character
      * @param $char
      * @return bool
      */
-    public static function isLetter($char)
+    public static function isLetter($char): bool
     {
         if (strlen($char) !== 1) {
             $char = 0;

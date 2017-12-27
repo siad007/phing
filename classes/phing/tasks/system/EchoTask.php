@@ -93,8 +93,9 @@ class EchoTask extends Task
      * Merges all filesets into a string to be echoed out
      *
      * @return string String to echo
+     * @throws Exception
      */
-    protected function getFilesetsMsg()
+    protected function getFilesetsMsg(): string
     {
         $project = $this->getProject();
         $msg = '';

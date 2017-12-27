@@ -53,7 +53,7 @@ abstract class MappingSelector extends BaseSelector
      * @return Mapper a mapper to be configured
      * @throws BuildException if more than one mapper defined
      */
-    public function createMapper()
+    public function createMapper(): \Mapper
     {
         if ($this->map !== null || $this->mapperElement !== null) {
             throw new BuildException('Cannot define more than one mapper');
@@ -81,7 +81,7 @@ abstract class MappingSelector extends BaseSelector
      * Checks to make sure all settings are kosher. In this case, it
      * means that the dest attribute has been set and we have a mapper.
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->targetdir === null) {
             $this->setError("The targetdir attribute is required.");
@@ -110,7 +110,7 @@ abstract class MappingSelector extends BaseSelector
      *
      * @throws BuildException
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
 
         // throw BuildException on error

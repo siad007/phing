@@ -72,7 +72,7 @@ class ExportPropertiesTask extends Task
      * @throws BuildException
      * @return bool
      */
-    public function setTargetFile($file)
+    public function setTargetFile($file): bool
     {
         if (!is_dir(dirname($file))) {
             throw new BuildException("Parent directory of target file doesn't exist");
@@ -94,7 +94,7 @@ class ExportPropertiesTask extends Task
      * @internal param string $file
      * @return bool
      */
-    public function setDisallowedPropertyPrefixes($prefixes)
+    public function setDisallowedPropertyPrefixes($prefixes): bool
     {
         $this->_disallowedPropertyPrefixes = explode(",", $prefixes);
 
@@ -126,7 +126,7 @@ class ExportPropertiesTask extends Task
      * @param  string $propertyName
      * @return bool
      */
-    protected function isDisallowedPropery($propertyName)
+    protected function isDisallowedPropery($propertyName): bool
     {
         foreach ($this->_disallowedPropertyPrefixes as $property) {
             if (substr($propertyName, 0, strlen($property)) == $property) {

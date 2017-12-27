@@ -41,7 +41,7 @@ class HgPullTask extends HgBaseTask
      *
      * @return void
      */
-    public function setTargetPath($targetPath)
+    public function setTargetPath($targetPath): void
     {
         $this->targetPath = $targetPath;
     }
@@ -52,7 +52,7 @@ class HgPullTask extends HgBaseTask
      * @throws BuildException
      * @return void
      */
-    public function main()
+    public function main(): void
     {
         $clone = $this->getFactoryInstance('pull');
         $clone->setInsecure($this->getInsecure());

@@ -210,7 +210,7 @@ class ZendGuardLicenseTask extends Task
      * @throws BuildException
      * @return string
      */
-    public function setExpires($expires)
+    public function setExpires($expires): ?string
     {
         // process the expires value
         if (false === $expires || '0' === $expires || strtolower($expires) == 'never' || '' === $expires) {
@@ -361,6 +361,7 @@ class ZendGuardLicenseTask extends Task
      * Do the work
      *
      * @throws BuildException
+     * @throws Exception
      */
     public function main()
     {
@@ -383,7 +384,7 @@ class ZendGuardLicenseTask extends Task
      *
      * @return void
      */
-    private function cleanupTmpFiles()
+    private function cleanupTmpFiles(): void
     {
         if (!empty($this->tmpLicensePath) && file_exists($this->tmpLicensePath)) {
             $this->log("Deleting temporary license template " . $this->tmpLicensePath, Project::MSG_VERBOSE);
@@ -398,7 +399,7 @@ class ZendGuardLicenseTask extends Task
      *
      * @return string
      */
-    protected function prepareSignCommand()
+    protected function prepareSignCommand(): string
     {
         $command = $this->zendsignPath;
 
@@ -425,7 +426,7 @@ class ZendGuardLicenseTask extends Task
      *
      * @return string
      */
-    protected function getLicenseTemplatePath()
+    protected function getLicenseTemplatePath(): ?string
     {
         if (!empty($this->licenseTemplate)) {
             return $this->licenseTemplate;
@@ -440,7 +441,7 @@ class ZendGuardLicenseTask extends Task
      * @throws BuildException
      * @return void
      */
-    protected function generateLicense()
+    protected function generateLicense(): void
     {
         $command = $this->prepareSignCommand() . ' 2>&1';
 
@@ -463,7 +464,7 @@ class ZendGuardLicenseTask extends Task
      * @throws BuildException
      * @return string Path of the temporary license template file
      */
-    protected function generateLicenseTemplate()
+    protected function generateLicenseTemplate(): string
     {
         $this->tmpLicensePath = tempnam(sys_get_temp_dir(), 'zendlicense');
 
@@ -481,7 +482,7 @@ class ZendGuardLicenseTask extends Task
      *
      * @return string
      */
-    protected function generateLicenseTemplateContent()
+    protected function generateLicenseTemplateContent(): string
     {
         $contentArr = [];
 
@@ -520,7 +521,7 @@ class ZendGuardLicenseTask extends Task
         // merge all the values
         $content = '';
         foreach ($contentArr as $valuePair) {
-            list($key, $value) = $valuePair;
+            [$key, $value] = $valuePair;
 
             $content .= $key . " = " . $value . "\n";
         }
@@ -545,12 +546,12 @@ class ZendGuardLicenseTask extends Task
         array &$valueArray,
         $keyPrefix = '',
         $pairSeparator = ';'
-    ) {
+    ): void {
         // explode the valueString (semicolon)
         $valuePairs = explode($pairSeparator, $valueString);
         if (!empty($valuePairs)) {
             foreach ($valuePairs as $valuePair) {
-                list($key, $value) = explode('=', $valuePair, 2);
+                [$key, $value] = explode('=', $valuePair, 2);
 
                 // add pair into the valueArray
                 $valueArray[] = [$keyPrefix . $key, $value];

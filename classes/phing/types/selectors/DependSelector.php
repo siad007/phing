@@ -54,7 +54,7 @@ class DependSelector extends BaseSelector
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $buf = "{dependselector targetdir: ";
         if ($this->targetdir === null) {
@@ -116,7 +116,7 @@ class DependSelector extends BaseSelector
      * Checks to make sure all settings are kosher. In this case, it
      * means that the dest attribute has been set and we have a mapper.
      */
-    public function verifySettings()
+    public function verifySettings(): void
     {
         if ($this->targetdir === null) {
             $this->setError("The targetdir attribute is required.");
@@ -143,7 +143,7 @@ class DependSelector extends BaseSelector
      *
      * @return bool whether the file should be selected or not
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool
     {
         $this->validate();
 

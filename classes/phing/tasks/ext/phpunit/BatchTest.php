@@ -59,7 +59,7 @@ class BatchTest
      * Sets the name of the batchtest/suite
      * @param $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -71,7 +71,7 @@ class BatchTest
      *
      * @return void
      */
-    public function setExclude($exclude)
+    public function setExclude($exclude): void
     {
         $this->excludeClasses = explode(" ", $exclude);
     }
@@ -83,7 +83,7 @@ class BatchTest
      *
      * @return void
      */
-    public function setClasspath(Path $classpath)
+    public function setClasspath(Path $classpath): void
     {
         if ($this->classpath === null) {
             $this->classpath = $classpath;
@@ -97,7 +97,7 @@ class BatchTest
      *
      * @return Path
      */
-    public function createClasspath()
+    public function createClasspath(): \Path
     {
         $this->classpath = new Path();
 
@@ -109,7 +109,7 @@ class BatchTest
      *
      * @return Path
      */
-    public function getClasspath()
+    public function getClasspath(): \Path
     {
         return $this->classpath;
     }
@@ -118,8 +118,9 @@ class BatchTest
      * Iterate over all filesets and return the filename of all files.
      *
      * @return array an array of filenames
+     * @throws Exception
      */
-    private function getFilenames()
+    private function getFilenames(): array
     {
         $filenames = [];
 
@@ -144,7 +145,7 @@ class BatchTest
      *
      * @return bool
      */
-    private function isTestCase($input)
+    private function isTestCase($input): bool
     {
         return is_subclass_of($input, '\PHPUnit\Framework\TestCase') || is_subclass_of(
             $input,
@@ -160,7 +161,7 @@ class BatchTest
      *
      * @return bool
      */
-    private function filterTests($input)
+    private function filterTests($input): bool
     {
         $reflect = new ReflectionClass($input);
 
@@ -172,8 +173,9 @@ class BatchTest
      * by the files included by the filesets
      *
      * @return array an array of tests.
+     * @throws Exception
      */
-    public function elements()
+    public function elements(): array
     {
         $filenames = $this->getFilenames();
 

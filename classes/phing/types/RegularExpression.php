@@ -76,7 +76,7 @@ class RegularExpression extends DataType
      * @return string
      * @throws BuildException
      */
-    public function getPattern($p)
+    public function getPattern($p): string
     {
         if ($this->isReference()) {
             $ref = $this->getRef($p);
@@ -92,7 +92,7 @@ class RegularExpression extends DataType
      * @return string
      * @throws BuildException
      */
-    public function getReplace($p)
+    public function getReplace($p): string
     {
         if ($this->isReference()) {
             $ref = $this->getRef($p);
@@ -114,7 +114,7 @@ class RegularExpression extends DataType
     /**
      * @return string
      */
-    public function getModifiers()
+    public function getModifiers(): string
     {
         return $this->regexp->getModifiers();
     }
@@ -130,7 +130,7 @@ class RegularExpression extends DataType
     /**
      * @return bool
      */
-    public function getIgnoreCase()
+    public function getIgnoreCase(): bool
     {
         return $this->regexp->getIgnoreCase();
     }
@@ -146,7 +146,7 @@ class RegularExpression extends DataType
     /**
      * @return bool
      */
-    public function getMultiline()
+    public function getMultiline(): bool
     {
         return $this->regexp->getMultiline();
     }
@@ -156,7 +156,7 @@ class RegularExpression extends DataType
      * @return null|Regexp
      * @throws BuildException
      */
-    public function getRegexp(Project $p)
+    public function getRegexp(Project $p): ?\Regexp
     {
         if ($this->isReference()) {
             $ref = $this->getRef($p);

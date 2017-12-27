@@ -143,7 +143,7 @@ class TokenSource extends DataType
      * Returns the qualified classname (dot-path) to use for handling token replacement.
      * @return string
      */
-    public function getClassname()
+    public function getClassname(): string
     {
         return $this->classname;
     }
@@ -153,7 +153,7 @@ class TokenSource extends DataType
      * Uses standard name/value Parameter class.
      * @return Parameter
      */
-    public function createParam()
+    public function createParam(): \Parameter
     {
         $num = array_push($this->parameters, new Parameter());
 

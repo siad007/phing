@@ -42,5 +42,5 @@ interface FileSelector
      * @return bool whether the file should be selected or not
      * @throws BuildException if the selector was not configured correctly
      */
-    public function isSelected(PhingFile $basedir, $filename, PhingFile $file);
+    public function isSelected(PhingFile $basedir, $filename, PhingFile $file): bool;
 }

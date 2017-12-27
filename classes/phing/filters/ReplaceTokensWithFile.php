@@ -174,7 +174,7 @@ class ReplaceTokensWithFile extends BaseParamFilterReader implements ChainableRe
     /**
      * @return string
      */
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return $this->_prefix;
     }
@@ -216,7 +216,7 @@ class ReplaceTokensWithFile extends BaseParamFilterReader implements ChainableRe
      *
      * @return string The character used to denote the beginning of a token.
      */
-    public function getBeginToken()
+    public function getBeginToken(): string
     {
         return $this->_beginToken;
     }
@@ -236,7 +236,7 @@ class ReplaceTokensWithFile extends BaseParamFilterReader implements ChainableRe
      *
      * @return string the character used to denote the beginning of a token
      */
-    public function getEndToken()
+    public function getEndToken(): string
     {
         return $this->_endToken;
     }
@@ -246,7 +246,7 @@ class ReplaceTokensWithFile extends BaseParamFilterReader implements ChainableRe
      * @param  array  $matches Array of 1 el containing key to search for.
      * @return string Text with which to replace key or value of key if none is found.
      */
-    private function replaceTokenCallback($matches)
+    private function replaceTokenCallback($matches): string
     {
         $filetoken = $matches[1];
 
@@ -305,7 +305,7 @@ class ReplaceTokensWithFile extends BaseParamFilterReader implements ChainableRe
         // read from next filter up the chain
         $buffer = $this->in->read($len);
 
-        if ($buffer === -1) {
+        if ($buffer == -1) {
             return -1;
         }
 
@@ -324,15 +324,15 @@ class ReplaceTokensWithFile extends BaseParamFilterReader implements ChainableRe
      * Reader for instantiation.
      *
      * @param Reader $reader
+     * @return object A new filter based on this configuration, but filtering
+     *                the specified reader
      * @internal param A $object Reader object providing the underlying stream.
      *               Must not be <code>null</code>.
      *
-     * @return object A new filter based on this configuration, but filtering
-     *                the specified reader
      */
-    public function chain(Reader $reader)
+    public function chain(Reader $reader): \Reader
     {
-        $newFilter = new ReplaceTokensWithFile($reader);
+        $newFilter = new self($reader);
         $newFilter->setProject($this->getProject());
         $newFilter->setTranslateHTML($this->getTranslateHTML());
         $newFilter->setDir($this->getDir());

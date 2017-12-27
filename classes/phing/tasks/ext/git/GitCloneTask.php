@@ -140,7 +140,7 @@ class GitCloneTask extends GitBaseTask
     /**
      * @return int
      */
-    public function getDepth()
+    public function getDepth(): int
     {
         return $this->depth;
     }
@@ -156,7 +156,7 @@ class GitCloneTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function hasDepth()
+    public function hasDepth(): bool
     {
         return (bool) $this->depth;
     }
@@ -166,7 +166,7 @@ class GitCloneTask extends GitBaseTask
      *
      * @return string
      */
-    public function getTargetPath()
+    public function getTargetPath(): ?string
     {
         return $this->targetPath;
     }
@@ -177,7 +177,7 @@ class GitCloneTask extends GitBaseTask
      * @param  string $targetPath Path to repository used as source
      * @return void
      */
-    public function setTargetPath($targetPath)
+    public function setTargetPath($targetPath): void
     {
         $this->targetPath = $targetPath;
     }
@@ -187,7 +187,7 @@ class GitCloneTask extends GitBaseTask
      *
      * @return bool
      */
-    public function isBare()
+    public function isBare(): bool
     {
         return $this->getBare();
     }
@@ -195,7 +195,7 @@ class GitCloneTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function getBare()
+    public function getBare(): bool
     {
         return $this->isBare;
     }
@@ -211,7 +211,7 @@ class GitCloneTask extends GitBaseTask
     /**
      * @return boolean
      */
-    public function isSingleBranch()
+    public function isSingleBranch(): bool
     {
         return $this->singleBranch;
     }
@@ -227,7 +227,7 @@ class GitCloneTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getBranch()
+    public function getBranch(): string
     {
         return $this->branch;
     }
@@ -235,7 +235,7 @@ class GitCloneTask extends GitBaseTask
     /**
      * @return bool
      */
-    public function hasBranch()
+    public function hasBranch(): bool
     {
         return !empty($this->branch);
     }

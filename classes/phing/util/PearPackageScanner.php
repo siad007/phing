@@ -53,7 +53,7 @@ class PearPackageScanner extends DirectoryScanner
      * @throws BuildException
      * @return void
      */
-    public function setDescFile($descfile)
+    public function setDescFile($descfile): void
     {
         if ($descfile != '' && !file_exists($descfile)) {
             throw new BuildException(
@@ -71,7 +71,7 @@ class PearPackageScanner extends DirectoryScanner
      *
      * @return void
      */
-    public function setPackage($package)
+    public function setPackage($package): void
     {
         $this->package = $package;
     }
@@ -83,7 +83,7 @@ class PearPackageScanner extends DirectoryScanner
      *
      * @return void
      */
-    public function setChannel($channel)
+    public function setChannel($channel): void
     {
         $this->channel = $channel;
     }
@@ -96,7 +96,7 @@ class PearPackageScanner extends DirectoryScanner
      * @throws BuildException
      * @return void
      */
-    public function setConfig($config)
+    public function setConfig($config): void
     {
         if ($config != '') {
             if (!file_exists($config)) {
@@ -134,7 +134,7 @@ class PearPackageScanner extends DirectoryScanner
      * We do not verify the role against a hardcoded list since that
      * would break packages with additional roles.
      */
-    public function setRole($role)
+    public function setRole($role): void
     {
         if ($role == '' && $this->packageFile == '') {
             throw new BuildException('A non-empty role is required');
@@ -150,7 +150,7 @@ class PearPackageScanner extends DirectoryScanner
      *
      * @uses $packageInfo
      */
-    protected function init()
+    protected function init(): void
     {
         if (!$this->packageInfo) {
             $this->packageInfo = $this->loadPackageInfo();
@@ -164,7 +164,7 @@ class PearPackageScanner extends DirectoryScanner
      *
      * @throws BuildException When the package does not exist
      */
-    protected function loadPackageInfo()
+    protected function loadPackageInfo(): \PEAR_PackageFile_v2
     {
         $config = PEAR_Config::singleton($this->config);
 
@@ -210,7 +210,7 @@ class PearPackageScanner extends DirectoryScanner
      * @uses $dirsNotIncluded
      * @uses $dirsExcluded
      */
-    public function scan()
+    public function scan(): bool
     {
         $this->init();
         $list = $this->packageInfo->getFilelist();

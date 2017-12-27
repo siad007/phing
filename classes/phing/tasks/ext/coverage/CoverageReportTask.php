@@ -72,7 +72,7 @@ class CoverageReportTask extends Task
     /**
      * @return null|Path
      */
-    public function createClasspath()
+    public function createClasspath(): ?\Path
     {
         $this->classpath = new Path();
 
@@ -128,9 +128,9 @@ class CoverageReportTask extends Task
 
     /**
      * @param $packageName
-     * @return null
+     * @return \DOMNode|null
      */
-    protected function getPackageElement($packageName)
+    protected function getPackageElement($packageName): ?\DOMNode
     {
         $packages = $this->doc->documentElement->getElementsByTagName('package');
 
@@ -169,7 +169,7 @@ class CoverageReportTask extends Task
      * @author Benjamin Schultz <bschultz@proqrent.de>
      * @return void
      */
-    protected function addSubpackageToPackage($packageName, $subpackageName)
+    protected function addSubpackageToPackage($packageName, $subpackageName): void
     {
         $package = $this->getPackageElement($packageName);
         $subpackage = $this->getSubpackageElement($subpackageName);
@@ -196,7 +196,7 @@ class CoverageReportTask extends Task
      * @author Benjamin Schultz <bschultz@proqrent.de>
      * @return DOMNode|null null when no DOMNode with the given name exists
      */
-    protected function getSubpackageElement($subpackageName)
+    protected function getSubpackageElement($subpackageName): ?\DOMNode
     {
         $subpackages = $this->doc->documentElement->getElementsByTagName('subpackage');
 
@@ -218,7 +218,7 @@ class CoverageReportTask extends Task
      * @author Benjamin Schultz <bschultz@proqrent.de>
      * @return void
      */
-    protected function addClassToSubpackage($classname, $element)
+    protected function addClassToSubpackage($classname, $element): void
     {
         $subpackageName = PHPUnitUtil::getSubpackageName($classname);
 
@@ -237,7 +237,7 @@ class CoverageReportTask extends Task
      * @param $source
      * @return string
      */
-    protected function stripDiv($source)
+    protected function stripDiv($source): string
     {
         $openpos = strpos($source, "<div");
         $closepos = strpos($source, ">", $openpos);
@@ -255,7 +255,7 @@ class CoverageReportTask extends Task
      * @param $filename
      * @return array
      */
-    protected function highlightSourceFile($filename)
+    protected function highlightSourceFile($filename): ?array
     {
         if ($this->geshipath) {
             require_once $this->geshipath . '/geshi.php';
@@ -288,7 +288,7 @@ class CoverageReportTask extends Task
         } else {
             $lines = file($filename);
 
-            for ($i = 0; $i < count($lines); $i++) {
+            for ($i = 0, $iMax = count($lines); $i < $iMax; $i++) {
                 $line = $lines[$i];
 
                 $line = rtrim($line);
@@ -314,7 +314,7 @@ class CoverageReportTask extends Task
      * @param int $classStartLine
      * @return DOMElement
      */
-    protected function transformSourceFile($filename, $coverageInformation, $classStartLine = 1)
+    protected function transformSourceFile($filename, $coverageInformation, $classStartLine = 1): \DOMElement
     {
         $sourceElement = $this->doc->createElement('sourcefile');
         $sourceElement->setAttribute('name', basename($filename));
@@ -332,7 +332,7 @@ class CoverageReportTask extends Task
             $lineElement = $this->doc->createElement('sourceline');
             $lineElement->setAttribute(
                 'coveredcount',
-                (isset($coverageInformation[$linenr]) ? $coverageInformation[$linenr] : '0')
+                ($coverageInformation[$linenr] ?? '0')
             );
 
             if ($linenr == $classStartLine) {
@@ -360,7 +360,7 @@ class CoverageReportTask extends Task
      * @author Benjamin Schultz <bschultz@proqrent.de>
      * @return void
      */
-    protected function transformCoverageInformation($filename, $coverageInformation)
+    protected function transformCoverageInformation($filename, $coverageInformation): void
     {
         $classes = PHPUnitUtil::getDefinedClasses($filename, $this->classpath);
 

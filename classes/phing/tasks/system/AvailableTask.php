@@ -131,7 +131,7 @@ class AvailableTask extends Task implements Condition
      *
      * @return Path
      */
-    public function createFilepath()
+    public function createFilepath(): \Path
     {
         if ($this->filepath === null) {
             $this->filepath = new Path($this->project);
@@ -152,9 +152,8 @@ class AvailableTask extends Task implements Condition
 
     /**
      * @return bool
-     * @throws BuildException
      */
-    public function evaluate()
+    public function evaluate(): bool
     {
         if ($this->file === null && $this->resource === null && $this->extension === null) {
             throw new BuildException("At least one of (file|resource|extension) is required", $this->getLocation());
@@ -198,7 +197,7 @@ class AvailableTask extends Task implements Condition
     /**
      * @return bool
      */
-    private function _checkFile()
+    private function _checkFile(): bool
     {
         if ($this->filepath === null) {
             return $this->_checkFile1($this->file);
@@ -221,7 +220,7 @@ class AvailableTask extends Task implements Condition
      * @return bool
      * @throws IOException
      */
-    private function _checkFile1(PhingFile $file)
+    private function _checkFile1(PhingFile $file): bool
     {
         // Resolve symbolic links
         if ($this->followSymlinks && $file->isLink()) {
@@ -256,7 +255,7 @@ class AvailableTask extends Task implements Condition
      * @param $resource
      * @return bool
      */
-    private function _checkResource($resource)
+    private function _checkResource($resource): ?bool
     {
         if (null != ($resourcePath = Phing::getResourcePath($resource))) {
             return $this->_checkFile1(new PhingFile($resourcePath));
