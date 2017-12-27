@@ -30,20 +30,20 @@ require_once 'phing/tasks/ext/git/GitBaseTask.php';
  */
 class GitArchiveTask extends GitBaseTask
 {
-    /** @var string $format */
-    private $format;
+    /** @var string|false $format */
+    private $format = false;
 
     /** @var PhingFile $output */
     private $output;
 
-    /** @var string $prefix */
-    private $prefix;
+    /** @var string|false $prefix */
+    private $prefix = false;
 
     /** @var string $treeish */
     private $treeish;
 
-    /** @var string $remoteRepo */
-    private $remoteRepo;
+    /** @var string|false $remoteRepo */
+    private $remoteRepo = false;
 
     /**
      * The main entry point for the task
@@ -77,7 +77,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getFormat(): ?string
+    public function getFormat()
     {
         return $this->format;
     }
@@ -109,7 +109,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getPrefix(): ?string
+    public function getPrefix()
     {
         return $this->prefix;
     }
@@ -125,7 +125,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getTreeish(): ?string
+    public function getTreeish()
     {
         return $this->treeish;
     }
@@ -141,7 +141,7 @@ class GitArchiveTask extends GitBaseTask
     /**
      * @return string
      */
-    public function getRemoteRepo(): ?string
+    public function getRemoteRepo()
     {
         return $this->remoteRepo;
     }
