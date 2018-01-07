@@ -445,7 +445,7 @@ class Project
         if (!$dir->exists()) {
             throw new BuildException("Basedir " . $dir->getAbsolutePath() . " does not exist");
         }
-        if (!$dir->isDirectory()) {
+        if (!$dir->isDir()) {
             throw new BuildException("Basedir " . $dir->getAbsolutePath() . " is not a directory");
         }
         $this->basedir = $dir;

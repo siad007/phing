@@ -97,7 +97,7 @@ class UntarTask extends ExtractBaseTask
     private function initTar(PhingFile $tarfile)
     {
         $compression = null;
-        $tarfileName = $tarfile->getName();
+        $tarfileName = $tarfile->getFilename();
         $mode = strtolower(substr($tarfileName, strrpos($tarfileName, '.')));
 
         $compressions = [

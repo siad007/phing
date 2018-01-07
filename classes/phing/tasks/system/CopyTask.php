@@ -282,12 +282,12 @@ class CopyTask extends Task
         if ($this->file !== null) {
             if ($this->file->exists()) {
                 if ($this->destFile === null) {
-                    $this->destFile = new PhingFile($this->destDir, (string) $this->file->getName());
+                    $this->destFile = new PhingFile($this->destDir, (string) $this->file->getFilename());
                 }
                 if ($this->overwrite === true || ($this->file->lastModified() > $this->destFile->lastModified())) {
                     $this->fileCopyMap[$this->file->getAbsolutePath()] = $this->destFile->getAbsolutePath();
                 } else {
-                    $this->log($this->file->getName() . " omitted, " . $this->destFile->getName() . " is up to date");
+                    $this->log($this->file->getFilename() . " omitted, " . $this->destFile->getFilename() . " is up to date");
                 }
             } else {
                 // terminate build
@@ -388,7 +388,7 @@ class CopyTask extends Task
             throw new BuildException("One of destfile or destdir must be set.");
         }
 
-        if ($this->file !== null && $this->file->exists() && $this->file->isDirectory()) {
+        if ($this->file !== null && $this->file->exists() && $this->file->isDir()) {
             throw new BuildException("Use a fileset to copy directories.");
         }
 
@@ -585,10 +585,10 @@ class CopyTask extends Task
             $toFile = new PhingFile($to);
 
             $fromSlot->setValue($fromFile->getPath());
-            $fromBasenameSlot->setValue($fromFile->getName());
+            $fromBasenameSlot->setValue($fromFile->getFilename());
 
             $toSlot->setValue($toFile->getPath());
-            $toBasenameSlot->setValue($toFile->getName());
+            $toBasenameSlot->setValue($toFile->getFilename());
 
             $this->fileUtils->copyFile(
                 $fromFile,

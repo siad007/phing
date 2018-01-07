@@ -235,7 +235,7 @@ class AvailableTask extends Task implements Condition
 
         if ($this->type !== null) {
             if ($this->type === "dir") {
-                return $file->isDirectory();
+                return $file->isDir();
             } else {
                 if ($this->type === "file") {
                     return $file->isFile();

@@ -50,7 +50,7 @@ class PhpLintTask extends Task
      */
     public function init()
     {
-        $this->setInterpreter($this->project->getProperty('php.interpreter'));
+        $this->setInterpreter($this->project->getProperty(Phing::PHP_INTERPRETER));
     }
 
     /**

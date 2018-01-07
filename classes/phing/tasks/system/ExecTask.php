@@ -169,7 +169,7 @@ class ExecTask extends Task
 
         // expand any symbolic links first
         try {
-            if (!$this->dir->getCanonicalFile()->isDirectory()) {
+            if (!$this->dir->getCanonicalFile()->isDir()) {
                 throw new BuildException(
                     "'" . (string) $this->dir . "' is not a valid directory"
                 );

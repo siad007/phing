@@ -85,7 +85,7 @@ class DifferentSelector extends MappingSelector
                 return true;
             }
 
-            if ($srcfile->length() !== $destfile->length()) {
+            if ($srcfile->getSize() !== $destfile->getSize()) {
                 // different size => different files
                 return true;
             }

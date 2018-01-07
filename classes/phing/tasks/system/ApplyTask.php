@@ -533,7 +533,7 @@ class ApplyTask extends Task
         if ($this->dir !== null) {
 
             // Try expanding (any) symbolic links
-            if (!$this->dir->getCanonicalFile()->isDirectory()) {
+            if (!$this->dir->getCanonicalFile()->isDir()) {
                 $this->throwBuildException("'" . $this->dir . "' is not a valid directory");
             }
 

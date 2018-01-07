@@ -148,7 +148,7 @@ class TruncateTask extends Task
 
     private function process(PhingFile $f)
     {
-        $len = $f->length();
+        $len = $f->getSize();
         $newLength = $this->length === null
             ? $len + $this->adjust
             : $this->length;

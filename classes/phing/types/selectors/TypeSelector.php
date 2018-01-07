@@ -119,7 +119,7 @@ class TypeSelector extends BaseExtendSelector
             $file = new PhingFile($file->getCanonicalPath());
         }
 
-        if ($file->isDirectory()) {
+        if ($file->isDir()) {
             return $this->type === 'dir';
         } else {
             return $this->type === 'file';

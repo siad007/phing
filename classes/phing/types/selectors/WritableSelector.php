@@ -38,6 +38,6 @@ class WritableSelector implements FileSelector
      */
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
     {
-        return $file !== null && $file->canWrite();
+        return $file !== null && $file->isWritable();
     }
 }

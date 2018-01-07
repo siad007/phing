@@ -124,7 +124,7 @@ class DataStore
      */
     private function read()
     {
-        if (!$this->file->canRead()) {
+        if (!$this->file->isReadable()) {
             throw new BuildException("Can't read data store from '" .
                 $this->file->getPath() . "'");
         } else {
@@ -142,7 +142,7 @@ class DataStore
      */
     private function write()
     {
-        if (!$this->file->canWrite()) {
+        if (!$this->file->isWritable()) {
             throw new BuildException("Can't write data store to '" .
                 $this->file->getPath() . "'");
         } else {

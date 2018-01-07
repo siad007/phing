@@ -189,7 +189,7 @@ class PearPackageTask extends MatchingTask
         if ($this->packageFile !== null) {
             // create one w/ full path
             $f = new PhingFile($this->packageFile->getAbsolutePath());
-            $this->preparedOptions['packagefile'] = $f->getName();
+            $this->preparedOptions['packagefile'] = $f->getFilename();
             // must end in trailing slash
             $this->preparedOptions['outputdirectory'] = $f->getParent() . DIRECTORY_SEPARATOR;
             $this->log("Creating package file: " . $f->__toString(), Project::MSG_INFO);

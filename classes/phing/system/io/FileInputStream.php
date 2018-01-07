@@ -55,7 +55,7 @@ class FileInputStream extends InputStream
         if (!$this->file->exists()) {
             throw new IOException("Unable to open " . $this->file->__toString() . " for reading. File does not exists.");
         }
-        if (!$this->file->canRead()) {
+        if (!$this->file->isReadable()) {
             throw new IOException("Unable to open " . $this->file->__toString() . " for reading. File not readable.");
         }
         $stream = @fopen($this->file->getAbsolutePath(), "rb");

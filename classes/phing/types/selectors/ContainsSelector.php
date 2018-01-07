@@ -152,7 +152,7 @@ class ContainsSelector extends BaseExtendSelector
     {
         $this->validate();
 
-        if ($file->isDirectory()) {
+        if ($file->isDir()) {
             return true;
         }
 

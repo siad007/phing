@@ -213,13 +213,13 @@ class EchoProperties extends Task
             // add phing properties
             $allProps = $this->getProject()->getProperties();
         } elseif ($this->inFile != null) {
-            if ($this->inFile->exists() && $this->inFile->isDirectory()) {
+            if ($this->inFile->exists() && $this->inFile->isDir()) {
                 $message = "srcfile is a directory!";
                 $this->failOnErrorAction(null, $message, Project::MSG_ERR);
                 return;
             }
 
-            if ($this->inFile->exists() && !$this->inFile->canRead()) {
+            if ($this->inFile->exists() && !$this->inFile->isReadable()) {
                 $message = "Can not read from the specified srcfile!";
                 $this->failOnErrorAction(null, $message, Project::MSG_ERR);
                 return;
@@ -243,13 +243,13 @@ class EchoProperties extends Task
                 $this->saveProperties($allProps, $os);
                 $this->log($os, Project::MSG_INFO);
             } else {
-                if ($this->destfile->exists() && $this->destfile->isDirectory()) {
+                if ($this->destfile->exists() && $this->destfile->isDir()) {
                     $message = "destfile is a directory!";
                     $this->failOnErrorAction(null, $message, Project::MSG_ERR);
                     return;
                 }
 
-                if ($this->destfile->exists() && !$this->destfile->canWrite()) {
+                if ($this->destfile->exists() && !$this->destfile->isWritable()) {
                     $message = "Can not write to the specified destfile!";
                     $this->failOnErrorAction(null, $message, Project::MSG_ERR);
                     return;

@@ -282,15 +282,15 @@ class SizeSelector extends BaseExtendSelector
         $this->validate();
 
         // Directory size never selected for
-        if ($file->isDirectory()) {
+        if ($file->isDir()) {
             return true;
         }
         if ($this->cmp === 0) {
-            return ($file->length() < $this->sizelimit);
+            return ($file->getSize() < $this->sizelimit);
         } elseif ($this->cmp === 1) {
-            return ($file->length() > $this->sizelimit);
+            return ($file->getSize() > $this->sizelimit);
         } else {
-            return ($file->length() === $this->sizelimit);
+            return ($file->getSize() === $this->sizelimit);
         }
     }
 }

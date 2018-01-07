@@ -126,7 +126,7 @@ abstract class MappingSelector extends BaseSelector
         // Sanity check
         if (count($destfiles) !== 1 || $destfiles[0] === null) {
             throw new BuildException('Invalid destination file results for '
-                . $this->targetdir->getName() . ' with filename ' . $filename);
+                . $this->targetdir->getFilename() . ' with filename ' . $filename);
         }
         $destname = $destfiles[0];
         $fu = new FileUtils();

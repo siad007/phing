@@ -229,7 +229,7 @@ class DateSelector extends BaseExtendSelector
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
     {
         $this->validate();
-        if ($file->isDirectory() && ($this->includeDirs === false)) {
+        if ($file->isDir() && ($this->includeDirs === false)) {
             return true;
         }
         if ($this->cmp === 0) {

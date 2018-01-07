@@ -282,11 +282,11 @@ class VersionTask extends Task
             throw new BuildException($message, $ioe);
         }
 
-        if (!$this->file->canRead()) {
+        if (!$this->file->isReadable()) {
             $message = "Unable to read from " . $this->file . ".";
             throw new BuildException($message);
         }
-        if (!$this->file->canWrite()) {
+        if (!$this->file->isWritable()) {
             $message = "Unable to write to " . $this->file . ".";
             throw new BuildException($message);
         }

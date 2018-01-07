@@ -319,7 +319,7 @@ class ManifestTask extends Task
             throw new BuildException("Specify at least sources and destination - a file or a fileset.");
         }
 
-        if (null !== $this->file && $this->file->exists() && $this->file->isDirectory()) {
+        if (null !== $this->file && $this->file->exists() && $this->file->isDir()) {
             throw new BuildException("Destination file cannot be a directory.");
         }
     }

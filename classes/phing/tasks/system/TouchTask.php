@@ -113,7 +113,7 @@ class TouchTask extends Task
             throw new BuildException("Specify at least one source - a file, a fileset or a filelist.");
         }
 
-        if ($this->file !== null && $this->file->exists() && $this->file->isDirectory()) {
+        if ($this->file !== null && $this->file->exists() && $this->file->isDir()) {
             throw new BuildException("Use a fileset to touch directories.");
         }
 

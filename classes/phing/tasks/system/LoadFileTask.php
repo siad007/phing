@@ -133,7 +133,7 @@ class LoadFileTask extends Task
             // read file (through filterchains)
             $contents = "";
 
-            if ($this->file->length() > 0) {
+            if ($this->file->getSize() > 0) {
                 $reader = FileUtils::getChainedReader(new FileReader($this->file), $this->filterChains, $this->project);
                 while (-1 !== ($buffer = $reader->read())) {
                     $contents .= $buffer;

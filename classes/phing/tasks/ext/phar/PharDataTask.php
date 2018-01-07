@@ -127,7 +127,7 @@ class PharDataTask extends MatchingTask
                 }
             }
 
-            $pharData = new PharData($this->baseDirectory->getPath() . '/' . $this->destinationFile->getName());
+            $pharData = new PharData($this->baseDirectory->getPath() . '/' . $this->destinationFile->getFilename());
 
             foreach ($this->filesets as $fileset) {
                 $this->log(
@@ -171,11 +171,11 @@ class PharDataTask extends MatchingTask
             throw new BuildException("destfile attribute must be set!", $this->getLocation());
         }
 
-        if ($this->destinationFile->exists() && $this->destinationFile->isDirectory()) {
+        if ($this->destinationFile->exists() && $this->destinationFile->isDir()) {
             throw new BuildException("destfile is a directory!", $this->getLocation());
         }
 
-        if (!$this->destinationFile->canWrite()) {
+        if (!$this->destinationFile->isWritable()) {
             throw new BuildException("Can not write to the specified destfile!", $this->getLocation());
         }
 

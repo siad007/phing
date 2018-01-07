@@ -67,7 +67,7 @@ class ComposerTask extends Task
      */
     public function init()
     {
-        $this->setPhp($this->project->getProperty('php.interpreter'));
+        $this->setPhp($this->project->getProperty(Phing::PHP_INTERPRETER));
     }
 
     /**

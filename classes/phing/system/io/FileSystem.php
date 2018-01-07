@@ -344,7 +344,7 @@ abstract class FileSystem
      */
     public function delete(PhingFile $f, $recursive = false)
     {
-        if ($f->isDirectory()) {
+        if ($f->isDir()) {
             $this->rmdir($f->getPath(), $recursive);
         } else {
             $this->unlink($f->getPath());
@@ -505,7 +505,7 @@ abstract class FileSystem
         global $php_errormsg;
 
         // Recursively copy a directory
-        if ($src->isDirectory()) {
+        if ($src->isDir()) {
             $this->copyr($src->getAbsolutePath(), $dest->getAbsolutePath());
         }
 

@@ -85,12 +85,12 @@ class AppendTaskTest extends BuildFileTest
         $this->test3();
 
         $file = new PhingFile($this->getProject()->getBasedir(), $this->tempFile);
-        $origSize = $file->length();
+        $origSize = $file->getSize();
 
         $this->executeTarget("testPath");
 
         $file2 = new PhingFile($this->getProject()->getBasedir(), $this->tempFile2);
-        $newSize = $file2->length();
+        $newSize = $file2->getSize();
 
         $this->assertEquals($origSize, $newSize);
     }
@@ -100,12 +100,12 @@ class AppendTaskTest extends BuildFileTest
         $this->test3();
 
         $file = new PhingFile($this->getProject()->getBasedir(), $this->tempFile);
-        $origSize = $file->length();
+        $origSize = $file->getSize();
 
         $this->executeTarget("testAppend");
 
         $file2 = new PhingFile($this->getProject()->getBasedir(), $this->tempFile2);
-        $newSize = $file2->length();
+        $newSize = $file2->getSize();
 
         $this->assertEquals($origSize * 2, $newSize);
     }
@@ -119,7 +119,7 @@ class AppendTaskTest extends BuildFileTest
     {
         $this->executeTarget("testnooverwrite");
         $file2 = new PhingFile($this->getProject()->getBasedir(), $this->tempFile2);
-        $size = $file2->length();
+        $size = $file2->getSize();
         $this->assertEquals($size, 0);
     }
 

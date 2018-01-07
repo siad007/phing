@@ -67,7 +67,7 @@ class Properties
      */
     public function load(PhingFile $file)
     {
-        if ($file->canRead()) {
+        if ($file->isReadable()) {
             $this->parse($file);
 
             $this->file = $file;

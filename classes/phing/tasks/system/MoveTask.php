@@ -42,7 +42,7 @@ class MoveTask extends CopyTask
      */
     protected function validateAttributes()
     {
-        if ($this->file !== null && $this->file->isDirectory()) {
+        if ($this->file !== null && $this->file->isDir()) {
             if (($this->destFile !== null && $this->destDir !== null)
                 || ($this->destFile === null && $this->destDir === null)
             ) {
@@ -50,7 +50,7 @@ class MoveTask extends CopyTask
             }
 
             if ($this->destFile === null) {
-                $this->destFile = new PhingFile($this->destDir, $this->file->getName());
+                $this->destFile = new PhingFile($this->destDir, $this->file->getFilename());
             }
 
             if ($this->destDir === null) {
@@ -189,7 +189,7 @@ class MoveTask extends CopyTask
 
         foreach ($list as $s) {
             $f = new PhingFile($d, $s);
-            if ($f->isDirectory()) {
+            if ($f->isDir()) {
                 if (!$this->okToDelete($f)) {
                     return false;
                 }
@@ -219,7 +219,7 @@ class MoveTask extends CopyTask
 
         foreach ($list as $fname) {
             $f = new PhingFile($d, $fname);
-            if ($f->isDirectory()) {
+            if ($f->isDir()) {
                 $this->deleteDir($f);
             } else {
                 throw new BuildException("UNEXPECTED ERROR - The file " . $f->getAbsolutePath() . " should not exist!");

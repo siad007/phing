@@ -115,7 +115,7 @@ abstract class ExtractBaseTask extends MatchingTask
 
             foreach ($compressedArchiveFiles as $compressedArchiveFilePath) {
                 $compressedArchiveFile = new PhingFile($compressedArchiveDir, $compressedArchiveFilePath);
-                if ($compressedArchiveFile->isDirectory()) {
+                if ($compressedArchiveFile->isDir()) {
                     throw new BuildException($compressedArchiveFile->getAbsolutePath(
                         ) . ' compressed archive cannot be a directory.');
                 }
@@ -206,11 +206,11 @@ abstract class ExtractBaseTask extends MatchingTask
             throw new BuildException("todir must be set.");
         }
 
-        if ($this->todir !== null && $this->todir->exists() && !$this->todir->isDirectory()) {
+        if ($this->todir !== null && $this->todir->exists() && !$this->todir->isDir()) {
             throw new BuildException("todir must be a directory.");
         }
 
-        if ($this->file !== null && $this->file->exists() && $this->file->isDirectory()) {
+        if ($this->file !== null && $this->file->exists() && $this->file->isDir()) {
             throw new BuildException("Compressed archive file cannot be a directory.");
         }
 

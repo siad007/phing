@@ -416,11 +416,11 @@ class FileUtils
             return false;
         }
 
-        if (!($file1->canRead() || $file2->canRead())) {
+        if (!($file1->isReadable() || $file2->isReadable())) {
             return false;
         }
 
-        if ($file1->isDirectory() || $file2->isDirectory()) {
+        if ($file1->isDir() || $file2->isDir()) {
             return false;
         }
 

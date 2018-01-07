@@ -38,6 +38,6 @@ class ReadableSelector implements FileSelector
      */
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file)
     {
-        return $file !== null && $file->canRead();
+        return $file !== null && $file->isReadable();
     }
 }

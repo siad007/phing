@@ -59,6 +59,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
     public $defaultPatterns;
 
     public $additionalPatterns = [];
+    /** @var PhingFile $dir */
     public $dir;
     public $isCaseSensitive = true;
     private $errorOnMissingDir = false;
@@ -207,7 +208,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
     public function setFile(PhingFile $file)
     {
         $this->setDir($file->getParentFile());
-        $this->createInclude()->setName($file->getName());
+        $this->createInclude()->setName($file->getFilename());
     }
 
     /**
@@ -313,7 +314,7 @@ abstract class AbstractFileSet extends DataType implements SelectorContainer, It
             throw new BuildException("Directory " . $this->dir->getAbsolutePath() . " not found.");
         }
         if (!$this->dir->isLink() || !$this->expandSymbolicLinks) {
-            if (!$this->dir->isDirectory()) {
+            if (!$this->dir->isDir()) {
                 throw new BuildException($this->dir->getAbsolutePath() . " is not a directory.");
             }
         }

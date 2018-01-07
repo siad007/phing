@@ -81,7 +81,7 @@ class Basename extends Task
             throw new BuildException("file attribute required", $this->getLocation());
         }
 
-        $value = $this->file->getName();
+        $value = $this->file->getFilename();
         if ($this->suffix != null && StringHelper::endsWith($this->suffix, $value)) {
             // if the suffix does not starts with a '.' and the
             // char preceding the suffix is a '.', we assume the user

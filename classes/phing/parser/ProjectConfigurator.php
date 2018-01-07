@@ -206,7 +206,7 @@ class ProjectConfigurator
         $parser = new ExpatParser($reader);
         $parser->parserSetOption(XML_OPTION_CASE_FOLDING, 0);
         $parser->setHandler(new RootHandler($parser, $this, $ctx));
-        $this->project->log("parsing buildfile " . $this->buildFile->getName(), Project::MSG_VERBOSE);
+        $this->project->log("parsing buildfile " . $this->buildFile->getFilename(), Project::MSG_VERBOSE);
         $parser->parse();
         $reader->close();
 

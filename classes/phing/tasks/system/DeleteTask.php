@@ -171,7 +171,7 @@ class DeleteTask extends Task
                 if (!$dir instanceof PhingFile) {
                     $dir = new PhingFile($baseDir, $dir);
                 }
-                if ($dir->exists() && $dir->isDirectory()) {
+                if ($dir->exists() && $dir->isDir()) {
                     if ($this->verbosity === Project::MSG_VERBOSE) {
                         $this->log("Deleting directory " . $dir->__toString());
                     }
@@ -235,7 +235,7 @@ class DeleteTask extends Task
 
         foreach ($list as $s) {
             $f = new PhingFile($d, $s);
-            if ($f->isDirectory()) {
+            if ($f->isDir()) {
                 $this->removeDir($f);
             } else {
                 $this->log("Deleting " . $f->__toString(), $this->verbosity);

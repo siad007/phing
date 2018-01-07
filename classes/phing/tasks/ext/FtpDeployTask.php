@@ -352,7 +352,7 @@ class FtpDeployTask extends Task
                 }
 
                 if (!$this->depends || ($local_filemtime > $remoteFileModificationTime)) {
-                    if ($this->skipOnSameSize === true && $file->length() === $ftp->size($filename)) {
+                    if ($this->skipOnSameSize === true && $file->getSize() === $ftp->size($filename)) {
                         $this->log('Skipped ' . $file->getCanonicalPath(), $this->logLevel);
                         continue;
                     }

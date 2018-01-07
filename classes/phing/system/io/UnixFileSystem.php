@@ -253,7 +253,7 @@ class UnixFileSystem extends FileSystem
     public function getBooleanAttributes($f)
     {
         //$rv = getBooleanAttributes0($f);
-        $name = $f->getName();
+        $name = $f->getFilename();
         $hidden = (strlen($name) > 0) && ($name{0} == '.');
 
         return ($hidden ? FileSystem::BA_HIDDEN : 0);

@@ -75,6 +75,6 @@ class IsFileSelected extends AbstractSelectorContainer implements Condition
         /** @var FileSelector $f */
         $file = $this->getSelectors($this->getProject());
         $f = $file[0];
-        return $f->isSelected($myBaseDir, $this->file->getName(), $this->file);
+        return $f->isSelected($myBaseDir, $this->file->getFilename(), $this->file);
     }
 }

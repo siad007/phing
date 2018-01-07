@@ -102,9 +102,9 @@ class PathToFileSet extends Task
         if ($this->pathRefId == null) {
             throw new BuildException("missing pathrefid");
         }
-        if (!$this->dir->isDirectory()) {
+        if (!$this->dir->isDir()) {
             throw new BuildException(
-                $this->dir->toString() . " is not a directory");
+                (string) $this->dir . " is not a directory");
         }
         $path = $this->getProject()->getReference($this->pathRefId);
         if ($path == null) {

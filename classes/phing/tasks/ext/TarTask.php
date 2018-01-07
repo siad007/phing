@@ -203,11 +203,11 @@ class TarTask extends MatchingTask
             throw new BuildException("tarfile attribute must be set!", $this->getLocation());
         }
 
-        if ($this->tarFile->exists() && $this->tarFile->isDirectory()) {
+        if ($this->tarFile->exists() && $this->tarFile->isDir()) {
             throw new BuildException("tarfile is a directory!", $this->getLocation());
         }
 
-        if ($this->tarFile->exists() && !$this->tarFile->canWrite()) {
+        if ($this->tarFile->exists() && !$this->tarFile->isWritable()) {
             throw new BuildException("Can not write to the specified tarfile!", $this->getLocation());
         }
 

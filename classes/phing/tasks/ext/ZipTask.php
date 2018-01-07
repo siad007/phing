@@ -162,11 +162,11 @@ class ZipTask extends MatchingTask
             throw new BuildException("zipfile attribute must be set!", $this->getLocation());
         }
 
-        if ($this->zipFile->exists() && $this->zipFile->isDirectory()) {
+        if ($this->zipFile->exists() && $this->zipFile->isDir()) {
             throw new BuildException("zipfile is a directory!", $this->getLocation());
         }
 
-        if ($this->zipFile->exists() && !$this->zipFile->canWrite()) {
+        if ($this->zipFile->exists() && !$this->zipFile->isWritable()) {
             throw new BuildException("Can not write to the specified zipfile!", $this->getLocation());
         }
 
@@ -279,7 +279,7 @@ class ZipTask extends MatchingTask
 
                 if ($this->ignoreLinks && $f->isLink()) {
                     continue;
-                } elseif ($f->isDirectory()) {
+                } elseif ($f->isDir()) {
                     if ($pathInZip != '.') {
                         $zip->addEmptyDir($pathInZip);
                     }

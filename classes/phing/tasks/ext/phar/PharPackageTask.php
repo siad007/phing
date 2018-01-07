@@ -344,11 +344,11 @@ class PharPackageTask extends MatchingTask
             throw new BuildException("destfile attribute must be set!", $this->getLocation());
         }
 
-        if ($this->destinationFile->exists() && $this->destinationFile->isDirectory()) {
+        if ($this->destinationFile->exists() && $this->destinationFile->isDir()) {
             throw new BuildException("destfile is a directory!", $this->getLocation());
         }
 
-        if (!$this->destinationFile->canWrite()) {
+        if (!$this->destinationFile->isWritable()) {
             throw new BuildException("Can not write to the specified destfile!", $this->getLocation());
         }
         if (null !== $this->baseDirectory) {
@@ -371,7 +371,7 @@ class PharPackageTask extends MatchingTask
                 throw new BuildException("key '" . (string) $this->key . "' does not exist!", $this->getLocation());
             }
 
-            if (!$this->key->canRead()) {
+            if (!$this->key->isReadable()) {
                 throw new BuildException("key '" . (string) $this->key . "' cannot be read!", $this->getLocation());
             }
         }

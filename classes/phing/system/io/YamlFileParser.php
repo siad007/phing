@@ -32,7 +32,7 @@ class YamlFileParser implements FileParserInterface
      */
     public function parseFile(PhingFile $file)
     {
-        if (!$file->canRead()) {
+        if (!$file->isReadable()) {
             throw new IOException("Unable to read file: " . $file);
         }
 
