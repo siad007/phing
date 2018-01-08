@@ -296,6 +296,21 @@ class PhingFileInfo extends SplFileInfo
     }
 
     /**
+     * Returns the absolute form of this abstract pathname.  Equivalent to
+     * getAbsolutePath.
+     *
+     * @return PhingFile The absolute abstract pathname denoting the same file or
+     *                directory as this abstract pathname
+     *
+     * @throws \NullPointerException
+     * @throws \IOException
+     */
+    public function getAbsoluteFile(): \PhingFile
+    {
+        return new PhingFile((string) $this->getAbsolutePath());
+    }
+
+    /**
      * Returns the canonical pathname string of this abstract pathname.
      *
      * A canonical pathname is both absolute and unique. The precise
