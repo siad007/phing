@@ -31,13 +31,6 @@ class PhingFileInfo extends SplFileInfo
     public static $pathSeparator;
 
     /**
-     * This abstract pathname's normalized pathname string.  A normalized
-     * pathname string uses the default name-separator character and does not
-     * contain any duplicate or redundant separators.
-     */
-    protected $path;
-
-    /**
      * The length of this abstract pathname's prefix, or zero if it has no prefix.
      * @var int
      */
@@ -75,7 +68,7 @@ class PhingFileInfo extends SplFileInfo
             $this->prefixLength = (int) $arg2;
         }
 
-        parent::__construct($this->path);
+        parent::__construct($this->getPath());
     }
 
     /**
@@ -106,7 +99,7 @@ class PhingFileInfo extends SplFileInfo
         }
 
         $this->path = (string) $fs->normalize($pathname);
-        $this->prefixLength = (int) $fs->prefixLength($this->path);
+        $this->prefixLength = (int) $fs->prefixLength($this->getPath());
     }
 
     /**
@@ -133,7 +126,7 @@ class PhingFileInfo extends SplFileInfo
         } else {
             $this->path = (string) $fs->normalize($child);
         }
-        $this->prefixLength = (int) $fs->prefixLength($this->path);
+        $this->prefixLength = (int) $fs->prefixLength($this->getPath());
     }
 
     /**
@@ -153,15 +146,15 @@ class PhingFileInfo extends SplFileInfo
         }
 
         if ($parent !== null) {
-            if ($parent->path === "") {
+            if ($parent->getPath() === "") {
                 $this->path = $fs->resolve($fs->getDefaultParent(), $fs->normalize($child));
             } else {
-                $this->path = $fs->resolve($parent->path, $fs->normalize($child));
+                $this->path = $fs->resolve($parent->getPath(), $fs->normalize($child));
             }
         } else {
             $this->path = $fs->normalize($child);
         }
-        $this->prefixLength = $fs->prefixLength($this->path);
+        $this->prefixLength = $fs->prefixLength($this->getPath());
     }
 
     /**
@@ -179,16 +172,16 @@ class PhingFileInfo extends SplFileInfo
     public function getParent(): ?string
     {
         // that's a lastIndexOf
-        $index = ((($res = strrpos($this->path, self::$separator)) === false) ? -1 : $res);
+        $index = ((($res = strrpos($this->getPath(), self::$separator)) === false) ? -1 : $res);
         if ($index < $this->prefixLength) {
-            if (($this->prefixLength > 0) && (strlen($this->path) > $this->prefixLength)) {
-                return substr($this->path, 0, $this->prefixLength);
+            if (($this->prefixLength > 0) && (strlen($this->getPath()) > $this->prefixLength)) {
+                return substr($this->getPath(), 0, $this->prefixLength);
             }
 
             return null;
         }
 
-        return substr($this->path, 0, $index);
+        return substr($this->getPath(), 0, $index);
     }
 
     /**
@@ -215,18 +208,6 @@ class PhingFileInfo extends SplFileInfo
         }
 
         return new PhingFile((string) $p, (int) $this->prefixLength);
-    }
-
-    /**
-     * Converts this abstract pathname into a pathname string.  The resulting
-     * string uses the default name-separator character to separate the names
-     * in the name sequence.
-     *
-     * @return string The string form of this abstract pathname
-     */
-    public function getPath()
-    {
-        return $this->path;
     }
 
     /**
@@ -340,7 +321,7 @@ class PhingFileInfo extends SplFileInfo
     {
         $fs = FileSystem::getFileSystem();
 
-        return $fs->canonicalize($this->path);
+        return $fs->canonicalize($this->getPath());
     }
 
 
@@ -402,7 +383,7 @@ class PhingFileInfo extends SplFileInfo
             return true;
         }
 
-        return $this->isDir() ? true : @file_exists($this->getAbsolutePath());
+        return $this->isDir() ? true : @file_exists($this->getPath());
     }
 
     /**
@@ -422,7 +403,7 @@ class PhingFileInfo extends SplFileInfo
     {
         $fs = FileSystem::getFileSystem();
         if ($fs->checkAccess($this) !== true) {
-            throw new IOException("No read access to " . $this->path);
+            throw new IOException("No read access to " . $this->getPath());
         }
 
         return (($fs->getBooleanAttributes($this) & FileSystem::BA_HIDDEN) !== 0);
@@ -442,7 +423,7 @@ class PhingFileInfo extends SplFileInfo
     {
         $fs = FileSystem::getFileSystem();
         if ($fs->checkAccess($this) !== true) {
-            throw new IOException("No read access to " . $this->path);
+            throw new IOException("No read access to " . $this->getPath());
         }
 
         return $fs->getLastModifiedTime($this);
