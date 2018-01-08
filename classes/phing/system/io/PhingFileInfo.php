@@ -398,11 +398,11 @@ class PhingFileInfo extends SplFileInfo
     {
         clearstatcache();
 
-        if (is_link($this->path)) {
+        if (is_link($this->getAbsolutePath())) {
             return true;
         }
 
-        return $this->isDir() ? true : @file_exists($this->path);
+        return $this->isDir() ? true : @file_exists($this->getAbsolutePath());
     }
 
     /**
