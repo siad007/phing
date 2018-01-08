@@ -127,7 +127,7 @@ class DeleteTask extends Task
         // delete a single file
         if ($this->file !== null) {
             if ($this->file->exists()) {
-                if ($this->file->isDirectory()) {
+                if ($this->file->isDir()) {
                     $this->log(
                         "Directory " . $this->file->__toString(
                         ) . " cannot be removed using the file attribute. Use dir instead."

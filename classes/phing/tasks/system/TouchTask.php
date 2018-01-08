@@ -195,10 +195,11 @@ class TouchTask extends Task
     /**
      * @param $file
      * @throws BuildException
+     * @throws Exception
      */
-    private function touchFile($file)
+    private function touchFile(PhingFile $file)
     {
-        if (!$file->canWrite()) {
+        if (!$file->isWritable()) {
             throw new BuildException("Can not change modification date of read-only file " . $file->__toString());
         }
         $file->setLastModified($this->millis);
