@@ -46,6 +46,10 @@ class Phing
     const PHP_VERSION = 'php.version';
     const PHP_INTERPRETER = 'php.interpreter';
 
+    public const PHING_EXECUTOR_REFERENCE = 'phing.executor';
+    public const PHING_EXECUTOR_CLASSNAME = 'phing.executor.class';
+    public const PROJECT_INVOKED_TARGETS = 'phing.project.invoked-targets';
+
     /** Our current message output status. Follows Project::MSG_XXX */
     private static $msgOutputLevel = Project::MSG_INFO;
 

@@ -91,11 +91,6 @@ class Project
     private $keepGoingMode = false;
 
     /**
-     * @var string[]
-     */
-    private $executedTargetNames = [];
-
-    /**
      *  Constructor, sets any default vars.
      */
     public function __construct()
@@ -652,31 +647,66 @@ class Project
     }
 
     /**
+     * Set the Executor instance for this Project.
+     * @param Executor $e the Executor to use.
+     */
+    public function setExecutor(Executor $e)
+    {
+        $this->addReference(Phing::PHING_EXECUTOR_REFERENCE, $e);
+    }
+
+    /**
+     * Get this Project's Executor (setting it if necessary).
+     * @return Executor an Executor instance.
+     * @throws \BuildException
+     */
+    public function getExecutor()
+    {
+        $o = $this->getReference(Phing::PHING_EXECUTOR_REFERENCE);
+        if ($o === null) {
+            $classname = $this->getProperty(Phing::PHING_EXECUTOR_CLASSNAME);
+            if ($classname === null) {
+                $classname = DefaultExecutor::class;
+            }
+            $this->log('Attempting to create object of type ' . $classname, Project::MSG_DEBUG);
+            try {
+                /** @var Executor $o */
+                $o = (new ReflectionClass($classname))->newInstance();
+            } catch (ReflectionException $re) {
+                $this->log($re->getMessage(), Project::MSG_ERR);
+            }
+            if ($o === null) {
+                throw new BuildException('Unable to obtain a Target Executor instance.');
+            }
+            $this->setExecutor($o);
+        }
+        return $o;
+    }
+
+    /**
      * Executes a list of targets
      *
      * @param  array          $targetNames List of target names to execute
      * @return void
      * @throws BuildException
      */
-    public function executeTargets($targetNames)
+    public function executeTargets(array $targetNames)
     {
-        $this->executedTargetNames = $targetNames;
-
-        foreach ($targetNames as $tname) {
-            $this->executeTarget($tname);
-        }
+        $this->setUserProperty(Phing::PROJECT_INVOKED_TARGETS, implode(',', $targetNames));
+        $this->getExecutor()->executeTargets($this, $targetNames);
     }
 
     /**
      * Executes a target
      *
-     * @param  string         $targetName Name of Target to execute
+     * @param  string $targetName Name of Target to execute
      * @return void
      * @throws BuildException
+     * @throws Exception
+     * @throws Throwable
      */
     public function executeTarget($targetName)
     {
-
         // complain about executing void
         if ($targetName === null) {
             throw new BuildException("No target specified");
@@ -684,45 +714,70 @@ class Project
 
         // invoke topological sort of the target tree and run all targets
         // until targetName occurs.
-        $sortedTargets = $this->topoSort($targetName);
+        $this->executeSortedTargets($this->topoSort($targetName));
+    }
 
-        $curIndex = (int) 0;
-        $curTarget = null;
-        $thrownException = null;
+    /**
+     * @param Target[] $sortedTargets
+     * @throws Throwable
+     */
+    public function executeSortedTargets(array $sortedTargets)
+    {
+        $succeededTargets = [];
         $buildException = null;
-        do {
-            try {
-                $curTarget = $sortedTargets[$curIndex++];
-                $curTarget->performTasks();
-            } catch (BuildException $exc) {
-                if (!($this->keepGoingMode)) {
-                    throw $exc;
-                }
-                $thrownException = $exc;
-            }
-            if ($thrownException != null) {
-                if ($thrownException instanceof BuildException) {
+        foreach ($sortedTargets as $curtarget) {
+            $canExecute = true;
+            foreach ($curtarget->getDependencies() as $dependencyName) {
+                if (!in_array($dependencyName, $succeededTargets)) {
+                    $canExecute = false;
                     $this->log(
-                        "Target '" . $curTarget->getName()
-                        . "' failed with message '"
-                        . $thrownException->getMessage() . "'.", Project::MSG_ERR);
-                    // only the first build exception is reported
-                    if ($buildException === null) {
-                        $buildException = $thrownException;
-                    }
-                } else {
-                    $this->log(
-                        "Target '" . $curTarget->getName()
-                        . "' failed with message '"
-                        . $thrownException->getMessage() . "'." . PHP_EOL
-                        . $thrownException->getTraceAsString(), Project::MSG_ERR
+                        "Cannot execute '" . $curtarget->getName() . "' - '"
+                        . $dependencyName . "' failed or was not executed.",
+                        self::MSG_ERR
                     );
-                    if ($buildException === null) {
-                        $buildException = new BuildException($thrownException);
+                    break;
+                }
+            }
+            if ($canExecute) {
+                $thrownException = null;
+                try {
+                    $curtarget->performTasks();
+                    $succeededTargets[] = $curtarget->getName();
+                } catch (RuntimeException $ex) {
+                    if (!$this->keepGoingMode) {
+                        throw $ex; // throw further
+                    }
+                    $thrownException = $ex;
+                } catch (Throwable $ex) {
+                    if (!$this->keepGoingMode) {
+                        throw new BuildException($ex);
+                    }
+                    $thrownException = $ex;
+                }
+                if ($thrownException !== null) {
+                    if ($thrownException instanceof BuildException) {
+                        $this->log(
+                            "Target '" . $curtarget->getName()
+                            . "' failed with message '"
+                            . $thrownException->getMessage() . "'.", Project::MSG_ERR
+                        );
+                        // only the first build exception is reported
+                        if ($buildException === null) {
+                            $buildException = $thrownException;
+                        }
+                    } else {
+                        $this->log(
+                            "Target '" . $curtarget->getName()
+                            . "' failed with message '"
+                            . $thrownException->getMessage() . "'.", Project::MSG_ERR
+                        );
+                        if ($buildException === null) {
+                            $buildException = new BuildException($thrownException);
+                        }
                     }
                 }
             }
-        } while ($curTarget->getName() !== $targetName);
+        }
 
         if ($buildException !== null) {
             throw $buildException;
