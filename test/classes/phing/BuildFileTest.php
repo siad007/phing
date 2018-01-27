@@ -226,6 +226,7 @@ abstract class BuildFileTest extends TestCase
         $this->project = new Project();
         $this->project->init();
         $f = new PhingFile($filename);
+        $this->project->setUserProperty('phing.executor.class', DefaultExecutor::class);
         $this->project->setUserProperty("phing.file", $f->getAbsolutePath());
         $this->project->setUserProperty("phing.dir", dirname($f->getAbsolutePath()));
         $this->project->addBuildListener(new PhingTestListener($this));
