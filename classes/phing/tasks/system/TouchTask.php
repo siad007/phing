@@ -43,6 +43,7 @@ class TouchTask extends Task
      */
     public function __construct()
     {
+        parent::__construct();
         $this->fileUtils = new FileUtils();
     }
 
@@ -104,6 +105,7 @@ class TouchTask extends Task
     /**
      * Execute the touch operation.
      * @throws BuildException
+     * @throws IOException
      */
     public function main()
     {
@@ -143,8 +145,8 @@ class TouchTask extends Task
                 try { // try to create file
                     $this->file->createNewFile($this->mkdirs);
                 } catch (IOException  $ioe) {
-                    throw new BuildException("Error creating new file " . $this->file->__toString(
-                        ), $ioe, $this->getLocation());
+                    throw new BuildException("Error creating new file " . $this->file->__toString(),
+                        $ioe, $this->getLocation());
                 }
             }
         }
