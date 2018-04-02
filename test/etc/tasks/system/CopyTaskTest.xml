@@ -49,10 +49,7 @@
 		<touch file="${tmp.dir}/Test2"/>
 		<mkdir dir="copies"/>
 		<copy todir="copies">
-			<filelist dir="${tmp.dir}">
-				<file name="Test1"/>
-				<file name="Test2"/>
-			</filelist>
+			<filelist dir="${tmp.dir}" files="Test1,Test2"/>
 		</copy>
 		<delete dir="copies"/>
 	</target>
