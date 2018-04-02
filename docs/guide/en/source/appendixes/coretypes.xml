@@ -141,6 +141,17 @@ the large, complex Bar project.
                 be useful if one task compiles a list of files to process and another task needs to
                 read in that list and perform some action to those files.</para>
         </sect2>
+        <sect2 role="nestedtags">
+            <title>Nested tags</title>
+            <para> The tags that are supported by <literal>Filelist</literal> are:</para>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>file</literal></para>
+                </listitem>
+            </itemizedlist>
+            <para>The <literal>&lt;file></literal> tag must have a <literal>name</literal> attribute that contains
+                the file name.</para>
+        </sect2>
     </sect1>
     <sect1 role="typedef" xml:id="FileSet">
         <title>FileSet</title>

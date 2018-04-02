@@ -1,6 +1,5 @@
 <?php
-/*
- *
+/**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -17,9 +16,6 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
-require_once 'phing/types/DataType.php';
-include_once 'phing/system/io/PhingFile.php';
 
 /**
  * FileList represents an explicitly named list of files. FileLists
@@ -118,9 +114,14 @@ class FileList extends DataType
         return $this->dir;
     }
 
+    public function addConfiguredFile(FileName $fileName)
+    {
+        $this->filenames[] = $fileName->getName();
+    }
+
     /**
      * Set the array of files in list.
-     * @param array $filenames
+     * @param string $filenames
      * @throws BuildException
      */
     public function setFiles($filenames)

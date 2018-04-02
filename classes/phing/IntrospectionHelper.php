@@ -95,6 +95,8 @@ class IntrospectionHelper
      */
     private static $helpers = [];
 
+    private $addTypeMethods = [];
+
     /**
      * Factory method for helper objects.
      *
@@ -133,6 +135,11 @@ class IntrospectionHelper
                 // for as long as we're allowed :)  It makes it much
                 // easier to map XML attributes to PHP class method names.
                 $name = strtolower($method->getName());
+
+                if ($name === "add" || $name === "addconfigured") {
+                    $this->insertAddTypeMethod($method);
+                    continue;
+                }
 
                 // There are a few "reserved" names that might look like attribute setters
                 // but should actually just be skipped.  (Note: this means you can't ever
@@ -221,7 +228,7 @@ class IntrospectionHelper
 
                     $this->nestedTypes[$name] = $classname;
 
-                    $this->nestedStorers[$name] = $method;
+                    $this->nestedCreators[$name] = $method;
                 } elseif (strpos($name, "add") === 0) {
 
                     // *must* use class hints if using add ...
@@ -257,6 +264,30 @@ class IntrospectionHelper
                 }
             } // if $method->isPublic()
         } // foreach
+    }
+
+    /**
+     * Inserts an add or addConfigured method into
+     * the addTypeMethods array. The array is
+     * ordered so that the more derived classes
+     * are first.
+     * @param method the <code>Method</code> to insert.
+     */
+    private function insertAddTypeMethod(ReflectionMethod $method)
+    {
+        $param = $method->getParameters();
+
+        $argClass = $param[0]->getClass()->getName();
+        foreach ($this->addTypeMethods as $index => $current) {
+            if ($current->getParameters()[0]->getClass()->getName() == $argClass) {
+                return; // Already present
+            }
+            if (is_a($current->getParameters()[0]->getClass()->getName(), $argClass)) {
+                $this->addTypeMethods[$index] = $method;
+                return; // higher derived
+            }
+        }
+        $this->addTypeMethods[] = $method;
     }
 
     /**
@@ -395,6 +426,7 @@ class IntrospectionHelper
     public function createElement(Project $project, $element, $elementName)
     {
         $addMethod = "add" . strtolower($elementName);
+        $addConfiguredMethod = "addconfigured" . strtolower($elementName);
         $createMethod = "create" . strtolower($elementName);
         $nestedElement = null;
 
@@ -407,6 +439,43 @@ class IntrospectionHelper
                     Project::MSG_DEBUG
                 );
                 $nestedElement = $method->invoke($element);
+            } catch (Exception $exc) {
+                throw new BuildException($exc);
+            }
+        } elseif (isset($this->nestedCreators[$addConfiguredMethod])) {
+            $method = $this->nestedCreators[$addConfiguredMethod];
+
+            // project components must use class hints to support the add methods
+
+            try { // try to invoke the adder method on object
+
+                $project->log(
+                    "    -calling addconfigured adder " . $method->getDeclaringClass()->getName() . "::" . $method->getName() . "()",
+                    Project::MSG_DEBUG
+                );
+                // we've already assured that correct num of params
+                // exist and that method is using class hints
+                $params = $method->getParameters();
+
+                $classname = null;
+
+                if (($hint = $params[0]->getClass()) !== null) {
+                    $classname = $hint->getName();
+                }
+
+                // create a new instance of the object and add it via $addMethod
+                $clazz = new ReflectionClass($classname);
+                if ($clazz->getConstructor() !== null && $clazz->getConstructor()->getNumberOfRequiredParameters() >= 1) {
+                    $nestedElement = new $classname(Phing::getCurrentProject());
+                } else {
+                    $nestedElement = new $classname();
+                }
+
+                if ($nestedElement instanceof Task && $element instanceof Task) {
+                    $nestedElement->setOwningTarget($element->getOwningTarget());
+                }
+
+                $method->invoke($element, $nestedElement);
             } catch (Exception $exc) {
                 throw new BuildException($exc);
             }

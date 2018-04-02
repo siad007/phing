@@ -628,6 +628,13 @@
                     <attribute name="listfile"/>
                 </choice>
             </interleave>
+            <optional>
+                <oneOrMore>
+                    <element name="file">
+                        <attribute name="name"/>
+                    </element>
+                </oneOrMore>
+            </optional>
         </element>
     </define>
 
