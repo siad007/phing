@@ -22,7 +22,7 @@ cache:
   - '%LOCALAPPDATA%\Composer\files'
 
 init:
-  - SET PATH=c:\php\%PHP_VERSION%;%PATH%
+  - SET PATH=c:\php\%PHP_VERSION%;C:\php\pear;%PATH%
 
 install:
   - IF NOT EXIST c:\php mkdir c:\php
