@@ -48,7 +48,7 @@ install:
   - IF NOT EXIST php-installed.txt curl -fsS -o c:\php\%PHP_VERSION%\ext\php_xdebug-%XDEBUG_VERSION%-vc14.dll https://xdebug.org/files/php_xdebug-%XDEBUG_VERSION%-vc14.dll
   - IF NOT EXIST php-installed.txt echo zend_extension=php_xdebug-%XDEBUG_VERSION%-vc14.dll >> php.ini
   - IF NOT EXIST php-installed.txt type nul >> php-installed.txt
-  - IF NOT EXIST c:\php\%PHP_VERSION%\go-pear.phar curl -fsS -o c:\php\%PHP_VERSION%\go-pear.phar https://pear.php.net/go-pear.phar
+  - IF NOT EXIST c:\php\%PHP_VERSION%\go-pear.phar curl -fsS -o c:\php\%PHP_VERSION%\go-pear.phar http://pear.php.net/install-pear-nozlib.phar
   - php c:\php\%PHP_VERSION%\go-pear.phar
   - cd C:\projects\phing
   - composer install --no-interaction --no-ansi --no-progress --no-suggest --optimize-autoloader
