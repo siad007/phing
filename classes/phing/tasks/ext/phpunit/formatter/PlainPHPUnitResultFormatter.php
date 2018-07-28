@@ -154,7 +154,7 @@ class PlainPHPUnitResultFormatter extends PHPUnitResultFormatter
 
         if ($e !== null) {
             if ($e instanceof PHPUnit\Framework\ExceptionWrapper) {
-                $this->inner .= $e->getPreviousWrapped()->getMessage() . "\n";
+                $this->inner .= $e->getPreviousWrapped() !== null ? $e->getPreviousWrapped()->getMessage() : $e->getMessage() . "\n";
             } else {
                 $this->inner .= $e->getMessage() . "\n";
             }
