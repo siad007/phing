@@ -50,6 +50,9 @@ install:
   - IF NOT EXIST php-installed.txt type nul >> php-installed.txt
   - IF NOT EXIST c:\php\%PHP_VERSION%\go-pear.phar curl -fsS -o c:\php\%PHP_VERSION%\go-pear.phar http://pear.php.net/install-pear-nozlib.phar
   - php c:\php\%PHP_VERSION%\go-pear.phar
+  - php c:\php\%PHP_VERSION%\go-pear.phar config-set auto_discover 1
+  - php c:\php\%PHP_VERSION%\go-pear.phar -qq channel-update pear.php.net
+  - php c:\php\%PHP_VERSION%\go-pear.phar -qq channel-discover pear.phing.info
   - cd C:\projects\phing
   - composer install --no-interaction --no-ansi --no-progress --no-suggest --optimize-autoloader
 
