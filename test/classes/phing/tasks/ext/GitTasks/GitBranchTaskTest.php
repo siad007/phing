@@ -21,7 +21,7 @@
 /**
  * @author Victor Farazdagi <simple.square@gmail.com>
  * @package phing.tasks.ext
- * @requires Linux
+ * @requires OS Linux
  */
 class GitBranchTaskTest extends BuildFileTest
 {
