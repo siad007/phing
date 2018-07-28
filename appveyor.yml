@@ -58,4 +58,4 @@ install:
 
 test_script:
   - cd C:\projects\phing\test
-  - ..\bin\phing.bat
+  - ..\bin\phing.bat -debug
