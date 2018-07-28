@@ -20,6 +20,7 @@
 /**
  * @author Siad Ardroumli <siad.ardroumli@gmail.com>
  * @package phing.tasks.ext
+ * @requires OS Linux
  */
 class GitArchiveTaskTest extends BuildFileTest
 {
