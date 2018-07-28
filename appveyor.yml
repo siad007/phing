@@ -43,13 +43,13 @@ install:
   - IF NOT EXIST php-installed.txt echo extension=php_pdo_sqlite.dll >> php.ini
   - IF NOT EXIST php-installed.txt echo zend.assertions=1 >> php.ini
   - IF NOT EXIST php-installed.txt echo assert.exception=On >> php.ini
+  - IF NOT EXIST php-installed.txt echo memory_limit=1024M >> php.ini
   - IF NOT EXIST php-installed.txt curl -fsS -o composer.phar https://getcomposer.org/composer.phar
   - IF NOT EXIST php-installed.txt echo @php %%~dp0composer.phar %%* > composer.bat
   - IF NOT EXIST php-installed.txt curl -fsS -o c:\php\%PHP_VERSION%\ext\php_xdebug-%XDEBUG_VERSION%-vc14.dll https://xdebug.org/files/php_xdebug-%XDEBUG_VERSION%-vc14.dll
   - IF NOT EXIST php-installed.txt echo zend_extension=php_xdebug-%XDEBUG_VERSION%-vc14.dll >> php.ini
   - IF NOT EXIST php-installed.txt type nul >> php-installed.txt
   - IF NOT EXIST c:\php\%PHP_VERSION%\go-pear.phar curl -fsS -o c:\php\%PHP_VERSION%\go-pear.phar http://pear.php.net/install-pear-nozlib.phar
-  - php c:\php\%PHP_VERSION%\go-pear.phar
   - php c:\php\%PHP_VERSION%\go-pear.phar config-set auto_discover 1
   - php c:\php\%PHP_VERSION%\go-pear.phar -qq channel-update pear.php.net
   - php c:\php\%PHP_VERSION%\go-pear.phar -qq channel-discover pear.phing.info
