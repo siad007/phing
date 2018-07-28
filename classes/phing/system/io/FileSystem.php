@@ -344,7 +344,10 @@ abstract class FileSystem
         if ($f->isDirectory()) {
             $this->rmdir($f->getPath(), $recursive);
         } else {
+            $old = getcwd();
+            chdir(dirname($f->getPath()));
             $this->unlink($f->getPath());
+            chdir($old);
         }
     }
 
