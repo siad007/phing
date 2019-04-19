@@ -72,6 +72,23 @@
 		</coverage-setup>
 	</target>
 
+	<target name="exec" hidden="true">
+		<delete dir="tmp"/>
+		<mkdir dir="tmp"/>
+		<adhoc><![CDATA[ @include_once 'PHPUnit/Autoload.php';  ]]></adhoc>
+
+		<phpunit codecoverage="${tests.codecoverage.enabled}" haltonerror="true" haltonfailure="true" printsummary="true"
+				 pharlocation="/usr/local/bin/phpunit"
+				 configuration="phpunit-sparse.xml" bootstrap="../vendor/autoload.php">
+			<formatter type="xml" usefile="true" todir="${tests.reports.dir.resolved}" outfile="test-results.xml" />
+			<formatter type="clover" todir="${tests.reports.dir.resolved}"/>
+			<formatter type="plain" usefile="false"/>
+			<batchtest>
+				<fileset refid="relevant-tests"/>
+			</batchtest>
+		</phpunit>
+	</target>
+
 	<target name="create-report" if="tests.codecoverage" hidden="true">
 		<phpunitreport format="frames" todir="${tests.reports.dir.resolved}/tests"
 					   infile="${tests.reports.dir.resolved}/test-results.xml"
@@ -82,23 +99,7 @@
 		</coverage-report>
 	</target>
 
-	<target name="reports" depends="configure,cc-setup">
-		<delete dir="tmp"/>
-		<mkdir dir="tmp"/>
-		<adhoc><![CDATA[ @include_once 'PHPUnit/Autoload.php';  ]]></adhoc>
-
-		<phpunit codecoverage="${tests.codecoverage.enabled}" haltonerror="true" haltonfailure="true" printsummary="true"
-            pharlocation="/usr/local/bin/phpunit"
-	    	configuration="phpunit-sparse.xml" bootstrap="../vendor/autoload.php">
-			<formatter type="xml" usefile="true" todir="${tests.reports.dir.resolved}" outfile="test-results.xml" />
-            <formatter type="clover" todir="${tests.reports.dir.resolved}"/>
-			<formatter type="plain" usefile="false"/>
-			<batchtest>
-				<fileset refid="relevant-tests"/>
-			</batchtest>
-		</phpunit>
-        <phingcall target="create-report"/>
-	</target>
+	<target name="reports" depends="configure,cc-setup,exec,create-report"/>
 
 	<!-- run the insert-sql target of the build.xml unless we are doing this for one specific test -->
 	<target name="initialize" unless="test">
