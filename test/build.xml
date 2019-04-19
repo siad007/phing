@@ -13,8 +13,8 @@
 	<property name="tests.phpunit.dir" value="."/>
 	<property name="tests.reports.dir" value="${tests.phpunit.dir}/reports"/>
 
-	<condition property="tests.coverage" value="true" else="false">
-		<isset property="tests.coverage"/>
+	<condition property="tests.codecoverage.enabled" value="true" else="false">
+		<isset property="tests.codecoverage"/>
 	</condition>
 
 	<!--
@@ -87,7 +87,7 @@
 		<mkdir dir="tmp"/>
 		<adhoc><![CDATA[ @include_once 'PHPUnit/Autoload.php';  ]]></adhoc>
 
-		<phpunit codecoverage="${tests.codecoverage}" haltonerror="true" haltonfailure="true" printsummary="true"
+		<phpunit codecoverage="${tests.codecoverage.enabled}" haltonerror="true" haltonfailure="true" printsummary="true"
             pharlocation="/usr/local/bin/phpunit"
 	    	configuration="phpunit-sparse.xml" bootstrap="../vendor/autoload.php">
 			<formatter type="xml" usefile="true" todir="${tests.reports.dir.resolved}" outfile="test-results.xml" />
