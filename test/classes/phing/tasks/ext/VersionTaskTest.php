@@ -94,7 +94,7 @@ class VersionTaskTest extends BuildFileTest
     {
         $versionTask = new VersionTask();
         $versionTask->setReleasetype($releaseType);
-        $newVersion = $versionTask->getVersion();
+        $newVersion = $versionTask->getVersion($version);
 
         $this->assertSame($expectedVersion, $newVersion);
     }
