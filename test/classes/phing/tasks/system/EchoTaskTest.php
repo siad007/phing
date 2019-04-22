@@ -60,4 +60,10 @@ class EchoTaskTest extends BuildFileTest
         $this->assertInLogs("foo\n");
         $this->assertInLogs('EchoTest.xml');
     }
+
+    public function testEscapedPropertyExpansion()
+    {
+        $this->executeTarget(__FUNCTION__);
+        $this->assertInLogs('${project.basedir}', Project::MSG_INFO);
+    }
 }

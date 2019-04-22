@@ -44,4 +44,8 @@
             foo
         </echo>
     </target>
+
+    <target name="testEscapedPropertyExpansion">
+        <echo>$${project.basedir} = ${project.basedir}</echo>
+    </target>
 </project>

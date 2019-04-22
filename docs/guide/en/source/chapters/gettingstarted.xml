@@ -331,6 +331,9 @@
                 <programlisting language="xml">&lt;fileset id="sourcefiles" dir="src" includes="**/*.php"/>
 &lt;echo> sourcefiles = ${toString:sourcefiles} &lt;/echo></programlisting>
             </para>
+            <para>Use <literal>$$</literal> for no property expansion.
+                <programlisting language="xml">$lt;echo>$${} = ${}&lt;/echo></programlisting>
+            </para>
             <para>There is no guarantee that external types provide meaningful information in such a situation</para>
 
             <sect3>

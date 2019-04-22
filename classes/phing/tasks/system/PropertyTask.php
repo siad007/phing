@@ -497,72 +497,54 @@ class PropertyTask extends Task
      */
     protected function resolveAllProperties(Properties $props)
     {
-        foreach ($props->keys() as $name) {
-            // There may be a nice regex/callback way to handle this
-            // replacement, but at the moment it is pretty complex, and
-            // would probably be a lot uglier to work into a preg_replace_callback()
-            // system.  The biggest problem is the fact that a resolution may require
-            // multiple passes.
+        foreach ($props->keys() as $propName) {
+            $referencesSeen = [];
+            $this->resolve($props, $propName, $referencesSeen);
+        }
+    }
 
-            $value = $props->getProperty($name);
-            $resolved = false;
-            $resolveStack = [];
+    /**
+     * @param Properties $props
+     * @param string $name
+     * @param array $referencesSeen
+     */
+    private function resolve(Properties $props, string $name, array &$referencesSeen)
+    {
+        if (in_array($name, $referencesSeen)) {
+            throw new BuildException("Property $name was circularly defined.");
+        }
 
-            while (!$resolved) {
-                $fragments = [];
-                $propertyRefs = [];
+        $propertyValue = $props->getProperty($name);
+        $fragments = [];
+        $propertyRefs = [];
+        PropertyHelper::getPropertyHelper(
+            $this->getProject())->parsePropertyString(
+            $propertyValue, $fragments, $propertyRefs);
 
-                PropertyHelper::getPropertyHelper($this->project)->parsePropertyString(
-                    $value,
-                    $fragments,
-                    $propertyRefs
-                );
-
-                $resolved = true;
-                if (count($propertyRefs) === 0) {
-                    continue;
-                }
-
-                $sb = "";
-
-                $j = $propertyRefs;
-
-                foreach ($fragments as $fragment) {
-                    if ($fragment !== null) {
-                        $sb .= $fragment;
-                        continue;
-                    }
-
-                    $propertyName = array_shift($j);
-                    if (in_array($propertyName, $resolveStack)) {
-                        // Should we maybe just log this as an error & move on?
-                        // $this->log("Property ".$name." was circularly defined.", Project::MSG_ERR);
-                        throw new BuildException("Property " . $propertyName . " was circularly defined.");
-                    }
-
+        if (count($propertyRefs) !== 0) {
+            $referencesSeen[] = $name;
+            $sb = '';
+            $j = $propertyRefs;
+            foreach ($fragments as $index => &$fragment) {
+                if ($fragment === null) {
+                    $propertyName = current($j);
+                    next($j);
                     $fragment = $this->getProject()->getProperty($propertyName);
-                    if ($fragment !== null) {
-                        $sb .= $fragment;
-                        continue;
-                    }
-
-                    if ($props->containsKey($propertyName)) {
-                        $fragment = $props->getProperty($propertyName);
-                        if (strpos($fragment, '${') !== false) {
-                            $resolveStack[] = $propertyName;
-                            $resolved = false; // parse again (could have been replaced w/ another var)
+                    if ($fragment === null) {
+                        if ($props->containsKey($propertyName)) {
+                            $this->resolve($props, $propertyName, $referencesSeen);
+                            $fragment = $props->getProperty($propertyName);
+                        } else {
+                            $fragment = '${' . $propertyName . '}';
                         }
-                    } else {
-                        $fragment = "\${" . $propertyName . "}";
                     }
-
-                    $sb .= $fragment;
                 }
-
-                $this->log("Resolved Property \"$value\" to \"$sb\"", Project::MSG_DEBUG);
-                $value = $sb;
-                $props->setProperty($name, $value);
-            } // while (!$resolved)
-        } // while (count($keys)
+                $sb .= $fragment;
+            }
+            unset($fragment);
+            $propertyValue = $sb;
+            $props[$name] = $propertyValue;
+            array_pop($referencesSeen);
+        }
     }
 }

@@ -190,59 +190,46 @@ class PropertyHelper
      */
     public function replaceProperties($ns, $value, $keys)
     {
-        if ($value === null) {
-            return null;
+        if ($value === null || strpos($value, '$') === false) {
+            return $value;
         }
         if ($keys === null) {
             $keys = self::$project->getProperties();
         }
-        // Because we're not doing anything special (like multiple passes),
-        // regex is the simplest / fastest.  PropertyTask, though, uses
-        // the old parsePropertyString() method, since it has more stringent
-        // requirements.
+        $fragments = [];
+        $propertyRefs = [];
+        $this->parsePropertyString($value, $fragments, $propertyRefs);
 
-        $sb = $value;
-        $iteration = 0;
-        // loop to recursively replace tokens
-        while (strpos($sb, '${') !== false) {
-            $sb = preg_replace_callback(
-                '/\$\{([^\$}]+)\}/',
-                function ($matches) use ($keys) {
-                    $propertyName = $matches[1];
+        $sb = '';
 
-                    $replacement = null;
-                    if (array_key_exists($propertyName, $keys)) {
-                        $replacement = $keys[$propertyName];
-                    }
+        foreach ($fragments as $index => &$fragment) {
+            if ($fragment === null) {
+                $propertyName = current($propertyRefs);
+                next($propertyRefs);
+                $replacement = null;
+                if (array_key_exists($propertyName, $keys)) {
+                    $replacement = $keys[$propertyName];
+                }
 
-                    if ($replacement === null) {
-                        $replacement = $this->getProperty(null, $propertyName);
-                    }
+                if ($replacement === null) {
+                    $replacement = $this->getProperty(null, $propertyName);
+                }
 
-                    if ($replacement === null) {
-                        self::$project->log(
-                            'Property ${' . $propertyName . '} has not been set.',
-                            Project::MSG_VERBOSE
-                        );
-
-                        return $matches[0];
-                    }
-
+                if ($replacement === null) {
                     self::$project->log(
-                        'Property ${' . $propertyName . '} => ' . (string) $replacement,
+                        'Property ${' . $propertyName . '} has not been set.',
                         Project::MSG_VERBOSE
                     );
+                }
 
-                    return $replacement;
-                },
-                $sb
-            );
-
-            // keep track of iterations so we can break out of otherwise infinite loops.
-            $iteration++;
-            if ($iteration === 5) {
-                return $sb;
+                $fragment = $replacement !== null ? (string) $replacement : '${' . $propertyName . '}';
+                self::$project->log(
+                    'Property ${' . $propertyName . '} => ' . $replacement,
+                    Project::MSG_VERBOSE
+                );
             }
+
+            $sb .= $fragment;
         }
 
         return $sb;
@@ -538,29 +525,33 @@ class PropertyHelper
     public function parsePropertyString($value, &$fragments, &$propertyRefs)
     {
         $prev = 0;
-        $pos = 0;
 
         while (($pos = strpos($value, '$', $prev)) !== false) {
-            if ($pos > $prev) {
+            if ($pos > 0) {
                 $fragments[] = StringHelper::substring($value, $prev, $pos - 1);
             }
             if ($pos === (strlen($value) - 1)) {
                 $fragments[] = '$';
                 $prev = $pos + 1;
             } elseif ($value{$pos + 1} !== '{') {
-                // the string positions were changed to value-1 to correct
-                // a fatal error coming from function substring()
-                $fragments[] = StringHelper::substring($value, $pos, $pos + 1);
-                $prev = $pos + 2;
+                if ($value{$pos + 1} === '$') {
+                    //backwards compatibility two $ map to one mode
+                    $fragments[] = '$';
+                    $prev = $pos + 2;
+                } else {
+                    //new behaviour: $X maps to $X for all values of X!='$'
+                    $fragments[] = StringHelper::substring($value, $pos, $pos + 2);
+                    $prev = $pos + 3;
+                }
             } else {
-                $endName = strpos($value, '}', $pos);
+                $endName = strpos($value, '}', $pos) - 1;
                 if ($endName === false) {
                     throw new BuildException("Syntax error in property: $value");
                 }
-                $propertyName = StringHelper::substring($value, $pos + 2, $endName - 1);
+                $propertyName = StringHelper::substring($value, $pos + 2, $endName);
                 $fragments[] = null;
                 $propertyRefs[] = $propertyName;
-                $prev = $endName + 1;
+                $prev = $endName + 2;
             }
         }
 
