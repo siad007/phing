@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/system/condition/Condition.php';
-
 /**
  * Condition returns true if selected partition has the requested space, false otherwise.
  *
@@ -31,13 +31,11 @@ class HasFreeSpaceCondition implements Condition
      * @var string $partition
      */
     private $partition;
-
-    /**
+/**
      * @var string $needed
      */
     private $needed;
-
-    /**
+/**
      * {@inheritdoc}
      *
      * @throws BuildException
@@ -47,7 +45,6 @@ class HasFreeSpaceCondition implements Condition
     public function evaluate()
     {
         $this->validate();
-
         $free = disk_free_space($this->partition);
         return $free >= $this->parseHumanSizes($this->needed);
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/system/condition/Condition.php';
-
 /**
  * A simple string comparator.  Compares two strings for eqiality in a
  * binary safe manner. Implements the condition interface specification.
@@ -33,8 +33,7 @@ class EqualsCondition implements Condition
     private $arg2;
     private $trim = false;
     private $caseSensitive = true;
-
-    /**
+/**
      * @param $a1
      */
     public function setArg1($a1)

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
-
 /**
  * Copies a repository from the repository url to another
  *
@@ -28,8 +28,7 @@ require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
 class SvnCopyTask extends SvnBaseTask
 {
     private $message = "";
-
-    /**
+/**
      * Sets the message
      *
      * @param $message
@@ -55,11 +54,8 @@ class SvnCopyTask extends SvnBaseTask
     public function main()
     {
         $this->setup('copy');
-
         $this->log("Copying SVN repository from '" . $this->getRepositoryUrl() . "' to '" . $this->getToDir() . "'");
-
         $options = [];
-
         if (strlen($this->getMessage()) > 0) {
             $options['message'] = $this->getMessage();
         }

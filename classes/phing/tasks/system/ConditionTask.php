@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/system/condition/ConditionBase.php';
-
 /**
  * <condition> task as a generalization of <available>
  *
@@ -38,18 +38,15 @@ class ConditionTask extends ConditionBase
      * @var string $property
      */
     private $property;
-
-    /**
+/**
      * @var string $value
      */
     private $value = "true";
-
-    /**
+/**
      * @var string $alternative
      */
     private $alternative;
-
-    /**
+/**
      * Constructor, names this task "condition".
      */
     public function __construct()
@@ -99,14 +96,10 @@ class ConditionTask extends ConditionBase
     public function main()
     {
         if ($this->countConditions() > 1) {
-            throw new BuildException(
-                "You must not nest more than one condition into <condition>"
-            );
+            throw new BuildException("You must not nest more than one condition into <condition>");
         }
         if ($this->countConditions() < 1) {
-            throw new BuildException(
-                "You must nest a condition into <condition>"
-            );
+            throw new BuildException("You must nest a condition into <condition>");
         }
         if ($this->property === null) {
             throw new BuildException('The property attribute is required.');

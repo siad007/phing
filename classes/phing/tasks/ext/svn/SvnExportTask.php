@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
-
 /**
  * Exports/checks out a repository to a local directory
  * with authentication
@@ -38,8 +38,7 @@ class SvnExportTask extends SvnBaseTask
      * @var string
      */
     private $revision = 'HEAD';
-
-    /**
+/**
      * The main entry point
      *
      * @throws BuildException
@@ -47,11 +46,8 @@ class SvnExportTask extends SvnBaseTask
     public function main()
     {
         $this->setup('export');
-
         $this->log("Exporting SVN repository to '" . $this->getToDir() . "'");
-
         $switches = [];
-
         if (!empty($this->revision)) {
             $switches['r'] = $this->revision;
         }

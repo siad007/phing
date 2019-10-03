@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/system/io/PhingFile.php';
-
 /**
  * Analyzer element for the PhpDependTask
  *
@@ -34,15 +34,13 @@ class PhpDependAnalyzerElement
      * @var string
      */
     protected $type = '';
-
-    /**
+/**
      * The value(s) for the analyzer option
      *
      * @var array
      */
     protected $value = [];
-
-    /**
+/**
      * Sets the analyzer type
      *
      * @param string $type Type of the analyzer
@@ -52,11 +50,9 @@ class PhpDependAnalyzerElement
     public function setType($type)
     {
         $this->type = $type;
-
         switch ($this->type) {
             case 'coderank-mode':
                 break;
-
             default:
                 throw new BuildException('Analyzer "' . $this->type . '" not implemented');
         }
@@ -80,10 +76,8 @@ class PhpDependAnalyzerElement
     public function setValue($value)
     {
         $this->value = [];
-
         $token = ' ,;';
         $values = strtok($value, $token);
-
         while ($values !== false) {
             $this->value[] = $values;
             $values = strtok($token);

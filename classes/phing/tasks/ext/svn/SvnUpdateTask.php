@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
-
 /**
  * Updates a repository in local directory
  *
@@ -36,8 +36,7 @@ class SvnUpdateTask extends SvnBaseTask
      * @var string
      */
     private $revision = 'HEAD';
-
-    /**
+/**
      * The main entry point
      *
      * @throws BuildException
@@ -45,16 +44,11 @@ class SvnUpdateTask extends SvnBaseTask
     public function main()
     {
         $this->setup('update');
-
-        $this->log(
-            "Updating SVN repository at '" . $this->getToDir() . "'" . ($this->revision == 'HEAD' ? '' : " (revision: {$this->revision})")
-        );
-
-        // revision
+        $this->log("Updating SVN repository at '" . $this->getToDir() . "'" . ($this->revision == 'HEAD' ? '' : " (revision: {$this->revision})"));
+// revision
         $switches = [
             'r' => $this->revision,
         ];
-
         $this->run([$this->getToDir()], $switches);
     }
 

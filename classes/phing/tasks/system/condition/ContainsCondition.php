@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/system/condition/Condition.php';
-
 /**
  * Is one string part of another string?
  *
@@ -31,8 +31,7 @@ class ContainsCondition implements Condition
     private $string;
     private $subString;
     private $caseSensitive = true;
-
-    /**
+/**
      * The string to search in.
      *
      * @param string $a1
@@ -70,10 +69,8 @@ class ContainsCondition implements Condition
     public function evaluate()
     {
         if ($this->string === null || $this->subString === null) {
-            throw new BuildException(
-                "both string and substring are required "
-                . "in contains"
-            );
+            throw new BuildException("both string and substring are required "
+                . "in contains");
         }
 
         return $this->caseSensitive

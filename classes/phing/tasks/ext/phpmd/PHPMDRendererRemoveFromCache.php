@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,10 +19,8 @@
  */
 
 require_once 'phing/util/DataStore.php';
-
 use PHPMD\AbstractRenderer;
 use PHPMD\Report;
-
 /**
  * This class will remove files with violations from cache
  *
@@ -37,8 +36,7 @@ class PHPMDRendererRemoveFromCache extends AbstractRenderer
      * @var DataStore
      */
     protected $cache;
-
-    /**
+/**
      * Constructor
      *
      * @param DataStore $cache

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * INI file modification task for Phing, the PHP build tool.
  *
@@ -17,7 +18,6 @@ require_once 'IniFileGet.php';
 require_once 'IniFileSet.php';
 require_once 'IniFileRemove.php';
 require_once 'IniFileConfig.php';
-
 /**
  * InifileTask
  *
@@ -35,64 +35,55 @@ class IniFileTask extends Task
      * @var string|null
      */
     protected $source = null;
-
-    /**
+/**
      * Dest file
      *
      * @var string|null
      */
     protected $dest = null;
-
-    /**
+/**
      * Whether to halt phing on error.
      *
      * @var bool
      */
     protected $haltonerror = false;
-
-    /**
+/**
      * Gets
      *
      * @var array
      */
     protected $gets = [];
-
-    /**
+/**
      * Sets
      *
      * @var array
      */
     protected $sets = [];
-
-    /**
+/**
      * Removals
      *
      * @var array
      */
     protected $removals = [];
-
-    /**
+/**
      * IniFileConfig instance
      *
      * @var IniFileConfig
      */
     protected $ini = null;
-
-    /**
+/**
      * Taskname for logger
      *
      * @var string
      */
     protected $taskName = 'IniFile';
-
-    /**
+/**
      * Verbose
      *
      * @var bool
      */
     protected $verbose = false;
-
-    /**
+/**
      * Check file to be read from
      *
      * @param string $readFile Filename
@@ -155,7 +146,6 @@ class IniFileTask extends Task
         $this->ini = new IniFileConfig();
         $readFile = null;
         $writeFile = null;
-
         if (null !== $this->source && null === $this->dest) {
             $readFile = $this->source;
         } elseif (null !== $this->dest && null === $this->source) {
@@ -192,7 +182,6 @@ class IniFileTask extends Task
         $this->enumerateGets();
         $this->enumerateSets();
         $this->enumerateRemoves();
-
         if (count($this->sets) || count($this->removals)) {
             try {
                 $this->ini->write($writeFile);
@@ -219,7 +208,6 @@ class IniFileTask extends Task
             $property = $get->getProperty();
             $section = $get->getSection();
             $value = '';
-
             if ($property === null) {
                 throw new BuildException("property must be set");
             }
@@ -232,14 +220,7 @@ class IniFileTask extends Task
             try {
                 $value = $this->ini->get($section, $property);
             } catch (RuntimeException $ex) {
-                $this->logDebugOrMore(
-                    sprintf(
-                        '%s: section = %s; key = %s',
-                        $ex->getMessage(),
-                        $section,
-                        $property
-                    )
-                );
+                $this->logDebugOrMore(sprintf('%s: section = %s; key = %s', $ex->getMessage(), $section, $property));
             } finally {
                 if ($value === '') {
                     $value = $get->getDefault();
@@ -248,15 +229,7 @@ class IniFileTask extends Task
 
             $project = $this->getProject();
             $project->setProperty($outProperty, $value);
-            $this->logDebugOrMore(
-                sprintf(
-                    'Set property %s to value \'%s\' read from key %s in section %s',
-                    $outProperty,
-                    $value,
-                    $property,
-                    $section
-                )
-            );
+            $this->logDebugOrMore(sprintf('Set property %s to value \'%s\' read from key %s in section %s', $outProperty, $value, $property, $section));
         }
     }
 
@@ -277,25 +250,20 @@ class IniFileTask extends Task
                     $this->ini->set($section, $key, $value);
                     $this->logDebugOrMore("[$section] $key set to $value");
                 } catch (Exception $ex) {
-                    $this->log(
-                        "Error setting value for section '" . $section .
-                        "', key '" . $key . "'",
-                        Project::MSG_ERR
-                    );
+                    $this->log("Error setting value for section '" . $section .
+                    "', key '" . $key . "'", Project::MSG_ERR);
                     $this->logDebugOrMore($ex->getMessage());
                 }
             } elseif ($operation !== null) {
                 $v = $this->ini->get($section, $key);
-                // value might be wrapped in quotes with a semicolon at the end
+            // value might be wrapped in quotes with a semicolon at the end
                 if (!is_numeric($v)) {
                     if (preg_match('/^"(\d*)";?$/', $v, $match)) {
                         $v = $match[1];
                     } elseif (preg_match("/^'(\d*)';?$/", $v, $match)) {
                         $v = $match[1];
                     } else {
-                        $this->log(
-                            "Value $v is not numeric. Skipping $operation operation."
-                        );
+                        $this->log("Value $v is not numeric. Skipping $operation operation.");
                         continue;
                     }
                 }
@@ -316,17 +284,12 @@ class IniFileTask extends Task
                     $this->ini->set($section, $key, $v);
                     $this->logDebugOrMore("[$section] $key set to $v");
                 } catch (Exception $ex) {
-                    $this->log(
-                        "Error setting value for section '" . $section .
-                        "', key '" . $key . "'"
-                    );
+                    $this->log("Error setting value for section '" . $section .
+                                "', key '" . $key . "'");
                     $this->logDebugOrMore($ex->getMessage());
                 }
             } else {
-                $this->log(
-                    "Set: value and operation are both not set",
-                    Project::MSG_ERR
-                );
+                $this->log("Set: value and operation are both not set", Project::MSG_ERR);
             }
         }
     }
@@ -342,17 +305,12 @@ class IniFileTask extends Task
             $key = $remove->getProperty();
             $section = $remove->getSection();
             if ($section == '') {
-                $this->log(
-                    "Remove: section must be set",
-                    Project::MSG_ERR
-                );
+                $this->log("Remove: section must be set", Project::MSG_ERR);
                 continue;
             }
             $this->ini->remove($section, $key);
             if (($section != '') && ($key != '')) {
-                $this->logDebugOrMore(
-                    "$key in section [$section] has been removed."
-                );
+                $this->logDebugOrMore("$key in section [$section] has been removed.");
             } elseif (($section != '') && ($key == '')) {
                 $this->logDebugOrMore("[$section] has been removed.");
             }

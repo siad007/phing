@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/phk/PhkPackageWebAccessPath.php';
-
 /**
  * @author Alexey Shockov <alexey@shockov.com>
  * @package phing.tasks.ext.phk
@@ -29,8 +29,7 @@ class PhkPackageWebAccess
      * @var array
      */
     private $paths = [];
-
-    /**
+/**
      * @return PhkPackageWebAccessPath
      */
     public function createPath()
@@ -47,7 +46,6 @@ class PhkPackageWebAccess
          * Get real paths...
          */
         $paths = [];
-
         foreach ($this->paths as $path) {
             $paths[] = $path->getPath();
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,7 +20,6 @@
 
 require_once 'phing/system/io/PhingFile.php';
 require_once 'phing/tasks/ext/pdo/PDOResultFormatter.php';
-
 /**
  * XML formatter for PDO results.
  *
@@ -52,25 +52,21 @@ class XMLPDOResultFormatter extends PDOResultFormatter
      * @var DOMDocument
      */
     private $doc;
-
-    /**
+/**
      * @var DOMElement
      */
     private $rootNode;
-
-    /**
+/**
      * XML document encoding
      *
      * @var string
      */
     private $encoding;
-
-    /**
+/**
      * @var boolean
      */
     private $formatOutput = true;
-
-    /**
+/**
      * Set the DOM document encoding.
      *
      * @param string $v
@@ -105,11 +101,9 @@ class XMLPDOResultFormatter extends PDOResultFormatter
     {
         $rowNode = $this->doc->createElement('row');
         $this->rootNode->appendChild($rowNode);
-
         foreach ($row as $columnName => $columnValue) {
             $colNode = $this->doc->createElement('column');
             $colNode->setAttribute('name', $columnName);
-
             if ($columnValue != null) {
                 $columnValue = trim($columnValue);
                 $colNode->nodeValue = $columnValue;

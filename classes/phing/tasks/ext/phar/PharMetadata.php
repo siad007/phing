@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/phar/PharMetadataElement.php';
-
 /**
  * @package phing.tasks.ext.phar
  * @author Alexey Shockov <alexey@shockov.com>
@@ -30,8 +30,7 @@ class PharMetadata
      * @var array
      */
     protected $elements = [];
-
-    /**
+/**
      * @return PharMetadataElement
      */
     public function createElement()
@@ -45,7 +44,6 @@ class PharMetadata
     public function toArray()
     {
         $metadata = [];
-
         foreach ($this->elements as $element) {
             $metadata[$element->getName()] = $element->toArray();
         }

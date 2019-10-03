@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/system/io/PhingFile.php';
-
 /**
  * Abstract
  *
@@ -34,8 +34,7 @@ abstract class PDOResultFormatter
      * @var Writer
      */
     protected $out;
-
-    /**
+/**
      * Sets the output writer.
      *
      * @param Writer $out
@@ -61,8 +60,7 @@ abstract class PDOResultFormatter
      * @return string
      */
     abstract public function getPreferredOutfile();
-
-    /**
+/**
      * Perform any initialization.
      */
     public function initialize()
@@ -75,8 +73,7 @@ abstract class PDOResultFormatter
      * @param array $row Row of PDO result set.
      */
     abstract public function processRow($row);
-
-    /**
+/**
      * Perform any final tasks and Close the writer.
      */
     public function close()

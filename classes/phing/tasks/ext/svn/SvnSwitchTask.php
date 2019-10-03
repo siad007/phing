@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
-
 /**
  * Switches a repository at a given local directory to a different location
  *
@@ -36,8 +36,7 @@ class SvnSwitchTask extends SvnBaseTask
      * @var string
      */
     private $revision = 'HEAD';
-
-    /**
+/**
      * The main entry point
      *
      * @throws BuildException
@@ -45,17 +44,12 @@ class SvnSwitchTask extends SvnBaseTask
     public function main()
     {
         $this->setup('switch');
-
-        $this->log(
-            "Switching SVN repository at '" . $this->getToDir() . "' to '" . $this->getRepositoryUrl() . "' "
-            . ($this->getRevision() == 'HEAD' ? '' : " (revision: {$this->getRevision()})")
-        );
-
-        // revision
+        $this->log("Switching SVN repository at '" . $this->getToDir() . "' to '" . $this->getRepositoryUrl() . "' "
+            . ($this->getRevision() == 'HEAD' ? '' : " (revision: {$this->getRevision()})"));
+// revision
         $switches = [
             'r' => $this->getRevision(),
         ];
-
         $this->run([$this->getToDir()], $switches);
     }
 

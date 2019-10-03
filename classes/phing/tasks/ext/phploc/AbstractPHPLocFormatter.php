@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/system/io/PhingFile.php';
-
 /**
  * @author Michiel Rook <mrook@php.net>
  * @package phing.tasks.ext.phploc
@@ -31,23 +31,19 @@ abstract class AbstractPHPLocFormatter
      * @return mixed
      */
     abstract public function printResult(array $count, $countTests = false);
-
-    /**
+/**
      * @var bool
      */
     protected $useFile = true;
-
-    /**
+/**
      * @var string
      */
     protected $toDir = ".";
-
-    /**
+/**
      * @var string
      */
     protected $outfile = "";
-
-    /**
+/**
      * Sets whether to store formatting results in a file
      *
      * @param $useFile

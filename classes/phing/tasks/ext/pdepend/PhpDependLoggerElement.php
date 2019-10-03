@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/system/io/PhingFile.php';
-
 /**
  * Logger element for the PhpDependTask.
  *
@@ -34,15 +34,13 @@ class PhpDependLoggerElement
      * @var string
      */
     protected $type = '';
-
-    /**
+/**
      * Output file for logger.
      *
      * @var PhingFile
      */
     protected $outfile = null;
-
-    /**
+/**
      * Sets the logger type.
      *
      * @param string $type Type of the logger
@@ -52,7 +50,6 @@ class PhpDependLoggerElement
     public function setType($type)
     {
         $this->type = $type;
-
         switch ($this->type) {
             case 'jdepend-chart':
             case 'jdepend-xml':
@@ -60,7 +57,6 @@ class PhpDependLoggerElement
             case 'phpunit-xml':
             case 'summary-xml':
                 break;
-
             default:
                 throw new BuildException('Logger "' . $this->type . '" not implemented');
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
-
 /**
  * Commits changes in a local working copy to the repository
  *
@@ -32,14 +32,12 @@ class SvnCommitTask extends SvnBaseTask
      * Commit message
      */
     private $message = '';
-
-    /**
+/**
      * Property name where we store the revision number of the just
      * committed version.
      */
     private $propertyName = "svn.committedrevision";
-
-    /**
+/**
      * Sets the commit message
      *
      * @param $message
@@ -87,22 +85,17 @@ class SvnCommitTask extends SvnBaseTask
         }
 
         $this->setup('commit');
-
-        $this->log(
-            "Committing SVN working copy at '" . $this->getWorkingCopy() . "' with message '" . $this->getMessage() . "'"
-        );
-
+        $this->log("Committing SVN working copy at '" . $this->getWorkingCopy() . "' with message '" . $this->getMessage() . "'");
         $output = $this->run([], ['message' => $this->getMessage()]);
-
         if (preg_match('/[\s]*Committed revision[\s]+([\d]+)/', $output, $matches)) {
             $this->project->setProperty($this->getPropertyName(), $matches[1]);
         } else {
-            /**
-             * If no new revision was committed set revision to "empty". Remember that
-             * this is not necessarily an error. It could be that the specified working
-             * copy is identical to the copy in the repository and in that case
-             * there will be no update and no new revision number.
-             */
+        /**
+                     * If no new revision was committed set revision to "empty". Remember that
+                     * this is not necessarily an error. It could be that the specified working
+                     * copy is identical to the copy in the repository and in that case
+                     * there will be no update and no new revision number.
+                     */
             $this->project->setProperty($this->getPropertyName(), '');
         }
     }

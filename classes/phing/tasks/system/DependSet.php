@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/system/MatchingTask.php';
-
 /**
  * Examines and removes out of date target files.  If any of the target files
  * are out of date with respect to any of the source files, all target
@@ -58,23 +58,19 @@ class DependSet extends MatchingTask
      * @var FileSet[] $sourceFileSets
      */
     private $sourceFileSets = [];
-
-    /**
+/**
      * @var FileList[] $sourceFileLists
      */
     private $sourceFileLists = [];
-
-    /**
+/**
      * @var FileSet[] $targetFileSets
      */
     private $targetFileSets = [];
-
-    /**
+/**
      * @var FileList[] $targetFileLists
      */
     private $targetFileLists = [];
-
-    /**
+/**
      * Add a set of source files.
      *
      * @param FileSet $fs the FileSet to add.
@@ -122,19 +118,15 @@ class DependSet extends MatchingTask
     public function main()
     {
         if ((count($this->sourceFileSets) === 0) && (count($this->sourceFileLists) === 0)) {
-            throw new BuildException(
-                'At least one <srcfileset> or <srcfilelist>'
-                . ' element must be set'
-            );
+            throw new BuildException('At least one <srcfileset> or <srcfilelist>'
+                . ' element must be set');
         }
         if ((count($this->targetFileSets) === 0) && (count($this->targetFileLists) === 0)) {
-            throw new BuildException(
-                'At least one <targetfileset> or'
-                . ' <targetfilelist> element must be set'
-            );
+            throw new BuildException('At least one <targetfileset> or'
+                . ' <targetfilelist> element must be set');
         }
         $now = (new DateTime())->getTimestamp();
-        /*
+/*
           We have to munge the time to allow for the filesystem time
           granularity.
         */
@@ -146,23 +138,19 @@ class DependSet extends MatchingTask
         $oldestTarget = null;
         foreach ($this->targetFileSets as $targetFS) {
             if (!$targetFS->getDir($this->getProject())->exists()) {
-                // this is the same as if it was empty, no target files found
+        // this is the same as if it was empty, no target files found
                 continue;
             }
             $targetDS = $targetFS->getDirectoryScanner($this->getProject());
             $targetFiles = $targetDS->getIncludedFiles();
-
             foreach ($targetFiles as $targetFile) {
                 $dest = new PhingFile($targetFS->getDir($this->getProject()), $targetFile);
                 $allTargets[] = $dest;
-
                 if ($dest->lastModified() > $now) {
-                    $this->log(
-                        'Warning: ' . $targetFile . ' modified in the future.',
-                        Project::MSG_WARN
-                    );
+                    $this->log('Warning: ' . $targetFile . ' modified in the future.', Project::MSG_WARN);
                 }
-                if ($oldestTarget === null
+                if (
+                    $oldestTarget === null
                     || $dest->lastModified() < $oldestTargetTime
                 ) {
                     $oldestTargetTime = $dest->lastModified();
@@ -174,7 +162,6 @@ class DependSet extends MatchingTask
         $upToDate = true;
         foreach ($this->targetFileLists as $targetFL) {
             $targetFiles = $targetFL->getFiles($this->getProject());
-
             foreach ($targetFiles as $targetFile) {
                 $dest = new PhingFile($targetFL->getDir($this->getProject()), $targetFile);
                 if (!$dest->exists()) {
@@ -185,12 +172,10 @@ class DependSet extends MatchingTask
 
                 $allTargets[] = $dest;
                 if ($dest->lastModified() > $now) {
-                    $this->log(
-                        'Warning: ' . $targetFile . ' modified in the future.',
-                        Project::MSG_WARN
-                    );
+                    $this->log('Warning: ' . $targetFile . ' modified in the future.', Project::MSG_WARN);
                 }
-                if ($oldestTarget === null
+                if (
+                    $oldestTarget === null
                     || $dest->lastModified() < $oldestTargetTime
                 ) {
                     $oldestTargetTime = $dest->lastModified();
@@ -201,7 +186,7 @@ class DependSet extends MatchingTask
         if ($oldestTarget !== null) {
             $this->log($oldestTarget . ' is oldest target file', Project::MSG_VERBOSE);
         } else {
-            // no target files, then we cannot remove any target files and
+        // no target files, then we cannot remove any target files and
             // skip the following tests right away
             $upToDate = false;
         }
@@ -209,32 +194,21 @@ class DependSet extends MatchingTask
         if ($upToDate) {
             foreach ($this->sourceFileLists as $sourceFL) {
                 $sourceFiles = $sourceFL->getFiles($this->getProject());
-
                 foreach ($sourceFiles as $sourceFile) {
                     $src = new PhingFile($sourceFL->getDir($this->getProject()), $sourceFile);
-
                     if ($src->lastModified() > $now) {
-                        $this->log(
-                            'Warning: ' . $sourceFile
-                            . ' modified in the future.',
-                            Project::MSG_WARN
-                        );
+                            $this->log('Warning: ' . $sourceFile
+                            . ' modified in the future.', Project::MSG_WARN);
                     }
                     if (!$src->exists()) {
-                        $this->log(
-                            $sourceFile . ' does not exist.',
-                            Project::MSG_VERBOSE
-                        );
+                        $this->log($sourceFile . ' does not exist.', Project::MSG_VERBOSE);
                         $upToDate = false;
                         break 2;
                     }
                     if ($src->lastModified() > $oldestTargetTime) {
                         $upToDate = false;
-                        $this->log(
-                            $oldestTarget . ' is out of date with respect to '
-                            . $sourceFile,
-                            Project::MSG_VERBOSE
-                        );
+                        $this->log($oldestTarget . ' is out of date with respect to '
+                        . $sourceFile, Project::MSG_VERBOSE);
                         break 2;
                     }
                 }
@@ -245,24 +219,16 @@ class DependSet extends MatchingTask
             foreach ($this->sourceFileSets as $sourceFS) {
                 $sourceDS = $sourceFS->getDirectoryScanner($this->getProject());
                 $sourceFiles = $sourceDS->getIncludedFiles();
-
                 foreach ($sourceFiles as $sourceFile) {
                     $src = new PhingFile($sourceFS->getDir($this->getProject()), $sourceFile);
-
                     if ($src->lastModified() > $now) {
-                        $this->log(
-                            'Warning: ' . $sourceFile
-                            . ' modified in the future.',
-                            Project::MSG_WARN
-                        );
+                            $this->log('Warning: ' . $sourceFile
+                            . ' modified in the future.', Project::MSG_WARN);
                     }
                     if ($src->lastModified() > $oldestTargetTime) {
                         $upToDate = false;
-                        $this->log(
-                            $oldestTarget . ' is out of date with respect to '
-                            . $sourceFile,
-                            Project::MSG_VERBOSE
-                        );
+                        $this->log($oldestTarget . ' is out of date with respect to '
+                        . $sourceFile, Project::MSG_VERBOSE);
                         break 2;
                     }
                 }
@@ -271,10 +237,7 @@ class DependSet extends MatchingTask
         if (!$upToDate) {
             $this->log('Deleting all target files. ', Project::MSG_VERBOSE);
             foreach ($allTargets as $fileToRemove) {
-                $this->log(
-                    'Deleting file ' . $fileToRemove->getAbsolutePath(),
-                    Project::MSG_VERBOSE
-                );
+                $this->log('Deleting file ' . $fileToRemove->getAbsolutePath(), Project::MSG_VERBOSE);
                 $fileToRemove->delete();
             }
         }

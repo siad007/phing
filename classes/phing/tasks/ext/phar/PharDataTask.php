@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/system/MatchingTask.php';
-
 /**
  * Data task for {@link http://php.net/manual/en/class.phardata.php PharData class}.
  *
@@ -31,25 +31,21 @@ class PharDataTask extends MatchingTask
      * @var PhingFile
      */
     private $destinationFile;
-
-    /**
+/**
      * @var int
      */
     private $compression = Phar::NONE;
-
-    /**
+/**
      * Base directory, from where local package paths will be calculated.
      *
      * @var PhingFile
      */
     private $baseDirectory;
-
-    /**
+/**
      * @var FileSet[]
      */
     private $filesets = [];
-
-    /**
+/**
      * @return FileSet
      */
     public function createFileSet()
@@ -71,10 +67,12 @@ class PharDataTask extends MatchingTask
          */
         switch ($compression) {
             case 'gzip':
-                $this->compression = Phar::GZ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $this->compression = Phar::GZ;
+
                 break;
             case 'bzip2':
-                $this->compression = Phar::BZ2;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $this->compression = Phar::BZ2;
+
                 break;
             default:
                 break;
@@ -108,16 +106,11 @@ class PharDataTask extends MatchingTask
     public function main()
     {
         $this->checkPreconditions();
-
         try {
-            $this->log(
-                'Building archive: ' . $this->destinationFile->__toString(),
-                Project::MSG_INFO
-            );
-
-            /**
-             * Delete old archive, if exists.
-             */
+            $this->log('Building archive: ' . $this->destinationFile->__toString(), Project::MSG_INFO);
+        /**
+                     * Delete old archive, if exists.
+                     */
             if ($this->destinationFile->exists()) {
                 $isDeleted = $this->destinationFile->delete();
                 if (!$isDeleted) {
@@ -126,13 +119,8 @@ class PharDataTask extends MatchingTask
             }
 
             $pharData = new PharData($this->baseDirectory->getPath() . '/' . $this->destinationFile->getName());
-
             foreach ($this->filesets as $fileset) {
-                $this->log(
-                    'Adding specified files in ' . $fileset->getDir($this->project) . ' to archive',
-                    Project::MSG_VERBOSE
-                );
-
+                $this->log('Adding specified files in ' . $fileset->getDir($this->project) . ' to archive', Project::MSG_VERBOSE);
                 $pharData->buildFromIterator($fileset->getIterator(), $fileset->getDir($this->project));
             }
 
@@ -146,11 +134,7 @@ class PharDataTask extends MatchingTask
                 unset($pharData);
             }
         } catch (Exception $e) {
-            throw new BuildException(
-                'Problem creating archive: ' . $e->getMessage(),
-                $e,
-                $this->getLocation()
-            );
+            throw new BuildException('Problem creating archive: ' . $e->getMessage(), $e, $this->getLocation());
         }
     }
 
@@ -160,9 +144,7 @@ class PharDataTask extends MatchingTask
     private function checkPreconditions()
     {
         if (!extension_loaded('phar')) {
-            throw new BuildException(
-                "PharDataTask require either PHP 5.3 or better or the PECL's Phar extension"
-            );
+            throw new BuildException("PharDataTask require either PHP 5.3 or better or the PECL's Phar extension");
         }
 
         if (null === $this->destinationFile) {
@@ -182,10 +164,7 @@ class PharDataTask extends MatchingTask
         }
 
         if (!$this->baseDirectory->exists()) {
-            throw new BuildException(
-                "basedir '" . (string) $this->baseDirectory . "' does not exist!",
-                $this->getLocation()
-            );
+            throw new BuildException("basedir '" . (string) $this->baseDirectory . "' does not exist!", $this->getLocation());
         }
     }
 }

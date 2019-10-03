@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/types/Reference.php';
-
 /**
  * Handles PDO configuration needed by SQL type tasks.
  *
@@ -32,28 +32,23 @@ require_once 'phing/types/Reference.php';
 abstract class PDOTask extends Task
 {
     private $caching = true;
-
-    /**
+/**
      * Autocommit flag. Default value is false
      */
     private $autocommit = false;
-
-    /**
+/**
      * DB url.
      */
     private $url;
-
-    /**
+/**
      * User name.
      */
     private $userId;
-
-    /**
+/**
      * Password
      */
     private $password;
-
-    /**
+/**
      * Initialize the PDOTask
      * This method checks if the PDO classes are available and triggers
      * appropriate error if they cannot be found.  This is not done in header
@@ -124,10 +119,8 @@ abstract class PDOTask extends Task
 
         try {
             $this->log("Connecting to " . $this->getUrl(), Project::MSG_VERBOSE);
-
             $user = null;
             $pass = null;
-
             if ($this->userId) {
                 $user = $this->getUserId();
             }
@@ -138,14 +131,10 @@ abstract class PDOTask extends Task
 
             $conn = new PDO($this->getUrl(), $user, $pass);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
             try {
                 $conn->setAttribute(PDO::ATTR_AUTOCOMMIT, $this->autocommit);
             } catch (PDOException $pe) {
-                $this->log(
-                    "Unable to enable auto-commit for this database: " . $pe->getMessage(),
-                    Project::MSG_VERBOSE
-                );
+                $this->log("Unable to enable auto-commit for this database: " . $pe->getMessage(), Project::MSG_VERBOSE);
             }
 
             return $conn;

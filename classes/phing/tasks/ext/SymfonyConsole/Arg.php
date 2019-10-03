@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once "phing/types/DataType.php";
-
 /**
  * Implementation of console argument
  *
@@ -31,8 +31,7 @@ class Arg extends DataType
     private $name = null;
     private $value = null;
     private $quotes = false;
-
-    /**
+/**
      * Gets the argument name
      *
      * @return String
@@ -103,7 +102,6 @@ class Arg extends DataType
         $name = "";
         $value = "";
         $quote = $this->getQuotes() ? '"' : '';
-
         if (null !== $this->getValue()) {
             $value = $quote . $this->getValue() . $quote;
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/TaskContainer.php';
-
 /**
  * Sequential is a container task that contains other Phing Task objects.
  *
@@ -36,8 +36,7 @@ class SequentialTask extends Task implements TaskContainer
      * Optional Vector holding the nested tasks
      */
     protected $nestedTasks = [];
-
-    /**
+/**
      * Add a nested task to Sequential.
      *
      * @param Task $nestedTask Nested task to execute Sequential

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/liquibase/AbstractLiquibaseTask.php';
-
 /**
  * Task for running liquibase commands that doesn't have their own
  * commands yet.
@@ -36,8 +36,7 @@ class LiquibaseTask extends AbstractLiquibaseTask
      * What liquibase command you wish to run.
      */
     private $command;
-
-    /**
+/**
      * @param $command
      */
     public function setCommand($command)
@@ -48,7 +47,6 @@ class LiquibaseTask extends AbstractLiquibaseTask
     protected function checkParams()
     {
         parent::checkParams();
-
         if (null === $this->command) {
             throw new BuildException('Please provide a liquibase command.');
         }

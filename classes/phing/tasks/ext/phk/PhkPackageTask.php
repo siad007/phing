@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/phk/PhkPackageWebAccess.php';
-
 /**
  * See {@link http://phk.tekwire.net/} for more information about PHK.
  *
@@ -31,28 +31,27 @@ class PhkPackageTask extends Task
      * @var string
      */
     private $outputFile;
-    /**
+/**
      * @var string
      */
     private $inputDirectory;
-    /**
+/**
      * @var string
      */
     private $phkCreatorPath;
-    /**
+/**
      * @var PhkPackageWebAccess
      */
     private $webAccess;
-    /**
+/**
      * @var array
      */
     private $modifiers = [];
-    /**
+/**
      * @var array
      */
     private $options = [];
-
-    /**
+/**
      * @return PhkPackageWebAccess
      */
     public function createWebAccess()
@@ -204,16 +203,13 @@ class PhkPackageTask extends Task
         }
 
         include_once $this->phkCreatorPath;
-
         $mountPoint = PHK_Mgr::mount($this->outputFile, PHK::F_CREATOR);
         $phkManager = PHK_Mgr::instance($mountPoint);
-
-        /*
+/*
          * Add files.
          */
         $phkManager->ftree()->merge_file_tree('/', $this->inputDirectory, $this->modifiers);
-
-        /*
+/*
          * Add web_access to options, if present.
          */
         if (null !== $this->webAccess) {
@@ -224,22 +220,21 @@ class PhkPackageTask extends Task
         }
 
         $phkManager->set_options($this->options);
-
-        /*
+/*
          * Intercept output (in PHP we can't intercept stream).
          */
         ob_start();
-        /*
+/*
          * Create file...
          */
         $phkManager->dump();
-        /*
+/*
          * Print with Phing log...
          */
         $output = trim(ob_get_clean());
         $output = explode("\n", $output);
         foreach ($output as $line) {
-            /*
+        /*
              * Delete all '--- *' lines. Bluh!
              */
             if (0 === strpos($line, '---')) {

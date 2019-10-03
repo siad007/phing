@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
-
 /**
  * Stores the number of the last revision of a workingcopy in a property
  *
@@ -31,8 +31,7 @@ class SvnLastRevisionTask extends SvnBaseTask
 {
     private $propertyName = "svn.lastrevision";
     private $lastChanged = false;
-
-    /**
+/**
      * Sets the name of the property to use
      *
      * @param string $propertyName
@@ -70,10 +69,8 @@ class SvnLastRevisionTask extends SvnBaseTask
     public function main()
     {
         $this->setup('info');
-
         if ($this->oldVersion) {
             $output = $this->run(['--xml']);
-
             if (!($xmlObj = @simplexml_load_string($output))) {
                 throw new BuildException("Failed to parse the output of 'svn info --xml'.");
             }
@@ -85,7 +82,6 @@ class SvnLastRevisionTask extends SvnBaseTask
             }
         } else {
             $output = $this->run();
-
             if (empty($output) || !isset($output['entry'][0])) {
                 throw new BuildException("Failed to parse the output of 'svn info'.");
             }

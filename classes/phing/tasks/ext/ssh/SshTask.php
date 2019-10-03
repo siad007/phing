@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'Ssh2MethodParam.php';
-
 /**
  * Execute commands on a remote host using ssh.
  *
@@ -31,77 +31,63 @@ class SshTask extends Task
      * @var string
      */
     private $host = "";
-
-    /**
+/**
      * @var int
      */
     private $port = 22;
-
-    /**
+/**
      * @var Ssh2MethodParam
      */
     private $methods = null;
-
-    /**
+/**
      * @var string
      */
     private $username = "";
-
-    /**
+/**
      * @var string
      */
     private $password = "";
-
-    /**
+/**
      * @var string
      */
     private $command = "";
-
-    /**
+/**
      * @var string
      */
     private $pubkeyfile = '';
-
-    /**
+/**
      * @var string
      */
     private $privkeyfile = '';
-
-    /**
+/**
      * @var string
      */
     private $privkeyfilepassphrase = '';
-
-    /**
+/**
      * @var string
      */
     private $pty = '';
-
-    /**
+/**
      * @var bool
      */
     private $failonerror = false;
-
-    /**
+/**
      * The name of the property to capture (any) output of the command
      *
      * @var string
      */
     private $property = "";
-
-    /**
+/**
      * Whether to display the output of the command
      *
      * @var boolean
      */
     private $display = true;
-
-    /**
+/**
      * @var resource
      */
     private $connection;
-
-    /**
+/**
      * @param $host
      */
     public function setHost($host)
@@ -293,7 +279,6 @@ class SshTask extends Task
     public function createSshconfig()
     {
         $this->methods = new Ssh2MethodParam();
-
         return $this->methods;
     }
 
@@ -308,7 +293,6 @@ class SshTask extends Task
     protected function setupConnection()
     {
         $p = $this->getProject();
-
         if (!function_exists('ssh2_connect')) {
             throw new BuildException("To use SshTask, you need to install the PHP SSH2 extension.");
         }
@@ -321,13 +305,7 @@ class SshTask extends Task
 
         $could_auth = null;
         if ($this->pubkeyfile) {
-            $could_auth = ssh2_auth_pubkey_file(
-                $this->connection,
-                $this->username,
-                $this->pubkeyfile,
-                $this->privkeyfile,
-                $this->privkeyfilepassphrase
-            );
+            $could_auth = ssh2_auth_pubkey_file($this->connection, $this->username, $this->pubkeyfile, $this->privkeyfile, $this->privkeyfilepassphrase);
         } else {
             $could_auth = ssh2_auth_password($this->connection, $this->username, $this->password);
         }
@@ -339,7 +317,6 @@ class SshTask extends Task
     public function main()
     {
         $this->setupConnection();
-
         if ($this->pty != '') {
             $stream = ssh2_exec($this->connection, $this->command, $this->pty);
         } else {
@@ -364,15 +341,12 @@ class SshTask extends Task
         }
 
         $this->log("Executing command {$this->command}", Project::MSG_VERBOSE);
-
         stream_set_blocking($stream, true);
         $result = stream_get_contents($stream);
-
-        // always load contents of error stream, to make sure not one command failed
+// always load contents of error stream, to make sure not one command failed
         $stderr_stream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
         stream_set_blocking($stderr_stream, true);
         $result_error = stream_get_contents($stderr_stream);
-
         if ($this->display) {
             print($result);
         }

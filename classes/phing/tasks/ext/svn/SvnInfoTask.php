@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
-
 /**
  * Parses the output of 'svn info --xml' and
  *
@@ -32,11 +32,9 @@ require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
 class SvnInfoTask extends SvnBaseTask
 {
     private $propertyName = "svn.info";
-
     private $element = 'url';
     private $subElement = null;
-
-    /**
+/**
      * Sets the name of the property to use
      *
      * @param $propertyName
@@ -108,28 +106,23 @@ class SvnInfoTask extends SvnBaseTask
     public function main()
     {
         $this->setup('info');
-
         if ($this->oldVersion) {
             $output = $this->run(['--xml', '--incremental']);
-
             if (!($xmlObj = @simplexml_load_string($output))) {
                 throw new BuildException("Failed to parse the output of 'svn info --xml'.");
             }
 
             $object = $xmlObj->{$this->element};
-
             if (!empty($this->subElement)) {
                 $object = $object->{$this->subElement};
             }
         } else {
             $output = $this->run();
-
             if (empty($output) || !isset($output['entry'][0])) {
                 throw new BuildException("Failed to parse the output of 'svn info'.");
             }
 
             $object = $output['entry'][0][$this->element];
-
             if (!empty($this->subElement)) {
                 $object = $object[$this->subElement];
             }

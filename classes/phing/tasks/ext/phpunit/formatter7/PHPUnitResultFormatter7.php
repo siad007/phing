@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/system/io/Writer.php';
-
 /**
  * This abstract class describes classes that format the results of a PHPUnit testrun.
  *
@@ -28,46 +28,37 @@ require_once 'phing/system/io/Writer.php';
 abstract class PHPUnitResultFormatter7 implements PHPUnit\Framework\TestListener
 {
     protected $out;
-
-    /** @var Project */
+/** @var Project */
     protected $project;
-
-    /**
+/**
      * @var array
      */
     private $timers = [];
-
-    /**
+/**
      * @var array
      */
     private $runCounts = [];
-
-    /**
+/**
      * @var array
      */
     private $failureCounts = [];
-
-    /**
+/**
      * @var array
      */
     private $errorCounts = [];
-
-    /**
+/**
      * @var array
      */
     private $incompleteCounts = [];
-
-    /**
+/**
      * @var array
      */
     private $skipCounts = [];
-
-    /**
+/**
      * @var array
      */
     private $warningCounts = [];
-
-    /**
+/**
      * Constructor
      *
      * @param PHPUnitTask $parentTask Calling Task
@@ -147,19 +138,14 @@ abstract class PHPUnitResultFormatter7 implements PHPUnit\Framework\TestListener
     {
         $lastRunCount = array_pop($this->runCounts);
         $this->runCounts[count($this->runCounts) - 1] += $lastRunCount;
-
         $lastFailureCount = array_pop($this->failureCounts);
         $this->failureCounts[count($this->failureCounts) - 1] += $lastFailureCount;
-
         $lastErrorCount = array_pop($this->errorCounts);
         $this->errorCounts[count($this->errorCounts) - 1] += $lastErrorCount;
-
         $lastIncompleteCount = array_pop($this->incompleteCounts);
         $this->incompleteCounts[count($this->incompleteCounts) - 1] += $lastIncompleteCount;
-
         $lastSkipCount = array_pop($this->skipCounts);
         $this->skipCounts[count($this->skipCounts) - 1] += $lastSkipCount;
-
         array_pop($this->timers);
     }
 
@@ -194,11 +180,8 @@ abstract class PHPUnitResultFormatter7 implements PHPUnit\Framework\TestListener
      * @param PHPUnit\Framework\AssertionFailedError $e
      * @param float $time
      */
-    public function addFailure(
-        PHPUnit\Framework\Test $test,
-        PHPUnit\Framework\AssertionFailedError $e,
-        float $time
-    ): void {
+    public function addFailure(PHPUnit\Framework\Test $test, PHPUnit\Framework\AssertionFailedError $e, float $time): void
+    {
         $this->failureCounts[count($this->failureCounts) - 1]++;
     }
 
@@ -307,7 +290,6 @@ abstract class PHPUnitResultFormatter7 implements PHPUnit\Framework\TestListener
     private function getMicrotime()
     {
         [$usec, $sec] = explode(' ', microtime());
-
         return (float) $usec + (float) $sec;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,7 +20,6 @@
 
 require_once "phing/Task.php";
 require_once __DIR__ . "/Arg.php";
-
 /**
  * Symfony Console Task
  *
@@ -35,45 +35,38 @@ class SymfonyConsoleTask extends Task
      * @var Arg[] a collection of Arg objects
      */
     private $args = [];
-
-    /**
+/**
      *
      * @var string the Symfony console command to execute
      */
     private $command = null;
-
-    /**
+/**
      *
      * @var string path to symfony console application
      */
     private $console = 'app/console';
-
-    /**
+/**
      *
      * @var string property to be set
      */
     private $propertyName = null;
-
-    /**
+/**
      * Whether to check the return code.
      *
      * @var boolean
      */
     private $checkreturn = false;
-
-    /**
+/**
      * Is the symfony cli debug mode set? (true by default)
      *
      * @var boolean
      */
     private $debug = true;
-
-    /**
+/**
      * @var bool $silent
      */
     private $silent = false;
-
-    /**
+/**
      * sets the symfony console command to execute
      *
      * @param string $command
@@ -177,7 +170,6 @@ class SymfonyConsoleTask extends Task
     public function createArg()
     {
         $num = array_push($this->args, new Arg());
-
         return $this->args[$num - 1];
     }
 
@@ -224,7 +216,6 @@ class SymfonyConsoleTask extends Task
             implode(' ', $this->args)
         ];
         $cmd = implode(' ', $cmd);
-
         return $cmd;
     }
 
@@ -234,16 +225,12 @@ class SymfonyConsoleTask extends Task
     public function main()
     {
         $cmd = $this->getCmdString();
-
         $this->silent ?: $this->log("executing $cmd");
         $return = null;
         $output = [];
         exec($cmd, $output, $return);
-
         $lines = implode("\r\n", $output);
-
         $this->silent ?: $this->log($lines, Project::MSG_INFO);
-
         if ($this->propertyName != null) {
             $this->project->setProperty($this->propertyName, $lines);
         }

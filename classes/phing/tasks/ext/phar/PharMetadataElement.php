@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/phar/PharMetadata.php';
-
 /**
  * @package phing.tasks.ext.phar
  * @author Alexey Shockov <alexey@shockov.com>
@@ -30,12 +30,11 @@ class PharMetadataElement extends PharMetadata
      * @var string
      */
     private $name;
-    /**
+/**
      * @var string
      */
     private $value;
-
-    /**
+/**
      * @param string $value
      */
     public function setValue($value)

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/system/AdhocTask.php';
-
 /**
  * A class for creating adhoc datatypes in build file.
  *
@@ -32,8 +32,7 @@ class AdhocTypedefTask extends AdhocTask
      * The tag that refers to this task.
      */
     private $name;
-
-    /**
+/**
      * Set the tag that will represent this adhoc task/type.
      *
      * @param string $name
@@ -53,20 +52,15 @@ class AdhocTypedefTask extends AdhocTask
         }
 
         $this->execute();
-
         $classes = $this->getNewClasses();
         if (count($classes) !== 1) {
             throw new BuildException("You must define one (and only one) class for AdhocTypedefTask.");
         }
         $classname = array_shift($classes);
-
-        // instantiate it to make sure it is an instance of ProjectComponent
+// instantiate it to make sure it is an instance of ProjectComponent
         $t = new $classname();
         if (!($t instanceof ProjectComponent)) {
-            throw new BuildException(
-                "The adhoc class you defined must be an instance of phing.ProjectComponent",
-                $this->getLocation()
-            );
+            throw new BuildException("The adhoc class you defined must be an instance of phing.ProjectComponent", $this->getLocation());
         }
 
         $this->log("Datatype " . $this->name . " will be handled by class " . $classname, Project::MSG_VERBOSE);

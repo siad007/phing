@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/Task.php';
-
 /**
  * Send an e-mail message
  *
@@ -32,14 +32,13 @@ class MailTask extends Task
 {
     use FileSetAware;
 
+
     protected $tolist = null;
     protected $subject = null;
     protected $msg = null;
     protected $from = null;
-
     protected $backend = 'mail';
     protected $backendParams = [];
-
     public function main()
     {
         if (empty($this->from)) {
@@ -47,10 +46,8 @@ class MailTask extends Task
         }
 
         $this->log('Sending mail to ' . $this->tolist);
-
         if (!empty($this->filesets)) {
             $this->sendFilesets();
-
             return;
         }
 
@@ -61,7 +58,6 @@ class MailTask extends Task
     {
         @include_once 'Mail.php';
         @include_once 'Mail/mime.php';
-
         if (!class_exists('Mail_mime')) {
             throw new BuildException('Need the PEAR Mail_mime package to send attachments');
         }
@@ -72,12 +68,10 @@ class MailTask extends Task
             'Subject' => $this->subject
         ];
         $mime->setTXTBody($this->msg);
-
         foreach ($this->filesets as $fs) {
             $ds = $fs->getDirectoryScanner($this->project);
             $fromDir = $fs->getDir($this->project);
             $srcFiles = $ds->getIncludedFiles();
-
             foreach ($srcFiles as $file) {
                 $mime->addAttachment($fromDir . DIRECTORY_SEPARATOR . $file, 'application/octet-stream');
             }
@@ -85,7 +79,6 @@ class MailTask extends Task
 
         $body = $mime->get();
         $hdrs = $mime->headers($hdrs);
-
         $mail = Mail::factory($this->backend, $this->backendParams);
         $mail->send($this->tolist, $hdrs, $body);
     }
@@ -188,10 +181,8 @@ class MailTask extends Task
     public function setBackendParams($backendParams)
     {
         $params = explode(',', $backendParams);
-
         foreach ($params as $param) {
             $values = explode('=', $param);
-
             if (count($values) < 1) {
                 continue;
             }

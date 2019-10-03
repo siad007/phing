@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +19,6 @@
  */
 
 require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
-
 /**
  * Stores the output of a log command on a workingcopy or repositoryurl in a property.
  * This stems from the SvnLastRevisionTask.
@@ -33,8 +33,7 @@ class SvnLogTask extends SvnBaseTask
 {
     private $propertyName = "svn.log";
     private $limit = null;
-
-    /**
+/**
      * Sets the name of the property to use
      *
      * @param $propertyName
@@ -70,7 +69,6 @@ class SvnLogTask extends SvnBaseTask
     public function main()
     {
         $this->setup('log');
-
         $switches = [];
         if ($this->limit > 0) {
             $switches['limit'] = $this->limit;
@@ -78,7 +76,6 @@ class SvnLogTask extends SvnBaseTask
 
         $output = $this->run([], $switches);
         $result = null;
-
         if ($this->oldVersion) {
             foreach ($output as $line) {
                 $result .= (!empty($result)) ? "\n" : '';

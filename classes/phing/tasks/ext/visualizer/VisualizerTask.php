@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use function Jawira\PlantUml\encodep;
 
@@ -21,23 +23,19 @@ class VisualizerTask extends HttpTask
     public const XSL_FOOTER = __DIR__ . '/footer.xsl';
     public const XSL_HEADER = __DIR__ . '/header.xsl';
     public const XSL_TARGETS = __DIR__ . '/targets.xsl';
-
-    /**
+/**
      * @var string Diagram format
      */
     protected $format;
-
-    /**
+/**
      * @var string Location in disk where diagram is saved
      */
     protected $destination;
-
-    /**
+/**
      * @var string PlantUml server
      */
     protected $server;
-
-    /**
+/**
      * Setting some default values and checking requirements
      */
     public function init(): void
@@ -84,7 +82,6 @@ class VisualizerTask extends HttpTask
     {
         $function = '\Jawira\PlantUml\encodep';
         $message = "Please install 'jawira/plantuml-encoding' library";
-
         if (!function_exists($function)) {
             $this->log($message, Project::MSG_ERR);
             throw new BuildException($message);
@@ -141,7 +138,6 @@ class VisualizerTask extends HttpTask
             ->getReference("phing.parsing.context");
         $importStack = $xmlContext->getImportStack();
         $pumlDiagram = $this->generatePuml($importStack);
-
         return $pumlDiagram;
     }
 
@@ -155,8 +151,7 @@ class VisualizerTask extends HttpTask
     protected function generatePuml(array $buildFiles): string
     {
         $puml = $this->transformToPuml(reset($buildFiles), VisualizerTask::XSL_HEADER);
-
-        /**
+/**
          * @var \PhingFile $buildFile
          */
         foreach ($buildFiles as $buildFile) {
@@ -168,7 +163,6 @@ class VisualizerTask extends HttpTask
         }
 
         $puml .= $this->transformToPuml(reset($buildFiles), VisualizerTask::XSL_FOOTER);
-
         return $puml;
     }
 
@@ -184,10 +178,8 @@ class VisualizerTask extends HttpTask
     {
         $xml = $this->loadXmlFile($buildfile->getPath());
         $xsl = $this->loadXmlFile($xslFile);
-
         $processor = new XSLTProcessor();
         $processor->importStylesheet($xsl);
-
         return $processor->transformToXml($xml) . PHP_EOL;
     }
 
@@ -202,7 +194,6 @@ class VisualizerTask extends HttpTask
     {
         $xmlContent = (new FileReader($xmlFile))->read();
         $xml = simplexml_load_string($xmlContent);
-
         if (!($xml instanceof SimpleXMLElement)) {
             $message = "Error loading XML file: $xmlFile";
             $this->log($message, Project::MSG_ERR);
@@ -225,7 +216,6 @@ class VisualizerTask extends HttpTask
         $format = $this->getFormat();
         $candidate = $this->getDestination();
         $path = $this->resolveDestination($phingFile, $format, $candidate);
-
         return new PhingFile($path);
     }
 
@@ -252,12 +242,14 @@ class VisualizerTask extends HttpTask
             case VisualizerTask::FORMAT_EPS:
             case VisualizerTask::FORMAT_SVG:
                 $this->format = $format;
+
                 break;
             default:
-                $message = "'$format' is not a valid format";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            $message = "'$format' is not a valid format";
                 $this->log($message, Project::MSG_ERR);
+
                 throw new BuildException($message);
-                break;
+            break;
         }
 
         return $this;
@@ -279,7 +271,6 @@ class VisualizerTask extends HttpTask
     public function setDestination(?string $destination): VisualizerTask
     {
         $this->destination = $destination;
-
         return $this;
     }
 
@@ -295,8 +286,7 @@ class VisualizerTask extends HttpTask
     protected function resolveDestination(string $buildfilePath, string $format, ?string $destination): string
     {
         $buildfileInfo = pathinfo($buildfilePath);
-
-        // Fallback
+// Fallback
         if (empty($destination)) {
             $destination = $buildfileInfo['dirname'];
         }
@@ -329,16 +319,15 @@ class VisualizerTask extends HttpTask
     {
         if ($format === VisualizerTask::FORMAT_PUML) {
             $this->log('Bypassing, no need to call server', Project::MSG_DEBUG);
-
             return $pumlDiagram;
         }
 
         $format = $this->getFormat();
         $encodedPuml = encodep($pumlDiagram);
         $this->prepareImageUrl($format, $encodedPuml);
-
         $response = $this->createRequest()->send();
-        $this->processResponse($response); // used for status validation
+        $this->processResponse($response);
+// used for status validation
 
         return $response->getBody();
     }
@@ -353,7 +342,6 @@ class VisualizerTask extends HttpTask
     {
         $server = $this->getServer();
         $this->log("Server: $server", Project::MSG_VERBOSE);
-
         $server = filter_var($server, FILTER_VALIDATE_URL);
         if ($server === false) {
             $message = 'Invalid PlantUml server';
@@ -382,7 +370,6 @@ class VisualizerTask extends HttpTask
     public function setServer(string $server): VisualizerTask
     {
         $this->server = $server;
-
         return $this;
     }
 
@@ -401,7 +388,6 @@ class VisualizerTask extends HttpTask
         $reasonPhrase = $response->getReasonPhrase();
         $this->log("Response status: $status", Project::MSG_DEBUG);
         $this->log("Response reason: $reasonPhrase", Project::MSG_DEBUG);
-
         if ($status !== VisualizerTask::STATUS_OK) {
             $message = "Request unsuccessful. Response from server: $status $reasonPhrase";
             $this->log($message, Project::MSG_ERR);
@@ -421,7 +407,6 @@ class VisualizerTask extends HttpTask
     {
         $path = $destination->getPath();
         $this->log("Writing: $path", Project::MSG_INFO);
-
         (new FileWriter($destination))->write($content);
     }
 }

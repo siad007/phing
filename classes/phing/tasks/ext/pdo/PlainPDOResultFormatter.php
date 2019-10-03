@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,7 +20,6 @@
 
 require_once 'phing/system/io/PhingFile.php';
 require_once 'phing/tasks/ext/pdo/PDOResultFormatter.php';
-
 /**
  * Plain text formatter for PDO results.
  *
@@ -35,31 +35,27 @@ class PlainPDOResultFormatter extends PDOResultFormatter
      * @var boolean
      */
     private $colsprinted = false;
-
-    /**
+/**
      * Whether to show headers.
      *
      * @var boolean
      */
     private $showheaders = true;
-
-    /**
+/**
      * Column delimiter.
      * Defaults to ','
      *
      * @var string
      */
     private $coldelimiter = ",";
-
-    /**
+/**
      * Row delimiter.
      * Defaults to PHP_EOL.
      *
      * @var string
      */
     private $rowdelimiter = PHP_EOL;
-
-    /**
+/**
      * Set the showheaders attribute.
      *
      * @param boolean $v
@@ -109,7 +105,6 @@ class PlainPDOResultFormatter extends PDOResultFormatter
 
             $this->out->write($line);
             $this->out->write(PHP_EOL);
-
             $line = "";
             $colsprinted = true;
         } // if show headers
